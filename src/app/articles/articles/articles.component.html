@@ -1,0 +1,39 @@
+<div class="F2K-column">
+    <h1>Latest F2K Articles</h1>
+    <div class="articles-select">
+        <h3 class="b1">Show me</h3>
+        <div class="dropdown" [ngClass]="{open : articlesOpen}">
+            <h3 (click)="articlesOpen = !articlesOpen">
+                {{displayArticles}}{{ articlesOpen ? " &#65087;" : " &#65088;"}}
+            </h3>
+            <div class="dropdown-children"
+                 [ngStyle]="{'width.px': getWidth(displayArticles + (articlesOpen ? ' &#65087;' : ' &#65088;'))}">
+                <ng-template ngFor let-article [ngForOf]="displayedArticles">
+                    <div *ngIf="article !== displayArticles"><h5 (click)="displayArticles = article; articlesOpen = false">{{article}}</h5></div>
+                </ng-template>
+            </div>
+        </div>
+
+        <h3>for</h3>
+
+        <div class="dropdown" [ngClass]="{open : gamesOpen}">
+            <h3 (click)="gamesOpen = !gamesOpen">
+                {{displayGames}}{{ gamesOpen ? " &#65087;" : " &#65088;"}}
+            </h3>
+            <div class="dropdown-children"
+                 [ngStyle]="{'width.px': getWidth(displayGames + (gamesOpen ? ' &#65087;' : ' &#65088;'))}">
+                <ng-template ngFor let-game [ngForOf]="displayedGames">
+                    <div *ngIf="game !== displayGames"><h5 (click)="displayGames = game; gamesOpen = false">{{game}}</h5></div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div class="articles clearfix"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="10"
+         (scrolled)="onScrollDown()">
+        <f2kArticlesTile *ngFor="let article of articles" [article]="article"></f2kArticlesTile>
+    </div>
+</div>

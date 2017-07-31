@@ -1,0 +1,171 @@
+/* Variables
+================================== */
+$bw: 1px; // border width
+
+/* Tables
+================================== */
+.decklistrow {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    border-left: solid $bw #E7E7E7;
+    border-right: solid $bw #E7E7E7;
+    border-bottom: solid $bw #E7E7E7;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.decklistrow.first {
+    border-top: solid $bw #E7E7E7;
+}
+
+.cell {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    border-left: solid $bw #E7E7E7;
+}
+
+.cell.title-cell {
+    flex-flow: row wrap;
+    h5 {
+        margin-bottom: -30px;
+    }
+}
+
+.cell:first-of-type {
+    border: none;
+}
+
+.b2.grey {
+    color: #9B9B9B
+}
+
+.red {
+    color: red;
+}
+
+@media (max-width: 767px) {
+    .decklistrow {
+        width: calc(100vw - 40px);
+        max-width: 440px;
+        height: 80px;
+    }
+
+    .cell {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 30px;
+        background: #F7F7F7;
+        border-top: solid $bw #E7E7E7;
+    }
+
+    .cell.title-cell {
+        width: calc(100vw - 40px);
+        max-width: 440px;
+        height: 48px;
+        background: #FFFFFF;
+    }
+
+    .cell.date-cell {
+        flex: 1;
+    }
+
+    .img-cell:nth-child(2) {
+        border-left: none;
+    }
+
+    .icon-wrap {
+        width: 20px;
+        height: 20px;
+        .icon {
+            width: 20px;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    .decklistrow {
+        width: 359px;
+        height: 90px;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-top: solid $bw #E7E7E7;
+    }
+
+    .cell {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 40px;
+        background: #F7F7F7;
+        border-top: solid $bw #E7E7E7;
+    }
+
+    .cell.title-cell {
+        width: 359px;
+        height: 48px;
+        background: #FFFFFF;
+    }
+
+    .cell.date-cell {
+        flex: 1;
+    }
+
+    .img-cell:nth-child(2) {
+        border-left: none;
+    }
+
+    .icon-wrap {
+        width: 30px;
+        height: 30px;
+        .icon {
+            width: 30px;
+        }
+    }
+}
+
+@media (min-width: 1220px) {
+    .decklistrow {
+        width: 1180px;
+        height: 60px;
+    }
+
+    .cell {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .cell.title-cell {
+        flex: 1;
+    }
+
+    .cell.date-cell {
+        width: 182px;
+    }
+
+    .cell.data-cell-4 {
+        width: 114px;
+    }
+
+    .cell.data-cell-1 {
+        width: 89px;
+    }
+
+    .icon-wrap {
+        width: 30px;
+        height: 30px;
+        .icon {
+            width: 30px;
+        }
+    }
+
+    .even {
+        background: #FFFFFF
+    }
+    .odd {
+        background: #F7F7F7
+    }
+}

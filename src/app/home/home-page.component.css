@@ -1,0 +1,37 @@
+f2kOnlineSteamerScroll {
+    margin-bottom: 20px;
+}
+
+.f2k-visible-lg {
+    display: none;
+}
+
+.tier-title {
+    font-family: 'Roboto', sans-serif;
+    line-height: 26px; /* TODO */
+    font-size: 28px; /* TODO */
+}
+
+@media (max-width: 768px) {
+    .tier-title {
+
+    }
+}
+
+@media (min-width: 768px) {
+    .tier-title {
+
+    }
+}
+
+@media (min-width: 1220px) {
+    .f2k-visible-lg {
+        display: block
+    }
+
+    .tier-title {
+        line-height: 26px;
+        font-size: 28px;
+    }
+}
+

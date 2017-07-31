@@ -1,0 +1,203 @@
+$legendary: #F7B220;
+$rare: #49A1BB;
+$epic: #8365C7;
+$common: #E7E7E7;
+
+$monsters: #EF3418;
+$northern-realms: #4A90E2;
+$scotia-tael: #315B01;
+$skellige: #57009B;
+$nilfgaard: #4F4F4F;
+
+.gwfilter {
+    // TODO: fix with actual width
+    display: flex;
+    flex-wrap: wrap;
+    .faction-group {
+        display: flex;
+        flex-wrap: wrap;
+        cursor: pointer;
+        .name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+
+            img {
+                height: 20px;
+            }
+
+            .title {
+                padding-left: 3px;
+            }
+        }
+
+        .name.monsters {
+            border: 1px solid $monsters;
+            color: $monsters;
+        }
+
+        .name.northern-realms {
+            border: 1px solid $northern-realms;
+            color: $northern-realms;
+        }
+
+        .name.scotia-tael {
+            border: 1px solid $scotia-tael;
+            color: $scotia-tael;
+        }
+
+        .name.skellige {
+            border: 1px solid $skellige;
+            color: $skellige;
+        }
+
+        .name.nilfgaard {
+            border: 1px solid $nilfgaard;
+            color: $nilfgaard;
+        }
+
+        .leaders {
+            display: flex;
+            flex-flow: row wrap;
+            img {
+                margin: 0;
+                padding-left: 1px;
+            }
+            img:first-of-type {
+                padding: 0;
+            }
+        }
+    }
+
+    .faction-group:first-of-type {
+        margin-left: 0;
+    }
+}
+
+.grey {
+    opacity: 0.5;
+}
+
+.name.grey + .leaders {
+    opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+    .gwfilter-scroll-fade {
+        position: relative;
+    }
+    .gwfilter-scroll {
+        // width: 400px;
+        height: 74px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        position: relative;
+    }
+    .gwfilter-scroll-fade:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        right: -1px;
+        pointer-events: none;
+        background-image: linear-gradient(to right,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 1) 90%);
+        width: 4em;
+        height: 100%;
+    }
+    .gwfilter {
+        // overflow:scroll;
+        position: relative;
+        width: 1040px;
+        .faction-group {
+            margin-right: 10px;
+            width: 200px;
+
+            .name {
+                width: 200px;
+                height: 29px;
+            }
+
+            .leaders {
+                img {
+                    width: 66px;
+                    height: 44px;
+                }
+
+            }
+        }
+
+        .faction-group:nth-of-type(5) {
+            margin-right: 0;
+        }
+
+    }
+}
+
+@media (min-width: 768px) {
+    .gwfilter {
+        width: 728px;
+        .faction-group {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            width: 236px;
+
+            .name {
+                width: 236px;
+                height: 29px;
+            }
+
+            .leaders {
+                img {
+                    width: 78px;
+                    height: 52px;
+                }
+
+            }
+        }
+
+        .faction-group:nth-of-type(3) {
+            margin-right: 0;
+        }
+        .faction-group:nth-of-type(5) {
+            margin-right: 0;
+        }
+
+    }
+}
+
+@media (min-width: 1220px) {
+    .gwfilter {
+        width: 1180px;
+        .faction-group {
+            margin-right: 11px;
+            width: 227px;
+
+            .name {
+                width: 227px;
+                height: 30px;
+            }
+
+            .leaders {
+                img {
+                    width: 75px;
+                    height: 50px;
+                }
+
+            }
+        }
+        // XXX: blah, override this for now
+        .faction-group:nth-of-type(3) {
+            margin-right: 11px;
+        }
+
+        .faction-group:nth-of-type(4) {
+            margin-right: 12px;
+        }
+        .faction-group:nth-of-type(5) {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,65 @@
+<!-- Large screen size -->
+<div *lg class="decklistrow" (mouseover)="color='red'" (mouseout)="color=''"
+     [ngClass]="{odd: odd, even: even, first: index === 0}">
+
+    <div class="cell img-cell">
+        <div class="icon-wrap">
+            <img src="{{deck.images[0]}}" class="icon"/>
+        </div>
+    </div>
+    <div class="cell img-cell">
+        <div class="icon-wrap">
+            <img src="{{deck.images[1]}}" class="icon"/>
+        </div>
+    </div>
+
+    <div class="cell title-cell">
+        <h5 [ngClass]="color">{{deck.name}}</h5>
+        <div style="width:100%"></div>
+        <p class="b2 grey">by {{deck.author}}</p>
+    </div>
+    <div class="cell data-cell-1">
+        <div class="b2">{{deck.tier}}</div>
+    </div>
+    <div class="cell data-cell-4">
+        <div class="b2">{{deck.scrapDust}}</div>
+    </div>
+    <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.date)}}</div></div>-->
+    <div class="cell date-cell">
+        <div class="b2">{{displayDate || (deck.date | date:'yMMMd')}}</div>
+    </div>
+
+</div>
+
+<!-- Small & medium screen size -->
+
+<div *showItBootstrap="['md','sm']" class="decklistrow" (mouseover)="color='red'" (mouseout)="color=''"
+     [ngClass]="{odd: odd, even: even, first: index === 0}">
+    <div class="cell title-cell">
+        <h5 [ngClass]="color">{{deck.name}}</h5>
+        <div style="width:100%"></div>
+        <p class="b2 grey">by {{deck.author}}</p>
+    </div>
+    <div class="cell img-cell">
+        <div class="icon-wrap">
+            <img src="{{deck.images[0]}}" class="icon"/>
+        </div>
+    </div>
+    <div class="cell img-cell">
+        <div class="icon-wrap">
+            <img src="{{deck.images[1]}}" class="icon"/>
+        </div>
+    </div>
+
+    <div class="cell data-cell-1">
+        <div class="b2">Tier: {{deck.tier}}</div>
+    </div>
+    <div class="cell data-cell-4">
+        <div class="b2">Dust: {{deck.scrapDust}}</div>
+    </div>
+    <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.date)}}</div></div>-->
+    <div class="cell date-cell">
+        <div class="b2">{{displayDate || (deck.date | date:'yMMMd')}}</div>
+    </div>
+
+</div>

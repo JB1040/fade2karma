@@ -1,0 +1,29 @@
+<div class="gwfilter-scroll-fade">
+    <div class="gwfilter-scroll">
+        <div class="gwfilter">
+            <div
+                *ngFor="let faction of factions"
+                class="faction-group"
+            >
+                <div class="name {{faction.uriName}}"
+                     [ngClass]="{grey: activeFactions.length > 0 && !activeFactions.includes(faction.name)}"
+                     (click)="toggleActiveFaction(faction.name)"
+                >
+                    <img src="assets/icons/{{faction.uriName}}.svg" alt="">
+                    <h5 class="title">
+                        {{faction.name}}
+                    </h5>
+                </div>
+                <div class="leaders">
+                    <img
+                        *ngFor="let leader of faction.leaders"
+                        src="assets/GwentLeaders_Wide/{{leader}}.jpg"
+                        alt=""
+                        [ngClass]="{grey: activeLeaders.length > 0 && !activeLeaders.includes(leader)}"
+                        (click)="toggleActiveLeader(leader)"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

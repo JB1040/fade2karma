@@ -1,0 +1,121 @@
+:host {
+    width: 340px;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 4px;
+}
+
+:host(.article) .text-container h4 {
+    margin-bottom: 2px;
+}
+
+:host:hover {
+    cursor: pointer;
+}
+
+:host:hover h4 {
+    color: #ef3418;
+}
+
+:host(.deck) .text-container {
+    display: inline-block;
+    margin-left: 44px;
+}
+
+:host(.article) .text-container {
+    width: 250px;
+}
+
+:host(.article) h4 {
+    height: 50px;
+    overflow: hidden;
+}
+
+h4 {
+    color: #333333;
+}
+
+.text-container p {
+    color: #9b9b9b;
+}
+
+
+:host(.deck) img {
+    height: 30px;
+    width: 30px;
+}
+
+:host(.article) img {
+    right: 0;
+}
+
+img {
+    position: absolute;
+    top: 4px;
+}
+
+
+@media (max-width: 768px) {
+    :host(.deck) h4 { /*h4 as h5*/
+        font-size: 12px;
+        line-height: 18px;
+    }
+    :host(.deck) {
+        width: Calc(100vw - 40px);
+        max-width: 440px;
+    }
+
+    :host(.article) {
+        width: Calc(100vw - 20px);
+        max-width: 460px;
+    }
+
+    :host(.article) img {
+        width: 65px;
+        height: 37px;
+    }
+
+    :host(.article) .text-container {
+        width: Calc(100vw - 95px);
+        max-width: 385px;
+    }
+}
+
+@media (min-width: 768px) {
+    :host(.deck) h4 { /*h4 as h5*/
+        font-size: 12px;
+        line-height: 18px;
+    }
+    :host(.deck) {
+        width: 334px;
+    }
+
+    :host(.article) img {
+        width: 65px;
+        height: 37px;
+    }
+
+    :host(.article) .text-container {
+        width: 270px;
+    }
+}
+
+@media (min-width: 1220px) {
+    :host(.deck) h4 { /*h4 as h5*/
+        font-size: 14px;
+        line-height: 22px;
+    }
+    :host(.deck) {
+        width: 340px;
+    }
+
+    :host(.article) {
+        width: 360px;
+    }
+
+    :host(.article) img {
+        width: 90px;
+        height: 51px;
+    }
+}

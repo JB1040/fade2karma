@@ -1,0 +1,6 @@
+<div class="hs-mana">
+    <div *ngIf="chartData.distribution" class="top">
+        <f2kHearthstoneManaGraph [data]="chartData.distribution"></f2kHearthstoneManaGraph>
+    </div>
+    <app-manatable [data]="chartData.metadata"></app-manatable>
+</div>

@@ -1,0 +1,3 @@
+<f2kOnlineStreamerTile *ngFor="let streamer of onlineStreamers; let index = index;" [streamer]="streamer" [moved]="moved"
+                       [containerWidth]="containerWidth" [index]="index" [itemsCount]="onlineStreamers.length"
+                       (currentStreamer)="pseudoStreamer = $event"></f2kOnlineStreamerTile>

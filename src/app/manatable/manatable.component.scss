@@ -1,0 +1,77 @@
+$grey-border: 1px solid #E7E7E7;
+
+.row {
+    border-left: $grey-border;
+    border-right: $grey-border;
+
+    .inner {
+        height: 50px;
+        border-bottom: $grey-border;
+        .label {
+            float: left;
+            h5 {
+                line-height: 50px;
+            }
+        }
+
+        .icon-wrap {
+            float: right;
+            line-height: 50px;
+            .icon {
+                max-width: 30px;
+                vertical-align: middle;
+                padding-right: 5px;
+            }
+        }
+
+        .value {
+            line-height: 50px;
+            float: right;
+        }
+    }
+}
+
+.row:first-of-type {
+    border-top: $grey-border;
+}
+
+.row:last-of-type {
+    border-bottom: $grey-border;
+
+    .inner {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .row {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .inner {
+            width: calc(100vw - 60px);
+            max-width: 420px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .row {
+        padding-left: 20px;
+        padding-right: 20px;
+
+        .inner {
+            width: 314px;
+
+        }
+    }
+}
+
+@media (min-width: 1220px) {
+    .row {
+        .inner {
+            width: 320px;
+
+        }
+    }
+}

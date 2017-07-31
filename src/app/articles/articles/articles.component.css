@@ -1,0 +1,63 @@
+f2kArticlesTile {
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+h1 {
+    padding-top: 20px;
+}
+
+.articles-select {
+    z-index: 10;
+    position: relative;
+}
+
+.dropdown-children {
+    display: none;
+}
+
+.open .dropdown-children {
+    display: block;
+}
+
+.articles-select h3 {
+    display: inline-block;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown h3 {
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown h3,
+.dropdown-children h5 {
+    color: #EF3418;
+    cursor: pointer;
+}
+
+.dropdown-children {
+    position: absolute;
+    z-index: 1;
+    background: white;
+    border: 1px solid #e7e7e7;
+    padding: 44px 20px 13px 20px;
+    margin: -41px -20px 0 -20px;
+}
+
+.dropdown-children h5{
+    padding: 4px 0;
+}
+
+.dropdown-children > div:not(:first-child) {
+    border-top: 1px solid #e7e7e7;
+}
+
+.dropdown-children h5:first-child {
+    margin-top: 5px;
+}
+

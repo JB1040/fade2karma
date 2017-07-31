@@ -1,0 +1,249 @@
+$white: #FFFFFF;
+$sky-blue: #4A90E2;
+$gray: #333333;
+
+$legendary: #F7B220;
+$rare: #49A1BB;
+$epic: #8365C7;
+$common: #E7E7E7;
+
+$monsters: #EF3418;
+$northern-realm: #4A90E2;
+$scotia-tael: #315B01;
+$skellige: #57009B;
+$nilfgaard: #4F4F4F;
+
+// Constants across view widths
+$tiny-pad: 1px;
+$card-name-width: 170px;
+$card-name-pad: 10px;
+$rarity-width: 4px;
+$image-width: 104px;
+
+// Default to smallest view
+// TODO: uncomment when below is fixed
+// $central-card-width: 100vw;
+// $square-width: 30px;
+
+.hs-card {
+    margin-bottom: $tiny-pad;
+}
+
+.hs-card .square {
+    position: relative;
+    float: left;
+    overflow: hidden;
+}
+
+.hs-card .square:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.hs-card .square-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.hs-card .square-content div {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.hs-card .square-content span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hs-card .central {
+    float: left;
+    margin: 0 $tiny-pad 0 $tiny-pad;
+    box-sizing: border-box;
+}
+
+.hs-card .central .image-wrap {
+    box-sizing: border-box;
+    width: $image-width;
+    float: right;
+}
+
+.hs-card .central .image-wrap img {
+    width: 100%
+}
+
+.hs-card .central .card-name {
+    float: left;
+    width: $card-name-width + $card-name-pad;
+}
+
+.hs-card .central .card-name p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: $card-name-pad;
+}
+
+/* Color */
+.white {
+    color: #FFFFFF;
+}
+
+.sky-blue-bg {
+    background-color: $sky-blue;
+}
+
+.gray-bg {
+    background-color: #333333;
+}
+
+/* Positioning */
+.right {
+    float: right;
+}
+
+/* Rarity */
+.legendary {
+    border-left: 4px solid $legendary;
+}
+
+.rare {
+    border-left: 4px solid $rare;
+}
+
+.epic {
+    border-left: 4px solid $epic;
+}
+
+div.common {
+    border-left: 4px solid $common;
+}
+
+/* GW Factions */
+
+.monsters {
+    background-color: $monsters;
+}
+
+.northern-realm {
+    background-color: $northern-realm;
+}
+
+.scotia-tael {
+    background-color: $scotia-tael;
+}
+
+.skellige {
+    background-color: $skellige;
+}
+
+.nilfgaard {
+    background-color: $nilfgaard;
+}
+
+span.common {
+    background-color: $legendary;
+}
+
+@media (max-width: 767px) {
+    $central-card-width: calc(100vw - 102px);
+    $square-width: 30px;
+    .hs-card {
+        height: $square-width;
+    }
+
+    .hs-card .square {
+        width: $square-width;
+        height: $square-width;
+    }
+
+    .hs-card .central {
+        width: calc(#{$central-card-width} - #{($tiny-pad * 2) - $rarity-width});
+        max-width: 378px;
+        height: $square-width;
+    }
+
+    .hs-card .central .card-name {
+        height: $square-width;
+    }
+
+    .hs-card .central .card-name p {
+        position: relative;
+        top: 10%;
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .hs-card .central .image-wrap {
+        height: $square-width;
+    }
+}
+
+@media (min-width: 768px) {
+    $central-card-width: 302px;
+    $square-width: 40px;
+    h1, h2, h3, h4, h5 {
+        text-shadow: 1px;
+    }
+
+    .hs-card {
+        width: $central-card-width + ($tiny-pad * 2) + ($square-width * 2);
+        height: $square-width;
+    }
+
+    .hs-card .square {
+        width: $square-width;
+        height: $square-width;
+    }
+
+    .hs-card .central {
+        width: $central-card-width - ($tiny-pad * 2) - $rarity-width;
+        height: $square-width;
+    }
+
+    .hs-card .central .image-wrap {
+        height: $square-width;
+    }
+}
+
+@media (min-width: 1220px) {
+    $central-card-width: 298px;
+    $square-width: 40px;
+
+    .hs-card {
+        width: $central-card-width + ($tiny-pad * 2) + ($square-width * 2);
+        height: $square-width;
+    }
+
+    .hs-card .square {
+        width: $square-width;
+        height: $square-width;
+    }
+
+    .hs-card .central {
+        width: $central-card-width - ($tiny-pad * 2) - $rarity-width;
+        height: $square-width;
+    }
+
+    .hs-card .central .card-name {
+        height: $square-width;
+    }
+
+    .hs-card .central .card-name p {
+        position: relative;
+        top: 15%;
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .hs-card .central .image-wrap {
+        height: $square-width;
+    }
+}

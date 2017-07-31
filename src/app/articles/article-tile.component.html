@@ -1,0 +1,11 @@
+<div class="article-image-container tint">
+    <img class="article-image" src="../images/{{article.image}}">
+    <!--<i class="fa fa-play-circle-o f2k-play-image" aria-hidden="true" style="font-size: 33px;"></i>-->
+    <img *ngIf="article.video" class="f2k-play-image" src="../../images/icons/PlayBtn.svg">
+</div>
+<div class="article-text-container">
+    <h6>{{article.type}}</h6>
+    <h4>{{article.title}}</h4>
+    <p class="b2 author">{{article.author}} &bull; {{date}}</p>
+    <p *ngIf="showDescription" class="b2">{{article.description}}</p>
+</div>

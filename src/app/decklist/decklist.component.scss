@@ -1,0 +1,152 @@
+/* Variables
+================================== */
+$bw: 1px; // border width
+
+/* Tables
+================================== */
+.decklistsorting {
+    background-color: #333333;
+    display: flex;
+
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.cell {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+}
+
+.cell:first-of-type {
+    border: none;
+}
+
+.cell.title-cell {
+    flex: 1;
+    padding-left: 40px;
+    justify-content: flex-start;
+}
+
+.cell.date-cell {
+    border-left: solid $bw #E7E7E7;
+
+}
+
+.cell.data-cell-4 {
+    border-left: solid $bw #E7E7E7;
+
+}
+
+.cell.data-cell-1 {
+    border-left: solid $bw #E7E7E7;
+}
+
+.b2.white {
+    color: #FFFFFF
+}
+
+.red p, .red span {
+    color: red;
+}
+
+@media (max-width: 767px) {
+    .decklistsorting {
+        width: calc(100vw - 40px);
+        max-width: 440px;
+        height: 40px;
+
+        .cell.img-cell {
+            width: 110px;
+        }
+    }
+
+    .cell {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .cell.date-cell {
+        border-left: solid $bw #E7E7E7;
+        flex: 1;
+    }
+
+    .cell.data-cell-4 {
+        border-left: solid $bw #E7E7E7;
+        flex: 1;
+    }
+
+    .cell.data-cell-1 {
+        border-left: solid $bw #E7E7E7;
+        flex: 1;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    .decks {
+        width: 738px;
+    }
+    .decklistsorting {
+        width: 728px;
+        height: 40px;
+
+    }
+
+    .cell {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .cell.date-cell {
+        // border-left: solid $bw #E7E7E7;
+
+    }
+
+    .cell.data-cell-4 {
+        border-left: solid $bw #E7E7E7;
+        border-right: solid $bw #E7E7E7;
+    }
+
+    .cell.data-cell-1 {
+        border-left: solid $bw #E7E7E7;
+    }
+}
+
+@media (min-width: 1220px) {
+    .decklistsorting {
+        width: 1180px;
+        height: 60px;
+
+        .cell.img-cell {
+            width: 110px;
+        }
+    }
+
+    .cell {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .cell.date-cell {
+        width: 182px;
+        border-left: solid $bw #E7E7E7;
+
+    }
+
+    .cell.data-cell-4 {
+        width: 114px;
+        border-left: solid $bw #E7E7E7;
+
+    }
+
+    .cell.data-cell-1 {
+        width: 89px;
+        border-left: solid $bw #E7E7E7;
+    }
+}

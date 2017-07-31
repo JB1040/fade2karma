@@ -1,0 +1,5 @@
+<h3>{{title}}</h3> <!--TODO-->
+
+<ng-template ngFor let-articles [ngForOf]="articlesArr" let-i="index" [ngForTrackBy]="trackByFn">
+    <f2kRecommendedContainer [items]="articles" [title]="i === 1 ? 'GWENT DECKS' :  'HEARTHSTONE DECKS'"></f2kRecommendedContainer>
+</ng-template>

@@ -1,0 +1,65 @@
+<div class="decklist">
+    <!-- Large screen sizes -->
+    <div *lg class="decklistsorting">
+        <!-- <th *ngFor="let column of options.columns" (click)="sortHeaderClick(column.value)"
+          [ngClass]="{ 'sorting': isSorting(column.value), 'sorting_asc': isSortAsc(column.value), 'sorting_desc': isSortDesc(column.value) }">
+          <span [innerHTML]="column.name"></span>
+        </th> -->
+        <div class="cell img-cell">
+            <p class="b2 white">Class</p>
+        </div>
+        <div class="cell img-cell">
+            <p class="b2 white">Game Mode</p>
+        </div>
+
+        <div class="cell title-cell">
+            <p class="b2 white">Deck Name</p>
+        </div>
+        <div class="cell data-cell-1" [ngClass]="{red: options.sortBy === 'tier'}" (click)="sortHeaderClick('tier')">
+            <p class="b2 white">Tier</p>
+            <span *ngIf="options.sortBy === 'tier' && options.sortDirection == 'asc'" class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'tier' || options.sortDirection == 'desc'" class="b2 white">&#65088;</span>
+        </div>
+        <div class="cell data-cell-4" [ngClass]="{red: options.sortBy === 'scrapDust'}"
+             (click)="sortHeaderClick('scrapDust')">
+            <p class="b2 white">Dust</p>
+            <span *ngIf="options.sortBy === 'scrapDust' && options.sortDirection == 'asc'"
+                  class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'scrapDust' || options.sortDirection == 'desc'"
+                  class="b2 white">&#65088;</span>
+        </div>
+        <div class="cell date-cell" [ngClass]="{red: options.sortBy === 'date'}" (click)="sortHeaderClick('date')">
+            <p class="b2 white">Date</p>
+            <span *ngIf="options.sortBy === 'date' && options.sortDirection == 'asc'" class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'date' || options.sortDirection == 'desc'" class="b2 white">&#65088;</span>
+        </div>
+
+    </div>
+
+    <!-- Small and medium screen sizes -->
+    <div *showItBootstrap="['md','sm']" class="decklistsorting">
+        <div class="cell date-cell" [ngClass]="{red: options.sortBy === 'date'}" (click)="sortHeaderClick('date')">
+            <p class="b2 white">Date</p>
+            <span *ngIf="options.sortBy === 'date' && options.sortDirection == 'asc'" class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'date' || options.sortDirection == 'desc'" class="b2 white">&#65088;</span>
+        </div>
+        <div class="cell data-cell-1" [ngClass]="{red: options.sortBy === 'tier'}" (click)="sortHeaderClick('tier')">
+            <p class="b2 white">Tier</p>
+            <span *ngIf="options.sortBy === 'tier' && options.sortDirection == 'asc'" class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'tier' || options.sortDirection == 'desc'" class="b2 white">&#65088;</span>
+        </div>
+        <div class="cell data-cell-4" [ngClass]="{red: options.sortBy === 'scrapDust'}"
+             (click)="sortHeaderClick('scrapDust')">
+            <p class="b2 white">Dust</p>
+            <span *ngIf="options.sortBy === 'scrapDust' && options.sortDirection == 'asc'"
+                  class="b2 white">&#65087;</span>
+            <span *ngIf="options.sortBy !== 'scrapDust' || options.sortDirection == 'desc'"
+                  class="b2 white">&#65088;</span>
+        </div>
+    </div>
+
+    <div class="decks clearfix">
+        <f2kDeckListRow *ngFor="let deck of decks; let index=index; let odd=odd; let even=even;" [deck]="deck"
+                        [odd]="odd" [even]="even" [index]="index" class="app-decklistrow"></f2kDeckListRow>
+    </div>
+</div>

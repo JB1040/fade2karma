@@ -1,0 +1,28 @@
+<h1>{{title}}</h1>
+<h2>Filters</h2>
+<f2kGwentFilter></f2kGwentFilter>
+<div class="spacer"></div>
+<f2kHearthstoneFilter></f2kHearthstoneFilter>
+<div class="spacer"></div>
+<h2>Cards</h2>
+<div class="cards">
+    <div *ngFor="let singleCard of hs_cards">
+        <f2kCardComponent [card]="singleCard"></f2kCardComponent>
+    </div>
+</div>
+<br>
+<div class="gw-cards">
+    <div *ngFor="let singleCard of gw_cards">
+        <f2kCardComponent [card]="singleCard"></f2kCardComponent>
+    </div>
+</div>
+<div class="spacer"></div>
+<h2>Mana graphs</h2>
+<f2kHearthstoneMana *ngIf="hs_mana_graph" [chartData]="hs_mana_graph"></f2kHearthstoneMana>
+<br>
+<f2kHearthstoneMana *ngIf="gw_mana_graph" [chartData]="gw_mana_graph"></f2kHearthstoneMana>
+<div class="spacer"></div>
+<h2>Deck Lists</h2>
+<div style="width:100%;">
+    <f2kDeckList [decks]="decks" [options]="{sortBy: '', sortDirection: ''}"></f2kDeckList>
+</div>

@@ -1,0 +1,101 @@
+.hsfilter {
+    .icons {
+        border-right: 1px solid #E7E7E7;
+        float: left;
+        img {
+            border-top: 1px solid #E7E7E7;
+            border-bottom: 1px solid #E7E7E7;
+            border-right: 1px solid #E7E7E7;
+            box-sizing: border-box;
+            float: left;
+            cursor: pointer;
+        }
+        img:first-of-type {
+            border: 1px solid #E7E7E7;
+        }
+        img.grey {
+            opacity: 0.5;
+        }
+    }
+
+    .type-filters {
+        padding-left: 40px;
+        float: left;
+        display: flex;
+        .box {
+            display: flex;
+            border: 1px solid #9B9B9B;
+            color: #9B9B9B;
+            width: 130px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box.active, .box.inactive:hover {
+            border: 1px solid red;
+            color: red;
+            cursor: pointer;
+            svg {
+                .icon {
+                    fill: red;
+                }
+            }
+        }
+
+        .box:nth-of-type(2).inactive {
+            border-left: none;
+        }
+
+        .box:nth-of-type(1).inactive {
+            border-right: none;
+        }
+    }
+}
+
+@media (max-width: 1219px) {
+    .hsfilter {
+        .icons {
+            height: 40px;
+            width: 400px;
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .type-filters {
+            .box {
+                height: 40px;
+                padding: 5px 15px 5px 15px;
+                width: 110px;
+                .label {
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1220px) {
+    .hsfilter {
+        .icons {
+            height: 50px;
+            width: 490px;
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        .type-filters {
+            .box {
+                height: 50px;
+                padding: 5px 15px 5px 15px;
+                .label {
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+}

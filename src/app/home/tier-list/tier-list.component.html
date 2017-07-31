@@ -1,0 +1,18 @@
+<p class="tier-title">{{title}}</p>
+
+<div class="tier-containers clearfix">
+    <div class="tier-container clearfix" *ngFor="let tier of tiers; let index = index">
+        <div class="tier-numeration-container">
+            <h6>TIER</h6>
+            <h1>{{index + 1}}</h1>
+        </div>
+        <div class="tier-list-recommended-tiles">
+            <f2kRecommendedTile [ngClass]="item.contentType" *ngFor="let item of tier" [teasedItem]="item"></f2kRecommendedTile>
+        </div>
+    </div>
+</div>
+<div class="tier-list-link-container">
+    <a routerLink="/tier_list"><p class="b2">VIEW FULL TIER LIST 	&rarr;</p></a>
+</div>
+<!--<a class="f2k-hidden-sm" routerLink="/tier_list">VIEW FULL TIER LIST 	&rarr;</a>-->
+<!--<a class="f2k-visible-sm" routerLink="/tier_list">VIEW FULL TIER LIST</a>-->

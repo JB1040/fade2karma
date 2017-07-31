@@ -1,0 +1,40 @@
+$grey-border: 1px solid #E7E7E7;
+
+.hs-mana {
+    .top {
+        border-left: $grey-border;
+        border-right: $grey-border;
+        border-top: $grey-border;
+    }
+}
+
+@media (max-width: 767px) {
+    .hs-mana {
+        width: calc(100vw - 40px);
+        max-width: 440px;
+
+        .top {
+            height: 140px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .hs-mana {
+        width: 354px;
+
+        .top {
+            height: 171px;
+        }
+    }
+}
+
+@media (min-width: 1220px) {
+    .hs-mana {
+        width: 360px;
+
+        .top {
+            height: 174px;
+        }
+    }
+}

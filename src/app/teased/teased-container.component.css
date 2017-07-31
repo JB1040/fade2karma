@@ -1,0 +1,20 @@
+:host {
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-bottom: 20px;
+    /*width: 340px;*/
+}
+
+h5 {
+    padding-top: 6px;
+    color: #ef3418;
+}
+
+f2kRecommendedTile:first-child {
+    margin-top: 24px;
+}
+
+f2kRecommendedTile {
+    margin-top: 10px;
+}

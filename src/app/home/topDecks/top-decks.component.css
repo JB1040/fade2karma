@@ -1,0 +1,58 @@
+:host {
+    border: 10px solid #e7e7e7;
+    display: block;
+}
+
+h3 {
+    padding-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    :host {
+        width: Calc(100vW - 20px);
+        max-width: 480px;
+    }
+
+    f2kRecommendedContainer {
+        margin: 20px 10px;
+    }
+
+    h3 {
+        margin: 22px 10px 0 10px;
+    }
+
+    f2kRecommendedContainer:first-child {
+        margin-top: 1px;
+    }
+}
+
+@media (min-width: 768px) {
+    :host {
+        width: 688px;
+        border-width: 15px;
+        padding: 24px 25px 5px 25px;
+    }
+}
+
+@media (min-width: 1220px) {
+    :host {
+        width: 700px;
+    }
+
+    h3 {
+        font-size: 28px;
+        line-height: 26px;
+    }
+}
+
+f2kRecommendedContainer {
+    float: left;
+}
+
+f2kRecommendedContainer:first-of-type {
+    margin-right: 20px;
+}
+
+h3 {
+    color: #ef3418;
+}

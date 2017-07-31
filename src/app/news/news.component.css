@@ -1,0 +1,107 @@
+:host {
+    display: block;
+    position: relative;
+    border-top: 2px solid black;
+}
+
+.mews-privacy {
+    border-top: 1px solid #e7e7e7;
+    margin-top: 30px;
+}
+
+.news-not-robot {
+    margin-top: 20px;
+}
+
+.news-header {
+    margin-top: 15px;
+    margin-bottom: 9px;
+}
+
+.news-email {
+    height: 40px;
+    margin-top: 16px;
+}
+
+.news-email input {
+    float: left;
+    height: 36px;
+    border: 1px solid #e7e7e7;
+    border-right-width: 0;
+}
+
+.news-email button {
+    float: left;
+    border: none;
+    height: 40px;
+    background: red;
+    color: white;
+}
+
+.receive-updates {
+    height: 22px;
+    margin-top: 10px;
+}
+
+.receive-updates input {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin: 0 10px 0 0;
+}
+
+.receive-updates p {
+    float: left;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    :host {
+        width: Calc(100vw - 40px);
+        max-width: 440px;
+    }
+
+    .news-email input {
+        width: 199px;
+    }
+
+    .news-email button {
+        width: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    :host {
+        width: 354px;
+    }
+
+    .news-email input {
+        width: 263px;
+    }
+
+    .news-email button {
+        width: 90px;
+    }
+}
+
+@media (min-width: 1220px) {
+    :host {
+        width: 360px;
+    }
+
+    .news-email {
+        margin-top: 18px;
+    }
+
+    .receive-updates {
+        margin-top: 8px;
+    }
+
+    .news-email input {
+        width: 264px;
+    }
+
+    .news-email button {
+        width: 95px;
+    }
+}

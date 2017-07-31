@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/youtube</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/youtube">
+            <circle id="Oval-Copy" stroke="#EB321B" cx="15" cy="15" r="14.5"></circle>
+            <path d="M13,12.65825 L17.917,14.99625 L13,17.34225 L13,12.65825 Z M10.558,19.89125 C12.657,20.03625 17.339,20.03625 19.441,19.89125 C21.715,19.73625 21.982,18.62925 22,15.00025 C21.982,11.37825 21.718,10.26425 19.441,10.10825 C17.34,9.96425 12.657,9.96425 10.558,10.10825 C8.285,10.26425 8.017,11.37125 8,15.00025 C8.017,18.62225 8.282,19.73625 10.558,19.89125 L10.558,19.89125 Z" id="Page-1" fill="#EF3418"></path>
+        </g>
+    </g>
+</svg>

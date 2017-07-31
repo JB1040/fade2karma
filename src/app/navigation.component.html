@@ -1,0 +1,36 @@
+<nav class="nav-column">
+    <div class="navbar clearfix">
+        <button type="button" (click)="open = !open" style="height: 16px;">
+            <i *ngIf="open" style="padding: 0 2.5px; width: 11px; color: #ef3418" class="fa fa-times" aria-hidden="true"></i>
+            <span *ngIf="!open" class="icon-bar"></span>
+            <span *ngIf="!open" class="icon-bar"></span>
+            <span *ngIf="!open" class="icon-bar"></span>
+        </button>
+        <a routerLink="/" >
+            <img src="../images/Fade2karma.svg">
+        </a>
+    </div>
+
+    <div class="navbar-collapse" [ngClass]="open ? 'open': ''">
+        <div *ngFor="let navItem of navItems; let index = index"
+            [ngClass]="{dropdown : (navItem.children.length > 0), open : navItem.children.length > 0 && navItem.open}"
+            (click)="navItem.open = !navItem.open"  class="navItem">
+            <h5 [ngClass]="{active: isActive(navItem.name)}">
+                <span class="navItemText">{{navItem.name}}</span>
+                <span class="caret" *ngIf="navItem.children.length > 0" [ngClass]="{up: navItem.open, down: !navItem.open}"></span> <!--TODO caret => &#65087 && &#65088-->
+
+                <a (click)="open = false" *ngIf="!navItem.children || navItem.children.length === 0" routerLink="{{'/' + toLink(navItem.name)}}"></a>
+            </h5>
+            <div class="dropdown-menu" *ngIf="navItem.children && navItem.children.length > 0">
+                <div style="display: block" *ngFor="let child of navItem.children" class="navItemChild">
+                    <h5 [ngClass]="{active: isActive(child)}">
+                        <span class="navItemText">{{child}}</span>
+                        <img src="../images/{{child}}.svg">
+
+                        <a (click)="open = false" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

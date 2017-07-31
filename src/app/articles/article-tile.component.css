@@ -1,0 +1,149 @@
+.article-image-container {
+    position: relative;
+    width: 100%;
+    background: black;
+    padding-top: Calc(100% / (16 / 9));
+}
+
+:host {
+    cursor: pointer;
+    top: 0;
+    display: block;
+    position: relative;
+    transition: top .25s ease-in-out, box-shadow .25s ease-in-out;
+}
+
+:host:hover .tint:before {
+    background: #ef3418;
+}
+
+:host:hover .article-text-container h4 {
+    color: #ef3418;
+}
+
+.article-image {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.article-image:before {
+    background: #ef3418;
+    opacity: 0.1;
+}
+
+.f2k-play-image {
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.article-text-container {
+    border: 1px solid #e7e7e7;
+    border-top: 0;
+}
+
+.article-text-container h4, .article-text-container h6, .article-text-container .author {
+    margin: 5px 0;
+}
+
+.article-text-container h4 {
+    color: #333333;
+    transition: all 300ms ease;
+}
+
+.article-text-container h6 {
+    color: #ef3418
+}
+
+.article-text-container .author {
+    color: #9b9b9b;
+}
+
+.f2k-play-image {
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    :host {
+        width: Calc(100vw - 20px);
+        max-width: 460px;
+    }
+
+    :host(.featured) h4 { /*h4 as h1*/
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .article-text-container {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    :host {
+        width: 354px;
+    }
+
+    :host(.featured) {
+        width: 728px
+    }
+
+    :host(.featured) .article-text-container {
+        width: 314px;
+    }
+
+    :host(.featured) h4 { /*h4 as h1*/
+        font-size: 28px;
+        line-height: 34px;
+    }
+}
+
+@media (min-width: 1220px) {
+    :host {
+        width: 380px;
+    }
+
+    :host(.featured) {
+        width: 780px
+    }
+
+    :host(.featured) .article-text-container {
+        width: 340px;
+    }
+
+    :host(.featured) h4 { /*h4 as h1*/
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .f2k-play-image { /*TODO*/
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+
+    :host(.next-to-featured) .article-text-container {
+        height: 198px; /* TODO better solution*/
+    }
+}
+
+@media (min-width: 768px) {
+    :host(.featured) .article-text-container {
+        border-right: 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        background: white;
+    }
+
+    .article-text-container {
+        padding: 13px 20px;
+    }
+}

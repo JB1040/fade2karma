@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/footer_twitch</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="footer_twitch">
+            <rect id="NAV-BG-Copy-2" stroke="#EF3418" x="0.5" y="0.5" width="29" height="29"></rect>
+            <path d="M9.0123558,7 L8,9.5871315 L8,20.1606255 L11.5994873,20.1606255 L11.5994873,22.0728531 L13.6241989,22.0728531 L15.5364265,20.1606255 L18.46101,20.1606255 L22.3979492,16.2236862 L22.3979492,7 L9.0123558,7 Z M10.2496796,8.34980774 L21.0481415,8.34980774 L21.0481415,15.5487823 L18.7984619,17.7984619 L15.1989746,17.7984619 L13.286747,19.7106895 L13.286747,17.7984619 L10.2496796,17.7984619 L10.2496796,8.34980774 Z M17.4486542,14.8738785 L18.7985744,14.8738785 L18.7985744,10.9369392 L17.4486542,10.9369392 L17.4486542,14.8738785 Z M13.8491669,14.8738785 L15.1989746,14.8738785 L15.1989746,10.9369392 L13.8491669,10.9369392 L13.8491669,14.8738785 Z" id="Page-1" fill="#EF3418"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<div class="hs-card">
+    <div class="square">
+        <div class="square-content">
+            <div><span [ngClass]="card.faction" class="b2 white sky-blue-bg">{{card.cost}}</span></div>
+        </div>
+    </div>
+    <div class="central gray-bg" [ngClass]="card.rarity">
+        <div class="b2 white card-name">
+            <p class="">{{card.name}}</p>
+        </div>
+        <div class="image-wrap" [style.background]="'-webkit-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(0,0,0,0) 30%), url(' + card.image + ') 35% 50% no-repeat' | safeStyle"></div>
+    </div>
+    <div class="square right">
+        <div class="square-content">
+            <div><span class="b2 white gray-bg">{{card.strength}}</span></div>
+        </div>
+    </div>
+</div>
