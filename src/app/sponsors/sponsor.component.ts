@@ -11,7 +11,7 @@ import { Sponsor, SponsorService } from './sponsor.service';
             <li class="row" style="margin:10px; border: 1px solid black; text-align: justify;" *ngFor="let sponsor of sponsors | async">
 
                 <div class="f2k-colapse" style="position:relative; float:left;width: 250px">
-                    <img style="width: 100%; max-width: 400px" src="../images/{{sponsor.image}}"
+                    <img style="width: 100%; max-width: 400px" src="assets/images/{{sponsor.image}}"
                          (click)="navigateLink(sponsor.home)"/>
                 </div>
 

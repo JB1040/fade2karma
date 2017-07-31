@@ -20,7 +20,7 @@ export class ArticlesComponent implements OnInit {
     article = {
         name: 'blue',
         title: 'Vararanis: Cosmoc Crown Showdown BreakDown',
-        image: 'cipher.jpg',
+        image: 'Cipher.jpg',
         type: 'PODCAST',
         author: 'Chris Kohler',
         contentType: 'article',

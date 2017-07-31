@@ -7,7 +7,7 @@
             <span *ngIf="!open" class="icon-bar"></span>
         </button>
         <a routerLink="/" >
-            <img src="../images/Fade2karma.svg">
+            <img src="assets/images/Fade2karma.svg">
         </a>
     </div>
 
@@ -25,7 +25,7 @@
                 <div style="display: block" *ngFor="let child of navItem.children" class="navItemChild">
                     <h5 [ngClass]="{active: isActive(child)}">
                         <span class="navItemText">{{child}}</span>
-                        <img src="../images/{{child}}.svg">
+                        <img src="assets/images/{{child}}.svg">
 
                         <a (click)="open = false" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
                     </h5>

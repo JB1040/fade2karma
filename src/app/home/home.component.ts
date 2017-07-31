@@ -100,7 +100,7 @@ export class HomeTestingComponent {
     constructor() {
         this.article = {
             title: 'Vararanis: Cosmoc Crown Showdown BreakDown',
-            image: 'cipher.jpg',
+            image: 'Cipher.jpg',
             type: 'PODCAST',
             author: 'Chris Kohler',
             contentType: 'article',
@@ -111,7 +111,7 @@ export class HomeTestingComponent {
 
         this.deck = {
             title: 'Control Mage',
-            image: 'cipher.jpg', // this is a placeholder image xD
+            image: 'Cipher.jpg', // this is a placeholder image xD
             type: 'MAGE',
             author: 'Chris Kohler',
             contentType: 'deck',

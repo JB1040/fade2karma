@@ -8,7 +8,7 @@ import { Player } from './teams.service';
 @Component({
     selector: 'my-player',
     template: `
-                <img class="player-image img-rounded" src="../images/{{player.image}}" (click)="navigate(team, player.name)"/>
+                <img class="player-image img-rounded" src="assets/images/{{player.image}}" (click)="navigate(team, player.name)"/>
 
                 <h3 class="name" style="position: absolute; top: 200px; color: white; width: 100%">{{player.name}}</h3>
 

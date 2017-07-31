@@ -10,7 +10,7 @@ import { Player, TeamsService } from './teams.service';
        <h1 (click)="navigate(player.name)">{{player.name}}</h1>
         <div class="items">
                 
-                    <img src="../images/{{player.image}}" (click)="navigate(team.name, player.name)"/>
+                    <img src="assets/images/{{player.image}}" (click)="navigate(team.name, player.name)"/>
 
                     <p>{{player.description}}</p>
 
