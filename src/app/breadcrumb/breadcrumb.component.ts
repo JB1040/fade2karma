@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+
+interface PagePath {
+  title: string;
+  path: string;
+}
 
 @Component({
   selector: 'f2k-breadcrumb',
@@ -6,10 +12,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./breadcrumb.component.css']
 })
 export class BreadcrumbComponent implements OnInit {
+  private paths: PagePath[] = [{
+      title: 'Home',
+      path: '/'
+  }];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+      let currentPath = '';
+      this.paths =
+          this.paths.concat(this.router.url.substr(1).split('/').map(path => {
+          currentPath += '/' + path;
+          return {
+              title: path.replace(/\b\w/, l => l.toUpperCase()),
+              path: currentPath
+          }
+      }));
+      console.log(this.paths);
   }
-
 }
