@@ -1,5 +1,7 @@
 f2kArticlesTile {
-    float: left;
+    float: left;    
+	margin-right: 5px;
+    margin-left: 5px;
 }
 
 h1 {
@@ -49,6 +51,10 @@ h1 {
 
 .dropdown-children h5{
     padding: 4px 0;
+}
+
+.dropdown-children h5:hover{
+    opacity: 0.75;
 }
 
 .dropdown-children > div:not(:first-child) {
@@ -105,3 +111,4 @@ h1 {
         margin-right: 20px;
     }
 }
+

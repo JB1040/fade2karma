@@ -2,6 +2,7 @@
     background-size: 100% 2px;
     background-repeat: no-repeat;
     display: inline-block;
+    background-color: #f7f7f7;
     /*width: 340px;*/
 }
 
@@ -14,6 +15,11 @@ a {
     text-decoration: none;
     background: #ef3418;
     display: inline-block;
+    transition: opacity 300ms;
+}
+
+a:hover{
+    opacity:0.75;
 }
 
 a .b2 {
@@ -23,6 +29,13 @@ a .b2 {
 .tier-list-link-container {
     margin: 20px 0;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+        .tier-list-link-container {
+        text-align: left;
+        padding-left: 80px;
+    }
 }
 
 f2kRecommendedTile:first-child {
@@ -43,6 +56,14 @@ f2kRecommendedTile {
 
 .tier-container:not(:last-child) {
     border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 10px;
+}
+
+@media (min-width : 768px)
+and (max-width : 1219px) {
+    .tier-container:not(:last-child) {
+        border-bottom: 0 solid;
+    }
 }
 
 :host f2kRecommendedTile {
@@ -59,12 +80,14 @@ f2kRecommendedTile {
     display: inline-block;
     width: Calc(100% - 60px);
     float: left;
+    margin-bottom: -1px;
 }
 
 .tier-title {
     color: #ef3418;
     font-family: 'Roboto', sans-serif;
     margin: 20px;
+    font-weight:800;
 }
 
 .tier-containers {

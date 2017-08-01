@@ -86,10 +86,14 @@ h5:hover,
     vertical-align: middle;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
+    -webkit-transition: -webkit-transform 300ms; /* Safari */
+    transition: transform 300ms;
 }
 
 .caret.up {
-    border-bottom: 4px dashed;
+    border-top: 4px dashed;
+    -webkit-transform: rotate(-180deg); /* Safari */
+    transform: rotate(-180deg);
 }
 
 .caret.down {
@@ -114,6 +118,7 @@ h5:hover,
     .dropdown > h5 {
         pointer-events: none;
         color: #c0c0c0;
+        font-weight: normal;
     }
 
     .navbar-collapse.open {
@@ -240,6 +245,7 @@ h5:hover,
 
     .navbar a {
         margin-right: 15px;
+        margin-left:-15px;
     }
 
     .navbar img {
@@ -268,6 +274,7 @@ h5:hover,
 
     .navbar a {
         margin-right: 40px;
+        margin-left:-20px;
     }
 
     .navbar img {
