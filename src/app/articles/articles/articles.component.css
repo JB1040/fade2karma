@@ -53,6 +53,10 @@ h1 {
     padding: 4px 0;
 }
 
+.dropdown-children h5:hover{
+    opacity: 0.75;
+}
+
 .dropdown-children > div:not(:first-child) {
     border-top: 1px solid #e7e7e7;
 }
@@ -60,4 +64,3 @@ h1 {
 .dropdown-children h5:first-child {
     margin-top: 5px;
 }
-
