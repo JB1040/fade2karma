@@ -10,6 +10,8 @@
 
 :host:hover .online-streamer-info h5 {
     color: #ef3418;
+    transition: color 300ms;
+    -webkit-transition: color 300ms;
 }
 
 .tint {
