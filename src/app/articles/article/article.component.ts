@@ -10,14 +10,14 @@ import { Author } from './author/author';
 export class ArticleComponent implements OnInit {
     // TODO: Resolve article from url
     mainArticle: ArticleContent = {
-        title: 'This is a new article',
+        title: 'F2K Signs Streamers: JJPasak and Isherwood',
         author: {
             name: 'Cipher',
             game: 'Hearthstone',
             image: 'cipher.jpg'
         },
         date: new Date(1481200000000),
-        rating: 21,
+        rating: 9,
         content: `
             <img src="http://lorempixel.com/780/438" alt="">
             <p class="b1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 interface PagePath {
@@ -12,6 +12,8 @@ interface PagePath {
   styleUrls: ['./breadcrumb.component.css']
 })
 export class BreadcrumbComponent implements OnInit {
+  @Input() title: string;
+
   private paths: PagePath[] = [{
       title: 'Home',
       path: '/'
@@ -29,5 +31,9 @@ export class BreadcrumbComponent implements OnInit {
               path: currentPath
           }
       }));
+
+      if(this.title) {
+          this.paths[this.paths.length-1].title = this.title;
+      }
   }
 }

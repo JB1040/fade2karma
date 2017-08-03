@@ -13,9 +13,7 @@ import { DeckHs } from '../decks/deck';
             <hr style="border-top: 3px solid black">
             <f2k-rating-box></f2k-rating-box>
             <!-- END OF ABDELHAKEEM TESTS  -->
-        </div>
-        `
-            /*
+
             <!--<h2>HomePageComponent PlaceHolder</h2>-->
             <!--<onlineSteamerScroll></onlineSteamerScroll>-->
             <hr style="border-top: 3px solid black">
@@ -69,7 +67,8 @@ import { DeckHs } from '../decks/deck';
             <hr style="border-top: 3px solid black">
 
             <f2kFooter></f2kFooter>
-        */
+        </div>
+`
 })
 
 export class HomeTestingComponent {

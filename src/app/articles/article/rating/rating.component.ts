@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2} from '@angular/core';
+import { Component, OnInit, Renderer2, Input } from '@angular/core';
 
 @Component({
     selector: 'f2k-rating-box',
@@ -6,13 +6,19 @@ import { Component, OnInit, Renderer2} from '@angular/core';
     styleUrls: ['./rating.component.css']
 })
 export class RatingComponent implements OnInit {
-    /* TODO: Dynamic functionality */
-    public score: number = 12;
-    public liked: boolean = false;
+    @Input() rating: number;
+    @Input() liked: boolean;
 
     constructor(private renderer: Renderer2) { }
 
     ngOnInit() {
+        // TODO: This is just for testing
+        if(this.rating === undefined) {
+            this.rating = 0;
+        }
+        if(this.liked === undefined) {
+            this.liked = false;
+        }
     }
 
     changeRating(): void {
@@ -25,13 +31,12 @@ export class RatingComponent implements OnInit {
             }, 300);
             setTimeout(() => {
                 this.renderer.removeClass(ratingAngle, 'hide');
-                this.score += 1;
+                this.rating += 1;
             }, 600);
         } else {
-            this.score -= 1;
+            this.rating -= 1;
         }
 
         this.liked = !this.liked;
     }
-
 }
