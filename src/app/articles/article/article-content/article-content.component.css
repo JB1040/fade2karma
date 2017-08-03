@@ -41,13 +41,20 @@ f2k-author-tile {
     width: 740px;
 }
 
-button.btn-expand-comments {
+.btn-expand-comments {
     float: left;
     border: none;
     height: 40px;
     padding: 0 20px;
-    background: red;
+    background-color: #EF3418;
     color: white;
+    font-weight: bold;
+}
+
+.btn-expand-comments i.fa {
+    transform: scale(2,1.5);
+    margin-left: 0.5em;
+    font-weight: normal;
 }
 
 .footer-ad {

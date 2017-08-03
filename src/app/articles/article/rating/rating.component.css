@@ -30,6 +30,7 @@
 }
 
 .rating-angle {
+    transform: scale(2,1.5);
     display: block;
 }
 
