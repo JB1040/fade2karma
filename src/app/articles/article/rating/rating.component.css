@@ -5,6 +5,8 @@
     text-align: center;
     border: 1px solid #9B9B9B;
     cursor: default;
+    transition: color 500ms ease, border-color 500ms ease;
+    overflow: hidden;
 }
 
 .rating-box:hover {
@@ -18,8 +20,28 @@
 }
 
 .rating-box.liked:hover {
-    border-color: #9B9B9B;
+    border-color: #EF3418;
     color: #EF3418;
+}
+
+.rating-angle {
+    transform: scale(2,1.5);
+    display: block;
+    transition: transform 300ms linear, opacity 300ms linear;
+}
+
+.rating-angle.leaveup {
+    transform: translateY(-100%) scale(2,1.5);
+}
+
+.rating-angle.hide {
+    transition: none;
+    opacity: 0;
+    transform: translateY(30%) scale(2,1.5);
+}
+
+.rating-score {
+    display: block;
 }
 
 @media(max-width: 1219) {
@@ -27,13 +49,4 @@
         width: 35px;
         height: 35px;
     }
-}
-
-.rating-angle {
-    transform: scale(2,1.5);
-    display: block;
-}
-
-.rating-score {
-    display: block;
 }

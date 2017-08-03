@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
 import { AuthorComponent } from '../author/author.component';
+import { RatingComponent } from '../rating/rating.component';
 import { RecommendedContainerComponent } from '../../../teased/teased-container.component';
 
 @Component({
