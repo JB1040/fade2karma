@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -13,9 +13,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeTestingComponent } from './home/home.component';
 import { OnlineStreamerTileComponent } from './home/streams/online-streamer-tile.component';
 import { OnlineStreamerScrollComponent } from './home/streams/online-streamer-scroll.component';
+import { AuthorComponent } from './articles/article/author/author.component';
 import { ArticlesTileComponent } from './articles/article-tile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ArticlesComponent } from './articles/articles/articles.component';
+import { ArticleComponent } from './articles/article/article.component';
 import { RecommendedTileComponent } from './teased/teased-tile.component';
 import { RecommendedContainerComponent } from './teased/teased-container.component';
 import { TopDecksComponent } from './home/topDecks/top-decks.component';
@@ -37,6 +39,9 @@ import { ManatableComponent } from './manatable/manatable.component';
 import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ArticleContentComponent } from './articles/article/article-content/article-content.component';
+import { RatingComponent } from './articles/article/rating/rating.component';
 
 
 const config = {
@@ -82,6 +87,7 @@ const myAppRoutes: Routes = [
         OnlineStreamerScrollComponent,
         ArticlesTileComponent,
         ArticlesComponent,
+        ArticleComponent,
         RecommendedTileComponent,
         RecommendedContainerComponent,
         TopDecksComponent,
@@ -97,7 +103,11 @@ const myAppRoutes: Routes = [
         HearthstoneFilterComponent,
         GwentFilterComponent,
         FooterComponent,
-        NewsLetterComponent
+        NewsLetterComponent,
+        BreadcrumbComponent,
+        AuthorComponent,
+        ArticleContentComponent,
+        RatingComponent
     ],
     bootstrap: [
         AppComponent

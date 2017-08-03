@@ -1,0 +1,88 @@
+.article-page {
+    position: relative;
+    top: 32px;
+    width: 780px;
+}
+
+h1.article-title {
+    margin-top: 6px;
+}
+
+f2k-author-tile {
+    float: left;
+    margin-right: 40px;
+}
+
+.article-info {
+    padding: 31px 0 20px 0;
+    margin-bottom: 40px;
+    border-bottom: #e7e7e7 1px solid;
+}
+
+/* Article Info Clearfix */
+.article-info:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.article-date {
+    float: left;
+    margin: 0 40px;
+}
+
+.article-date .date-string {
+    color: #9B9B9B;
+}
+
+.article-content p {
+    color: #333333;
+    margin: 34px auto;
+    width: 740px;
+}
+
+button.btn-expand-comments {
+    float: left;
+    border: none;
+    height: 40px;
+    padding: 0 20px;
+    background: red;
+    color: white;
+}
+
+.footer-ad {
+    width: 728px;
+    height: 90px;
+    margin: 40px auto 80px auto;
+    text-align: center;
+    background-color: #e7e7e7;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 90px;
+}
+
+f2k-rating-box {
+    margin-left: 40px;
+}
+
+/* CARETS */
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.caret.up {
+    border-bottom: 4px dashed;
+}
+
+.caret.down {
+    border-top: 4px dashed;
+}
+

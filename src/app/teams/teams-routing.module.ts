@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TeamsComponent } from './teams.component';
@@ -6,6 +6,7 @@ import { TeamComponent } from './team.component';
 import { PlayerComponent } from './player.component';
 import {HomeTestingComponent} from '../home/home.component';
 import { ArticlesComponent } from '../articles/articles/articles.component';
+import { ArticleComponent } from '../articles/article/article.component';
 import { HomePageComponent } from '../home/home-page.component';
 
 const contentRoutes: Routes = [
@@ -15,7 +16,7 @@ const contentRoutes: Routes = [
     { path: 'test', component: HomeTestingComponent },
     { path: '', component: HomePageComponent },
     { path: 'articles', component: ArticlesComponent },
-    // { path: 'articles/article', component: ArticlesComponent },
+    { path: 'articles/article', component: ArticleComponent },
 ];
 
 @NgModule({
