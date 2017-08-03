@@ -29,6 +29,5 @@ export class BreadcrumbComponent implements OnInit {
               path: currentPath
           }
       }));
-      console.log(this.paths);
   }
 }
