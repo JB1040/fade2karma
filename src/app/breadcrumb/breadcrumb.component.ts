@@ -25,7 +25,7 @@ export class BreadcrumbComponent implements OnInit {
           this.paths.concat(this.router.url.substr(1).split('/').map(path => {
           currentPath += '/' + path;
           return {
-              title: path.replace(/\b\w/, l => l.toUpperCase()),
+              title: path.replace(/^\w/, l => l.toUpperCase()),
               path: currentPath
           }
       }));

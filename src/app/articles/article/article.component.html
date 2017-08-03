@@ -1,8 +1,5 @@
 <div class="F2K-column">
-    <div class="article">
-        <f2k-article-content></f2k-article-content>
-    </div>
-    <div class="article">
-        <f2k-article-content></f2k-article-content>
+    <div *ngFor="let article of articles" class="article">
+        <f2k-article-content [article]="article"></f2k-article-content>
     </div>
 </div>
