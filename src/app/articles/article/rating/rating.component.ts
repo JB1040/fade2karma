@@ -32,7 +32,7 @@ export class RatingComponent implements OnInit {
             setTimeout(() => {
                 this.renderer.removeClass(ratingAngle, 'hide');
                 this.rating += 1;
-            }, 600);
+            }, 400);
         } else {
             this.rating -= 1;
         }
