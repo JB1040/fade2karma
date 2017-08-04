@@ -24,6 +24,7 @@ import { TopDecksComponent } from './home/topDecks/top-decks.component';
 import { CanvasService } from './core/canvas.service';
 import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
+import { TierListHubComponent } from './tier-list-hub/tier-list-hub.component';
 import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
 import { IntegratedComponent } from './integrated.app.component';
@@ -60,6 +61,7 @@ export function ResponsiveDefinition() {
 };
 
 const myAppRoutes: Routes = [
+    {path: 'tier_list', component: TierListHubComponent},
     {path: '', component: PageNotFoundComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
@@ -75,7 +77,7 @@ const myAppRoutes: Routes = [
         NgbModule.forRoot(),
         InfiniteScrollModule,
         FormsModule,
-        ResponsiveModule
+        ResponsiveModule,
     ],
     declarations: [
         AppComponent,
@@ -107,7 +109,8 @@ const myAppRoutes: Routes = [
         BreadcrumbComponent,
         AuthorComponent,
         ArticleContentComponent,
-        RatingComponent
+        RatingComponent,
+        TierListHubComponent,
     ],
     bootstrap: [
         AppComponent

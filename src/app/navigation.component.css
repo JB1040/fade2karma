@@ -140,6 +140,7 @@ h5:hover,
 
     .nav-column {
         width: calc(100% - 20px);
+        height: 40px;
     }
 
     .navbar {
