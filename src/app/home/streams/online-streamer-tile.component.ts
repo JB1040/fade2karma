@@ -65,7 +65,6 @@ export class OnlineStreamerTileComponent implements OnChanges {
     setPostition() {
         const compStyle = window.getComputedStyle(this.el.nativeElement);
         const width = parseInt(compStyle.width, 10) + this.spaceBetweenTiles;
-        console.log(this.containerWidth);
         if (this.containerWidth && this.itemsCount > (this.containerWidth - this.marginLeft - this.marginRight) / width) {
             let position = ((this.index * width) - (this.moved * width)) % (this.itemsCount * width);
             this.el.nativeElement.style.left = position + 'px';
@@ -77,9 +76,6 @@ export class OnlineStreamerTileComponent implements OnChanges {
             position += this.marginLeft;
             if (position < 0) {
                 this.currentStreamer.emit(this.streamer);
-            }
-            if (position > 700) {
-                console.log(position);
             }
             if (position >= (this.containerWidth - this.marginRight)) {
                 position += 15;

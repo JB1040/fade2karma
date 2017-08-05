@@ -1,0 +1,22 @@
+<div class="F2K-column clearfix">
+
+    <div class="articles-select">
+        <h1>Show me Members for </h1>
+
+        <div class="dropdown" [ngClass]="{open : gamesOpen}">
+            <h1 (click)="gamesOpen = !gamesOpen">
+                {{displayGames}}{{ gamesOpen ? " &#65087;" : " &#65088;"}}
+            </h1>
+            <div class="dropdown-children"
+                 [ngStyle]="{'width.px': getWidth(displayGames + (gamesOpen ? ' &#65087;' : ' &#65088;'))}">
+                <ng-template ngFor let-game [ngForOf]="displayedGames">
+                    <div *ngIf="game !== displayGames"><h5 (click)="displayGames = game; gamesOpen = false; filterByGame()">{{game}}</h5></div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <f2kMemberTile *ngFor="let player of players" [player]="player"></f2kMemberTile>
+    </div>
+</div>

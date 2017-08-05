@@ -10,8 +10,6 @@
 
 :host:hover .online-streamer-info h5 {
     color: #ef3418;
-    transition: color 300ms;
-    -webkit-transition: color 300ms;
 }
 
 .tint {
@@ -45,10 +43,12 @@ a {
 
 :host .indicator {
     color: #ef3418;
+    display: inline-block;
 }
 
 :host .game {
     color: #9b9b9b;
+    display: inline-block;
 }
 
 :host .image {

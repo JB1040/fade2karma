@@ -8,6 +8,6 @@ import { DeckHs } from '../../decks/deck';
     styleUrls: ['./top-decks.component.css']
 })
 export class TopDecksComponent {
-    @Input() articlesArr: Article[][] | DeckHs[][];
+    @Input() itemArr: Article[][] | DeckHs[][];
     @Input() title: string;
 }

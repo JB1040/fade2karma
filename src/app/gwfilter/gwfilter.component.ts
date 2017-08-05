@@ -64,8 +64,6 @@ export class GwentFilterComponent {
     }
 
     toggleActiveFaction(faction: string) {
-        console.log('toggling ', faction);
-        console.log('this.activeFactions ', this.activeFactions);
         this.activeLeaders = [];
         const index = this.activeFactions.indexOf(faction);
         if (index >= 0) {
@@ -77,9 +75,6 @@ export class GwentFilterComponent {
     }
 
     toggleActiveLeader(leader: string) {
-        console.log('toggling ', leader);
-        console.log('this.activeLeaders ', this.activeLeaders);
-
         this.activeFactions = [];
         const index = this.activeLeaders.indexOf(leader);
         if (index >= 0) {

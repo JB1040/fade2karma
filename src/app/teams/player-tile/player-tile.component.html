@@ -1,0 +1,15 @@
+<div class="player-image-container tint">
+    <img class="player-image" src="assets/images/{{player.image}}">
+</div>
+
+<div class="text-container">
+    <h5 class="player-name">{{player.name}}</h5>
+
+    <div *ngIf="player.stream">
+        <p class="b2 indicator">Live</p>
+        <div class="point"></div>
+        <p class="b2 game">{{player.game}}</p>
+    </div>
+
+    <p *ngIf="!player.stream" class="b2">Offline</p>
+</div>

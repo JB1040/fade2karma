@@ -2,11 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { TeamsComponent } from './teams.component';
-import { TeamComponent } from './team.component';
-import { PlayerComponent } from './player.component';
-import { PlayerInstanceComponent } from './player';
-//import { HeroDetailComponent } from './content-detail';
+import { TeamsComponent } from './team-hub/team-hub.component';
+import { PlayerInstanceComponent } from './player-tile/player-tile.component';
 
 import { TeamsService } from './teams.service';
 
@@ -20,10 +17,9 @@ import { TeamsRoutingModule } from './teams-routing.module';
     ],
     declarations: [
         TeamsComponent,
-        TeamComponent,
-        PlayerComponent,
         PlayerInstanceComponent
     ],
     providers: [TeamsService]
 })
-export class TeamsModule { }
+export class TeamsModule {
+}

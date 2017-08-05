@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ContentModule } from './contentMain/content.module';
 import { SponsorModule } from './sponsors/sponsor.module';
@@ -14,19 +13,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeTestingComponent } from './home/home.component';
 import { OnlineStreamerTileComponent } from './home/streams/online-streamer-tile.component';
 import { OnlineStreamerScrollComponent } from './home/streams/online-streamer-scroll.component';
-import { AuthorComponent } from './articles/article/author/author.component';
 import { ArticlesTileComponent } from './articles/article-tile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ArticlesComponent } from './articles/articles/articles.component';
-import { ArticleComponent } from './articles/article/article.component';
 import { RecommendedTileComponent } from './teased/teased-tile.component';
 import { RecommendedContainerComponent } from './teased/teased-container.component';
 import { TopDecksComponent } from './home/topDecks/top-decks.component';
 import { CanvasService } from './core/canvas.service';
 import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
-import { TierListHubComponent } from './tier-list-hub/tier-list-hub.component';
-import { TierListHubService } from './tier-list-hub/tier-list-hub.service';
 import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
 import { IntegratedComponent } from './integrated.app.component';
@@ -42,9 +37,6 @@ import { ManatableComponent } from './manatable/manatable.component';
 import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { ArticleContentComponent } from './articles/article/article-content/article-content.component';
-import { RatingComponent } from './articles/article/rating/rating.component';
 
 
 const config = {
@@ -63,7 +55,6 @@ export function ResponsiveDefinition() {
 };
 
 const myAppRoutes: Routes = [
-    {path: 'tier_list', component: TierListHubComponent},
     {path: '', component: PageNotFoundComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
@@ -72,7 +63,6 @@ const myAppRoutes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
         ContentModule,
         SponsorModule,
         TeamsModule,
@@ -80,7 +70,7 @@ const myAppRoutes: Routes = [
         NgbModule.forRoot(),
         InfiniteScrollModule,
         FormsModule,
-        ResponsiveModule,
+        ResponsiveModule
     ],
     declarations: [
         AppComponent,
@@ -92,7 +82,6 @@ const myAppRoutes: Routes = [
         OnlineStreamerScrollComponent,
         ArticlesTileComponent,
         ArticlesComponent,
-        ArticleComponent,
         RecommendedTileComponent,
         RecommendedContainerComponent,
         TopDecksComponent,
@@ -108,12 +97,7 @@ const myAppRoutes: Routes = [
         HearthstoneFilterComponent,
         GwentFilterComponent,
         FooterComponent,
-        NewsLetterComponent,
-        BreadcrumbComponent,
-        AuthorComponent,
-        ArticleContentComponent,
-        RatingComponent,
-        TierListHubComponent,
+        NewsLetterComponent
     ],
     bootstrap: [
         AppComponent
@@ -124,7 +108,6 @@ const myAppRoutes: Routes = [
     },
         NavigationService,
         CanvasService,
-        TierListHubService,
         DatePipe
     ]
 })

@@ -1,14 +1,17 @@
-f2kArticlesTile {
+f2kMemberTile {
     float: left;
 }
 
-h1 {
-    padding-top: 20px;
+.F2K-column {
+    margin-bottom: 10px;
 }
+
+
 
 .articles-select {
     z-index: 10;
     position: relative;
+    margin: 32px 0;
 }
 
 .dropdown-children {
@@ -19,20 +22,20 @@ h1 {
     display: block;
 }
 
-.articles-select h3 {
-    display: inline-block;
+.articles-select h1 {
+    display: inline;
 }
 
 .dropdown {
     display: inline-block;
 }
 
-.dropdown h3 {
+.dropdown h1 {
     position: relative;
     z-index: 2;
 }
 
-.dropdown h3,
+.dropdown h1,
 .dropdown-children h5 {
     color: #EF3418;
     cursor: pointer;
@@ -59,49 +62,21 @@ h1 {
     margin-top: 5px;
 }
 
-@media (max-width: 767px) {
-    h1 {
-        margin-top: 15px;
-    }
-    .articles-select {
-        margin: 17px 0 25px 0;
-    }
 
-    f2kArticlesTile {
-        margin-bottom: 10px;
-        max-width: 480px;
+@media (max-width: 767px) {
+    .articles-select {
+        margin: 15px 0;
     }
 }
 
 @media (min-width: 768px) {
-    h1 {
-        margin-top: 32px;
-    }
     .articles-select {
-        margin: 29px 0 33px 0;
-    }
-
-    f2kArticlesTile {
-        margin-bottom: 20px;
-    }
-
-}
-
-@media (min-width: 768px) and (max-width: 1219px) {
-    f2kArticlesTile:not(:nth-child(2n+2)) {
-        margin-right: 20px;
+        margin: 33px 0;
     }
 }
 
 @media (min-width: 1220px) {
-    h1 {
-        margin-top: 33px;
-    }
     .articles-select {
-        margin: 26px 0 32px 0;
-    }
-
-    f2kArticlesTile:not(:nth-child(3n+3)) {
-        margin-right: 20px;
+        margin: 32px 0;
     }
 }

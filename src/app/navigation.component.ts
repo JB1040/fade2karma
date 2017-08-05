@@ -13,13 +13,13 @@ export class NavigationComponent {
     lastScrollTop: number;
     top: number;
     navItems: NavItem[] = [
-        new NavItem('Decklists', ['Hearthstone', 'Gwent']),
+        // new NavItem('Decklists', ['Hearthstone', 'Gwent']),
         new NavItem('Tier List', []),
         new NavItem('Articles', []),
         new NavItem('Giveaway', []),
         new NavItem('Team', []),
-        new NavItem('Sponsors', []),
-        new NavItem('Shop', [])
+        // new NavItem('Sponsors', []),
+        // new NavItem('Shop', [])
     ];
 
     @HostListener('window:scroll', ['$event']) scroll(event) {
@@ -49,16 +49,11 @@ export class NavigationComponent {
     }
 
     getHeight() {
-        console.log(this.element.nativeElement.querySelector('.nav-column').offsetWidth);
-        if (this.element.nativeElement.querySelector('.nav-column').offsetWidth < 728) { // @
+        if (this.element.nativeElement.querySelector('.nav-column').offsetWidth < 728) {
             return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
         }
-        return this.element.nativeElement.querySelector('.nav-column').offsetHeight + this.element.nativeElement.querySelector('.dropdown-menu').offsetHeight;
+        return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
     }
-
-    // getNavHeight() {
-    //     return this.element.nativeElement.querySelector('.navbar-collapse').heght;
-    // }
 
     isActive(name: string) {
         let currentRoute: string | string[] = this.router.url;

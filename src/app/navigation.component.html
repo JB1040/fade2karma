@@ -6,7 +6,7 @@
             <span *ngIf="!open" class="icon-bar"></span>
             <span *ngIf="!open" class="icon-bar"></span>
         </button>
-        <a routerLink="/" >
+        <a routerLink="/" (click)="resetOpenItems()">
             <img src="assets/images/Fade2karma.svg">
         </a>
     </div>
@@ -19,7 +19,7 @@
                 <span class="navItemText">{{navItem.name}}</span>
                 <span class="caret" *ngIf="navItem.children.length > 0" [ngClass]="{up: navItem.open, down: !navItem.open}"></span> <!--TODO caret => &#65087 && &#65088-->
 
-                <a (click)="open = false" *ngIf="!navItem.children || navItem.children.length === 0" routerLink="{{'/' + toLink(navItem.name)}}"></a>
+                <a (click)="open = false; resetOpenItems()" *ngIf="!navItem.children || navItem.children.length === 0" routerLink="{{'/' + toLink(navItem.name)}}"></a>
             </h5>
             <div class="dropdown-menu" *ngIf="navItem.children && navItem.children.length > 0">
                 <div style="display: block" *ngFor="let child of navItem.children" class="navItemChild">
@@ -27,7 +27,7 @@
                         <span class="navItemText">{{child}}</span>
                         <img src="assets/images/{{child}}.svg">
 
-                        <a (click)="open = false" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
+                        <a (click)="open = false; resetOpenItems()" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
                     </h5>
                 </div>
             </div>

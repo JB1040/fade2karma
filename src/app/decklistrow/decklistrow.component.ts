@@ -16,7 +16,6 @@ export class DeckListRowComponent implements OnInit {
     displayDate: string;
 
     ngOnInit() {
-      console.log(this.deck, this.odd, this.even, this.index);
         if ((Date.now() - this.deck.date) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
             this.displayDate = TimeTransfer.getTime(this.deck.date);
         }

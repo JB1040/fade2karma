@@ -1,0 +1,102 @@
+/* TODO a lot of :host logic in team-hub.component.css on f2kMemberTile */
+
+:host {
+    position: relative;
+    display: block;
+}
+
+.player-image-container {
+    position: relative;
+    padding-top: 100%;
+}
+
+.point {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+:host .indicator {
+    color: #ef3418;
+    display: inline-block;
+}
+
+:host .game {
+    color: #9b9b9b;
+    display: inline-block;
+}
+
+.text-container {
+    text-align: center;
+}
+
+.player-name {
+    display: inline-block;
+}
+
+h5 {
+    transition: color 300ms ease;
+}
+
+:host:hover h5 {
+    color: #EF3418;
+}
+
+:host:hover .tint:before {
+    background: #ef3418;
+}
+
+.player-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+@media (max-width: 767px) {
+    :host {
+        margin: 10px;
+        width: Calc((100vw - 67px)/2);
+        max-width: 225px;
+    }
+
+    :host:nth-child(2n + 2) {
+        margin-left: 0;
+    }
+
+    .text-container {
+        margin-top: 6px;
+    }
+}
+
+@media (min-width: 768px) {
+    .text-container {
+        margin-top: 11px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    :host {
+        margin-bottom: 20px;
+        width: 167px;
+    }
+
+    :host:not(:nth-child(4n + 4)) {
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 1220px) {
+    :host {
+        margin-bottom: 30px;
+        width: 212px;
+    }
+
+    :host:not(:nth-child(5n + 5)) {
+        margin-right: 30px;
+    }
+}

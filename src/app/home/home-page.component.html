@@ -1,7 +1,19 @@
 <f2kOnlineSteamerScroll [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 <div class="F2K-column">
-    <div class="clearfix featured" style="margin-bottom: 40px">
+    <div class="clearfix featured">
         <f2kArticlesTile class="featured" style="float: left" [showDescription]="true" [article]="article"></f2kArticlesTile>
         <f2kArticlesTile class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="article"></f2kArticlesTile>
+    </div>
+
+    <f2kTierListComponent [title]="'F2K HEARTHSTONE TIER LIST'" [items]="decks"></f2kTierListComponent>
+
+    <div class="clearfix article-container-one">
+        <f2kArticlesTile *ngFor="let article of firstTilesColumn" [article]="article"></f2kArticlesTile>
+    </div>
+
+    <f2kTopDecks [itemArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
+
+    <div class="clearfix article-container-two">
+        <f2kArticlesTile *ngFor="let article of secondTilesColumn" [article]="article"></f2kArticlesTile>
     </div>
 </div>
