@@ -41,13 +41,24 @@ f2k-author-tile {
     width: 740px;
 }
 
-button.btn-expand-comments {
+.article-content img {
+    width: 780px ;
+}
+
+.btn-expand-comments {
     float: left;
     border: none;
     height: 40px;
     padding: 0 20px;
-    background: red;
+    background-color: #EF3418;
     color: white;
+    font-weight: bold;
+}
+
+.btn-expand-comments i.fa {
+    transform: scale(2,1.5);
+    margin-left: 0.5em;
+    font-weight: normal;
 }
 
 .footer-ad {
@@ -65,24 +76,3 @@ button.btn-expand-comments {
 f2k-rating-box {
     margin-left: 40px;
 }
-
-/* CARETS */
-
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-}
-
-.caret.up {
-    border-bottom: 4px dashed;
-}
-
-.caret.down {
-    border-top: 4px dashed;
-}
-

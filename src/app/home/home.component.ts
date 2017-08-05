@@ -11,7 +11,7 @@ import { DeckHs } from '../decks/deck';
             <hr style="border-top: 3px solid black">
             <f2k-author-tile style="display: inline-block" [author]="author"></f2k-author-tile>
             <hr style="border-top: 3px solid black">
-            <f2k-article-rating></f2k-article-rating>
+            <f2k-rating-box></f2k-rating-box>
             <!-- END OF ABDELHAKEEM TESTS  -->
 
             <!--<h2>HomePageComponent PlaceHolder</h2>-->
