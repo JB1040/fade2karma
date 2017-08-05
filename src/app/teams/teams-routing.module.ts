@@ -1,22 +1,16 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TeamsComponent } from './teams.component';
-import { TeamComponent } from './team.component';
-import { PlayerComponent } from './player.component';
-import {HomeTestingComponent} from '../home/home.component';
+import { TeamsComponent } from './team-hub/team-hub.component';
+import { HomeTestingComponent } from '../home/home.component';
 import { ArticlesComponent } from '../articles/articles/articles.component';
-import { ArticleComponent } from '../articles/article/article.component';
 import { HomePageComponent } from '../home/home-page.component';
 
 const contentRoutes: Routes = [
-    { path: 'team/:name', component: TeamComponent },
-    { path: 'team/:name/:player', component: PlayerComponent },
-    { path: 'team', component: TeamsComponent },
-    { path: 'test', component: HomeTestingComponent },
-    { path: '', component: HomePageComponent },
-    { path: 'articles', component: ArticlesComponent },
-    { path: 'articles/article', component: ArticleComponent },
+    {path: 'team', component: TeamsComponent},
+    {path: 'test', component: HomeTestingComponent},
+    {path: '', component: HomePageComponent},
+    {path: 'articles', component: ArticlesComponent}
 ];
 
 @NgModule({
@@ -27,4 +21,5 @@ const contentRoutes: Routes = [
         RouterModule
     ]
 })
-export class TeamsRoutingModule { }
+export class TeamsRoutingModule {
+}

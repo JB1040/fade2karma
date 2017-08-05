@@ -27,7 +27,6 @@ export class HearthstoneManaGraphComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        console.log('window: ', window.innerWidth);
         this.createChart();
         if (this.data) {
             this.updateChart();
@@ -73,8 +72,6 @@ export class HearthstoneManaGraphComponent implements OnInit, OnChanges {
         const xDomain = this.data.map(d => d[0]);
         const yDomain = [0, d3.max(this.data, d => d[1])];
         const topDomain = this.data.map(d => d[1]);
-
-        console.log(`xDomain: ${xDomain} - yDomain: ${yDomain} - topDomain: ${topDomain}`);
 
         // create scales
         this.xScale = d3.scaleBand().domain(xDomain).rangeRound([0, this.width]);

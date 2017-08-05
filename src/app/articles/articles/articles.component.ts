@@ -15,8 +15,8 @@ export class ArticlesComponent implements OnInit {
     displayedGames = [ 'All Games', 'Hearthstone', 'Gwent' ];
     displayGames = 'All Games';
     displayArticles = 'All Articles';
-    articlesOpen: boolean = false;
-    gamesOpen: boolean = false;
+    articlesOpen = false;
+    gamesOpen = false;
     article = {
         name: 'blue',
         title: 'Vararanis: Cosmoc Crown Showdown BreakDown',
@@ -43,8 +43,6 @@ export class ArticlesComponent implements OnInit {
         }
     }
     onScrollDown () {
-        console.log('scrolled!!');
-
         // add another 20 items
         const start = this.sum;
         this.sum += 20;

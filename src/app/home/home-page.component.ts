@@ -16,10 +16,14 @@ export class HomePageComponent {
         twitch: 'https://www.twitch.tv/cipherhs'
     };
     articles: Article[];
+    tierList: DeckHs[];
+    articlesRecommended: Article[];
     decks: DeckHs[];
     articlesArr: Article[][];
     decksArr: DeckHs[][];
     deck: DeckHs;
+    firstTilesColumn: Article[] = [];
+    secondTilesColumn: Article[] = [];
 
     onlineStreamers: Streamer[] = [{
         name: 'BOB',
@@ -75,9 +79,14 @@ export class HomePageComponent {
         };
 
         this.articles = [];
-        for (let x = 0; x < 3; x++) {
+        for (let x = 0; x < 13; x++) {
             this.articles.push(this.article);
         }
+
+        console.log(this.articles);
+
+        this.firstTilesColumn = this.articles.slice(1, 7);
+        this.secondTilesColumn = this.articles.slice(6);
 
         this.articlesArr = [];
         for (let x = 0; x < 2; x++) {
@@ -85,13 +94,13 @@ export class HomePageComponent {
         }
 
         this.decks = [];
-        for (let x = 0; x < 6; x++) {
+        for (let x = 0; x < 8; x++) {
             this.decks.push(this.deck);
         }
 
         this.decksArr = [];
         for (let x = 0; x < 2; x++) {
-            this.decksArr.push(this.decks);
+            this.decksArr.push(this.decks.slice(0, 6));
         }
     }
 }

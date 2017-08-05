@@ -31,9 +31,7 @@ $bw: 1px; // border width
 .cell.title-cell {
     flex-flow: row wrap;
     h5 {
-        margin-bottom: -25px;
-        -webkit-transition: -webkit-all 300ms; /* Safari */
-        transition: all 300ms;
+        margin-bottom: -30px;
     }
 }
 
@@ -46,13 +44,13 @@ $bw: 1px; // border width
 }
 
 .red {
-    color: #ef3418;
+    color: red;
 }
 
 @media (max-width: 767px) {
     .decklistrow {
         width: calc(100vw - 40px);
-        max-width: 500px;
+        max-width: 440px;
         height: 80px;
     }
 
@@ -66,7 +64,7 @@ $bw: 1px; // border width
 
     .cell.title-cell {
         width: calc(100vw - 40px);
-        max-width: 500px;
+        max-width: 440px;
         height: 48px;
         background: #FFFFFF;
     }
@@ -131,7 +129,7 @@ $bw: 1px; // border width
 
 @media (min-width: 1220px) {
     .decklistrow {
-        width: 1210px;
+        width: 1180px;
         height: 60px;
     }
 

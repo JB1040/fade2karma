@@ -4,70 +4,59 @@ import { DeckHs } from '../decks/deck';
 
 @Component({
     template: `
-        <div class="F2K-column">
-            <!-- ABDELHAKEEM TESTS -->
-            <hr style="border-top: 3px solid black">
-            <f2k-breadcrumb></f2k-breadcrumb>
-            <hr style="border-top: 3px solid black">
-            <f2k-author-tile style="display: inline-block" [author]="author"></f2k-author-tile>
-            <hr style="border-top: 3px solid black">
-            <f2k-rating-box></f2k-rating-box>
-            <!-- END OF ABDELHAKEEM TESTS  -->
+        <!--<h2>HomePageComponent PlaceHolder</h2>-->
+        <!--<onlineSteamerScroll></onlineSteamerScroll>-->
+        <hr style="border-top: 3px solid black">
 
-            <!--<h2>HomePageComponent PlaceHolder</h2>-->
-            <!--<onlineSteamerScroll></onlineSteamerScroll>-->
-            <hr style="border-top: 3px solid black">
+        <f2kOnlineStreamerTile style="display: inline-block;" [streamer]="streamer"></f2kOnlineStreamerTile>
 
-            <f2kOnlineStreamerTile style="display: inline-block;" [streamer]="streamer"></f2kOnlineStreamerTile>
+        <hr style="border-top: 3px solid black">
 
-            <hr style="border-top: 3px solid black">
+        <f2kRecommendedTile class="article" [teasedItem]="article"></f2kRecommendedTile>
+      
+        <hr style="border-top: 3px solid black">
 
-            <f2kRecommendedTile class="article" [teasedItem]="article"></f2kRecommendedTile>
+        <f2kRecommendedTile class="deck" [teasedItem]="deck"></f2kRecommendedTile>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kRecommendedTile class="deck" [teasedItem]="deck"></f2kRecommendedTile>
+        <f2kArticlesTile [article]="article"></f2kArticlesTile>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kArticlesTile [article]="article"></f2kArticlesTile>
+        <f2kArticlesTile [showDescription]="true" class="featured" [article]="article"></f2kArticlesTile>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kArticlesTile [showDescription]="true" class="featured" [article]="article"></f2kArticlesTile>
+        <f2kRecommendedContainer [items]="articles" [title]="'YOU MAY ALSO LIKE'"></f2kRecommendedContainer>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kRecommendedContainer [items]="articles" [title]="'YOU MAY ALSO LIKE'"></f2kRecommendedContainer>
+        <f2kRecommendedContainer [items]="decks" [title]="'F2K HEARTHSTONE TIER LIST'"></f2kRecommendedContainer>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kRecommendedContainer [items]="decks" [title]="'F2K HEARTHSTONE TIER LIST'"></f2kRecommendedContainer>
+        <f2kTopDecks [itemArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kTopDecks [articlesArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
+        <f2kOnlineSteamerScroll [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 
-            <hr style="border-top: 3px solid black">
+        <hr style="border-top: 3px solid black">
 
-            <f2kOnlineSteamerScroll [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
+        <f2kTierListComponent [items]="recommended" [title]="'F2K HEARTHSTONE TIER LIST'"></f2kTierListComponent>
+        
+        <hr style="border-top: 3px solid black">
 
-            <hr style="border-top: 3px solid black">
+        <f2kIntegratedStuffDisplay></f2kIntegratedStuffDisplay>
 
-            <f2kTierListComponent [items]="recommended" [title]="'F2K HEARTHSTONE TIER LIST'"></f2kTierListComponent>
+        <hr style="border-top: 3px solid black">
 
-            <hr style="border-top: 3px solid black">
+        <f2kNewsLetter></f2kNewsLetter>
+        
+        <hr style="border-top: 3px solid black">
 
-            <f2kIntegratedStuffDisplay></f2kIntegratedStuffDisplay>
-
-            <hr style="border-top: 3px solid black">
-
-            <f2kNewsLetter></f2kNewsLetter>
-
-            <hr style="border-top: 3px solid black">
-
-            <f2kFooter></f2kFooter>
-        </div>
+        <f2kFooter></f2kFooter>
 `
 })
 
@@ -77,12 +66,6 @@ export class HomeTestingComponent {
         name: 'Cipher',
         game: 'Hearthstone',
         image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    };
-    author= {
-        name: 'Cipher',
-        game: 'Hearthstone',
-        image: 'cipher.jpg',
         twitch: 'https://www.twitch.tv/cipherhs'
     };
     articles: Article[];

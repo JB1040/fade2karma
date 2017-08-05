@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("rxjs/add/operator/switchMap");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var teams_service_1 = require("./teams.service");
+var teams_service_1 = require("../teams.service");
 var TeamsComponent = (function () {
     function TeamsComponent(service, route, router) {
         this.service = service;
