@@ -1,0 +1,110 @@
+<div class="social-media-links-floating hidden-md hidden-sm hidden-xs"
+     (window:resize)="onResize($event)">
+  <ng-container *ngIf="showFloatingSocialMediaLinks">
+
+    <div>
+      <a href="https://www.facebook.com/Fade2Karma/" target="_blank">
+          <img src="../../assets/icons/facebook.svg">
+      </a>
+    </div>
+    <div>
+      <a href="https://www.twitter.com/Fade2Karma/" target="_blank">
+          <img src="../../assets/icons/twitter.svg">
+      </a>
+    </div>
+    <div>
+      <a href="https://www.url.com/Fade2Karma/" target="_blank">
+          <img src="../../assets/icons/url.svg">
+      </a>
+    </div>
+
+  </ng-container>
+</div>
+
+<div class="F2K-column">
+
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Hearthstone July Tier List</h1>
+      <p class="b2 date">Last Updated: July 15th, 2017</p>
+      <div class="tier-list-button-group">
+        <div class="tier-list-button standard">
+          <img src="../../assets/icons/standardicon.svg">
+          Standard
+        </div>
+        <div class="tier-list-button wild">
+          <img src="../../assets/icons/wildicon.svg">
+          Wild
+        </div>
+        <div class="tier-list-button arena">
+          <img src="../../assets/icons/wildicon.svg">
+          Arena
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tip-of-the-day hidden-xs hidden-sm" [ngClass]="{'short': !isLg()}">
+        <p class="tip-of-the-day-title">! TIP OF THE DAY:</p>
+        <p class="tip-of-the-day-content">Going second is better today.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="social-media-links hidden-lg" [ngClass]="{'right': isMd()}">
+        <span>
+          <a href="https://www.facebook.com/Fade2Karma/" target="_blank">
+              <img src="../../assets/icons/facebook.svg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.twitter.com/Fade2Karma/" target="_blank">
+              <img src="../../assets/icons/twitter.svg">
+          </a>
+        </span>
+        <span>
+          <a href="https://www.url.com/Fade2Karma/" target="_blank">
+              <img src="../../assets/icons/url.svg">
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNCOMMENT the code below. This is using data returned by the service. -->
+  <!-- <div *ngFor="let decks of decksList" class="tier-list row">
+    <div class="col-md-12">
+      <p class="tier-list-title">
+        {{decks.title}}
+      </p>
+      <div class="row">
+        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 deck-list-row" *ngFor="let deck of decks.list; let index=index; let odd=odd; let even=even;">
+          <f2kDeckListRow
+            [deck]="deck"
+            [odd]="true"
+            [even]="false"
+            [index]="1">
+          </f2kDeckListRow>
+        </div>
+      </div>
+    </div>
+  </div>   -->
+
+  <!--  REMOVE this entire component. This is for dummy data. -->
+  <div class="tier-list row">
+    <div class="col-md-12">
+      <p class="tier-list-title">
+        Tier 1 - Top Decks to Beat
+      </p>
+      <div class="row">
+        <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 deck-list-row" *ngFor="let deck of decks; let index=index; let odd=odd; let even=even;">
+          <f2kDeckListRow
+            [deck]="deck"
+            [odd]="true"
+            [even]="false"
+            [index]="1">
+          </f2kDeckListRow>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
