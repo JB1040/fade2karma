@@ -8,7 +8,6 @@ export class TierListHubService {
   
   getDecks(tier: number) {
     const url = `api/decks/list?amount=5&tier=${tier}`;
-    console.log(url);
     return this.http.get(url)
                .toPromise()
                .then(response => response.json().data)

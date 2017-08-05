@@ -19,9 +19,9 @@ export class TierListHubComponent implements OnInit {
 
   ngOnInit() {
     //getting the real data from the service
-    this.getDecks(1);
-    this.getDecks(2);
-    this.getDecks(3);
+    this.getDecks(1, 'Tier 1 - Top Decks to Beat');
+    this.getDecks(2, 'Tier 2 - Top Decks to Beat');
+    this.getDecks(3, 'Tier 3 - Top Decks to Beat');
 
     //REMOVE. Dummy data
     this.decks = [
@@ -77,12 +77,15 @@ export class TierListHubComponent implements OnInit {
     this.showFloatingSocialMediaLinks  = window.matchMedia("screen and (min-width:1300px)").matches;
   }
 
-  getDecks(tier: number) {
+  getDecks(tier: number, title: string) {
     this.tierListHubService
         .getDecks(tier)
         .then(deckList => {
-          console.log("RESULTS", deckList);
-          this.decksList.push(deckList);
+          const deck = {
+            title: title,
+            list: deckList
+          };
+          this.decksList.push(deck);
         });
   }
 
