@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TierListHubService } from './tier-list-hub.service';
 import { DeckHs } from './../decks/deck';
 
 @Component({
@@ -8,12 +9,21 @@ import { DeckHs } from './../decks/deck';
 })
 export class TierListHubComponent implements OnInit {
 
+  //REMOVE this variable. This is for dummy data
   decks: any[] = [];
+
+  decksList: any[] = [];
   showFloatingSocialMediaLinks = true;
 
-  constructor() { }
+  constructor(private tierListHubService: TierListHubService) { }
 
   ngOnInit() {
+    //getting the real data from the service
+    this.getDecks(1);
+    this.getDecks(2);
+    this.getDecks(3);
+
+    //REMOVE. Dummy data
     this.decks = [
       {
         title: 'Title',
@@ -65,6 +75,15 @@ export class TierListHubComponent implements OnInit {
       },
     ];
     this.showFloatingSocialMediaLinks  = window.matchMedia("screen and (min-width:1300px)").matches;
+  }
+
+  getDecks(tier: number) {
+    this.tierListHubService
+        .getDecks(tier)
+        .then(deckList => {
+          console.log("RESULTS", deckList);
+          this.decksList.push(deckList);
+        });
   }
 
   onResize() {

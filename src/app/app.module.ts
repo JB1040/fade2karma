@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ContentModule } from './contentMain/content.module';
 import { SponsorModule } from './sponsors/sponsor.module';
@@ -25,6 +26,7 @@ import { CanvasService } from './core/canvas.service';
 import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
 import { TierListHubComponent } from './tier-list-hub/tier-list-hub.component';
+import { TierListHubService } from './tier-list-hub/tier-list-hub.service';
 import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
 import { IntegratedComponent } from './integrated.app.component';
@@ -70,6 +72,7 @@ const myAppRoutes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
+        HttpModule,
         ContentModule,
         SponsorModule,
         TeamsModule,
@@ -121,6 +124,7 @@ const myAppRoutes: Routes = [
     },
         NavigationService,
         CanvasService,
+        TierListHubService,
         DatePipe
     ]
 })
