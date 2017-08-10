@@ -1,0 +1,21 @@
+.article:first-child {
+  position: relative;
+  top: 32px;
+}
+
+.article {
+    border-bottom: #e7e7e7 1px solid;
+    margin-bottom: 73px;
+}
+
+@media(max-width: 1219px) {
+  .article:first-child {
+    top: 26px;
+  }
+}
+
+@media(max-width: 767px) {
+  .article:first-child {
+    top: 14px;
+  }
+}

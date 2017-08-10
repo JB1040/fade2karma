@@ -1,0 +1,36 @@
+.social-share-icons {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+}
+
+.social-share-icons li {
+  list-style: none;
+}
+
+.social-share-icons li a, .social-share-icons li span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 10px 0;
+}
+
+.link-icon {
+  cursor: pointer;
+}
+
+@media(max-width: 1219px) {
+  .social-share-icons li {
+    display: inline-block;
+  }
+
+  .social-share-icons li a {
+    margin: 0 10px 0 0;
+  }
+
+  .social-share-icons li span {
+    margin: 0;
+  }
+}
+
