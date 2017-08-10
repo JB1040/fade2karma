@@ -44,7 +44,11 @@ import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
 import { ArticleFetchingService } from './articles/article/article-fetching.service';
-
+import { CapitalizePipe } from './core/capitalize pipe';
+import { DeckHubComponent } from './decks/deck-hub/deck-hub.component';
+import { DeckHubService } from './decks/deck-hub/deck-hub.service';
+import { DustCalculationService } from './core/dust-calculation.service';
+import { HttpModule } from '@angular/http';
 
 const config = {
     breakPoints: {
@@ -77,7 +81,8 @@ const myAppRoutes: Routes = [
         NgbModule.forRoot(),
         InfiniteScrollModule,
         FormsModule,
-        ResponsiveModule
+        ResponsiveModule,
+        HttpModule
     ],
     declarations: [
         AppComponent,
@@ -110,7 +115,12 @@ const myAppRoutes: Routes = [
         HearthstoneFilterComponent,
         GwentFilterComponent,
         FooterComponent,
-        NewsLetterComponent
+        NewsLetterComponent,
+        CapitalizePipe,
+        DeckHubComponent
+    ],
+    exports: [
+        CapitalizePipe,
     ],
     bootstrap: [
         AppComponent
@@ -122,7 +132,9 @@ const myAppRoutes: Routes = [
         NavigationService,
         CanvasService,
         DatePipe,
-        ArticleFetchingService
+        ArticleFetchingService,
+        DeckHubService,
+        DustCalculationService
     ]
 })
 export class AppModule {
