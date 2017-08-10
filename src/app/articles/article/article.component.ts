@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ArticleContent } from './article-content/article-content';
 import { Author } from './author/author';
+import { ArticleFetchingService } from './article-fetching.service';
 
 @Component({
     selector: 'f2k-article',
@@ -8,6 +9,8 @@ import { Author } from './author/author';
     styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
+    constructor(private articleService: ArticleFetchingService) {}
+
     // TODO: Resolve article from url
     mainArticle: ArticleContent = new ArticleContent(
         'F2K Signs Streamers: JJPasak and Isherwood',
@@ -40,9 +43,13 @@ export class ArticleComponent implements OnInit {
     );
     articles: ArticleContent[] = [];
 
-    constructor() {}
-
     ngOnInit(): void {
         this.articles.push(this.mainArticle);
+    }
+
+    onScrollDown() {
+      this.articleService.getNextArticle().subscribe(article => {
+        this.articles.push(article);
+      });
     }
 }

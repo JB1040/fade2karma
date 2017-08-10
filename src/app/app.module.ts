@@ -43,6 +43,7 @@ import { ManatableComponent } from './manatable/manatable.component';
 import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
+import { ArticleFetchingService } from './articles/article/article-fetching.service';
 
 
 const config = {
@@ -120,7 +121,8 @@ const myAppRoutes: Routes = [
     },
         NavigationService,
         CanvasService,
-        DatePipe
+        DatePipe,
+        ArticleFetchingService
     ]
 })
 export class AppModule {
