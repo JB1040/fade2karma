@@ -1,0 +1,10 @@
+ul.breadcrumb {
+    list-style: none;
+    color: #9B9B9B;
+    margin: 0;
+    padding: 0;
+}
+
+ul.breadcrumb li.breadcrumb-link {
+    display: inline;
+}

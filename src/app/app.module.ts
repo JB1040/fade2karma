@@ -16,6 +16,12 @@ import { OnlineStreamerScrollComponent } from './home/streams/online-streamer-sc
 import { ArticlesTileComponent } from './articles/article-tile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ArticlesComponent } from './articles/articles/articles.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { AuthorComponent } from './articles/article/author/author.component';
+import { ArticleComponent } from './articles/article/article.component';
+import { ArticleContentComponent } from './articles/article/article-content/article-content.component';
+import { RatingComponent } from './articles/article/rating/rating.component';
+import { SocialShareComponent } from './articles/article/social-share/social-share.component';
 import { RecommendedTileComponent } from './teased/teased-tile.component';
 import { RecommendedContainerComponent } from './teased/teased-container.component';
 import { TopDecksComponent } from './home/topDecks/top-decks.component';
@@ -82,6 +88,12 @@ const myAppRoutes: Routes = [
         OnlineStreamerScrollComponent,
         ArticlesTileComponent,
         ArticlesComponent,
+        BreadcrumbComponent,
+        AuthorComponent,
+        ArticleComponent,
+        ArticleContentComponent,
+        RatingComponent,
+        SocialShareComponent,
         RecommendedTileComponent,
         RecommendedContainerComponent,
         TopDecksComponent,
