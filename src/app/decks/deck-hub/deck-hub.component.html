@@ -1,0 +1,59 @@
+<div class="F2K-column">
+    <f2k-breadcrumb></f2k-breadcrumb>
+
+    <h1 class="article-title">{{deck.title}}</h1>
+
+    <div>
+        <div class="article-info clearfix">
+            <f2k-author-tile style="display: inline-block" [author]="deck.author"></f2k-author-tile>
+
+            <div class="article-date">
+                <h5>Date Posted:</h5>
+                <span class="b2 date-string">{{deck.date | date:'yMMMd'}}</span>
+            </div>
+
+            <f2k-article-rating [score]="deck.rating"></f2k-article-rating> <!-- TODO -->
+
+            <!-- TODO share component -->
+        </div>
+    </div>
+
+    <div class="cards-containers clearfix">
+        <div class="cards-container">
+            <p class="b2">{{deck.heroClass | capitalize}} Cards</p>
+            <f2kCardComponent *ngFor="let card of classCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true; "
+                              (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+        </div>
+
+        <div class="cards-container">
+            <p class="b2">Neutral Cards</p>
+            <f2kCardComponent *ngFor="let card of neutralCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true"
+                              (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+        </div>
+    </div>
+<!-- (mouseenter)="hovering($event, 'enter')" (mouseleave)="hovering($event, 'leave')" -->
+
+    <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+
+    <div class="article-content" [innerHTML]="deck.content"></div>
+
+    <div class="article-comments">
+        <button class="btn-expand-comments">COMMENTS
+            <i class="fa fa-2x" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>
+            <!-- TODO: comments open...comments closed -->
+        </button>
+        <!-- TODO: Facebook Comments API -->
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="footer-ad">728x90 AD</div>
+
+    <div class="recommended">
+        <f2kRecommendedContainer [items]="decks" [itemType]="'deck'" [title]="'SIMILAR DECKS'"></f2kRecommendedContainer>
+    </div>
+</div>
+
+<div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
+     [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}"> <!-- TODO make a component -->
+    <img src="'assets/images/static/hearthstone/{{displayedCard.cardId}}.png">
+</div>
