@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, Input, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
+import { BASE_URL } from '../../../core/globals';
 
 @Component({
     selector: 'f2k-rating-box',
@@ -44,11 +45,11 @@ export class RatingComponent implements OnInit {
         this.liked = true;
 
         if (this.itemType === 'article') {
-            this.http.get(`/api/articles/upvote/${this.itemId}`).subscribe(() => {
+            this.http.get(`${BASE_URL}/api/articles/upvote/${this.itemId}`).subscribe(() => {
             });
         }
         if (this.itemType === 'deck') {
-            this.http.get(`/api/decks/upvote/${this.itemId}`).subscribe(() => {
+            this.http.get(`${BASE_URL}/api/decks/upvote/${this.itemId}`).subscribe(() => {
             });
         }
 
