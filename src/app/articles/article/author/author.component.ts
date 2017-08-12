@@ -5,7 +5,7 @@ import {
 import { Author} from './author';
 
 @Component({
-    selector: 'f2k-author-tile',
+    selector: 'f2kAuthorTile',
     templateUrl: './author.component.html',
     styleUrls: ['./author.component.css']
 })

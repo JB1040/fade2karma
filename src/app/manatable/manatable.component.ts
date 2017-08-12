@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['../app.component.css', './manatable.component.scss']
 })
 export class ManatableComponent {
-    @Input() private data: Array<any>;
+    @Input() data: Array<any>;
 }

@@ -4,6 +4,11 @@ $bw: 1px; // border width
 
 /* Tables
 ================================== */
+
+:host {
+    cursor: pointer;
+}
+
 .decklistrow {
     display: flex;
     flex-wrap: wrap;

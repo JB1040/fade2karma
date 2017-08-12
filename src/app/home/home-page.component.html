@@ -1,19 +1,19 @@
 <f2kOnlineSteamerScroll [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 <div class="F2K-column">
-    <div class="clearfix featured">
-        <f2kArticlesTile class="featured" style="float: left" [showDescription]="true" [article]="article"></f2kArticlesTile>
-        <f2kArticlesTile class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="article"></f2kArticlesTile>
+    <div class="clearfix featured" *ngIf="featuredArticles.length > 1">
+        <f2kArticlesTile class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
+        <f2kArticlesTile class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
     </div>
 
-    <f2kTierListComponent [title]="'F2K HEARTHSTONE TIER LIST'" [items]="decks"></f2kTierListComponent>
+    <f2kTierListComponent *ngIf="tierOne.length > 0 && tierTwo.length > 0" [type]="deck" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne" [tierTwo]="tierTwo"></f2kTierListComponent>
 
-    <div class="clearfix article-container-one">
-        <f2kArticlesTile *ngFor="let article of firstTilesColumn" [article]="article"></f2kArticlesTile>
+    <div class="clearfix article-container-one" *ngIf="firstTilesColumn.length > 0">
+        <f2kArticlesTile *ngFor="let article of firstTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
     </div>
 
-    <f2kTopDecks [itemArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
+    <f2kTopDecks *ngIf="decksArr.length > 0" [itemArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
 
-    <div class="clearfix article-container-two">
-        <f2kArticlesTile *ngFor="let article of secondTilesColumn" [article]="article"></f2kArticlesTile>
+    <div class="clearfix article-container-two" *ngIf="secondTilesColumn.length > 0">
+        <f2kArticlesTile *ngFor="let article of secondTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
     </div>
 </div>

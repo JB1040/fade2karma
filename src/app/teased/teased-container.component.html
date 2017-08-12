@@ -1,2 +1,3 @@
 <h5>{{title}}</h5>
-<f2kRecommendedTile class="recommended-tiles" (width)="setBorder($event)" [ngClass]="item.contentType" *ngFor="let item of items" [teasedItem]="item"></f2kRecommendedTile>
+<f2kRecommendedTile class="recommended-tiles" (width)="setBorder($event)" [ngClass]="itemType" [type]="type" *ngFor="let item of items" [teasedItem]="item"></f2kRecommendedTile>
+<!-- TODO remove item.contentType and have always input of what type of items this container is displaying -->

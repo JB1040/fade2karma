@@ -3,28 +3,29 @@ import { Observable } from 'rxjs/Observable';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Player, TeamsService } from '../teams.service';
+import { TeamsService } from '../teams.service';
 import { CanvasService } from '../../core/canvas.service';
+import { Http } from '@angular/http';
+import { Author } from '../../articles/article/author/author';
 
 @Component({
     templateUrl: './team-hub.component.html',
     styleUrls: ['./team-hub.component.css']
 })
 export class TeamsComponent implements OnInit {
-    players: Player[];
-    allPlayers: Player[];
-    playersObservable: Observable<Player[]>;
+    players: Author[];
+    allPlayers: Author[];
     private selectedId: number;
     displayedGames = ['All Games', 'Hearthstone', 'Gwent'];
     displayGames = 'All Games';
     gamesOpen = false;
 
-
     constructor(private service: TeamsService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private canvas: CanvasService,
-                private el: ElementRef) {
+                private el: ElementRef,
+                private http: Http) {
     }
 
     getWidth(text: string) {
@@ -33,18 +34,22 @@ export class TeamsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.playersObservable = this.route.params
-            .switchMap((params: Params) => {
-                return this.service.getPlayers();
-            });
+        this.setAllPlayers();
+    }
 
-        this.playersObservable.subscribe(players => {
-            this.allPlayers = players;
-            this.players = players;
-        });
+    navigateToTwitch(twitchName: string) {
+        const win = window.open(`https://www.twitch.tw/${twitchName}`, '_blank');
+        win.focus();
     }
 
     filterByGame() {
         this.players = this.allPlayers.filter(player => player.game === this.displayGames || this.displayGames === 'All Games');
+    }
+
+    setAllPlayers(): void { // TODO move in service, handle errors in case they take place...
+        this.http.get(`/api/users/list?amount=100&offset=0`).subscribe(res => {
+            this.allPlayers = res.json(); // TODO if select game filter...
+            this.players = this.allPlayers;
+        });
     }
 }

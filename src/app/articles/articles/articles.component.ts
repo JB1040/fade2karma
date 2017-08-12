@@ -1,35 +1,25 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { CanvasService } from '../../core/canvas.service';
+import { Http } from '@angular/http';
 
 @Component({
-    selector: 'f2kArticles',
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
 
-    articles: Article[];
-    sum = 40;
-    displayedArticles = [ 'All Articles', 'Podcasts', 'Highlights', 'Viewpoints', 'Meta Reports', 'Teams' ];
-    displayedGames = [ 'All Games', 'Hearthstone', 'Gwent' ];
+    articles: Article[] = [];
+    sum = 0;
+    displayedArticles = ['All Articles', 'Podcasts', 'Highlights', 'Viewpoints', 'Meta Reports', 'Teams'];
+    displayedGames = ['All Games', 'Hearthstone'/*, 'Gwent'*/];
     displayGames = 'All Games';
     displayArticles = 'All Articles';
     articlesOpen = false;
     gamesOpen = false;
-    article = {
-        name: 'blue',
-        title: 'Vararanis: Cosmoc Crown Showdown BreakDown',
-        image: 'Cipher.jpg',
-        type: 'PODCAST',
-        author: 'Chris Kohler',
-        contentType: 'article',
-        date: 1498302349012,
-        description: 'Lorem ipsum dolor sit amet, pro te volumus maluisset, no qui aperiri signiferumque, epicurei petentium no his. Cu natum abhorreant voluptatum ',
-        video: true
-    };
 
-    constructor(private canvas: CanvasService, private el: ElementRef) {}
+    constructor(private canvas: CanvasService, private el: ElementRef, private http: Http) {
+    }
 
     getWidth(text: string) {
         const elementStyle = window.getComputedStyle(this.el.nativeElement.querySelectorAll('h3')[1]);
@@ -37,17 +27,36 @@ export class ArticlesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.articles = [];
-        for (let i = 0; i < this.sum; ++i) {
-            this.articles.push(this.article);
+        let articles = this.displayArticles;
+        if (articles === 'All Articles') {
+            articles = '';
         }
+        this.loadArticles(this.sum, 30, articles.replace(/ /g, '_').toUpperCase());
+        this.sum += 30;
     }
-    onScrollDown () {
-        // add another 20 items
-        const start = this.sum;
-        this.sum += 20;
-        for (let i = start; i < this.sum; ++i) {
-            this.articles.push(this.article);
+
+    onScrollDown() {
+        let articles = this.displayArticles;
+        if (articles === 'All Articles') {
+            articles = '';
         }
+        this.loadArticles(this.sum, 20, articles.replace(/ /g, '_').toUpperCase());
+        this.sum += 20;
+    }
+
+    changeArticles(articlesType) {
+        this.sum = 0;
+        this.articles = [];
+        if (articlesType === 'All Articles') {
+            articlesType = '';
+        }
+        this.loadArticles(this.sum, 30, articlesType.replace(/ /g, '_').toUpperCase());
+        this.sum += 30;
+    }
+
+    loadArticles(offset: number, amount: number, type: string) { // TODO move in service, handle errors in case they take place...
+        this.http.get(`/api/articles?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+            this.articles = this.articles.concat(res.json());
+        });
     }
 }

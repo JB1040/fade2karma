@@ -1,11 +1,15 @@
+import { Author } from './article/author/author';
+
 export class Article {
-    constructor(
-        public title: string,
-        public image: string,
-        public type: string,
-        public author: string,
-        public date: number,
-        public contentType: string,
-        public description: string,
-        public video: boolean) {}
+    constructor(public id: number,
+                public author: Author,
+                public title: string,
+                public imageURL: string,
+                public content: string,
+                public game: string, // TODO enum
+                public articleType: string, // TODO enum
+                public published: boolean,
+                public rating: number,
+                public date: number) {
+    }
 }

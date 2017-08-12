@@ -2,17 +2,19 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { TeamsComponent } from './team-hub/team-hub.component';
-import { HomeTestingComponent } from '../home/home.component';
 import { ArticlesComponent } from '../articles/articles/articles.component';
 import { ArticleComponent } from '../articles/article/article.component';
 import { HomePageComponent } from '../home/home-page.component';
+import { TierListHubComponent } from '../tier-list-hub/tier-list-hub.component';
+import { NewDeckHubComponent } from '../decks/new-deck-hub/new-deck-hub.component';
 
 const contentRoutes: Routes = [
     {path: 'team', component: TeamsComponent},
-    {path: 'test', component: HomeTestingComponent},
     {path: '', component: HomePageComponent},
     {path: 'articles', component: ArticlesComponent},
-    {path: 'articles/article', component: ArticleComponent}
+    {path: 'articles/:article', component: ArticleComponent},
+    {path: 'decks/:deck', component: NewDeckHubComponent},
+    {path: 'tier_list', component: TierListHubComponent},
 ];
 
 @NgModule({

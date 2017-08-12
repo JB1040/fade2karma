@@ -7,9 +7,8 @@
     <div class="type-filters">
         <div
             [ngClass]="{active: 'standard' === activeMode, inactive: 'standard' !== activeMode}"
-            (click)="toggleActiveMode('standard')"
-            (mouseover)="border='1px solid red';" (mouseout)="border=''"
-            class="box">
+            (click)="toggleActiveMode('standard')" class="box">
+            <!--(click)="toggleActiveMode('standard')" (mouseover)="border='1px solid red';" (mouseout)="border=''" class="box">-->
             <!-- <img src="assets/icons/standardicon.svg" class="icon" /> -->
             <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -45,7 +44,8 @@
                     </g>
                 </g>
             </svg>
-            <h5 class="label" (mouseover)="border='1px solid red';" (mouseout)="border=''">Wild</h5>
+            <!--<h5 class="label" (mouseover)="border='1px solid red';" (mouseout)="border=''">Wild</h5>-->
+            <h5 class="label">Wild</h5>
         </div>
     </div>
 </div>

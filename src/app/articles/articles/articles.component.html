@@ -10,7 +10,7 @@
             <div class="dropdown-children"
                  [ngStyle]="{'width.px': getWidth(displayArticles + (articlesOpen ? ' &#65087;' : ' &#65088;'))}">
                 <ng-template ngFor let-article [ngForOf]="displayedArticles">
-                    <div *ngIf="article !== displayArticles"><h5 (click)="displayArticles = article; articlesOpen = false">{{article}}</h5></div>
+                    <div *ngIf="article !== displayArticles"><h5 (click)="displayArticles = article; articlesOpen = false; changeArticles(article)">{{article}}</h5></div>
                 </ng-template>
             </div>
         </div>
