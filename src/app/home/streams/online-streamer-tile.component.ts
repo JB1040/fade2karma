@@ -1,14 +1,5 @@
-import {
-    Component,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    Input,
-    OnChanges,
-    Output,
-    SimpleChanges
-} from '@angular/core';
-import { Streamer } from './streamer';
+import { Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Author } from '../../articles/article/author/author';
 
 @Component({
     selector: 'f2kOnlineStreamerTile',
@@ -16,7 +7,8 @@ import { Streamer } from './streamer';
     styleUrls: ['./online-streamer-tile.component.css']
 })
 export class OnlineStreamerTileComponent implements OnChanges {
-    @Input() streamer: Streamer;
+
+    @Input() streamer: Author;
     @Input() moved: number;
     @Input() index: number;
     @Input() containerWidth: number;
@@ -25,9 +17,8 @@ export class OnlineStreamerTileComponent implements OnChanges {
     marginLeft: number;
     spaceBetweenTiles = 10;
 
-    @Output() currentStreamer = new EventEmitter<Streamer>();
-
-    @HostListener('transitionend') transitioned() {
+    @HostListener('transitionend')
+    transitioned() {
         this.setMargins();
         if (parseInt(this.el.nativeElement.style.left, 10) < 0) {
             const compStyle = window.getComputedStyle(this.el.nativeElement);
@@ -74,9 +65,6 @@ export class OnlineStreamerTileComponent implements OnChanges {
             this.el.nativeElement.style.opacity = 1;
             position += position % width * 10;
             position += this.marginLeft;
-            if (position < 0) {
-                this.currentStreamer.emit(this.streamer);
-            }
             if (position >= (this.containerWidth - this.marginRight)) {
                 position += 15;
             }

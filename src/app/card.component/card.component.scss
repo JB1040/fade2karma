@@ -155,6 +155,7 @@ span.common {
     $square-width: 30px;
     .hs-card {
         height: $square-width;
+        max-width: 378px;
     }
 
     .hs-card .square {
@@ -186,7 +187,9 @@ span.common {
 }
 
 @media (min-width: 768px) {
-    $central-card-width: 302px;
+    //$central-card-width: 302px;
+    $central-card-width: 274px;
+    $image-width: 76px;
     $square-width: 40px;
     h1, h2, h3, h4, h5 {
         text-shadow: 1px;
@@ -209,6 +212,7 @@ span.common {
 
     .hs-card .central .image-wrap {
         height: $square-width;
+        width: $image-width;
     }
 }
 

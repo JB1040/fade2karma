@@ -17,6 +17,7 @@
     </div>
 
     <div class="clearfix">
-        <f2kMemberTile *ngFor="let player of players" [player]="player"></f2kMemberTile>
+        <f2kMemberTile *ngFor="let player of players" [user]="player" (click)="navigateToTwitch(player.twitch)"></f2kMemberTile> <!-- TODO link after member page is there -->
+        <!--<f2kMemberTile *ngFor="let player of players" [user]="player" routerLink="{{player.username | f2kUrlPipe}}_{{player.id}}"></f2kMemberTile>-->
     </div>
 </div>

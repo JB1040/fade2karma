@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Article } from '../../articles/article';
-import { DeckHs } from '../../decks/deck';
+import { Deck } from '../../decks/deck';
 
 @Component({
     selector: 'f2kTopDecks',
@@ -8,6 +8,6 @@ import { DeckHs } from '../../decks/deck';
     styleUrls: ['./top-decks.component.css']
 })
 export class TopDecksComponent {
-    @Input() itemArr: Article[][] | DeckHs[][];
+    @Input() itemArr: Deck[][];
     @Input() title: string;
 }

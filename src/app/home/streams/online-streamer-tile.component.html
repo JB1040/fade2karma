@@ -1,12 +1,12 @@
-<a href="{{streamer.twitch}}" target="_blank"></a> <!-- TODO FIX -->
+<a href="{{streamer.twitchData.channel.url}}" target="_blank"></a> <!-- TODO FIX -->
 <div class="tint">
-    <img class="img-circle image" src="assets/images/{{streamer.image}}">
+    <img class="img-circle image" src="assets/images/users/{{streamer.username.toLowerCase()}}.jpg">
 </div>
 <div class="online-streamer-info" style="float: left">
-    <h5>{{streamer.name}}</h5>
+    <h5>{{streamer.username}}</h5>
     <div>
         <p class="b2 indicator">Live</p>
         <div class="point"></div>
-        <p class="b2 game">{{streamer.game}}</p>
+        <p class="b2 game">{{streamer.twitchData.game}}</p>
     </div>
 </div>

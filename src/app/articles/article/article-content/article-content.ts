@@ -12,7 +12,7 @@ export class ArticleContent {
         public getArticle() {
           return {
             'title': this.title,
-            'author': this.author.name,
+            'author': this.author.username,
             'date': this.date.getTime()
           };
         }

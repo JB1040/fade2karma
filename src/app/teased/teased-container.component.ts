@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Article } from '../articles/article';
-import { DeckHs } from '../decks/deck';
+import { Deck } from '../decks/deck';
 import { CanvasService } from '../core/canvas.service';
 
 @Component({
@@ -9,8 +9,9 @@ import { CanvasService } from '../core/canvas.service';
     styleUrls: ['./teased-container.component.css']
 })
 export class RecommendedContainerComponent {
-    @Input() items: Article[] | DeckHs[];
+    @Input() items: Article[] | Deck[];
     @Input() title: string;
+    @Input() itemType: string;
     width: number;
 
     @HostListener('window:resize') resized() {

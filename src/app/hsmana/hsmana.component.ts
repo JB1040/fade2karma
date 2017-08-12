@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['../app.component.css', './hsmana.component.scss']
 })
 export class HearthstoneManaComponent {
-    @Input() private chartData: Array<any>;
+    @Input() chartData: any;
 }

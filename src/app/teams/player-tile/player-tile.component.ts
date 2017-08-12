@@ -2,8 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
-import { Player } from '../teams.service';
+import { Author } from '../../articles/article/author/author';
 
 @Component({
     selector: 'f2kMemberTile',
@@ -11,7 +10,7 @@ import { Player } from '../teams.service';
     styleUrls: ['./player-tile.component.css']
 })
 export class PlayerInstanceComponent {
-    @Input() player: Player;
+    @Input() user: Author;
 
     constructor(
         private route: ActivatedRoute,

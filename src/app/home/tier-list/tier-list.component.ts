@@ -1,7 +1,6 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Article } from '../../articles/article';
-import { DeckHs } from '../../decks/deck';
-import { CanvasService } from 'app/core/canvas.service';
+import { Deck } from '../../decks/deck';
 
 @Component({
     selector: 'f2kTierListComponent',
@@ -9,15 +8,17 @@ import { CanvasService } from 'app/core/canvas.service';
     styleUrls: ['./tier-list.component.css']
 })
 export class TierListComponent implements OnInit {
-    @Input() items: Article[] | DeckHs[];
+    @Input() tierOne: Article[] | Deck[];
+    @Input() tierTwo: Article[] | Deck[];
     @Input() title: string;
-    tiers: (Article[] | DeckHs[])[];
+    @Input() type: string;
+    tiers: (Article[] | Deck[])[];
 
-    constructor(private canvas: CanvasService, private el: ElementRef) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.tiers = [this.items.slice(0, 4), this.items.slice(4)];
+        this.tiers = [this.tierOne, this.tierTwo];
     }
 }
 

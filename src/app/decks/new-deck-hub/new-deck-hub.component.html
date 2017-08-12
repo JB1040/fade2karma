@@ -1,0 +1,106 @@
+<div class="F2K-column">
+    <div class="deck-hub-container">
+        <div class="deck-page">
+
+            <div class="deck-header">
+                <f2k-breadcrumb [title]="deck.title"></f2k-breadcrumb>
+                <h1 class="deck-title">{{deck.title}}</h1>
+                <div class="deck-info">
+                    <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
+                    <div class="deck-date">
+                        <h5>Date Posted:</h5>
+                        <span class="b2 date-string">{{deck.date | date:'yMMMd'}}</span>
+                    </div>
+                    <f2k-rating-box class="desktop" [rating]="deck.rating" [itemId]="deck.id" [itemType]="'deck'"></f2k-rating-box>
+                    <div class="social-share-tablet">
+                        <f2k-social-share></f2k-social-share>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-share">
+                <f2k-social-share></f2k-social-share>
+            </div>
+
+            <div class="deck-body">
+                <div class="share-rate-phone">
+                    <div class="social-share-phone">
+                        <f2k-social-share></f2k-social-share>
+                    </div>
+                </div>
+                <div class="deck-content">
+                    <div class="cards-containers clearfix">
+                        <div class="cards-container">
+                            <p class="b2">{{deck.heroClass | capitalize}} Cards</p>
+                            <f2kCardComponent *ngFor="let card of classCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true; "
+                                (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                        </div>
+
+                        <div class="cards-container">
+                            <p class="b2">Neutral Cards</p>
+                            <f2kCardComponent *ngFor="let card of neutralCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true"
+                                (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                        </div>
+                    </div>
+                    <!-- (mouseenter)="hovering($event, 'enter')" (mouseleave)="hovering($event, 'leave')" -->
+
+                    <div class="deck-and-ad tablet clearfix">
+                        <div class="graph-container">
+                            <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+                            <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                        </div>
+                        <div class="side-ad">AD</div>
+                    </div>
+
+                    <div class="phone graph-container">
+                        <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+                        <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                    </div>
+                    <div class="phone side-ad">AD</div>
+
+                    <div class="deck-guide-section" [innerHTML]="deck.content"></div>
+
+                    <f2kRecommendedContainer class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
+                        [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
+
+                    <div class="deck-comments phone">
+                        <button class="btn-expand-comments">COMMENTS
+        <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}" ></i> <!-- TODO: comments open...comments closed -->
+      </button>
+                        <!-- TODO: Facebook Comments API -->
+                    </div>
+
+                    <f2kRecommendedContainer class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
+                        [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
+                    <!-- TODO: itemType -->
+
+                </div>
+                <div class="deck-footer">
+                    <div class="deck-comments desktop">
+                        <button class="btn-expand-comments">COMMENTS
+        <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}" ></i> <!-- TODO: comments open...comments closed -->
+      </button>
+                        <!-- TODO: Facebook Comments API -->
+                    </div>
+                    <div class="footer-ad">AD</div>
+                </div>
+            </div>
+
+            <div class="recommended desktop">
+                <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+                <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                <div class="side-ad">AD</div>
+                <f2kRecommendedContainer class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
+                <!-- TODO: itemType -->
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+</div>
+
+<div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
+    [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
+    <!-- TODO make a component -->
+    <img src="'assets/images/static/hearthstone/{{displayedCard.cardId}}.png">
+</div>

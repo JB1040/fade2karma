@@ -1,5 +1,6 @@
 <h3>{{title}}</h3> <!--TODO-->
 
-<ng-template ngFor let-items [ngForOf]="itemArr" let-i="index" [ngForTrackBy]="trackByFn">
-    <f2kRecommendedContainer [items]="items" [title]="i === 1 ? 'GWENT DECKS' : 'HEARTHSTONE DECKS'"></f2kRecommendedContainer>
+<ng-template ngFor let-items [ngForOf]="itemArr" let-i="index">
+    <!--<f2kRecommendedContainer [items]="items" [itemType]="'deck'" [title]="i === 1 ? 'GWENT DECKS' : 'HEARTHSTONE DECKS'"></f2kRecommendedContainer>-->
+    <f2kRecommendedContainer [items]="items" [itemType]="'deck'" [title]="'HEARTHSTONE DECKS'"></f2kRecommendedContainer>
 </ng-template>
