@@ -3,6 +3,7 @@ import { Article } from '../articles/article';
 import { Http } from '@angular/http';
 import { Deck } from '../decks/deck';
 import { Author } from '../articles/article/author/author';
+import { BASE_URL } from '../core/globals';
 
 @Component({
     templateUrl: './home-page.component.html',
@@ -28,7 +29,7 @@ export class HomePageComponent implements OnInit {
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/articles/featured`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
             const articles = res.json();
             if (articles > 1) {
                 this.featuredArticles = articles;
@@ -44,7 +45,7 @@ export class HomePageComponent implements OnInit {
     }
 
     setArticles(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/articles/list?amount=12&offset=0`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
             const articles = res.json();
             if (this.firstTilesColumn.length > 1) {
                 this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
@@ -58,7 +59,7 @@ export class HomePageComponent implements OnInit {
     }
 
     setDecks(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/articles/list?amount=12&offset=0`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
             const decks = res.json();
             this.decksArr.push(decks.slice(0, 6));
             this.decksArr.push(decks.slice(6));
@@ -66,16 +67,16 @@ export class HomePageComponent implements OnInit {
     }
 
     setTierListDecks() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+        this.http.get(`${BASE_URL}api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
             this.tierOne = res.json();
         });
-        this.http.get(`api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+        this.http.get(`${BASE_URL}api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
             this.tierTwo = res.json();
         });
     }
 
     setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
             this.onlineStreamers = res.json();
         });
     }

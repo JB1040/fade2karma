@@ -4,6 +4,7 @@ import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+import { BASE_URL } from '../../core/globals';
 
 @Component({
   selector: 'f2kNewDeckHub',
@@ -133,14 +134,14 @@ export class NewDeckHubComponent implements OnInit {
     }
 
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/decks/:${id}`).subscribe(res => { // TODO get id...
+        this.http.get(`${BASE_URL}/api/decks/:${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
             this.buildData();
         });
     }
 
     getDecks() { // TODO make something cool with similar decks...
-        this.http.get(`/api/decks/list?amount=6&offset=0`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/decks/list?amount=6&offset=0`).subscribe(res => {
             this.decks = res.json();
         });
     }

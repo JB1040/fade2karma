@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { CanvasService } from '../../core/canvas.service';
 import { Http } from '@angular/http';
+import { BASE_URL } from '../../core/globals';
 
 @Component({
     templateUrl: './articles.component.html',
@@ -55,7 +56,7 @@ export class ArticlesComponent implements OnInit {
     }
 
     loadArticles(offset: number, amount: number, type: string) { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/articles?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
             this.articles = this.articles.concat(res.json());
         });
     }

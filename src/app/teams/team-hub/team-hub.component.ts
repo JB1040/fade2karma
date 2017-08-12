@@ -7,6 +7,7 @@ import { TeamsService } from '../teams.service';
 import { CanvasService } from '../../core/canvas.service';
 import { Http } from '@angular/http';
 import { Author } from '../../articles/article/author/author';
+import { BASE_URL } from '../../core/globals';
 
 @Component({
     templateUrl: './team-hub.component.html',
@@ -47,7 +48,7 @@ export class TeamsComponent implements OnInit {
     }
 
     setAllPlayers(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`/api/users/list?amount=100&offset=0`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0`).subscribe(res => {
             this.allPlayers = res.json(); // TODO if select game filter...
             this.players = this.allPlayers;
         });
