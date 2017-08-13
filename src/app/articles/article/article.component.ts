@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ArticleContent } from './article-content/article-content';
 import { Author } from './author/author';
 import { ArticleFetchingService } from './article-fetching.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Article } from '../article';
 import { Http } from '@angular/http';
 import { BASE_URL } from '../../core/globals';
@@ -17,13 +17,16 @@ export class ArticleComponent implements OnInit {
     articles = [];
     scrolled = 0;
 
-    constructor(private articleService: ArticleFetchingService, private router: Router, private http: Http) {
+    constructor(private articleService: ArticleFetchingService, private route: ActivatedRoute, private http: Http) {
     }
 
     ngOnInit(): void {
-        this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-        this.loadRecommendedArticles(3, this.scrolled);
-        this.scrolled += 3;
+        this.route.paramMap.subscribe((params: ParamMap) => {
+          const article = params.get('article');
+          this.loadArticle(parseInt(article.slice(article.lastIndexOf('_') + 1), 10));
+          this.loadRecommendedArticles(3, this.scrolled);
+          this.scrolled += 3;
+        });
     }
 
     onScrollDown() {
