@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './news.component.html',
     styleUrls: ['./news.component.css']
 })
-export class NewsLetterComponent {
+export class NewsLetterComponent { // TODO make this...
 }

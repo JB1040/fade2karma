@@ -2,15 +2,12 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { ContentModule } from './contentMain/content.module';
-import { SponsorModule } from './sponsors/sponsor.module';
 import { TeamsModule } from './teams/teams.module';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { NavigationComponent } from './navigation.component';
 import { NavigationService } from './navigation.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeTestingComponent } from './home/home.component';
 import { OnlineStreamerTileComponent } from './home/streams/online-streamer-tile.component';
 import { OnlineStreamerScrollComponent } from './home/streams/online-streamer-scroll.component';
 import { ArticlesTileComponent } from './articles/article-tile.component';
@@ -30,11 +27,9 @@ import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
 import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
-import { IntegratedComponent } from './integrated.app.component';
 import { HearthstoneManaGraphComponent } from './hsmanagraph/hsmanagraph.component';
 import { HearthstoneManaComponent } from './hsmana/hsmana.component';
 import { DeckListRowComponent } from './decklistrow/decklistrow.component';
-import { DeckListComponent } from './decklist/decklist.component';
 import { HearthstoneFilterComponent } from './hsfilter/hsfilter.component';
 import { GwentFilterComponent } from './gwfilter/gwfilter.component';
 import { SafeStyle } from './safestyle.pipe';
@@ -45,10 +40,14 @@ import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
 import { ArticleFetchingService } from './articles/article/article-fetching.service';
 import { CapitalizePipe } from './core/capitalize pipe';
-import { DeckHubComponent } from './decks/deck-hub/deck-hub.component';
-import { DeckHubService } from './decks/deck-hub/deck-hub.service';
 import { DustCalculationService } from './core/dust-calculation.service';
 import { HttpModule } from '@angular/http';
+import { TierListHubComponent } from './tier-list-hub/tier-list-hub.component';
+import { TierListHubService } from './tier-list-hub/tier-list-hub.service';
+import { NewDeckHubComponent } from './decks/new-deck-hub/new-deck-hub.component';
+import { F2kUrlPipe } from './core/url.pipe';
+import { TeamsComponent } from './teams/team-hub/team-hub.component';
+import { PlayerInstanceComponent } from './teams/player-tile/player-tile.component';
 
 const config = {
     breakPoints: {
@@ -74,8 +73,6 @@ const myAppRoutes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
-        ContentModule,
-        SponsorModule,
         TeamsModule,
         RouterModule.forRoot(myAppRoutes),
         NgbModule.forRoot(),
@@ -89,7 +86,6 @@ const myAppRoutes: Routes = [
         PageNotFoundComponent,
         HomePageComponent,
         NavigationComponent,
-        HomeTestingComponent,
         OnlineStreamerTileComponent,
         OnlineStreamerScrollComponent,
         ArticlesTileComponent,
@@ -104,37 +100,41 @@ const myAppRoutes: Routes = [
         RecommendedContainerComponent,
         TopDecksComponent,
         TierListComponent,
-        IntegratedComponent,
         SafeStyle,
         CardComponent,
         HearthstoneManaGraphComponent,
         HearthstoneManaComponent,
         ManatableComponent,
         DeckListRowComponent,
-        DeckListComponent,
         HearthstoneFilterComponent,
         GwentFilterComponent,
         FooterComponent,
         NewsLetterComponent,
         CapitalizePipe,
-        DeckHubComponent
+        TierListHubComponent,
+        NewDeckHubComponent,
+        F2kUrlPipe,
+        TeamsComponent,
+        PlayerInstanceComponent
     ],
     exports: [
         CapitalizePipe,
+        F2kUrlPipe
     ],
     bootstrap: [
         AppComponent
     ],
     providers: [{
         provide: ResponsiveConfig,
-        useFactory: ResponsiveDefinition,
+        useFactory: ResponsiveDefinition
     },
         NavigationService,
         CanvasService,
         DatePipe,
         ArticleFetchingService,
-        DeckHubService,
-        DustCalculationService
+        DustCalculationService,
+        TierListHubService,
+        F2kUrlPipe
     ]
 })
 export class AppModule {

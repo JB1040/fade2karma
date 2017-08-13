@@ -1,106 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from '../articles/article';
-import { DeckHs } from '../decks/deck';
-import { Streamer } from './streams/streamer';
+import { Http } from '@angular/http';
+import { Deck } from '../decks/deck';
+import { Author } from '../articles/article/author/author';
+import { BASE_URL } from '../core/globals';
 
 @Component({
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
-    article: Article;
-    streamer = {
-        name: 'Cipher',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    };
-    articles: Article[];
-    tierList: DeckHs[];
-    articlesRecommended: Article[];
-    decks: DeckHs[];
-    articlesArr: Article[][];
-    decksArr: DeckHs[][];
-    deck: DeckHs;
+export class HomePageComponent implements OnInit {
+    featuredArticles: Article[] = [];
+    tierOne: Deck[] = [];
+    tierTwo: Deck[] = [];
+    decksArr: Deck[][] = [];
     firstTilesColumn: Article[] = [];
     secondTilesColumn: Article[] = [];
+    onlineStreamers: Author[] = [];
 
-    onlineStreamers: Streamer[] = [{
-        name: 'BOB',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    }, {
-        name: 'MAT',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    }, {
-        name: 'GREEN',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    }, {
-        name: 'Cipher',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    }, {
-        name: 'TIM',
-        game: 'Hearthstone',
-        image: 'Cipher.jpg',
-        twitch: 'https://www.twitch.tv/cipherhs'
-    }];
+    constructor(private http: Http) {
+    }
 
-    constructor() {
-        this.article = {
-            title: 'Vararanis: Cosmoc Crown Showdown BreakDown',
-            image: 'Cipher.jpg',
-            type: 'PODCAST',
-            author: 'Chris Kohler',
-            contentType: 'article',
-            date: 1498302349012,
-            description: 'Lorem ipsum dolor sit amet, pro te volumus maluisset, no qui aperiri signiferumque, epicurei petentium no his. Cu natum abhorreant voluptatum ',
-            video: true
-        };
+    ngOnInit() {
+        this.setFeatured();
+        this.setArticles();
+        this.setDecks();
+        this.setTierListDecks();
+    }
 
-        this.deck = {
-            title: 'Control Mage',
-            image: 'Cipher.jpg', // this is a placeholder image xD
-            type: 'MAGE',
-            author: 'Chris Kohler',
-            contentType: 'deck',
-            date: 1498983069770,
-            description: 'Lorem ipsum dolor sit amet, pro te volumus maluisset, no qui aperiri signiferumque, epicurei petentium no his. Cu natum abhorreant voluptatum ',
-            dust: 2630,
-            gameMode: 'Standard',
-            hero: 'Druid',
-            tier: 1
-        };
+    setFeatured(): void { // TODO move in service, handle errors in case they take place...
+        this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
+            const articles = res.json();
+            if (articles > 1) {
+                this.featuredArticles = articles;
+                this.firstTilesColumn.unshift(this.featuredArticles[1]);
+                if (this.firstTilesColumn.length > 6) {
+                    this.secondTilesColumn.unshift(this.firstTilesColumn.pop());
+                    this.secondTilesColumn.pop();
+                }
+            } else {
+                this.featuredArticles = articles.concat(this.featuredArticles);
+            }
+        });
+    }
 
-        this.articles = [];
-        for (let x = 0; x < 13; x++) {
-            this.articles.push(this.article);
-        }
+    setArticles(): void { // TODO move in service, handle errors in case they take place...
+        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
+            const articles = res.json();
+            if (this.firstTilesColumn.length > 1) {
+                this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
+                this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(5, 11));
+            } else {
+                this.featuredArticles = this.featuredArticles.concat(articles.slice(0, 1));
+                this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 6));
+                this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(6, 12));
+            }
+        });
+    }
 
-        console.log(this.articles);
+    setDecks(): void { // TODO move in service, handle errors in case they take place...
+        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
+            const decks = res.json();
+            this.decksArr.push(decks.slice(0, 6));
+            this.decksArr.push(decks.slice(6));
+        });
+    }
 
-        this.firstTilesColumn = this.articles.slice(1, 7);
-        this.secondTilesColumn = this.articles.slice(6);
+    setTierListDecks() { // TODO optimize the component for displaying them and requests...
+        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+            this.tierOne = res.json();
+        });
+        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+            this.tierTwo = res.json();
+        });
+    }
 
-        this.articlesArr = [];
-        for (let x = 0; x < 2; x++) {
-            this.articlesArr.push(this.articles);
-        }
-
-        this.decks = [];
-        for (let x = 0; x < 8; x++) {
-            this.decks.push(this.deck);
-        }
-
-        this.decksArr = [];
-        for (let x = 0; x < 2; x++) {
-            this.decksArr.push(this.decks.slice(0, 6));
-        }
+    setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
+        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
+            this.onlineStreamers = res.json();
+        });
     }
 }

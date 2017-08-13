@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
-import { Streamer } from './streamer';
+import { Author } from '../../articles/article/author/author';
 
 @Component({
     selector: 'f2kOnlineSteamerScroll',
@@ -9,12 +9,13 @@ import { Streamer } from './streamer';
     styleUrls: ['./online-streamer-scroll.component.css']
 })
 export class OnlineStreamerScrollComponent implements OnDestroy, OnInit {
-    @Input() onlineStreamers: any;
+    @Input() onlineStreamers: Author[];
     containerWidth: number;
     moved = 0;
     timeoutScroll: any;
 
-    @HostListener('window:resize') resized() {
+    @HostListener('window:resize')
+    resized() {
         this.containerWidth = parseInt(window.getComputedStyle(this.el.nativeElement).width, 10);
     }
 

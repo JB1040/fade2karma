@@ -5,18 +5,19 @@
 
         <div class="dropdown" [ngClass]="{open : gamesOpen}">
             <h1 (click)="gamesOpen = !gamesOpen">
-                {{displayGames}}{{ gamesOpen ? " &#65087;" : " &#65088;"}}
+                {{displayGames.outSideName}}{{ gamesOpen ? " &#65087;" : " &#65088;"}}
             </h1>
             <div class="dropdown-children"
-                 [ngStyle]="{'width.px': getWidth(displayGames + (gamesOpen ? ' &#65087;' : ' &#65088;'))}">
+                 [ngStyle]="{'width.px': getWidth(displayGames.outSideName + (gamesOpen ? ' &#65087;' : ' &#65088;'))}">
                 <ng-template ngFor let-game [ngForOf]="displayedGames">
-                    <div *ngIf="game !== displayGames"><h5 (click)="displayGames = game; gamesOpen = false; filterByGame()">{{game}}</h5></div>
+                    <div *ngIf="game.insideName !== displayGames.insideName"><h5 (click)="displayGames = game; gamesOpen = false; filterByGame()">{{game.insideName}}</h5></div>
                 </ng-template>
             </div>
         </div>
     </div>
 
     <div class="clearfix">
-        <f2kMemberTile *ngFor="let player of players" [player]="player"></f2kMemberTile>
+        <f2kMemberTile *ngFor="let player of players" [user]="player" (click)="navigateToTwitch(player.twitch)"></f2kMemberTile> <!-- TODO link after member page is there -->
+        <!--<f2kMemberTile *ngFor="let player of players" [user]="player" routerLink="{{player.username | f2kUrlPipe}}_{{player.id}}"></f2kMemberTile>-->
     </div>
 </div>

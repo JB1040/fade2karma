@@ -2,54 +2,54 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ArticleContent } from './article-content/article-content';
 import { Author } from './author/author';
 import { ArticleFetchingService } from './article-fetching.service';
+import { Router } from '@angular/router';
+import { Article } from '../article';
+import { Http } from '@angular/http';
+import { BASE_URL } from '../../core/globals';
 
 @Component({
-    selector: 'f2k-article',
+    selector: 'f2kArticleHub',
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-    constructor(private articleService: ArticleFetchingService) {}
+    recommendedArticles: Article[] = [];
+    articles = [];
+    scrolled = 0;
 
-    // TODO: Resolve article from url
-    mainArticle: ArticleContent = new ArticleContent(
-        'F2K Signs Streamers: JJPasak and Isherwood',
-        {
-            name: 'Cipher',
-            game: 'Hearthstone',
-            image: 'cipher.jpg',
-            twitch: 'https://www.twitch.tv/cipherhs'
-        },
-        new Date(1481200000000),
-        9,
-        `
-            <img src="http://lorempixel.com/780/438" alt="">
-            <p class="b1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.</p>
-            <img src="http://lorempixel.com/780/438" alt="">
-            <p class="b1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.</p>
-        `
-    );
-    articles: ArticleContent[] = [];
+    constructor(private articleService: ArticleFetchingService, private router: Router, private http: Http) {
+    }
 
     ngOnInit(): void {
-        this.articles.push(this.mainArticle);
+        this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+        this.loadRecommendedArticles(3, this.scrolled);
+        this.scrolled += 3;
     }
 
     onScrollDown() {
-      this.articleService.getNextArticle().subscribe(article => {
-        this.articles.push(article);
-      });
+        this.loadArticles(6, this.scrolled);
+        this.scrolled += 6;
+    }
+
+    loadArticle(id: number) {
+        this.http.get(`${BASE_URL}/api/articles/:${id}`).subscribe(res => { // TODO get id...
+            const articles = res.json();
+            this.articles = articles.concat(this.articles);
+        });
+    }
+
+    loadArticles(amount: number, offset: number) {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
+            const articles = res.json();
+            this.articles = this.articles.concat(articles);
+        });
+    }
+
+    loadRecommendedArticles(amount: number, offset: number) {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
+            const articles = res.json();
+            this.recommendedArticles = articles;
+            this.articles = this.articles.concat(articles);
+        });
     }
 }

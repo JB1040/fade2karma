@@ -5,9 +5,9 @@
       [infiniteScrollThrottle]="500"
       (scrolled)="onScrollDown()">
 
-    <div *ngFor="let article of articles" class="article">
-        <f2k-article-content [article]="article"></f2k-article-content>
-    </div>
+      <div *ngFor="let article of articles" class="article">
+          <f2kArticleContent [article]="article" [articles]="recommendedArticles"></f2kArticleContent>
+      </div>
 
   </div>
 </div>

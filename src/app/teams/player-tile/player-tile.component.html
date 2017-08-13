@@ -1,15 +1,15 @@
 <div class="player-image-container tint">
-    <img class="player-image" src="assets/images/{{player.image}}">
+    <img class="player-image" src="assets/images/users/{{user.username.toLowerCase()}}.jpg">
 </div>
 
 <div class="text-container">
-    <h5 class="player-name">{{player.name}}</h5>
+    <h5 class="player-name">{{user.username}}</h5>
 
-    <div *ngIf="player.stream">
+    <div *ngIf="user.twitchData">
         <p class="b2 indicator">Live</p>
         <div class="point"></div>
-        <p class="b2 game">{{player.game}}</p>
+        <p class="b2 game">{{user.twitchData.game}}</p>
     </div>
 
-    <p *ngIf="!player.stream" class="b2">Offline</p>
+    <p *ngIf="!user.twitchData" class="b2">Offline</p>
 </div>

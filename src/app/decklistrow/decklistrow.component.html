@@ -4,25 +4,25 @@
 
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img src="{{deck.images[0]}}" class="icon"/>
+            <img src="assets/images/Hearthstone_Square/{{deck.heroClass.toLowerCase()}}.jpg" class="icon"/>
         </div>
     </div>
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img src="{{deck.images[1]}}" class="icon"/>
+            <img src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>
         </div>
     </div>
 
     <div class="cell title-cell">
-        <h5 [ngClass]="color">{{deck.name}}</h5>
+        <h5 [ngClass]="color">{{deck.title}}</h5>
         <div style="width:100%"></div>
-        <p class="b2 grey">by {{deck.author}}</p>
+        <p class="b2 grey">by {{deck.author.username}}</p>
     </div>
     <div class="cell data-cell-1">
         <div class="b2">{{deck.tier}}</div>
     </div>
     <div class="cell data-cell-4">
-        <div class="b2">{{deck.scrapDust}}</div>
+        <div class="b2">{{dustCost}}</div>
     </div>
     <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.date)}}</div></div>-->
     <div class="cell date-cell">
@@ -36,18 +36,18 @@
 <div *showItBootstrap="['md','sm']" class="decklistrow" (mouseover)="color='red'" (mouseout)="color=''"
      [ngClass]="{odd: odd, even: even, first: index === 0}">
     <div class="cell title-cell">
-        <h5 [ngClass]="color">{{deck.name}}</h5>
+        <h5 [ngClass]="color">{{deck.title}}</h5>
         <div style="width:100%"></div>
-        <p class="b2 grey">by {{deck.author}}</p>
+        <p class="b2 grey">by {{deck.author.username}}</p>
     </div>
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img src="{{deck.images[0]}}" class="icon"/>
+            <img src="assets/images/Hearthstone_Square/{{deck.heroClass.toLowerCase()}}.jpg" class="icon"/>
         </div>
     </div>
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img src="{{deck.images[1]}}" class="icon"/>
+            <img src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
         <div class="b2">Tier: {{deck.tier}}</div>
     </div>
     <div class="cell data-cell-4">
-        <div class="b2">Dust: {{deck.scrapDust}}</div>
+        <div class="b2">Dust: {{dustCost}}</div>
     </div>
     <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.date)}}</div></div>-->
     <div class="cell date-cell">

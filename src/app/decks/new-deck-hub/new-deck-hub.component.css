@@ -1,11 +1,62 @@
-.article-header,
-.article-body,
-.article-footer {
-    width: 780px;
+:host {
+    display: block;
 }
 
-.article-page {
-  position: relative;
+.desktop {
+  display: block;
+}
+
+.tablet, .phone {
+  display: none;
+}
+
+.deck-display {
+    position: fixed;
+    z-index: 9999;
+}
+
+.deck-display.left {
+    transform: translateX(-100%);
+}
+
+.deck-display.top {
+    transform: translateY(-100%);
+}
+
+.cards-containers {
+    border-bottom: #e7e7e7 1px solid;
+    padding-bottom: 40px;
+}
+
+.cards-container:first-child {
+    margin-right: 20px;
+}
+
+.cards-container {
+    display: inline-block;
+    width: 380px;
+    float: left;
+}
+
+.cards-container .b2 {
+    margin-top: 0;
+}
+
+.deck-guide-section {
+    margin: 40px auto 34px auto;
+    width: 740px;
+}
+
+.deck-hub-container {
+    position: relative;
+    top: 32px;
+    margin-bottom: 73px;
+}
+
+.deck-header,
+.deck-body,
+.deck-footer {
+    width: 780px;
 }
 
 .social-share {
@@ -16,34 +67,34 @@
 }
 
 .social-share-tablet {
-  display: none;
+    display: none;
 }
 
 .share-rate-phone {
-  display: none;
+    display: none;
 }
 
-.article-body {
+.deck-body {
     float: left;
     border-top: #e7e7e7 1px solid;
 }
 
-.article-footer {
+.deck-footer {
     padding-bottom: 40px;
 }
 
-h1.article-title {
+h1.deck-title {
     margin-top: 6px;
 }
 
-.article-info {
+.deck-info {
     padding: 31px 0 20px 0;
 }
 
 
 /* Article Info Clearfix */
 
-.article-info:after {
+.deck-info:after {
     content: "";
     display: table;
     clear: both;
@@ -54,12 +105,12 @@ f2kAuthorTile {
     margin-right: 40px;
 }
 
-.article-date {
+.deck-date {
     float: left;
     margin: 0 40px;
 }
 
-.article-date .date-string {
+.deck-date .date-string {
     color: #9B9B9B;
 }
 
@@ -67,17 +118,17 @@ f2k-rating-box {
     margin-left: 40px;
 }
 
-.article-content {
+.deck-content {
     padding-top: 40px;
 }
 
-.article-content p {
+.deck-content p {
     color: #333333;
     margin: 34px auto;
     width: 740px;
 }
 
-.article-content img {
+.deck-content img {
     width: 780px;
 }
 
@@ -94,10 +145,21 @@ f2k-rating-box {
     font-weight: bold;
 }
 
+.btn-copy-deck-code {
+    border: none;
+    height: 40px;
+    margin-top: 20px;
+    padding: 0 20px;
+    width: 360px;
+    background-color: #EF3418;
+    color: white;
+    font-weight: bold;
+}
+
 
 /* Article Comments Clearfix */
 
-.article-comments:after {
+.deck-comments:after {
     content: "";
     display: table;
     clear: both;
@@ -150,51 +212,76 @@ f2k-rating-box {
 /******************/
 
 @media(max-width: 1219px) {
-    .article-header,
-    .article-body,
-    .article-footer {
+    .desktop {
+      display: none;
+    }
+    .tablet {
+      display: block;
+    }
+    .deck-and-ad {
+      margin-top: 40px;
+    }
+    .graph-container {
+      float: left;
+      width: 354px;
+    }
+    .btn-copy-deck-code {
+      width: 354px;
+    }
+    .deck-hub-container:first-child {
+        top: 26px;
+    }
+    .cards-container {
+        width: 354px;
+    }
+    .deck-guide-section {
+      margin: 40px auto;
+    }
+    .deck-header,
+    .deck-body,
+    .deck-footer {
         width: 728px;
     }
     .social-share {
-      display: none;
+        display: none;
     }
     .social-share-tablet {
-      display: inline-block;
-      float: right;
+        display: inline-block;
+        float: right;
     }
-    .article-body {
+    .deck-body {
         float: none;
     }
-    .article-footer {
+    .deck-footer {
         padding-bottom: 30px;
     }
-    h1.article-title {
+    h1.deck-title {
         margin-top: 8px;
     }
-    .article-info {
+    .deck-info {
         padding: 21px 0 17px 0;
     }
     f2kAuthorTile {
         margin-right: 20px;
     }
-    .article-date {
+    .deck-date {
         margin: 0 20px;
     }
     f2k-rating-box {
         margin-left: 20px;
     }
     /* TODO: social-share positioning for tablet screen */
-    .article-content {
+    .deck-content {
         padding-top: 30px;
     }
-    .article-content p {
+    .deck-content p {
         margin: 24px auto;
         width: 688px;
     }
-    .article-content p:last-child {
+    .deck-content p:last-child {
         margin-bottom: 23px;
     }
-    .article-content img {
+    .deck-content img {
         width: 728px;
     }
     .footer-ad {
@@ -229,74 +316,90 @@ f2k-rating-box {
 /***************/
 
 @media(max-width: 767px) {
-    .article-header,
-    .article-footer {
+    .tablet {
+      display: none;
+    }
+    .phone {
+      display: block;
+    }
+    .deck-hub-container:first-child {
+        top: 14px;
+    }
+    .graph-container {
+      float: none;
+      margin: 20px auto;
+      max-width: 440px;
+     }
+    .btn-copy-deck-code {
+      width: Calc(100% - 40px);
+      max-width: 440px;
+      margin: 20px auto 40px auto;
+    }
+    .cards-container {
+      float: none;
+      width: Calc(100% - 40px);
+      max-width: 440px;
+    }
+    .deck-header,
+    .deck-footer {
         width: 100%;
         max-width: 440px;
     }
-    .article-body {
+    .deck-body {
         width: 100%;
         max-width: 460px;
     }
-    .article-footer {
+    .deck-footer {
         padding-bottom: 20px;
     }
     .social-share-tablet {
-      display: none;
+        display: none;
     }
     f2k-rating-box {
-      display: none;
+        display: none;
     }
     .share-rate-phone {
-      display: block;
-      margin-top: 23px;
-      position: relative;
-      height: 35px;
+        display: block;
+        margin-top: 23px;
+        position: relative;
+        height: 35px;
     }
     .social-share-phone {
-      float: left;
-      height: 30px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
+        float: left;
+        height: 30px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
-    .rating-box-phone {
-      display: block;
-      width: 37px;
-      height: 37px;
-      float: right;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-    h1.article-title {
+    h1.deck-title {
         margin-top: 7px;
         width: 100%;
         max-width: 440px;
     }
-    .article-info {
+    .deck-info {
         padding: 15px 0 17px 0;
     }
     /* TODO: f2k-rating-box positioning for phone screen */
     /* TODO: social-share positioning for phone screen */
-    .article-content {
+    .deck-content {
         padding-top: 22px;
     }
-    .article-content p {
+    .deck-content p {
         margin: 15px auto;
         width: 100%;
         max-width: 440px;
     }
-    .article-content p:last-child {
+    .deck-content p:last-child {
         margin-bottom: 13px;
     }
-    .article-content img {
+    .deck-content img {
         width: 100%;
         max-width: 460px;
     }
     .btn-expand-comments {
         float: none;
         width: 100%;
+        margin-bottom: 40px;
     }
     .recommended {
         width: 100%;

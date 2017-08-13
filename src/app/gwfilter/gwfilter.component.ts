@@ -7,11 +7,9 @@ import { Component } from '@angular/core';
 })
 export class GwentFilterComponent {
 
-    private factions: Array<any>;
-    // private activeFactions: Array<any>;
-    private activeFactions: any = [];
-    // private activeLeaders: Array<any>;
-    private activeLeaders: any = [];
+    factions: Array<any>;
+    activeFactions: any = [];
+    activeLeaders: any = [];
 
     constructor() {
         this.factions = [

@@ -7,22 +7,22 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class HearthstoneFilterComponent {
 
-    private classNames: Array<any>;
+    classNames: Array<any>;
     // private activeClasses: Array<any>;
-    private activeClasses: any = [];
-    private activeMode = 'standard';
+    activeClasses: any = [];
+    activeMode = 'standard';
 
     constructor(private el: ElementRef) {
         this.classNames = [
-            'druid',
-            'hunter',
-            'mage',
-            'paladin',
-            'priest',
-            'rogue',
-            'shaman',
-            'warlock',
-            'warrior'
+            'DRUID',
+            'HUNTER',
+            'MAGE',
+            'PALADIN',
+            'PRIEST',
+            'ROGUE',
+            'SHAMAN',
+            'WARLOCK',
+            'WARRIOR'
         ];
     }
 
