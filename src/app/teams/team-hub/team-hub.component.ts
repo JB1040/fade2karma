@@ -1,7 +1,6 @@
 ﻿import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TeamsService } from '../teams.service';
 import { CanvasService } from '../../core/canvas.service';
@@ -16,9 +15,11 @@ import { BASE_URL } from '../../core/globals';
 export class TeamsComponent implements OnInit {
     players: Author[];
     allPlayers: Author[];
-    private selectedId: number;
-    displayedGames = ['All Games', 'Hearthstone', 'Gwent'];
-    displayGames = 'All Games';
+    displayedGames: Array<{ outSideName: string, insideName: string }> = [{
+        outSideName: 'All Games',
+        insideName: 'ALL'
+    }, {outSideName: 'Hearthstone', insideName: 'HS'}, {outSideName: 'Gwent', insideName: 'GWENT'}];
+    displayGames: { outSideName: string, insideName: string } = {outSideName: 'All Games', insideName: 'ALL'};
     gamesOpen = false;
 
     constructor(private service: TeamsService,
@@ -44,7 +45,7 @@ export class TeamsComponent implements OnInit {
     }
 
     filterByGame() {
-        this.players = this.allPlayers.filter(player => player.game === this.displayGames || this.displayGames === 'All Games');
+        this.players = this.allPlayers.filter(player => player.game === this.displayGames.insideName || this.displayGames.insideName === 'ALL');
     }
 
     setAllPlayers(): void { // TODO move in service, handle errors in case they take place...
