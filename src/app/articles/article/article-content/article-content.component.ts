@@ -10,9 +10,11 @@ import { Article } from '../../article';
 export class ArticleContentComponent implements OnInit {
     @Input() article: Article;
     @Input() articles: Article[];
+    CONTENT: any;
 
     constructor() { }
 
     ngOnInit() {
+        this.CONTENT = this.CONTENT = `<img class="article-image" src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
     }
 }
