@@ -4,6 +4,10 @@
     width: 780px;
 }
 
+.article-page {
+  position: relative;
+}
+
 .social-share {
     position: absolute;
     float: left;
