@@ -35,7 +35,7 @@ export class ArticleComponent implements OnInit {
     }
 
     loadArticle(id: number) {
-        this.http.get(`${BASE_URL}/api/articles/:${id}`).subscribe(res => { // TODO get id...
+        this.http.get(`${BASE_URL}/api/articles/${id}`).subscribe(res => { // TODO get id...
             const articles = res.json();
             this.articles = articles.concat(this.articles);
         });
