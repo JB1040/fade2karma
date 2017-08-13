@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+/src/assets/images/F2K_Cards_Assets
 
 # dependencies
 /node_modules

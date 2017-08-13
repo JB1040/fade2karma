@@ -31,7 +31,7 @@ export class ArticleComponent implements OnInit {
         this.scrolled += 6;
     }
 
-    loadArticle(id: number) {\
+    loadArticle(id: number) {
         this.http.get(`${BASE_URL}/api/articles/${id}`).subscribe(res => { // TODO get id...\
             const articles = res.json();
             this.articles.unshift(res.json());

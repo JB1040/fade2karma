@@ -74,26 +74,29 @@ export class NewDeckHubComponent implements OnInit {
         const addedCardIDs: number[] = [];
 
         this.deck.cards.forEach((card: Card) => {
-            this.distribution[card.cost][1] += 1;
+            this.distribution[(card.cost > 7 ? 7 : card.cost)][1] += 1;
 
             if (card.heroClass === 'NEUTRAL') {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.neutralCards.forEach(neutralCard => {
                         if (neutralCard.dbId === card.dbId) {
-                            neutralCard.repeats = true;
+                            neutralCard.amount += 1;
                         }
                     });
                 } else {
+					card.amount = 1;
                     this.neutralCards.push(card);
                 }
             } else {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.classCards.forEach(classCard => {
                         if (classCard.dbId === card.dbId) {
-                            classCard.repeats = true;
+						
+                            classCard.amount += 1;
                         }
                     });
                 } else {
+                    card.amount = 1;
                     this.classCards.push(card);
                 }
             }
@@ -137,7 +140,7 @@ export class NewDeckHubComponent implements OnInit {
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
-            this.CONTENT = `<img class="article-image" src="${this.deck.imageURL.indexOf('http') !== -1 ? this.deck.imageURL : 'assets/images/' + this.deck.imageURL}">${this.deck.content}`;
+            this.CONTENT = `${this.deck.content}`;
             this.buildData();
         });
     }
