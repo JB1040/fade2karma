@@ -39,7 +39,7 @@ export class TeamsComponent implements OnInit {
     }
 
     navigateToTwitch(twitchName: string) {
-        const win = window.open(`https://www.twitch.tw/${twitchName}`, '_blank');
+        const win = window.open(`https://www.twitch.tv/${twitchName}`, '_blank');
         win.focus();
     }
 
