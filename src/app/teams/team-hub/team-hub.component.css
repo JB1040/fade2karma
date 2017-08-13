@@ -6,8 +6,6 @@ f2kMemberTile {
     margin-bottom: 10px;
 }
 
-
-
 .articles-select {
     z-index: 10;
     position: relative;
@@ -46,8 +44,8 @@ f2kMemberTile {
     z-index: 1;
     background: white;
     border: 1px solid #e7e7e7;
-    padding: 44px 20px 13px 20px;
-    margin: -41px -20px 0 -20px;
+    padding: 54px 20px 13px 20px;
+    margin: -51px -20px 0 -20px;
 }
 
 .dropdown-children h5{

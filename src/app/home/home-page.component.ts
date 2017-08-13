@@ -67,10 +67,10 @@ export class HomePageComponent implements OnInit {
     }
 
     setTierListDecks() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`${BASE_URL}api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
             this.tierOne = res.json();
         });
-        this.http.get(`${BASE_URL}api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
             this.tierTwo = res.json();
         });
     }

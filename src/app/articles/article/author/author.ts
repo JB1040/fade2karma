@@ -2,10 +2,19 @@ export class Author {
     constructor(public id: number,
                 public username: string,
                 public email: string,
-                public twitch: string,
+                public fullName: string,
                 public createDate: number,
-                public twitchData: TwitchData,
-                public game: string) {
+                public residence: string,
+                public birthday: string,
+                public facebook: string,
+                public twitter: string,
+                public twitch: string,
+                public youtube: string,
+                public description: string,
+                public image: string,
+                public code: any,
+                public game: string,
+                public twitchData?: TwitchData) {
     }
 }
 
