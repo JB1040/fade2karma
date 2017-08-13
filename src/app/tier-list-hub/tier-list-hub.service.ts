@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { BASE_URL } from '../core/globals';
 
 @Injectable()
 export class TierListHubService {
@@ -8,7 +9,7 @@ export class TierListHubService {
     }
 
     getDecks(amount: number, tier: number, mode: string, isStandard: boolean) {
-        const url = `api/decks/list?amount=${amount}&tier=${tier}&mode=${mode}&isStandard=${isStandard}`;
+        const url = `${BASE_URL}/api/decks/list?amount=${amount}&tier=${tier}&mode=${mode}&isStandard=${isStandard}`;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data)
@@ -19,5 +20,4 @@ export class TierListHubService {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
     }
-
 }
