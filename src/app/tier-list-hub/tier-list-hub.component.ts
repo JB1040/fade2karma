@@ -16,6 +16,9 @@ export class TierListHubComponent implements OnInit {
     active = 'STANDARD';
 
     constructor(private tierListHubService: TierListHubService) {
+        this.decksList['STANDARD'] = [];
+        this.decksList['WILD'] = [];
+        this.decksList['ARENA'] = [];
     }
 
     ngOnInit() {
@@ -29,11 +32,11 @@ export class TierListHubComponent implements OnInit {
         this.tierListHubService
             .getDecks(this.amount, tier, this.mode, this.isStandard)
             .then(deckList => {
-                const deck = {
+                const deck = { // TIER
                     title: title,
                     list: deckList
                 };
-                this.decksList[active].push(deck);
+                this.decksList[active][tier - 1] = deck;
             });
     }
 

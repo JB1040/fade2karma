@@ -75,7 +75,7 @@ const myAppRoutes: Routes = [
     imports: [
         BrowserModule,
         TeamsModule,
-        RouterModule.forRoot(myAppRoutes),
+        RouterModule.forRoot(myAppRoutes, { useHash: true }),
         NgbModule.forRoot(),
         InfiniteScrollModule,
         FormsModule,
