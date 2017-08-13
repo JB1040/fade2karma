@@ -25,6 +25,7 @@ export class NewDeckHubComponent implements OnInit {
     displayedCardLeft: boolean;
     displayCardTopPx: number;
     displayCardleftPx: number;
+    CONTENT: any;
 
     distribution: Array<Array<any>> = [ // TODO type
         ['0', 0],
@@ -136,6 +137,7 @@ export class NewDeckHubComponent implements OnInit {
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
+            this.CONTENT = `<img class="article-image" src="${this.deck.imageURL.indexOf('http') !== -1 ? this.deck.imageURL : 'assets/images/' + this.deck.imageURL}">${this.deck.content}`;
             this.buildData();
         });
     }
@@ -145,5 +147,4 @@ export class NewDeckHubComponent implements OnInit {
             this.decks = res.json();
         });
     }
-
 }

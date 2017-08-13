@@ -1,5 +1,5 @@
 <div class="article-image-container tint">
-    <img class="article-image" src="assets/images/{{article.imageURL}}">
+    <img class="article-image" src="{{ article.imageURL.indexOf('http') !== -1 ? article.imageURL : 'assets/images/' + article.imageURL}}">
     <!--<i class="fa fa-play-circle-o f2k-play-image" aria-hidden="true" style="font-size: 33px;"></i>-->
     <img *ngIf="article.imageURL.indexOf('youtube')" class="f2k-play-image" src="assets/images/icons/PlayBtn.svg">
 </div>
