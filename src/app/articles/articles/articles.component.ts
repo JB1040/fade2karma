@@ -56,7 +56,7 @@ export class ArticlesComponent implements OnInit {
     }
 
     loadArticles(offset: number, amount: number, type: string) { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
             this.articles = this.articles.concat(res.json());
         });
     }
