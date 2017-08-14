@@ -1,8 +1,8 @@
-<f2kOnlineSteamerScroll [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
+<f2kOnlineSteamerScroll *ngIf="onlineStreamers.length > 0" [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 <div class="F2K-column">
     <div class="clearfix featured" *ngIf="featuredArticles.length > 1">
-        <f2kArticlesTile class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
-        <f2kArticlesTile class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
+        <f2kArticlesTile *ngIf="featuredArticles[0]" class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
+        <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
     </div>
 
     <f2kTierListComponent *ngIf="tierOne.length > 0 && tierTwo.length > 0" [type]="deck" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne" [tierTwo]="tierTwo"></f2kTierListComponent>

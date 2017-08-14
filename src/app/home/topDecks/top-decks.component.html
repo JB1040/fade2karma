@@ -2,5 +2,5 @@
 
 <ng-template ngFor let-items [ngForOf]="itemArr" let-i="index">
     <!--<f2kRecommendedContainer [items]="items" [itemType]="'deck'" [title]="i === 1 ? 'GWENT DECKS' : 'HEARTHSTONE DECKS'"></f2kRecommendedContainer>-->
-    <f2kRecommendedContainer [items]="items" [itemType]="'deck'" [title]="'HEARTHSTONE DECKS'"></f2kRecommendedContainer>
+    <f2kRecommendedContainer *ngIf="items" [items]="items" [itemType]="'deck'" [title]="'HEARTHSTONE DECKS'"></f2kRecommendedContainer>
 </ng-template>
