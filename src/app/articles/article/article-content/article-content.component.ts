@@ -15,6 +15,12 @@ export class ArticleContentComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.CONTENT = this.CONTENT = `<img class="article-image" src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
+        if (this.article.imageURL && this.article.imageURL.indexOf('youtube')) {
+            this.CONTENT = this.CONTENT = `<iframe src="${this.article.imageURL}"></iframe>${this.article.content}`;
+        } else if (this.article.imageURL) {
+            this.CONTENT = `<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
+        } else {
+            this.CONTENT = this.article.content;
+        }
     }
 }
