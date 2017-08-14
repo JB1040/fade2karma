@@ -15,10 +15,11 @@ import { BASE_URL } from '../../core/globals';
 export class TeamsComponent implements OnInit {
     players: Author[];
     allPlayers: Author[];
-    displayedGames: Array<{ outSideName: string, insideName: string }> = [{
-        outSideName: 'All Games',
-        insideName: 'ALL'
-    }, {outSideName: 'Hearthstone', insideName: 'HS'}, {outSideName: 'Gwent', insideName: 'GWENT'}];
+    displayedGames: Array<{ outSideName: string, insideName: string }> = [
+        {outSideName: 'All Games', insideName: 'ALL'},
+        {outSideName: 'Hearthstone', insideName: 'HS'},
+        {outSideName: 'Gwent', insideName: 'GWENT'}
+        ];
     displayGames: { outSideName: string, insideName: string } = {outSideName: 'All Games', insideName: 'ALL'};
     gamesOpen = false;
 
@@ -50,7 +51,7 @@ export class TeamsComponent implements OnInit {
 
     setAllPlayers(): void { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0`).subscribe(res => {
-            this.allPlayers = res.json(); // TODO if select game filter...
+            this.allPlayers = res.json().filter(player => player.type !== 'ADMIN'); // TODO if select game filter...
             this.players = this.allPlayers;
         });
     }

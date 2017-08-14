@@ -14,6 +14,7 @@ export class Author {
                 public image: string,
                 public code: any,
                 public game: string,
+                public type: 'STREAMER' | 'EDITOR' | 'ADMIN',
                 public twitchData?: TwitchData) {
     }
 }

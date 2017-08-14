@@ -13,7 +13,7 @@ const contentRoutes: Routes = [
     {path: '', component: HomePageComponent},
     {path: 'articles', component: ArticlesComponent},
     {path: 'articles/:article', component: ArticleComponent},
-    {path: 'decks/:deck', component: NewDeckHubComponent},
+    {path: 'tier_list/:deck', component: NewDeckHubComponent},
     {path: 'tier_list', component: TierListHubComponent},
 ];
 

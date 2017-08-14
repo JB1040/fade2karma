@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Deck } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kNewDeckHub',
@@ -54,7 +55,7 @@ export class NewDeckHubComponent implements OnInit {
         return sortValue;
     }
 
-    constructor(private http: Http, private router: Router) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router) { // TODO remove when real data is there
         // const card: Card = new Card('Gabe from Penny Arcade', 6, 'NEUTRAL', true, 5, 559, 'At least he has Angry Chicken.', 2, 'EX1_116', 'Leeroy Jenkins', 'expert1', 'LEGENDARY', 'MINION', false);
         // const card2: Card = new Card('Chippy', null, 'PALADIN', true, 1, 1373, 'Apparently with wisdom comes the knowledge that you should probably be attacking every turn.', 2, 'EX1_363', 'Blessing of Wisdom', 'expert1', 'COMMON', 'SPELL', false);
         // const cards: Card[] = [card, card2, card2];
@@ -149,5 +150,16 @@ export class NewDeckHubComponent implements OnInit {
         this.http.get(`${BASE_URL}/api/decks/list?amount=6&offset=0`).subscribe(res => {
             this.decks = res.json();
         });
+    }
+
+    copyDeckCode(): void {
+        const textArea = this.docEl.createElement('textarea');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        this.docEl.body.appendChild(textArea);
+        textArea.value = this.deck.code;
+        textArea.select();
+        this.docEl.execCommand('copy');
+        textArea.remove();
     }
 }

@@ -47,14 +47,14 @@
                     <div class="deck-and-ad tablet clearfix">
                         <div class="graph-container">
                             <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                            <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                            <button class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                         </div>
                         <div class="side-ad">AD</div>
                     </div>
 
                     <div class="phone graph-container">
                         <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                        <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                        <button class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                     </div>
                     <div class="phone side-ad">AD</div>
 
@@ -88,7 +88,7 @@
 
             <div class="recommended desktop">
                 <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                <button class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                 <div class="side-ad">AD</div>
                 <f2kRecommendedContainer *ngIf="decks.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->
