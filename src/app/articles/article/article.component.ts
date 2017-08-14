@@ -16,6 +16,8 @@ export class ArticleComponent implements OnInit {
     recommendedArticles: Article[] = [];
     articles = [];
     scrolled = 0;
+    loadingArticles = false;
+    allArticlesLoaded = false;
 
     constructor(private articleService: ArticleFetchingService, private router: Router, private http: Http) {
     }
@@ -36,8 +38,17 @@ export class ArticleComponent implements OnInit {
     }
 
     loadArticles(amount: number, offset: number) {
+        if (this.loadingArticles || this.allArticlesLoaded) {
+            return;
+        }
+        this.loadingArticles = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
-            this.articles = this.articles.concat(res.json());
+            const articles = res.json();
+            this.articles = this.articles.concat(articles);
+            if (articles.length < amount) {
+                this.allArticlesLoaded = true;
+            }
+            this.loadingArticles = false;
         });
     }
 
