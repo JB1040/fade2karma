@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ArticleContent } from './article-content/article-content';
 import { Author } from './author/author';
 import { ArticleFetchingService } from './article-fetching.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../article';
 import { Http } from '@angular/http';
 import { BASE_URL } from '../../core/globals';
@@ -12,20 +12,30 @@ import { BASE_URL } from '../../core/globals';
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements /*OnInit, */OnDestroy {
     recommendedArticles: Article[] = [];
     articles = [];
     scrolled = 0;
     loadingArticles = false;
     allArticlesLoaded = false;
+    routeSubscription: any;
 
-    constructor(private articleService: ArticleFetchingService, private router: Router, private http: Http) {
+    constructor(private articleService: ArticleFetchingService, private router: Router, private http: Http, private route: ActivatedRoute) {
+        this.routeSubscription = this.route.params.subscribe(() => {
+            this.articles = [];
+            this.scrolled = 0;
+            this.loadingArticles = false;
+            this.allArticlesLoaded = false;
+            this.recommendedArticles = [];
+            this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+            this.loadRecommendedArticles(3, 0);
+        });
     }
 
-    ngOnInit(): void {
-        this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-        this.loadRecommendedArticles(3, 0);
-    }
+    // ngOnInit(): void {
+    //     this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+    //     this.loadRecommendedArticles(3, 0);
+    // }
 
     onScrollDown() {
         this.loadArticles(1, this.scrolled);
@@ -57,5 +67,9 @@ export class ArticleComponent implements OnInit {
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
             this.recommendedArticles = res.json();
         });
+    }
+
+    ngOnDestroy() {
+        this.routeSubscription.unsubscribe();
     }
 }
