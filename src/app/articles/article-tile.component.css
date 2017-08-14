@@ -57,11 +57,6 @@
     transition: all 300ms ease;
 }
 
-.article-text-container h4:not(:host(.featured)) {
-    height: 50px;
-    overflow: hidden;
-}
-
 .article-text-container h4 {
     color: #333333;
     transition: all 300ms ease;
@@ -113,6 +108,11 @@
         font-size: 28px;
         line-height: 34px;
     }
+
+    .article-text-container h4:not(:host(.featured)) {
+        height: 42px;
+        overflow: hidden;
+    }
 }
 
 @media (min-width: 1220px) {
@@ -142,6 +142,11 @@
 
     :host(.next-to-featured) .article-text-container {
         height: 198px; /* TODO better solution*/
+    }
+
+    .article-text-container h4:not(:host(.featured)) {
+        height: 50px;
+        overflow: hidden;
     }
 }
 
