@@ -32,10 +32,7 @@ export class TierListHubComponent implements OnInit {
         this.tierListHubService
             .getDecks(this.amount, tier, this.mode, this.isStandard)
             .then(deckList => {
-                const deck = { // TIER
-                    title: title,
-                    list: deckList
-                };
+                const deck = { title: title, list: deckList };
                 this.decksList[active][tier - 1] = deck;
             });
     }
@@ -57,7 +54,7 @@ export class TierListHubComponent implements OnInit {
 
     changeActive(newActive: string) {
         this.active = newActive;
-        if (!this.decksList[newActive]) {
+        if (this.decksList[newActive].length === 0) {
             this.setParams();
             this.getDecks(1, 'Tier 1 - Top Decks to Beat', newActive);
             this.getDecks(2, 'Tier 2 - Top Decks to Beat', newActive);

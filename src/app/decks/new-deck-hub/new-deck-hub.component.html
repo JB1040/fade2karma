@@ -1,4 +1,4 @@
-<div class="F2K-column">
+<div *ngIf="deck" class="F2K-column">
     <div class="deck-hub-container">
         <div class="deck-page">
 
@@ -60,7 +60,7 @@
 
                     <div class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
-                    <f2kRecommendedContainer class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
 
                     <div class="deck-comments phone">
@@ -70,7 +70,7 @@
                         <!-- TODO: Facebook Comments API -->
                     </div>
 
-                    <f2kRecommendedContainer class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
                     <!-- TODO: itemType -->
 
@@ -90,7 +90,7 @@
                 <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
                 <button class="btn-copy-deck-code">COPY DECK CODE</button>
                 <div class="side-ad">AD</div>
-                <f2kRecommendedContainer class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
+                <f2kRecommendedContainer *ngIf="decks.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->
             </div>
             <div class="clearfix"></div>

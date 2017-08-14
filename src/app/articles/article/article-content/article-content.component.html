@@ -1,5 +1,4 @@
-<div class="article-page">
-
+<div *ngIf="article" class="article-page">
     <div class="article-header">
         <f2k-breadcrumb [title]="article.title"></f2k-breadcrumb>
         <h1 class="article-title">{{article.title}}</h1>
@@ -42,10 +41,9 @@
     </div>
 
     <div class="recommended">
-        <f2kRecommendedContainer class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
+        <f2kRecommendedContainer *ngIf="articles" class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
                                  [items]="[articles]"></f2kRecommendedContainer>
         <div class="side-ad">AD</div>
     </div>
     <div class="clearfix"></div>
-
 </div>

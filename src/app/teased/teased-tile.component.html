@@ -1,4 +1,4 @@
-<img src="{{teasedItem.imageURL.indexOf('http') !== -1 ? teasedItem.imageURL : 'assets/images/' + teasedItem.imageURL}}">
+<img src="{{teasedItem.imageURL && teasedItem.imageURL.indexOf('http') !== -1 ? teasedItem.imageURL : 'assets/images/' + teasedItem.imageURL}}">
 <div class="text-container">
     <h4 class="title">{{teasedItem.title.slice(0, 50)}}</h4>
     <p class="info, b2">{{teasedItem.author.username}} &bull; {{date}}</p>

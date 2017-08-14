@@ -26,6 +26,7 @@ export class HomePageComponent implements OnInit {
         this.setArticles();
         this.setDecks();
         this.setTierListDecks();
+        this.setOnlineStreamers();
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
@@ -59,7 +60,7 @@ export class HomePageComponent implements OnInit {
     }
 
     setDecks(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/decks/list?amount=12&offset=0`).subscribe(res => {
             const decks = res.json();
             this.decksArr.push(decks.slice(0, 6));
             this.decksArr.push(decks.slice(6));

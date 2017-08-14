@@ -8,11 +8,11 @@
         <div class="b2 white card-name">
             <p class="">{{card.name}}</p>
         </div>
-        <div class="image-wrap" [style.background]="'-webkit-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(0,0,0,0) 30%), url(' + 'assets/images/static/hearthstone/' + card.cardId + '.png' + ') 35% 50% no-repeat' | safeStyle"></div>
+        <div class="image-wrap" [style.background]="'-webkit-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(0,0,0,0) 30%), url(' + 'assets/images/static/hearthstone/' + card.cardId + '_thumb.png' + ') 35% 50% no-repeat' | safeStyle"></div>
     </div>
     <div class="square right">
         <div class="square-content">
-            <div><span class="b2 white gray-bg">{{card.attack}}</span></div>
+            <div><span class="b2 white gray-bg">{{card.amount}}</span></div>
         </div>
     </div>
 </div>
