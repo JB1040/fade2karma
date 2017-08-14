@@ -15,7 +15,7 @@ export class ArticleContentComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        if (this.article.imageURL && this.article.imageURL.indexOf('youtube')) {
+        if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
             this.CONTENT = this.CONTENT = `<iframe src="${this.article.imageURL}"></iframe>${this.article.content}`;
         } else if (this.article.imageURL) {
             this.CONTENT = `<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
