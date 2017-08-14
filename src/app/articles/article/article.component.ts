@@ -22,13 +22,11 @@ export class ArticleComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-        this.loadRecommendedArticles(3, this.scrolled);
-        this.scrolled += 3;
     }
 
     onScrollDown() {
-        this.loadArticles(6, this.scrolled);
-        this.scrolled += 6;
+        this.loadArticles(1, this.scrolled);
+        this.scrolled += 1;
     }
 
     loadArticle(id: number) {
@@ -39,16 +37,13 @@ export class ArticleComponent implements OnInit {
 
     loadArticles(amount: number, offset: number) {
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
-            const articles = res.json();
-            this.articles = this.articles.concat(articles);
+            this.articles = this.articles.concat(res.json());
         });
     }
 
     loadRecommendedArticles(amount: number, offset: number) {
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
-            const articles = res.json();
-            this.recommendedArticles = articles;
-            this.articles = this.articles.concat(articles);
+            this.recommendedArticles = res.json();
         });
     }
 }
