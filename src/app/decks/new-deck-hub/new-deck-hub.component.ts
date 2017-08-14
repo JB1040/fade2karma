@@ -92,7 +92,6 @@ export class NewDeckHubComponent implements OnInit {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.classCards.forEach(classCard => {
                         if (classCard.dbId === card.dbId) {
-
                             classCard.amount += 1;
                         }
                     });
