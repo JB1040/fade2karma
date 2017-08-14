@@ -24,6 +24,7 @@ export class ArticleComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+        this.loadRecommendedArticles(3, 0);
     }
 
     onScrollDown() {
