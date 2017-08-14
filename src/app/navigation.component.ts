@@ -73,7 +73,7 @@ export class NavigationComponent implements OnInit {
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
             const articles = res.json();
-            if (articles > 1) {
+            if (articles.length > 1) {
                 this.giveawayUrl = `/articles/${articles[1].title.replace(/ /g, '_').toLowerCase()}_${articles[1].id}`;
                 this.giveawayExists = true;
             }
