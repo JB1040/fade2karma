@@ -1,5 +1,6 @@
 .article-image-container {
     position: relative;
+    overflow: hidden;
     width: 100%;
     background: black;
     padding-top: Calc(100% / (16 / 9));
@@ -55,6 +56,17 @@
     color: #333333;
     transition: all 300ms ease;
 }
+
+.article-text-container h4:not(:host(.featured)) {
+    height: 50px;
+    overflow: hidden;
+}
+
+.article-text-container h4 {
+    color: #333333;
+    transition: all 300ms ease;
+}
+
 
 .article-text-container h6 {
     color: #ef3418

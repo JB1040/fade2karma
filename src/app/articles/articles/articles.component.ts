@@ -18,6 +18,8 @@ export class ArticlesComponent implements OnInit {
     displayArticles = 'All Articles';
     articlesOpen = false;
     gamesOpen = false;
+    loading = false;
+    allArticlesLoaded = false;
 
     constructor(private canvas: CanvasService, private el: ElementRef, private http: Http) {
     }
@@ -56,8 +58,17 @@ export class ArticlesComponent implements OnInit {
     }
 
     loadArticles(offset: number, amount: number, type: string) { // TODO move in service, handle errors in case they take place...
+        if (this.loading || this.allArticlesLoaded) {
+            return;
+        }
+        this.loading = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
-            this.articles = this.articles.concat(res.json());
+            const articles = res.json();
+            this.articles = this.articles.concat(articles);
+            if (articles.length < amount) {
+                this.allArticlesLoaded = true;
+            }
+            this.loading = false;
         });
     }
 }

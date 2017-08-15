@@ -1,6 +1,7 @@
 import { Component, Input, Inject} from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BASE_URL } from '../../../core/globals';
 
 @Component({
     selector: 'f2k-social-share',
@@ -20,7 +21,7 @@ export class SocialShareComponent {
         textArea.style.position = 'fixed';
         textArea.style.opacity = '0';
         this.docEl.body.appendChild(textArea);
-        textArea.value = this.router.url;
+        textArea.value = BASE_URL + this.router.url;
         textArea.select();
         this.docEl.execCommand('copy');
         textArea.remove();

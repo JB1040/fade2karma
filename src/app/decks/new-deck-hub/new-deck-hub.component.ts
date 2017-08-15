@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Deck } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
-  selector: 'f2kNewDeckHub',
-  templateUrl: './new-deck-hub.component.html',
-  styleUrls: ['./new-deck-hub.component.css']
+    selector: 'f2kNewDeckHub',
+    templateUrl: './new-deck-hub.component.html',
+    styleUrls: ['./new-deck-hub.component.css']
 })
-export class NewDeckHubComponent implements OnInit {
+export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
 
     public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
     deck: Deck;
@@ -26,6 +27,7 @@ export class NewDeckHubComponent implements OnInit {
     displayCardTopPx: number;
     displayCardleftPx: number;
     CONTENT: any;
+    routeSubscription: any;
 
     distribution: Array<Array<any>> = [ // TODO type
         ['0', 0],
@@ -54,7 +56,25 @@ export class NewDeckHubComponent implements OnInit {
         return sortValue;
     }
 
-    constructor(private http: Http, private router: Router) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute) { // TODO remove when real data is there
+        this.routeSubscription = this.route.params.subscribe(() => {
+            this.deck = null;
+            this.decks = [];
+            this.chartData = null;
+            this.classCards = [];
+            this.neutralCards = [];
+            this.displayCard = false;
+            this.displayedCard = null;
+            this.displayedCardUp = false;
+            this.displayedCardLeft = false;
+            this.displayCardTopPx = null;
+            this.displayCardleftPx = null;
+            this.CONTENT = '';
+
+            this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+            this.getDecks();
+        });
+
         // const card: Card = new Card('Gabe from Penny Arcade', 6, 'NEUTRAL', true, 5, 559, 'At least he has Angry Chicken.', 2, 'EX1_116', 'Leeroy Jenkins', 'expert1', 'LEGENDARY', 'MINION', false);
         // const card2: Card = new Card('Chippy', null, 'PALADIN', true, 1, 1373, 'Apparently with wisdom comes the knowledge that you should probably be attacking every turn.', 2, 'EX1_363', 'Blessing of Wisdom', 'expert1', 'COMMON', 'SPELL', false);
         // const cards: Card[] = [card, card2, card2];
@@ -65,35 +85,37 @@ export class NewDeckHubComponent implements OnInit {
         // }
     }
 
-    ngOnInit() {
-        this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-        this.getDecks();
-    }
+    // ngOnInit() {
+    //     this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+    //     this.getDecks();
+    // }
 
     buildData() {
         const addedCardIDs: number[] = [];
 
         this.deck.cards.forEach((card: Card) => {
-            this.distribution[card.cost][1] += 1;
+            this.distribution[(card.cost > 7 ? 7 : card.cost)][1] += 1;
 
             if (card.heroClass === 'NEUTRAL') {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.neutralCards.forEach(neutralCard => {
                         if (neutralCard.dbId === card.dbId) {
-                            neutralCard.repeats = true;
+                            neutralCard.amount += 1;
                         }
                     });
                 } else {
+                    card.amount = 1;
                     this.neutralCards.push(card);
                 }
             } else {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.classCards.forEach(classCard => {
                         if (classCard.dbId === card.dbId) {
-                            classCard.repeats = true;
+                            classCard.amount += 1;
                         }
                     });
                 } else {
+                    card.amount = 1;
                     this.classCards.push(card);
                 }
             }
@@ -137,7 +159,7 @@ export class NewDeckHubComponent implements OnInit {
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
-            this.CONTENT = `<img class="article-image" src="${this.deck.imageURL.indexOf('http') !== -1 ? this.deck.imageURL : 'assets/images/' + this.deck.imageURL}">${this.deck.content}`;
+            this.CONTENT = `${this.deck.content}`;
             this.buildData();
         });
     }
@@ -146,5 +168,20 @@ export class NewDeckHubComponent implements OnInit {
         this.http.get(`${BASE_URL}/api/decks/list?amount=6&offset=0`).subscribe(res => {
             this.decks = res.json();
         });
+    }
+
+    copyDeckCode(): void {
+        const textArea = this.docEl.createElement('textarea');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        this.docEl.body.appendChild(textArea);
+        textArea.value = this.deck.code;
+        textArea.select();
+        this.docEl.execCommand('copy');
+        textArea.remove();
+    }
+
+    ngOnDestroy() {
+        this.routeSubscription.unsubscribe();
     }
 }

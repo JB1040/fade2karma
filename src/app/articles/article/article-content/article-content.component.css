@@ -120,6 +120,7 @@ f2k-rating-box {
     font-size: 2em;
     font-weight: bold;
     line-height: 90px;
+    display: none; /* TODO add adds*/
 }
 
 .recommended {
@@ -138,6 +139,7 @@ f2k-rating-box {
     font-size: 2em;
     font-weight: bold;
     line-height: 250px;
+    display: none; /* TODO add adds*/
 }
 
 

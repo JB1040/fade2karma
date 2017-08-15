@@ -1,4 +1,4 @@
-<div class="F2K-column">
+<div *ngIf="deck" class="F2K-column">
     <div class="deck-hub-container">
         <div class="deck-page">
 
@@ -47,20 +47,20 @@
                     <div class="deck-and-ad tablet clearfix">
                         <div class="graph-container">
                             <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                            <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                            <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                         </div>
-                        <div class="side-ad">AD</div>
+                        <!--<div class="side-ad">AD</div>-->
                     </div>
 
                     <div class="phone graph-container">
                         <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                        <button class="btn-copy-deck-code">COPY DECK CODE</button>
+                        <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                     </div>
-                    <div class="phone side-ad">AD</div>
+                    <!--<div class="phone side-ad">AD</div>-->
 
                     <div class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
-                    <f2kRecommendedContainer class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
 
                     <div class="deck-comments phone">
@@ -70,7 +70,7 @@
                         <!-- TODO: Facebook Comments API -->
                     </div>
 
-                    <f2kRecommendedContainer class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
                     <!-- TODO: itemType -->
 
@@ -88,9 +88,9 @@
 
             <div class="recommended desktop">
                 <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                <button class="btn-copy-deck-code">COPY DECK CODE</button>
-                <div class="side-ad">AD</div>
-                <f2kRecommendedContainer class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
+                <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                <!--<div class="side-ad">AD</div>-->
+                <f2kRecommendedContainer *ngIf="decks.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->
             </div>
             <div class="clearfix"></div>

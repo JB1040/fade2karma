@@ -154,6 +154,7 @@ f2k-rating-box {
     background-color: #EF3418;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 }
 
 
@@ -182,11 +183,13 @@ f2k-rating-box {
     font-size: 2em;
     font-weight: bold;
     line-height: 90px;
+    display: none; /* TODO add adds*/
 }
 
 .recommended {
     float: left;
     margin-left: 40px;
+    width: 360px;
 }
 
 .side-ad {
@@ -200,6 +203,7 @@ f2k-rating-box {
     font-size: 2em;
     font-weight: bold;
     line-height: 250px;
+    /*display: none; !* TODO add adds*!*/
 }
 
 
@@ -411,5 +415,11 @@ f2k-rating-box {
     .side-ad {
         float: none;
         margin: 0 auto 20px auto;
+    }
+}
+
+@media(min-width: 1200px) {
+    f2kRecommendedContainer {
+        margin-top: 40px;
     }
 }

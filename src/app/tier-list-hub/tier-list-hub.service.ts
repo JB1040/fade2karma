@@ -12,7 +12,7 @@ export class TierListHubService {
         const url = `${BASE_URL}/api/decks/list?amount=${amount}&tier=${tier}&mode=${mode}&isStandard=${isStandard}`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 

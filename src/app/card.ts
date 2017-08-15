@@ -12,6 +12,6 @@ export default class Card {
                 public set: string, // TODO enum
                 public rarity: string, // TODO enum
                 public type: string, /* TODO enum*/
-                public repeats: boolean) {
+                public amount: number) {
     }
 }
