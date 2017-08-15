@@ -2,6 +2,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Article } from './article';
 import { TimeTransfer } from '../core/time-transfer';
 import { Router } from '@angular/router';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kArticlesTile',
@@ -18,7 +19,7 @@ export class ArticlesTileComponent implements OnInit {
         this.router.navigate([`/articles/${this.article.title.replace(/ /g, '_').toLowerCase()}_${this.article.id}`]);
     }
 
-    constructor(private router: Router) {}
+    constructor(private router: Router,private sanitizer: DomSanitizer) {}
 
     ngOnInit() {
         this.date = TimeTransfer.getTime(this.article.date);
@@ -32,4 +33,8 @@ export class ArticlesTileComponent implements OnInit {
             }
         }
     }
+	
+	articleURL() {
+		return this.sanitizer.bypassSecurityTrustUrl(this.article.imageURL);
+	}
 }
