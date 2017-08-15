@@ -39,7 +39,6 @@ import { DatePipe } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NewsLetterComponent } from './news/news.component';
 import { ArticleFetchingService } from './articles/article/article-fetching.service';
-import { FakeArticleFetchingService } from './articles/article/fake-article-fetching.service';
 import { CapitalizePipe } from './core/capitalize pipe';
 import { DustCalculationService } from './core/dust-calculation.service';
 import { HttpModule } from '@angular/http';
@@ -133,7 +132,6 @@ const myAppRoutes: Routes = [
         CanvasService,
         DatePipe,
         ArticleFetchingService,
-        FakeArticleFetchingService,
         DustCalculationService,
         TierListHubService,
         F2kUrlPipe
