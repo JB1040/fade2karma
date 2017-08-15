@@ -16,11 +16,11 @@
         </div>
     </div>
 
-    <div class="social-share">
+    <div #socialShare class="social-share">
         <f2k-social-share></f2k-social-share>
     </div>
 
-    <div class="article-body">
+    <div #articleBody class="article-body">
         <div class="share-rate-phone">
             <div class="social-share-phone">
                 <f2k-social-share></f2k-social-share>
@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="recommended">
+    <div #recommendedTeaser class="recommended">
         <f2kRecommendedContainer *ngIf="articles && articles.length > 0" class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
                                  [items]="[articles]"></f2kRecommendedContainer>
         <div class="side-ad">AD</div>

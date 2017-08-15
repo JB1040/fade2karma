@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, Inject, ViewEncapsulation, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { Article } from '../../article';
 
 @Component({
@@ -8,11 +9,44 @@ import { Article } from '../../article';
     encapsulation: ViewEncapsulation.None
 })
 export class ArticleContentComponent implements OnInit {
+    constructor(@Inject(DOCUMENT) private docEl: Document) { }
+
     @Input() article: Article;
     @Input() articles: Article[];
     CONTENT: any;
 
-    constructor() { }
+    @ViewChild('articleBody') articleBody: ElementRef;
+    @ViewChild('recommendedTeaser') recommendedTeaser: ElementRef;
+    @ViewChild('socialShare') socialShare: ElementRef;
+    @HostListener('window:scroll', ['$event'])
+    // TODO: while scrolling up, start scrolling when hits viewport bottom
+    onScroll(event) {
+      // Maximum translation distance for recommended teaser
+      let maxDistance = this.articleBody.nativeElement.clientHeight
+                        - this.recommendedTeaser.nativeElement.offsetHeight;
+      // Translation distance for recommended teaser
+      let distance = - this.articleBody.nativeElement.getBoundingClientRect().top // distance from viewport top
+                     + this.docEl.getElementsByTagName('f2knavigation')[0]['offsetHeight']
+                     + parseInt(this.docEl.getElementsByTagName('f2knavigation')[0]['style']['top'])
+                     + 20; // extra 20 px margin
+      // Teaser limits
+      distance = distance < 0 ? 0 : distance;
+      distance = distance > maxDistance ? maxDistance : distance;
+      this.recommendedTeaser.nativeElement.style.transform = 'translateY(' + distance + 'px)';
+
+      // Maximum translation distance for social share element
+      maxDistance = this.articleBody.nativeElement.clientHeight
+                        - this.socialShare.nativeElement.offsetHeight
+                        - 40; // top margin of social share element
+      // Translation distance for social share element
+      distance = - this.articleBody.nativeElement.getBoundingClientRect().top // distance from viewport top
+                     + this.docEl.getElementsByTagName('f2knavigation')[0]['offsetHeight']
+                     + parseInt(this.docEl.getElementsByTagName('f2knavigation')[0]['style']['top']);
+      // Social share element limits
+      distance = distance < 0 ? 0 : distance;
+      distance = distance > maxDistance ? maxDistance : distance;
+      this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
+    }
 
     ngOnInit() {
         if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
