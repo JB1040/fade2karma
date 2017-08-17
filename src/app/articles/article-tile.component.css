@@ -31,6 +31,10 @@
     margin: auto;
 }
 
+.article-video {
+	width:100%;
+}
+
 .article-image:before {
     background: #ef3418;
     opacity: 0.1;
@@ -41,6 +45,7 @@
     right: 10px;
     width: 30px;
     height: 30px;
+	z-index:10;
 }
 
 .article-text-container {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Article } from '../../article';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kArticleContent',
@@ -12,11 +13,12 @@ export class ArticleContentComponent implements OnInit {
     @Input() articles: Article[];
     CONTENT: any;
 
-    constructor() { }
+    constructor(private sanitizer: DomSanitizer) { }
 
     ngOnInit() {
         if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
-            this.CONTENT = this.CONTENT = `<iframe src="${this.article.imageURL}"></iframe>${this.article.content}`;
+			
+            this.CONTENT = this.sanitizer.bypassSecurityTrustHtml("<div class=\"box\"><iframe src='" + this.article.imageURL+"'></iframe></div>" + this.article.content);
         } else if (this.article.imageURL) {
             this.CONTENT = `<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
         } else {
