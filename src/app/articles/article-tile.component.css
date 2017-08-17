@@ -168,4 +168,15 @@
     .article-text-container {
         padding: 13px 20px;
     }
+	
+	.article-text-container h4 {
+		height: 44px:
+		text-overflow: hidden;
+	}
+}
+
+@media (min-width: 1220px) {
+	.article-text-container h4 {
+		height: 50px;
+	}
 }
