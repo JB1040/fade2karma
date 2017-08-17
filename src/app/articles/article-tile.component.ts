@@ -26,7 +26,6 @@ export class ArticlesTileComponent implements OnInit {
     ngOnInit() {
         this.date = TimeTransfer.getTime(this.article.date);
 		if (this.article.imageURL.indexOf('youtube') !== -1) {
-			alert("here")
 			this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
         } else if (this.article.imageURL.indexOf('twitch') !== -1) {
 			 this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.article.imageURL.split('&clip=')[1]).subscribe(res => {
