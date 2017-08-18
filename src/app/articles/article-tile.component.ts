@@ -18,9 +18,9 @@ export class ArticlesTileComponent implements OnInit {
 	image: any;
 
     onClick() {
-        this.router.navigate([`/articles/${this.article.title.replace(/ /g, '_').toLowerCase()}_${this.article.id}`]);
+        this.router.navigate([`/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}`]);
     }
-	
+
     constructor(private router: Router,private sanitizer: DomSanitizer,private e: ElementRef, private http: Http) {}
 
     ngOnInit() {

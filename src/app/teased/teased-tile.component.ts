@@ -19,9 +19,9 @@ export class RecommendedTileComponent implements OnInit {
 
     @HostListener('click') onClick() {
         if (this.type = 'deck') {
-            this.router.navigate([`/tier_list/${this.teasedItem.title.replace(/ /g, '_').toLowerCase()}_${this.teasedItem.id}`]);
+            this.router.navigate([`/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`]);
         } else {
-            this.router.navigate([`/articles/${this.teasedItem.title.replace(/ /g, '_').toLowerCase()}_${this.teasedItem.id}`]);
+            this.router.navigate([`/articles/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`]);
         }
     }
     constructor(private el: ElementRef, private router: Router) {

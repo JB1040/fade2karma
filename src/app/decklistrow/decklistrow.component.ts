@@ -21,7 +21,7 @@ export class DeckListRowComponent implements OnInit {
     displayDate: string;
 
     @HostListener('click') onClick() {
-        this.router.navigate([`/tier_list/${this.deck.title.replace(/ /g, '_').toLowerCase()}_${this.deck.id}`]);
+        this.router.navigate([`/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.deck.id}`]);
     }
 
     constructor(private router: Router) {}
