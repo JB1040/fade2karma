@@ -10,7 +10,6 @@ import { DomSanitizer} from '@angular/platform-browser';
     encapsulation: ViewEncapsulation.None
 })
 export class ArticleContentComponent implements OnInit {
-    constructor(@Inject(DOCUMENT) private docEl: Document) { }
 
     @Input() article: Article;
     @Input() articles: Article[];
@@ -50,7 +49,7 @@ export class ArticleContentComponent implements OnInit {
       distance = distance > maxDistance ? maxDistance : distance;
       this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
     }
-    constructor(private sanitizer: DomSanitizer, private el: ElementRef) { }
+    constructor(@Inject(DOCUMENT) private docEl: Document,private sanitizer: DomSanitizer, private el: ElementRef) { }
 
 	@HostListener('window:resize', ['$event.target']) 
 	onResize() { 
