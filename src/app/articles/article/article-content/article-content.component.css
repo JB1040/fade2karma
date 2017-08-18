@@ -81,6 +81,12 @@ f2k-rating-box {
     width: 780px;
 }
 
+.article-content iframe {
+    width: 780px;
+	height: 450px;
+	border:0;
+}
+
 
 /* TODO: Button specs for all layouts */
 
@@ -199,6 +205,11 @@ f2k-rating-box {
     .article-content img {
         width: 728px;
     }
+	
+	.article-content iframe{
+		width: 728px;
+		height:420px;
+	}
     .footer-ad {
         display: none;
     }
@@ -296,6 +307,14 @@ f2k-rating-box {
         width: 100%;
         max-width: 460px;
     }
+	.article-content iframe{
+		position: relative;
+		width: 100%;		/* desired width */
+		max-width:460px;
+		height:53.7vw;
+		max-height:260px;
+	}
+	
     .btn-expand-comments {
         float: none;
         width: 100%;

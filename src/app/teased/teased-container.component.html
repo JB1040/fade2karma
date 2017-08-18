@@ -1,4 +1,4 @@
 <h5>{{title}}</h5>
 <ng-template ngFor let-item [ngForOf]="items">
-    <f2kRecommendedTile *ngIf="item" class="recommended-tiles" (width)="setBorder($event)" [ngClass]="itemType" [type]="type" [teasedItem]="item"></f2kRecommendedTile>
+    <f2kRecommendedTile *ngIf="item" class="recommended-tiles" (width)="setBorder($event)" [ngClass]="itemType" [type]="itemType" [teasedItem]="item"></f2kRecommendedTile>
 </ng-template>

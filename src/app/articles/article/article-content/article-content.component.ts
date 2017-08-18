@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject, ViewEncapsulation, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Article } from '../../article';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kArticleContent',
@@ -14,6 +15,8 @@ export class ArticleContentComponent implements OnInit {
     @Input() article: Article;
     @Input() articles: Article[];
     CONTENT: any;
+	IMAGE: any;
+	height: any;
 
     @ViewChild('articleBody') articleBody: ElementRef;
     @ViewChild('recommendedTeaser') recommendedTeaser: ElementRef;
@@ -47,10 +50,21 @@ export class ArticleContentComponent implements OnInit {
       distance = distance > maxDistance ? maxDistance : distance;
       this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
     }
+    constructor(private sanitizer: DomSanitizer, private el: ElementRef) { }
+
+	@HostListener('window:resize', ['$event.target']) 
+	onResize() { 
+		this.resizeWorks();
+	}
+	
+
+	private resizeWorks(): void {
+		this.height = this.el.nativeElement.width * 0.667;
+	}
 
     ngOnInit() {
         if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
-            this.CONTENT = this.CONTENT = `<iframe src="${this.article.imageURL}"></iframe>${this.article.content}`;
+			 this.CONTENT = this.sanitizer.bypassSecurityTrustHtml("<iframe src='" + this.article.imageURL+"'></iframe>" + this.article.content);
         } else if (this.article.imageURL) {
             this.CONTENT = `<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
         } else {
