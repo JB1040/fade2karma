@@ -8,6 +8,10 @@
     margin-bottom: 73px;
 }
 
+.article:last-child {
+  border-bottom: none;
+}
+
 @media(max-width: 1219px) {
   .article:first-child {
     top: 26px;

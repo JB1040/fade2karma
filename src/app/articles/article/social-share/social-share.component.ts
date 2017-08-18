@@ -9,11 +9,14 @@ import { BASE_URL } from '../../../core/globals';
     styleUrls: ['./social-share.component.css']
 })
 export class SocialShareComponent {
-    @Input() url: string;
     @Input() text: string;
     routerSubscription: any;
 
     constructor(@Inject(DOCUMENT) private docEl: Document, public router: Router) {
+    }
+
+    getEncodedUrl(): string {
+      return encodeURIComponent(this.docEl.location.href);
     }
 
     copyToClipboard(): void {
@@ -21,7 +24,7 @@ export class SocialShareComponent {
         textArea.style.position = 'fixed';
         textArea.style.opacity = '0';
         this.docEl.body.appendChild(textArea);
-        textArea.value = BASE_URL + this.router.url;
+        textArea.value = this.docEl.location.href;
         textArea.select();
         this.docEl.execCommand('copy');
         textArea.remove();
