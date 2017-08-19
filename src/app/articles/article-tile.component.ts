@@ -39,6 +39,9 @@ export class ArticlesTileComponent implements OnInit {
             const pElement = el.getElementsByTagName('p')[0];
             if (pElement) {
                 this.description = el.getElementsByTagName('p')[0].textContent;
+                if (this.description.length > 125) {
+                    this.description = this.description.slice(0, 120) + '...';
+                }
             }
         }
     }
