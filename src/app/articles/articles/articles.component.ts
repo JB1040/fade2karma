@@ -50,6 +50,8 @@ export class ArticlesComponent implements OnInit {
     changeArticles(articlesType) {
         this.sum = 0;
         this.articles = [];
+        this.loading = false;
+        this.allArticlesLoaded = false;
         if (articlesType === 'All Articles') {
             articlesType = '';
         }
