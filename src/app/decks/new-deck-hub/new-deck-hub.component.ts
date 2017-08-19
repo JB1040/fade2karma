@@ -95,9 +95,9 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         let deckMode: string;
         if (this.deck.mode === 'CON') {
             if (this.deck.isStandard) {
-                deckMode = 'wild';
-            } else {
                 deckMode = 'standard';
+            } else {
+                deckMode = 'wild';
             }
         }
 
