@@ -92,6 +92,14 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
 
     buildData() {
         const addedCardIDs: number[] = [];
+        let deckMode: string;
+        if (this.deck.mode === 'CON') {
+            if (this.deck.isStandard) {
+                deckMode = 'wild';
+            } else {
+                deckMode = 'standard';
+            }
+        }
 
         this.deck.cards.forEach((card: Card) => {
             this.distribution[(card.cost > 7 ? 7 : card.cost)][1] += 1;
@@ -134,8 +142,8 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
                 },
                 {
                     label: 'Game mode',
-                    value: this.deck.mode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: `assets/icons/${this.deck.mode.toLowerCase()}icon.svg`
+                    value: deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
+                    image: `assets/icons/${deckMode.toLowerCase()}icon.svg`
                 },
                 {
                     label: 'Dust Cost',
