@@ -23,14 +23,20 @@ export class ArticlesTileComponent implements OnInit {
 
     constructor(private router: Router,private sanitizer: DomSanitizer,private e: ElementRef, private http: Http) {}
 
+	updateUrl(event: Event) {
+		if (this.article.imageURL.indexOf('youtube') !== -1) {
+			this.image= this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+     		
+		}
+	}
     ngOnInit() {
         this.date = TimeTransfer.getTime(this.article.date);
 		if (this.article.imageURL.indexOf('youtube') !== -1) {
-			this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
-        } else if (this.article.imageURL.indexOf('twitch') !== -1) {
+			this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
+     		} else if (this.article.imageURL.indexOf('twitch') !== -1) {
 			 this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.article.imageURL.split('&clip=')[1]).subscribe(res => {
 			 const result = res.json();
-			 this.image = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.small);
+			 this.image = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.medium);
 			 });
 		}
 		if (this.showDescription) {
