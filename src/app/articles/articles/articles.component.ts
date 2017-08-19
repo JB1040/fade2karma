@@ -12,7 +12,7 @@ export class ArticlesComponent implements OnInit {
 
     articles: Article[] = [];
     sum = 0;
-    displayedArticles = ['All Articles', 'Podcasts', 'Highlights', 'Viewpoints', 'Meta Reports', 'Teams'];
+    displayedArticles = ['All Articles', 'Announcements', 'Podcasts', 'Highlights', 'Viewpoints', 'Meta Reports', 'Teams','Card Reveals'];
     displayedGames = ['All Games', 'Hearthstone'/*, 'Gwent'*/];
     displayGames = 'All Games';
     displayArticles = 'All Articles';
