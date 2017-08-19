@@ -21,7 +21,7 @@ on play button click do {
 
 -->
 <img *ngIf="teasedItem.imageURL && (teasedItem.imageURL.indexOf('youtube') !== -1 || teasedItem.imageURL.indexOf('twitch') !== -1)" [src]='image'>
-<img *ngIf="!teasedItem.imageURL && type === 'deck'" src="assets/Hearthstone_Square/{{item.heroClass.toLowerCase()}}.jpg">
+<img *ngIf="!teasedItem.imageURL && type === 'deck'" src="assets/Hearthstone_Square/{{teasedItem.heroClass.toLowerCase()}}.jpg">
 <img *ngIf="teasedItem.imageURL && teasedItem.imageURL.indexOf('youtube') === -1 && teasedItem.imageURL.indexOf('twitch') === -1" src="{{ teasedItem.imageURL && article.imageURL.indexOf('http') !== -1 ? teasedItem.imageURL : 'assets/images/' + teasedItem.imageURL}}">
 
 <div class="text-container">
