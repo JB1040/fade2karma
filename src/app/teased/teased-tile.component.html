@@ -1,5 +1,28 @@
-<img *ngIf="teasedItem.imageURL" src="{{teasedItem.imageURL && teasedItem.imageURL.indexOf('http') !== -1 ? teasedItem.imageURL : 'assets/images/' + teasedItem.imageURL}}">
-<img *ngIf="!teasedItem.imageURL && type === 'deck'" src="assets/Hearthstone_Square/{{teasedItem.heroClass.toLowerCase()}}.jpg">
+<!--
+INSTEAD OF IFRAME....
+IF ITS YOUTUBE DO:
+<div id="{{'youtube' + article.id}}" class="article-image"></div>
+var player;
+function onYouTubePlayerAPIReady() {
+player = new YT.Player('ytplayer' + article.id, {
+  videoId: article.imageURL.split("/")[1]; //I will make sure format is youtube/code
+});
+
+//PSEUDO CODE
+on play button click do {
+  if (player.getPlayerState == 1) {    // actual code, 1 means player is playing
+    player.pauseVideo();
+  } else {
+    player.playVideo();
+  }
+}
+}
+
+
+-->
+<img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="article-image"  [src]='image'>
+<img *ngIf="article.imageURL && article.imageURL.indexOf('youtube') === -1 && article.imageURL.indexOf('twitch') === -1" class="article-image" src="{{ article.imageURL && article.imageURL.indexOf('http') !== -1 ? article.imageURL : 'assets/images/' + article.imageURL}}">
+
 <div class="text-container">
     <h4 *ngIf="teasedItem.title" class="title">{{teasedItem.title.slice(0, 50)}}</h4>
     <p *ngIf="teasedItem.author" class="info, b2">{{teasedItem.author.username}} &bull; {{date}}</p>
