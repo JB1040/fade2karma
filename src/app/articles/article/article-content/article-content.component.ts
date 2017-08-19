@@ -34,6 +34,10 @@ export class ArticleContentComponent implements OnInit {
       // Teaser limits
       distance = distance < 0 ? 0 : distance;
       distance = distance > maxDistance ? maxDistance : distance;
+      console.log(parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10));
+      if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 1180) { // TODO better fix for only doing this in window width more then 1220px
+          distance = 0
+      }
       this.recommendedTeaser.nativeElement.style.transform = 'translateY(' + distance + 'px)';
 
       // Maximum translation distance for social share element
@@ -47,15 +51,16 @@ export class ArticleContentComponent implements OnInit {
       // Social share element limits
       distance = distance < 0 ? 0 : distance;
       distance = distance > maxDistance ? maxDistance : distance;
+        if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 1180) { // TODO better fix for only doing this in window width more then 1220px
+            distance = 0
+        }
       this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
     }
     constructor(@Inject(DOCUMENT) private docEl: Document,private sanitizer: DomSanitizer, private el: ElementRef) { }
 
-	@HostListener('window:resize', ['$event.target']) 
-	onResize() { 
+	@HostListener('window:resize', ['$event.target']) onResize() {
 		this.resizeWorks();
 	}
-	
 
 	private resizeWorks(): void {
 		this.height = this.el.nativeElement.width * 0.667;
