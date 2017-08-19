@@ -11,19 +11,19 @@
             </div>
             <f2k-rating-box [rating]="article.rating" [itemId]="article.id" [itemType]="'article'"></f2k-rating-box>
             <div class="social-share-tablet">
-                <f2k-social-share></f2k-social-share>
+                <f2k-social-share [text]="article.title"></f2k-social-share>
             </div>
         </div>
     </div>
 
-    <div class="social-share">
-        <f2k-social-share></f2k-social-share>
+    <div #socialShare class="social-share">
+        <f2k-social-share [text]="article.title"></f2k-social-share>
     </div>
 
-    <div class="article-body">
+    <div #articleBody class="article-body">
         <div class="share-rate-phone">
             <div class="social-share-phone">
-                <f2k-social-share></f2k-social-share>
+                <f2k-social-share [text]="article.title"></f2k-social-share>
             </div>
             <f2k-rating-box class="rating-box-phone" [rating]="article.rating" [itemId]="article.id" [itemType]="'article'"></f2k-rating-box>
         </div>
@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="recommended">
+    <div #recommendedTeaser class="recommended">
         <f2kRecommendedContainer *ngIf="articles && articles.length > 0" class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
                                  [items]="articles"></f2kRecommendedContainer>
         <div class="side-ad">AD</div>

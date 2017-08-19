@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ArticleContent } from './article-content/article-content';
 import { Author } from './author/author';
 import { ArticleFetchingService } from './article-fetching.service';
 import { ActivatedRoute, Router } from '@angular/router';
