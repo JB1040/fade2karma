@@ -36,7 +36,7 @@ export class RecommendedTileComponent implements OnInit {
         this.date = TimeTransfer.getTime(this.teasedItem.date);
         if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.teasedItem.imageURL.split('embed/')[1] + '/mqdefault.jpg');
-        } else if (this.teasedItem.imageURL.indexOf('twitch') !== -1) {
+        } else if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('twitch') !== -1) {
             this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.teasedItem.imageURL.split('&clip=')[1]).subscribe(res => {
                 const result = res.json();
                 this.image = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.small);
