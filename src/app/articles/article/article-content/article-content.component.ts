@@ -34,8 +34,7 @@ export class ArticleContentComponent implements OnInit {
       // Teaser limits
       distance = distance < 0 ? 0 : distance;
       distance = distance > maxDistance ? maxDistance : distance;
-      console.log(parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10));
-      if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 1180) { // TODO better fix for only doing this in window width more then 1220px
+      if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 780) { // TODO better fix for only doing this in window width more then 1220px
           distance = 0
       }
       this.recommendedTeaser.nativeElement.style.transform = 'translateY(' + distance + 'px)';
@@ -51,7 +50,7 @@ export class ArticleContentComponent implements OnInit {
       // Social share element limits
       distance = distance < 0 ? 0 : distance;
       distance = distance > maxDistance ? maxDistance : distance;
-        if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 1180) { // TODO better fix for only doing this in window width more then 1220px
+        if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 780) { // TODO better fix for only doing this in window width more then 1220px
             distance = 0
         }
       this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
