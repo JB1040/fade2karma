@@ -34,6 +34,7 @@ export class ArticleContentComponent implements OnInit {
       // Teaser limits
       distance = distance < 0 ? 0 : distance;
       distance = distance > maxDistance ? maxDistance : distance;
+      console.log(parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10));
       if (parseInt(this.articleBody.nativeElement.getBoundingClientRect().width, 10) !== 1180) { // TODO better fix for only doing this in window width more then 1220px
           distance = 0
       }
