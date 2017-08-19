@@ -61,6 +61,7 @@ export class ArticlesComponent implements OnInit {
         if (this.loading || this.allArticlesLoaded) {
             return;
         }
+		if (type == "META_REPORTS") type = "METAREPORTS";
         this.loading = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
             const articles = res.json();
