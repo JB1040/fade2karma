@@ -43,4 +43,4 @@ export class RecommendedTileComponent implements OnInit {
             });
         }
     }
-}\
+}

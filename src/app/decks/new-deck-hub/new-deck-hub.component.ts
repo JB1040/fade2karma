@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
 import { DOCUMENT } from '@angular/platform-browser';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kNewDeckHub',
@@ -56,7 +57,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute,private sanitizer: DomSanitizer) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.decks = [];
@@ -159,7 +160,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
-            this.CONTENT = `${this.deck.content}`;
+            this.CONTENT =  this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
             this.buildData();
         });
     }

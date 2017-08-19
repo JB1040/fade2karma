@@ -132,8 +132,17 @@ f2k-rating-box {
     width: 740px;
 }
 
-.deck-content img {
+.deck-content img,iframe {
     width: 780px;
+}
+
+.deck-guide-section img{
+    width: 780px;
+}
+.deck-guide-section iframe{
+    width: 780px;	
+	height: 450px;
+	border:0;
 }
 
 
@@ -292,6 +301,15 @@ f2k-rating-box {
     .deck-content img {
         width: 728px;
     }
+	
+	.deck-guide-section img{
+		width: 728px;
+	}
+	.deck-guide-section iframe{
+		width: 728px;	
+		height: 420px;
+	}
+
     .footer-ad {
         display: none;
     }
@@ -404,6 +422,18 @@ f2k-rating-box {
         width: 100%;
         max-width: 460px;
     }
+	
+	.deck-guide-section img {
+        width: 100%;
+        max-width: 460px;
+    }
+	.deck-guide-section iframe{
+		position: relative;
+		width: 100%;		/* desired width */
+		max-width:460px;
+		height:53.7vw;
+		max-height:260px;
+	}
     .btn-expand-comments {
         float: none;
         width: 100%;

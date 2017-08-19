@@ -65,9 +65,9 @@ export class ArticleContentComponent implements OnInit {
         if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
 			 this.CONTENT = this.sanitizer.bypassSecurityTrustHtml("<iframe src='" + this.article.imageURL+"'></iframe>" + this.article.content);
         } else if (this.article.imageURL) {
-            this.CONTENT = `<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`;
+            this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`<img src="${this.article.imageURL.indexOf('http') !== -1 ? this.article.imageURL : 'assets/images/' + this.article.imageURL}">${this.article.content}`);
         } else {
-            this.CONTENT = this.article.content;
+            this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
         }
     }
 }
