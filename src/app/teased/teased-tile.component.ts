@@ -20,8 +20,7 @@ export class RecommendedTileComponent implements OnInit {
 
     @Output() width = new EventEmitter<number>();
 
-    @HostListener('click')
-    onClick() {
+    @HostListener('click') onClick() {
         if (this.type = 'deck') {
             this.router.navigate([`/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`]);
         } else {
