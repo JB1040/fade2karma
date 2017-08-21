@@ -49,6 +49,8 @@ a {
 :host .game {
     color: #9b9b9b;
     display: inline-block;
+    white-space: nowrap;
+    max-width: 90px;
 }
 
 :host .image {

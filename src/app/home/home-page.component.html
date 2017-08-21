@@ -5,7 +5,7 @@
         <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
     </div>
 
-    <f2kTierListComponent *ngIf="tierOne.length > 0 && tierTwo.length > 0" [type]="'deck'" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne" [tierTwo]="tierTwo"></f2kTierListComponent>
+    <f2kTierListComponent [type]="'deck'" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne" [tierTwo]="tierTwo"></f2kTierListComponent>
 
     <div class="clearfix article-container-one" *ngIf="firstTilesColumn.length > 0">
         <f2kArticlesTile *ngFor="let article of firstTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>

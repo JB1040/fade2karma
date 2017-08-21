@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Article } from '../../articles/article';
 import { Deck } from '../../decks/deck';
 
@@ -7,7 +7,7 @@ import { Deck } from '../../decks/deck';
     templateUrl: './tier-list.component.html',
     styleUrls: ['./tier-list.component.css']
 })
-export class TierListComponent implements OnInit {
+export class TierListComponent implements OnChanges {
     @Input() tierOne: Article[] | Deck[];
     @Input() tierTwo: Article[] | Deck[];
     @Input() title: string;
@@ -17,8 +17,10 @@ export class TierListComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
-        this.tiers = [this.tierOne, this.tierTwo];
+    ngOnChanges(change: SimpleChanges) {
+        if (change.tierOne || change.tierTwo) {
+            this.tiers = [this.tierOne, this.tierTwo];
+        }
     }
 }
 
