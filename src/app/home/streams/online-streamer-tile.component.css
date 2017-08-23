@@ -8,6 +8,10 @@
     background: #ef3418;
 }
 
+.online-streamer-info > h5 {
+    max-width: 95px;
+}
+
 :host:hover .online-streamer-info h5 {
     color: #ef3418;
 }
@@ -50,7 +54,7 @@ a {
     color: #9b9b9b;
     display: inline-block;
     white-space: nowrap;
-    max-width: 90px;
+    max-width: 75px;
 }
 
 :host .image {
@@ -82,9 +86,18 @@ a {
         margin-left: 20px;
         margin-right: 15px;
     }
+
+    .online-streamer-info > h5 {
+        max-width: 110px;
+    }
+
+    :host .game {
+        max-width: 90px;
+    }
 }
 
 .online-streamer-info {
+    overflow: hidden;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
