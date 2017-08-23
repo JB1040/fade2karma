@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
     firstTilesColumn: Article[] = [];
     secondTilesColumn: Article[] = [];
     onlineStreamers: Author[] = [];
+	completedFeatured: Boolean = false;
 
     constructor(private http: Http) {
     }
@@ -42,19 +43,32 @@ export class HomePageComponent implements OnInit {
             } else {
                 this.featuredArticles = articles.concat(this.featuredArticles);
             }
+			this.completedFeatured = true;
         });
     }
 
     setArticles(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles/list?amount=12&offset=0`).subscribe(res => {
-            const articles = res.json();
+        this.http.get(`${BASE_URL}/api/articles/list?amount=13&offset=0`).subscribe(res => {
+            var articles = res.json();
             if (this.firstTilesColumn.length > 1) {
                 this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
                 this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(5, 11));
             } else {
-                this.featuredArticles = this.featuredArticles.concat(articles.slice(0, 1));
-                this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 6));
-                this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(6, 12));
+				var parent = this;
+				var todo = function() { 
+					if (!parent.completedFeatured) {
+						setTimeout(todo,200);
+						return;
+					}
+					articles = articles.filter(art =>
+						parent.featuredArticles.length == 0 || 
+						art.id !== parent.featuredArticles[0].id
+					);
+					parent.featuredArticles = parent.featuredArticles.concat(articles.slice(0, 1));
+					parent.firstTilesColumn = parent.firstTilesColumn.concat(articles.slice(0, 6));
+					parent.secondTilesColumn = parent.secondTilesColumn.concat(articles.slice(6, 12));
+				}
+				setTimeout(todo,100);
             }
         });
     }
