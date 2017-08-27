@@ -48,6 +48,8 @@ import { NewDeckHubComponent } from './decks/new-deck-hub/new-deck-hub.component
 import { F2kUrlPipe } from './core/url.pipe';
 import { TeamsComponent } from './teams/team-hub/team-hub.component';
 import { PlayerInstanceComponent } from './teams/player-tile/player-tile.component';
+import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
+import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 
 const config = {
     breakPoints: {
@@ -116,6 +118,8 @@ const myAppRoutes: Routes = [
         F2kUrlPipe,
         TeamsComponent,
         PlayerInstanceComponent
+        GiveawaysHubComponent,
+        GiveawayTileComponent
     ],
     exports: [
         CapitalizePipe,

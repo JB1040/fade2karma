@@ -71,10 +71,13 @@ export class NavigationComponent implements OnInit {
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
-            const articles = res.json();
-            if (articles.length > 1) {
-                this.giveawayUrl = `/articles/${articles[1].title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${articles[1].id}`;
+        const amount = 100;
+        const offset = 0;
+        const type = 'GIVEAWAY';
+        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+            const giveaways = res.json();
+            if (giveaways && giveaways.length > 0) {
+                this.giveawayUrl = '/giveaways';
                 this.giveawayExists = true;
             }
         });
