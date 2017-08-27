@@ -29,6 +29,9 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     displayCardleftPx: number;
     CONTENT: any;
     routeSubscription: any;
+    facebookComments = false;
+    showComments = false;
+    commentUrl: string;
 
     distribution: Array<Array<any>> = [ // TODO type
         ['0', 0],
@@ -169,6 +172,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
             this.CONTENT =  this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
+            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
             this.buildData();
         });
     }
