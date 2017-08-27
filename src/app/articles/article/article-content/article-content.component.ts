@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject, ViewEncapsulation, ViewChild, Element
 import { DOCUMENT } from '@angular/platform-browser';
 import { Article } from '../../article';
 import { DomSanitizer} from '@angular/platform-browser';
+import { BASE_URL } from '../../../core/globals';
 
 @Component({
     selector: 'f2kArticleContent',
@@ -14,8 +15,10 @@ export class ArticleContentComponent implements OnInit {
     @Input() article: Article;
     @Input() articles: Article[];
     CONTENT: any;
-	IMAGE: any;
-	height: any;
+    height: any;
+    facebookComments = false;
+    showComments = false;
+    commentUrl: string;
 
     @ViewChild('articleBody') articleBody: ElementRef;
     @ViewChild('recommendedTeaser') recommendedTeaser: ElementRef;
@@ -66,6 +69,8 @@ export class ArticleContentComponent implements OnInit {
 	}
 
     ngOnInit() {
+        this.commentUrl = `${BASE_URL}/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
+
         if (this.article.imageURL && (this.article.imageURL.indexOf('youtube') !== -1 || this.article.imageURL.indexOf('twitch') !== -1)) {
 			 this.CONTENT = this.sanitizer.bypassSecurityTrustHtml("<iframe src='" + this.article.imageURL+"'></iframe>" + this.article.content);
         } else if (this.article.imageURL) {

@@ -77,10 +77,13 @@
                 </div>
                 <div class="deck-footer">
                     <div class="deck-comments desktop">
-                        <button class="btn-expand-comments">COMMENTS
-        <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}" ></i> <!-- TODO: comments open...comments closed -->
-      </button>
-                        <!-- TODO: Facebook Comments API -->
+                        <button class="btn-expand-comments" (click)="facebookComments = true; showComments = !showComments">COMMENTS
+                            <i class="fa" [ngClass]="{'fa-angle-down': facebookComments, 'fa-angle-up': facebookComments}"></i>
+                        </button>
+
+                        <div *ngIf="facebookComments" [ngStyle]="{display: showComments ? 'block' : 'none'}">
+                            <div class="fb-comments" data-href="{{commentUrl}}" data-numposts="5"></div>
+                        </div>
                     </div>
                     <div class="footer-ad">AD</div>
                 </div>
