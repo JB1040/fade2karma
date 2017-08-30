@@ -10,6 +10,7 @@ export class Article {
                 public articleType: string, // TODO enum
                 public published: boolean,
                 public rating: number,
-                public date: number) {
+                public date: number,
+                public changeDate: number) {
     }
 }

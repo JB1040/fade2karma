@@ -9,7 +9,7 @@
                     <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
                     <div class="deck-date">
                         <h5>Date Posted:</h5>
-                        <span class="b2 date-string">{{deck.date | date:'yMMMd'}}</span>
+                        <span class="b2 date-string">{{(deck.changeDate || deck.date) | date:'yMMMd'}}</span>
                     </div>
                     <f2k-rating-box class="desktop" [rating]="deck.rating" [itemId]="deck.id" [itemType]="'deck'"></f2k-rating-box>
                     <div class="social-share-tablet">
