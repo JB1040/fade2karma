@@ -15,6 +15,7 @@ export class Deck {
                 public imageURL: string,
                 public heroClass: string, // TODO enum
                 public date: number,
+                public changeDate: number,
                 public tier: number,
                 public code: any) {
     }

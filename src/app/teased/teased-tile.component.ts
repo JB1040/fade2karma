@@ -33,7 +33,7 @@ export class RecommendedTileComponent implements OnInit {
 
     ngOnInit() {
         this.width.emit(this.el.nativeElement.clientWidth);
-        this.date = TimeTransfer.getTime(this.teasedItem.date);
+        this.date = TimeTransfer.getTime(this.teasedItem.changeDate || this.teasedItem.date);
         if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.teasedItem.imageURL.split('embed/')[1] + '/mqdefault.jpg');
         } else if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('twitch') !== -1) {

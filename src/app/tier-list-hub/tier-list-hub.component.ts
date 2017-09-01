@@ -10,7 +10,7 @@ export class TierListHubComponent implements OnInit {
 
     decksList: any = {};
     showFloatingSocialMediaLinks = false;
-    amount = 5;
+    amount = 100;
     mode: string;
     isStandard: boolean;
     active = 'STANDARD';
