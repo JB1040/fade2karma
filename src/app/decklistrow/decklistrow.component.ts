@@ -27,8 +27,8 @@ export class DeckListRowComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit() {
-        if ((Date.now() - this.deck.date) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
-            this.displayDate = TimeTransfer.getTime(this.deck.date);
+        if ((Date.now() - (this.deck.changeDate || this.deck.date)) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
+            this.displayDate = TimeTransfer.getTime(this.deck.changeDate || this.deck.date);
         }
         this.dustCost = DustCalculationService.getDustCost(this.deck.cards);
     }
