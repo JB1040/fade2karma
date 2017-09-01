@@ -117,7 +117,7 @@ const myAppRoutes: Routes = [
         NewDeckHubComponent,
         F2kUrlPipe,
         TeamsComponent,
-        PlayerInstanceComponent
+        PlayerInstanceComponent,
         GiveawaysHubComponent,
         GiveawayTileComponent
     ],

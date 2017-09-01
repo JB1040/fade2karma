@@ -82,7 +82,7 @@
                         </button>
 
                         <div *ngIf="facebookComments" [ngStyle]="{display: showComments ? 'block' : 'none'}">
-                            <div class="fb-comments" data-href="{{commentUrl}}" data-numposts="5"></div>
+                            <div class="fb-comments fb-comment-embed" attr.data-href="{{commentUrl}}" data-numposts="5"></div>
                         </div>
                     </div>
                     <div class="footer-ad">AD</div>
