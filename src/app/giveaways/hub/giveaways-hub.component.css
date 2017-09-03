@@ -3,7 +3,7 @@
     position: relative;
 }
 
-f2kArticlesTile {
+f2kGiveawayTile {
     float: left;
 }
 
@@ -13,10 +13,10 @@ h1 {
 
 @media (max-width: 767px) {
     h1 {
-        margin-top: 15px;
+        margin: 15px 0 25px 0;
     }
 
-    f2kArticlesTile {
+    f2kGiveawayTile {
         margin-bottom: 10px;
         max-width: 480px;
     }
@@ -24,26 +24,26 @@ h1 {
 
 @media (min-width: 768px) {
     h1 {
-        margin-top: 32px;
+        margin: 32px 0 33px 0;
     }
 
-    f2kArticlesTile {
+    f2kGiveawayTile {
         margin-bottom: 20px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1219px) {
-    f2kArticlesTile:not(:nth-child(2n+2)) {
+    f2kGiveawayTile:not(:nth-child(2n+2)) {
         margin-right: 20px;
     }
 }
 
 @media (min-width: 1220px) {
     h1 {
-        margin-top: 33px;
+        margin: 33px 0 32px 0;
     }
 
-    f2kArticlesTile:not(:nth-child(3n+3)) {
+    f2kGiveawayTile:not(:nth-child(3n+3)) {
         margin-right: 20px;
     }
 }
