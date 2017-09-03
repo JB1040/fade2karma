@@ -72,7 +72,7 @@ export class NavigationComponent implements OnInit {
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
         const amount = 100;
         const offset = 0;
-        const type = 'GIVEAWAY';
+        const type = 'GIVEAWAYS';
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
             const giveaways = res.json();
             if (giveaways && giveaways.length > 0) {
