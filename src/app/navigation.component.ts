@@ -15,12 +15,11 @@ export class NavigationComponent implements OnInit {
     lastScrollTop: number;
     top: number;
     giveawayExists = false;
-    giveawayUrl: string;
     navItems: NavItem[] = [
         // new NavItem('Decklists', ['Hearthstone', 'Gwent']),
         new NavItem('Tier List', []),
         new NavItem('Articles', []),
-        new NavItem('Giveaway', []),
+        new NavItem('Giveaways', []),
         new NavItem('Team', []),
         // new NavItem('Sponsors', []),
         // new NavItem('Shop', [])
@@ -77,7 +76,6 @@ export class NavigationComponent implements OnInit {
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
             const giveaways = res.json();
             if (giveaways && giveaways.length > 0) {
-                this.giveawayUrl = '/giveaways';
                 this.giveawayExists = true;
             }
         });
