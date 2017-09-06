@@ -24,9 +24,9 @@ export class TierListHubComponent implements OnInit {
     ngOnInit() {
         this.setParams();
         this.getDecks(1, 'Tier 1 - Top Decks to Beat', this.active);
-        this.getDecks(2, 'Tier 2 - Top Decks to Beat', this.active);
-        this.getDecks(3, 'Tier 3 - Top Decks to Beat', this.active);
-        this.getDecks(4, 'Tier 4 - Top Decks to Beat', this.active);
+        this.getDecks(2, 'Tier 2 - Competitive Decks', this.active);
+        this.getDecks(3, 'Tier 3 - Playable Decks', this.active);
+        this.getDecks(4, 'Tier 4 - Sweet Decks', this.active);
     }
 
     getDecks(tier: number, title: string, active: string) {

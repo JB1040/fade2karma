@@ -28,10 +28,12 @@
 :host .game {
     color: #9b9b9b;
     display: inline-block;
+	max-width:170px;
 }
 
 .text-container {
     text-align: center;
+	height:50px;
 }
 
 .player-name {
