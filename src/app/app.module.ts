@@ -51,6 +51,7 @@ import { PlayerInstanceComponent } from './teams/player-tile/player-tile.compone
 import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
+import {DmcaComponent} from 'app/dmca/dmca.component';
 
 const config = {
     breakPoints: {
@@ -120,7 +121,8 @@ const myAppRoutes: Routes = [
         TeamsComponent,
         PlayerInstanceComponent,
         GiveawaysHubComponent,
-        GiveawayTileComponent
+        GiveawayTileComponent,
+        DmcaComponent
     ],
     exports: [
         CapitalizePipe,
