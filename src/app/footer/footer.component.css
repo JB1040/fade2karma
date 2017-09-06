@@ -21,6 +21,10 @@ h5 {
     display: inline-block;
 }
 
+.footer-header h5, .footer-policies p {
+    cursor: pointer;
+}
+
 .footer-links a {
     display: inline-block;
     float: left;

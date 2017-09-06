@@ -8,6 +8,7 @@ import { HomePageComponent } from '../home/home-page.component';
 import { TierListHubComponent } from '../tier-list-hub/tier-list-hub.component';
 import { NewDeckHubComponent } from '../decks/new-deck-hub/new-deck-hub.component';
 import { GiveawaysHubComponent } from '../giveaways/hub/giveaways-hub.component';
+import {DmcaComponent} from '../dmca/dmca.component';
 
 const contentRoutes: Routes = [
     {path: 'team', component: TeamsComponent},
@@ -16,7 +17,8 @@ const contentRoutes: Routes = [
     {path: 'articles/:article', component: ArticleComponent},
     {path: 'tier_list/:deck', component: NewDeckHubComponent},
     {path: 'tier_list', component: TierListHubComponent},
-    {path: 'giveaways', component: GiveawaysHubComponent}
+    {path: 'giveaways', component: GiveawaysHubComponent},
+    {path: 'dmca', component: DmcaComponent}
 ];
 
 @NgModule({
