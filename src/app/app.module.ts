@@ -50,6 +50,7 @@ import { TeamsComponent } from './teams/team-hub/team-hub.component';
 import { PlayerInstanceComponent } from './teams/player-tile/player-tile.component';
 import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
+import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 
 const config = {
     breakPoints: {
@@ -138,7 +139,8 @@ const myAppRoutes: Routes = [
         ArticleFetchingService,
         DustCalculationService,
         TierListHubService,
-        F2kUrlPipe
+        F2kUrlPipe,
+        GoogleAnalyticsEventsService
     ]
 })
 export class AppModule {
