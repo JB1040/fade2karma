@@ -25,7 +25,7 @@ export class ArticlesTileComponent implements OnInit {
 
     updateUrl(event: Event) {
         if (this.article.imageURL.indexOf('youtube') !== -1) {
-            this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+            this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
         }
     }
 
