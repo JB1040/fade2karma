@@ -16,23 +16,35 @@ export class ArticlesTileComponent implements OnInit {
     description: any;
     date: string;
     image: any;
-	
+	t: any;
+	done: boolean;
     onClick() {
         this.router.navigate([`/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}`]);
     }
 
     constructor(private router: Router, private sanitizer: DomSanitizer, private e: ElementRef, private http: Http) {}
 
-
+    updateUrl() {
+		if (this.article.imageURL.indexOf('youtube') !== -1) {
+			this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+		}
+	}
+	
+	onImageLoaded(img) {
+		if (img.naturalWidth < 1000 && !this.done) {
+			this.done = true;
+			this.updateUrl();
+		}
+	}
+	
     ngOnInit() {
-		
         this.date = TimeTransfer.getTime(this.article.changeDate || this.article.date);
         if (this.article.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
-			this.http.get('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg').subscribe(data => { }, err => {
-				this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
-	
-			});
+			//this.http.get('http://i1.ytimg.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg').subscribe(data => { }, err => {
+			//	console.log("Error generated in finding youtoob image. " + this.article.imageURL);
+			//	this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+			//});
 		} else if (this.article.imageURL.indexOf('twitch') !== -1) {
             this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.article.imageURL.split('&clip=')[1]).subscribe(res => {
                 const result = res.json();
@@ -49,6 +61,11 @@ export class ArticlesTileComponent implements OnInit {
                     this.description = this.description.slice(0, 120) + '...';
                 }
             }
+			
         }
     }
+	
+	getURL() {
+		return this.image;
+	}
 }
