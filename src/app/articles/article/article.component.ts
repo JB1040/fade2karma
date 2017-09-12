@@ -31,11 +31,6 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
         });
     }
 
-    // ngOnInit(): void {
-    //     this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-    //     this.loadRecommendedArticles(3, 0);
-    // }
-
     onScrollDown() {
         this.loadArticles(1, this.scrolled);
         this.scrolled += 1;
@@ -54,6 +49,12 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
         this.loadingArticles = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
             const articles = res.json();
+            if (articles[0].id === this.articles[0].id) { // TODO better solution (maybe I can in list request gibe notId=:ID or something to speed this up)
+                this.scrolled += 1;
+                this.loadingArticles = false;
+                this.loadArticles(1, this.scrolled);
+                return;
+            }
             this.articles = this.articles.concat(articles);
             if (articles.length < amount) {
                 this.allArticlesLoaded = true;
