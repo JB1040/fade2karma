@@ -49,7 +49,7 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
         this.loadingArticles = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
             const articles = res.json();
-            if (articles[0].id === this.articles[0].id) { // TODO better solution (maybe I can in list request gibe notId=:ID or something to speed this up)
+            if (articles[0] && articles[0].id === this.articles[0].id) { // TODO better solution (maybe I can in list request gibe notId=:ID or something to speed this up)
                 this.scrolled += 1;
                 this.loadingArticles = false;
                 this.loadArticles(1, this.scrolled);
