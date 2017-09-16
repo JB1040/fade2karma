@@ -15,6 +15,12 @@ h5 {
 
 .footer-links {
     height: 30px;
+    text-align: center;
+}
+
+.footer-links > h5 {
+    display: block;
+    padding-bottom: 10px;
 }
 
 .footer-header {
@@ -52,7 +58,7 @@ h5 {
     }
 
     .footer-bottom {
-        margin-top: 16px;
+        margin-top: 44px; /* 16 (spacing) + 28 (From: Contact Us) */
     }
 
     .footer-links a {
