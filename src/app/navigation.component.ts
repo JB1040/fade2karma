@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
     top: number;
     giveawayExists = false;
     navItems: NavItem[] = [
-        new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
+        // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
         new NavItem('Tier List', []),
         new NavItem('Articles', []),
         new NavItem('Giveaways', []),
