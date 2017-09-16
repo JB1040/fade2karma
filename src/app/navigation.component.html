@@ -27,7 +27,7 @@
                         <span class="navItemText">{{child}}</span>
                         <img src="assets/images/{{child}}.svg">
 
-                        <a (click)="open = false; resetOpenItems()" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
+                        <a (click)="open = false; resetOpenItems(navItem)" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
                     </h5>
                 </div>
             </div>
