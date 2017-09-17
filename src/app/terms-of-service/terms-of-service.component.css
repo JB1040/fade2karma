@@ -1,0 +1,14 @@
+:host {
+    padding: 20px 0;
+    display: block;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    vertical-align: baseline;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0;
+}
