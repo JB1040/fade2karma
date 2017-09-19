@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
     top: number;
     giveawayExists = false;
     navItems: NavItem[] = [
-        // new NavItem('Decklists', ['Hearthstone', 'Gwent']),
+        // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
         new NavItem('Tier List', []),
         new NavItem('Articles', []),
         new NavItem('Giveaways', []),
@@ -51,9 +51,13 @@ export class NavigationComponent implements OnInit {
         return url.replace(/ /g, '_').toLowerCase();
     }
 
-    resetOpenItems() {
+    resetOpenItems(currentNavItem?: NavItem) {
         this.open = false;
-        this.navItems.forEach(navItem => navItem.open = false);
+        this.navItems.forEach(navItem => {
+            if (currentNavItem && currentNavItem.name !== navItem.name) {
+                navItem.open = false;
+            }
+        });
     }
 
     getHeight() {

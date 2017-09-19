@@ -52,6 +52,9 @@ import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import {DmcaComponent} from 'app/dmca/dmca.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const config = {
     breakPoints: {
@@ -122,7 +125,10 @@ const myAppRoutes: Routes = [
         PlayerInstanceComponent,
         GiveawaysHubComponent,
         GiveawayTileComponent,
-        DmcaComponent
+        DmcaComponent,
+        PrivacyPolicyComponent,
+        TermsOfServiceComponent,
+        AboutUsComponent
     ],
     exports: [
         CapitalizePipe,

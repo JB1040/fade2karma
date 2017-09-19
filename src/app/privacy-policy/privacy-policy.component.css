@@ -1,0 +1,25 @@
+:host {
+    padding: 20px 0;
+    display: block;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    vertical-align: baseline;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.span-class-18 {
+    font-size: 18pt;
+    white-space: pre-wrap;
+}
+
+.span-class-15 {
+    list-style-type: decimal;
+    font-size: 15pt;
+    vertical-align: baseline;
+}
