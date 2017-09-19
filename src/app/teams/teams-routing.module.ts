@@ -22,7 +22,7 @@ const contentRoutes: Routes = [
     { path: 'tier_list', component: TierListHubComponent },
     { path: 'giveaways', component: GiveawaysHubComponent },
     { path: 'dmca', component: DmcaComponent },
-    { path: 'privacy_policy', component: PrivacyPolicyComponent },
+    { path: 'privacy_and_cookie_policy', component: PrivacyPolicyComponent },
     { path: 'terms_of_service', component: TermsOfServiceComponent },
     { path: 'about', component: AboutUsComponent }
 ];
