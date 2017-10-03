@@ -37,7 +37,6 @@ export class HearthstoneDecksHubComponent implements OnInit {
     }
 
     onAactiveModeChange(event: string) {
-        console.log('onAactiveModeChange', event);
         this.active = event;
         this.setParams();
         this.getDecks();
@@ -48,6 +47,15 @@ export class HearthstoneDecksHubComponent implements OnInit {
             .getDecks(this.amount, 0, this.mode, this.isStandard, this.heroClasses, this.page * this.amount)
             .then((decks: Array<Deck>) => {
                 this.decks = decks;
+                if (this.sortBy !== 'none') {
+                    this.decks.sort((a: Deck, b: Deck) => {
+                        if (this.sortUp) {
+                            return a[this.sortBy] - b[this.sortBy];
+                        } else {
+                            return b[this.sortBy] - a[this.sortBy];
+                        }
+                    });
+                }
             });
     }
 
@@ -74,7 +82,6 @@ export class HearthstoneDecksHubComponent implements OnInit {
         }
         this.sortBy = type;
 
-        console.log(this.decks);
         this.decks.sort((a: Deck, b: Deck) => {
             if (this.sortUp) {
                 return a[type] - b[type];
