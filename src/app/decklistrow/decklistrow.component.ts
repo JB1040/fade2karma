@@ -31,7 +31,6 @@ export class DeckListRowComponent implements OnInit {
         if ((Date.now() - (this.deck.changeDate || this.deck.date)) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
             this.displayDate = TimeTransfer.getTime(this.deck.changeDate || this.deck.date);
         }
-        this.dustCost = DustCalculationService.getDustCost(this.deck.cards);
-        this.deck.dust = this.dustCost;
+        this.dustCost = this.deck.dust;
     }
 }
