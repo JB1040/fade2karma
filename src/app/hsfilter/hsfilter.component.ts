@@ -1,16 +1,19 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'f2kHearthstoneFilter',
     templateUrl: './hsfilter.component.html',
-    styleUrls: ['../app.component.css', './hsfilter.component.scss']
+    styleUrls: ['../app.component.css', './hsfilter.component.css']
 })
 export class HearthstoneFilterComponent {
 
     classNames: Array<any>;
     // private activeClasses: Array<any>;
     activeClasses: any = [];
-    activeMode = 'standard';
+    activeMode = 'STANDARD';
+
+    @Output() activeClassesChange = new EventEmitter<Array<any>>();
+    @Output() activeModeChange = new EventEmitter<string>();
 
     constructor(private el: ElementRef) {
         this.classNames = [
@@ -34,10 +37,12 @@ export class HearthstoneFilterComponent {
         } else {
             this.activeClasses.push(classType);
         }
+        this.activeClassesChange.emit(this.activeClasses);
     }
 
     toggleActiveMode(modeType) {
         this.activeMode = modeType;
+        this.activeModeChange.emit(this.activeMode);
     }
 
     // hoverOver(name) {

@@ -1,6 +1,6 @@
 <ul class="b2 breadcrumb">
     <li class="breadcrumb-link" *ngFor="let path of paths; last as isLast">
-        <span *ngIf="!isLast"><a routerLink="{{path.path}}">{{path.title}}</a> /</span>
+        <span *ngIf="!isLast"><a routerLink="{{path.path}}" [ngClass]="{'disabled': path.title === 'Decklists'}">{{path.title}}</a> /</span>
         <span *ngIf="isLast">{{path.title}}</span>
     </li>
 </ul>

@@ -9,6 +9,7 @@ import { TierListHubComponent } from '../tier-list-hub/tier-list-hub.component';
 import { NewDeckHubComponent } from '../decks/new-deck-hub/new-deck-hub.component';
 import { GiveawaysHubComponent } from '../giveaways/hub/giveaways-hub.component';
 import { DmcaComponent } from '../dmca/dmca.component';
+import { HearthstoneDecksHubComponent } from '../decks/decks-hub/hearthstone-decks-hub/hearthstone-decks-hub.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from '../about-us/about-us.component';
@@ -20,6 +21,19 @@ const contentRoutes: Routes = [
     { path: 'articles/:article', component: ArticleComponent },
     { path: 'tier_list/:deck', component: NewDeckHubComponent },
     { path: 'tier_list', component: TierListHubComponent },
+    {
+        path: 'decklists/hearthstone',
+        children: [
+            {
+                path: '',
+                component: HearthstoneDecksHubComponent
+            },
+            {
+                path: ':deck',
+                component: NewDeckHubComponent
+            }
+        ]
+    },
     { path: 'giveaways', component: GiveawaysHubComponent },
     { path: 'dmca', component: DmcaComponent },
     { path: 'privacy_and_cookie_policy', component: PrivacyPolicyComponent },
