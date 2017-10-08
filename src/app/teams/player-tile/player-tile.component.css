@@ -9,7 +9,7 @@
 .player-image-container {
     position: relative;
     padding-top: 100%;
-	overflow:hidden;
+    overflow: hidden;
 }
 
 .point {
@@ -28,12 +28,14 @@
 :host .game {
     color: #9b9b9b;
     display: inline-block;
-	max-width:170px;
+    max-width: 170px;
+    white-space: nowrap;
 }
 
 .text-container {
     text-align: center;
-	height:50px;
+    height: 50px;
+    overflow: hidden;
 }
 
 .player-name {
@@ -63,7 +65,7 @@ h5 {
 @media (max-width: 767px) {
     :host {
         margin: 10px;
-        width: Calc((100vw - 67px)/2);
+        width: Calc((100vw - 67px) / 2);
         max-width: 225px;
     }
 

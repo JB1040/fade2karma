@@ -1,13 +1,14 @@
-<div class="hsfilter">
+<div class="hsfilter clearfix">
     <div class="icons">
-        <img *ngFor="let i of classNames" (click)="toggleActiveClass(i)"
-             [ngClass]="{grey: activeClasses.length > 0 && !activeClasses.includes(i)}"
-             src="assets/Hearthstone_Square/{{i}}.jpg">
+        <img *ngFor="let className of classNames" (click)="toggleActiveClass(className)"
+             [ngClass]="{grey: activeClasses.length > 0 && !activeClasses.includes(className)}"
+             src="assets/Hearthstone_Square/{{className.toLowerCase()}}.jpg">
     </div>
+
     <div class="type-filters">
         <div
-            [ngClass]="{active: 'standard' === activeMode, inactive: 'standard' !== activeMode}"
-            (click)="toggleActiveMode('standard')" class="box">
+            [ngClass]="{active: 'STANDARD' === activeMode, inactive: 'STANDARD' !== activeMode}"
+            (click)="toggleActiveMode('STANDARD')" class="box">
             <!--(click)="toggleActiveMode('standard')" (mouseover)="border='1px solid red';" (mouseout)="border=''" class="box">-->
             <!-- <img src="assets/icons/standardicon.svg" class="icon" /> -->
             <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +28,8 @@
             <h5 class="label">Standard</h5>
         </div>
         <div
-            [ngClass]="{active: 'wild' === activeMode, inactive: 'wild' !== activeMode}"
-            (click)="toggleActiveMode('wild')"
+            [ngClass]="{active: 'WILD' === activeMode, inactive: 'WILD' !== activeMode}"
+            (click)="toggleActiveMode('WILD')"
             class="box">
             <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink">

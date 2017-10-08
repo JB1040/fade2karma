@@ -1,0 +1,98 @@
+.hsfilter .icons {
+    border-right: 1px solid #e7e7e7;
+    float: left;
+}
+
+.hsfilter .icons img {
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    float: left;
+    cursor: pointer;
+}
+
+.hsfilter .icons img:first-of-type {
+    border: 1px solid #e7e7e7;
+}
+
+.hsfilter .icons img.grey {
+    opacity: 0.5;
+}
+
+.hsfilter .type-filters {
+    padding-left: 40px;
+    float: left;
+    display: flex;
+}
+
+.hsfilter .type-filters .box {
+    display: flex;
+    border: 1px solid #9b9b9b;
+    color: #9b9b9b;
+    width: 130px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.hsfilter .type-filters .box.active, .hsfilter .type-filters .box.inactive:hover {
+    border: 1px solid red;
+    color: red;
+    cursor: pointer;
+}
+
+.hsfilter .type-filters .box.active svg .icon, .hsfilter .type-filters .box.inactive:hover svg .icon {
+    fill: red;
+}
+
+.hsfilter .type-filters .box:nth-of-type(2).inactive {
+    border-left: none;
+}
+
+.hsfilter .type-filters .box:nth-of-type(1).inactive {
+    border-right: none;
+}
+
+@media (max-width: 1219px) {
+    .hsfilter .icons {
+        height: 40px;
+        width: 400px;
+    }
+
+    .hsfilter .icons img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hsfilter .type-filters .box {
+        height: 40px;
+        padding: 5px 15px 5px 15px;
+        width: 110px;
+    }
+
+    .hsfilter .type-filters .box .label {
+        padding-left: 5px;
+    }
+}
+
+@media (min-width: 1220px) {
+    .hsfilter .icons {
+        height: 50px;
+        width: 490px;
+    }
+
+    .hsfilter .icons img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .hsfilter .type-filters .box {
+        height: 50px;
+        padding: 5px 15px 5px 15px;
+    }
+
+    .hsfilter .type-filters .box .label {
+        padding-left: 5px;
+    }
+}
