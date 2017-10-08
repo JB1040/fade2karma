@@ -10,14 +10,14 @@ import { BASE_URL } from '../core/globals';
     styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-    featuredArticles: Article[] = [];
+    featuredArticles: Array<Article|Deck> = [];
     tierOne: Deck[] = [];
     tierTwo: Deck[] = [];
     decksArr: Deck[][] = [];
-    firstTilesColumn: Article[] = [];
-    secondTilesColumn: Article[] = [];
+    firstTilesColumn: Array<Article|Deck> = [];
+    secondTilesColumn: Array<Article|Deck> = [];
     onlineStreamers: Author[] = [];
-	completedFeatured: Boolean = false;
+    completedFeatured: Boolean = false;
 
     constructor(private http: Http) {
     }
@@ -43,32 +43,32 @@ export class HomePageComponent implements OnInit {
             } else {
                 this.featuredArticles = articles.concat(this.featuredArticles);
             }
-			this.completedFeatured = true;
+            this.completedFeatured = true;
         });
     }
 
     setArticles(): void { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/articles/list?amount=13&offset=0`).subscribe(res => {
-            var articles = res.json();
+            let articles = res.json();
             if (this.firstTilesColumn.length > 1) {
                 this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
                 this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(5, 11));
             } else {
-				var parent = this;
-				var todo = function() { 
-					if (!parent.completedFeatured) {
-						setTimeout(todo,200);
-						return;
-					}
-					articles = articles.filter(art =>
-						parent.featuredArticles.length == 0 || 
-						art.id !== parent.featuredArticles[0].id
-					);
-					parent.featuredArticles = parent.featuredArticles.concat(articles.slice(0, 1));
-					parent.firstTilesColumn = parent.firstTilesColumn.concat(articles.slice(0, 6));
-					parent.secondTilesColumn = parent.secondTilesColumn.concat(articles.slice(6, 12));
-				}
-				setTimeout(todo,100);
+                const parent = this;
+                const todo = function () {
+                    if (!parent.completedFeatured) {
+                        setTimeout(todo, 200);
+                        return;
+                    }
+                    articles = articles.filter(art =>
+                        parent.featuredArticles.length == 0 ||
+                        art.id !== parent.featuredArticles[0].id
+                    );
+                    parent.featuredArticles = parent.featuredArticles.concat(articles.slice(0, 1));
+                    parent.firstTilesColumn = parent.firstTilesColumn.concat(articles.slice(0, 6));
+                    parent.secondTilesColumn = parent.secondTilesColumn.concat(articles.slice(6, 12));
+                };
+                setTimeout(todo, 100);
             }
         });
     }
