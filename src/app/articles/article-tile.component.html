@@ -1,6 +1,6 @@
 <div (click)="onClick()" class="article-image-container tint">
 	<!--
-	INSTEAD OF IFRAME.... 
+	INSTEAD OF IFRAME....
 	IF ITS YOUTUBE DO:
 	<div id="{{'youtube' + article.id}}" class="article-image"></div>
 	var player;
@@ -8,7 +8,7 @@
     player = new YT.Player('ytplayer' + article.id, {
       videoId: article.imageURL.split("/")[1]; //I will make sure format is youtube/code
     });
-	
+
 	//PSEUDO CODE
 	on play button click do {
 	  if (player.getPlayerState == 1) {    // actual code, 1 means player is playing
@@ -17,15 +17,13 @@
 	    player.playVideo();
 	  }
 	}
-  } 
-	
-	
+  }
+
 	-->
-   	 <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="article-image" #img (load)="onImageLoaded(img)" [src]='getURL()'>
+    <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="article-image" #img (load)="onImageLoaded(img)" [src]='getURL()'>
     <img *ngIf="article.imageURL && article.imageURL.indexOf('youtube') === -1 && article.imageURL.indexOf('twitch') === -1" class="article-image" src="{{ article.imageURL && article.imageURL.indexOf('http') !== -1 ? article.imageURL : 'assets/images/' + article.imageURL}}">
-    <!--<i class="fa fa-play-circle-o f2k-play-image" aria-hidden="true" style="font-size: 33px;"></i>-->
     <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="f2k-play-image" src="assets/images/icons/PlayBtn.svg">
-    <img *ngIf="!article.imageURL && article.heroClass" src="assets/images/Hearthstone_Square/{{article.heroClass.toLowerCase()}}.jpg" class="article-image"/>
+    <img *ngIf="!article.imageURL && article.heroClass" src="assets/images/hearthstoneDeckImageFallback/{{article.heroClass.toLowerCase()}}.jpg" class="article-image"/>
 </div>
 <div (click)="onClick()" class="article-text-container">
     <h6 *ngIf="article.articleType">{{article.articleType}}</h6>
