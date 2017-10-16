@@ -1,6 +1,8 @@
 import { Author } from '../articles/article/author/author';
 import Card from '../card';
 
+export type HeroClasses = 'DRUID' | 'MAGE' | 'WARRIOR' | 'WARLOCK' | 'WARLOCK' | 'PALADIN' | 'HUNTER' | 'SHAMAN' | 'ROGUE';
+
 export class Deck {
     constructor(public id: number,
                 public author: Author,
@@ -13,10 +15,11 @@ export class Deck {
                 public mode: string, // TODO enum 'CON', 'ARENA', 'BRAWL'
                 public isStandard: boolean,
                 public imageURL: string,
-                public heroClass: string, // TODO enum
+                public heroClass: HeroClasses,
                 public date: number,
                 public changeDate: number,
                 public tier: number,
-                public code: any) {
+                public code: any,
+                public dust?: number) {
     }
 }

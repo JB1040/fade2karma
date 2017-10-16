@@ -1,0 +1,122 @@
+
+.tier-list-title {
+    width: 100%;
+    color: white;
+    font-weight: 400;
+    background-color: #333333;
+    font-family: 'Roboto', sans-serif;
+    padding: 0.7rem;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.tier-list-title > div > span {
+    color: white;
+    float: left;
+}
+
+.filters > span {
+    padding: 0 10px
+}
+
+.filters > span:not(:first-child) {
+    border-left: 1px solid white;
+}
+
+.tier-list-title > .filters > .selected {
+    color: red
+}
+
+.btn-group {
+    padding: 40px 0;
+    max-width: 215px;
+    margin: 0 auto;
+}
+
+.btn-group > button {
+    border: 1px solid red;
+    background: white;
+    border-radius: 0;
+    float: left;
+}
+
+.btn-group > button:not(:last-child) {
+    border-right: 0;
+}
+
+f2kHearthstoneFilter {
+    padding-bottom: 30px;
+    display: block;
+}
+
+h1 {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.titles {
+    display: none;
+}
+
+@media (max-width: 1199px) {
+    .filters {
+        text-align: center;
+    }
+
+    .filters > span {
+        width: Calc(100% / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    .tier-list-title {
+        width: calc(100vw - 40px);
+        max-width: 440px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    .tier-list-title {
+        width: Calc(100% + 10px);
+    }
+}
+
+@media (min-width: 1220px) {
+    .titles {
+        display: block;
+    }
+
+    .filters {
+        float: right;
+    }
+
+    .filters > span {
+        border-left: 1px solid white;
+    }
+
+    .titles span:nth-child(1) {
+        padding: 0 30px;
+    }
+
+    .titles span:nth-child(2) {
+        padding: 0 25px;
+    }
+
+    .titles span:nth-child(3) {
+        padding: 0 30px;
+    }
+
+    .filters span:nth-child(1) {
+        padding: 0 24px 0 23px;
+    }
+
+    .filters span:nth-child(2) {
+        padding: 0 30px 0 37px;
+    }
+
+    .filters span:nth-child(3) {
+        padding: 0 85px 0 39px;
+    }
+}
+
+

@@ -16,12 +16,13 @@ export class DeckListRowComponent implements OnInit {
     @Input() protected even: Boolean;
     @Input() protected index: Number;
     @Input() protected mode: string; // 'STANDARD' / 'WILD' / 'ARENA' when there is 3 images for each more use to set image
+    @Input() showTier = true;
     dustCost: number;
 
     displayDate: string;
 
     @HostListener('click') onClick() {
-        this.router.navigate([`/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.deck.id}`]);
+        this.router.navigate([`${this.router.url}/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.deck.id}`]);
     }
 
     constructor(private router: Router) {}
@@ -30,6 +31,6 @@ export class DeckListRowComponent implements OnInit {
         if ((Date.now() - (this.deck.changeDate || this.deck.date)) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
             this.displayDate = TimeTransfer.getTime(this.deck.changeDate || this.deck.date);
         }
-        this.dustCost = DustCalculationService.getDustCost(this.deck.cards);
+        this.dustCost = this.deck.dust;
     }
 }

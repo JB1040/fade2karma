@@ -8,3 +8,9 @@ ul.breadcrumb {
 ul.breadcrumb li.breadcrumb-link {
     display: inline;
 }
+
+.disabled {
+    pointer-events: none;
+    text-decoration: none;
+    color: #9B9B9B;
+}

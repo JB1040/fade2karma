@@ -1,0 +1,38 @@
+<div class="F2K-column">
+    <h1>Latest Hearthstone Decks</h1>
+
+    <f2kHearthstoneFilter (activeClassesChange)="onActiveClassesChange($event)" (activeModeChange)="onAactiveModeChange($event)"></f2kHearthstoneFilter>
+
+    <div *ngIf="decks">
+        <div class="tier-list-title clearfix"> <!-- TODO extract in separate component-->
+            <div class="titles">
+                <span class="b2">Class</span>
+
+                <span class="b2">Game Mode</span>
+
+                <span class="b2">Deck Name</span>
+            </div>
+
+            <div class="filters">
+                <span class="b2" (click)="sort('tier', $event)" [ngClass]="{'selected': this.sortBy === 'tier'}">Tier {{sortBy === 'tier' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+
+                <span class="b2" (click)="sort('dust', $event)" [ngClass]="{'selected': this.sortBy === 'dust'}">Dust {{sortBy === 'dust' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+
+                <span class="b2" (click)="sort('date', $event)" [ngClass]="{'selected': this.sortBy === 'date'}">Date {{sortBy === 'date' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 deck-list-row"
+                 *ngFor="let deck of decks; let index=index; let odd=odd; let even=even;">
+                <f2kDeckListRow [deck]="deck" [odd]="odd" [even]="even" [index]="index" [mode]="active"></f2kDeckListRow>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="page && this.decks.length > amount" class="btn-group" role="group">
+        <button *ngIf="page" (click)="page = page - 1; getDecks()" type="button" class="btn btn-default">Previous</button>
+        <button *ngIf="page" (click)="page = 0; getDecks()" type="button" class="btn btn-default">Back To Start</button>
+        <button *ngIf="this.decks.length > amount" (click)="page = page + 1; getDecks()" type="button" class="btn btn-default">Next</button>
+    </div>
+</div>
