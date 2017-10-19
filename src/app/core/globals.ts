@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://ec2-35-158-174-254.eu-central-1.compute.amazonaws.com:9000';
+export const BASE_URL = 'https://api.f2k.gg';

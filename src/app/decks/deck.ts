@@ -17,7 +17,7 @@ export class Deck {
                 public imageURL: string,
                 public heroClass: HeroClasses,
                 public date: number,
-                public changeDate: number,
+                public editDate: number,
                 public tier: number,
                 public code: any,
                 public dust?: number) {

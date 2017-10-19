@@ -38,7 +38,7 @@ export class ArticlesTileComponent implements OnInit {
 	}
 	
     ngOnInit() {
-        this.date = TimeTransfer.getTime(this.article.changeDate || this.article.date);
+        this.date = TimeTransfer.getTime(this.article.editDate || this.article.date);
         if (this.article.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
 			//this.http.get('http://i1.ytimg.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg').subscribe(data => { }, err => {

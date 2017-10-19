@@ -7,7 +7,7 @@
             <f2kAuthorTile style="display: inline-block" [author]="article.author"></f2kAuthorTile>
             <div class="article-date">
                 <h5>Date Posted:</h5>
-                <span class="b2 date-string">{{(article.changeDate || article.date) | date}}</span>
+                <span class="b2 date-string">{{(article.editDate || article.date) | date}}</span>
             </div>
             <f2k-rating-box [rating]="article.rating" [itemId]="article.id" [itemType]="'article'"></f2k-rating-box>
             <div class="social-share-tablet">

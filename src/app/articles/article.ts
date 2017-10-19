@@ -11,6 +11,6 @@ export class Article {
                 public published: boolean,
                 public rating: number,
                 public date: number,
-                public changeDate: number) {
+                public editDate: number) {
     }
 }

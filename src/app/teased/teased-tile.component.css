@@ -58,12 +58,7 @@ img {
     top: 4px;
 }
 
-<<<<<<< HEAD
-
-@media (max-width: 767px) {
-=======
 @media (max-width: 768px) {
->>>>>>> f9ebce1... polish0801
     :host(.deck) h4 { /*h4 as h5*/
         font-size: 12px;
         line-height: 18px;
