@@ -4,22 +4,24 @@ import { TimeTransfer } from '../core/time-transfer';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Http } from '@angular/http';
+import { Deck } from '../decks/deck';
 
 @Component({
     selector: 'f2kArticlesTile',
     templateUrl: './article-tile.component.html',
-    styleUrls: ['./article-tile.component.css']
+    styleUrls: [ './article-tile.component.css' ]
 })
 export class ArticlesTileComponent implements OnInit {
-    @Input() article: Article;
+    @Input() article: Article|Deck;
     @Input() showDescription = false;
     description: any;
     date: string;
     image: any;
-	t: any;
-	done: boolean;
+    t: any;
+    done: boolean;
+
     onClick() {
-        this.router.navigate([`/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}`]);
+        this.router.navigate([ `/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}` ]);
     }
 
     constructor(private router: Router, private sanitizer: DomSanitizer, private e: ElementRef, private http: Http) {}
