@@ -13,7 +13,7 @@ export class ArticlesComponent implements OnInit {
     articles: Article[] = [];
     sum = 0;
     displayedArticles = ['All Articles', 'Announcements', 'Podcasts', 'Highlights', 'Viewpoints', 'Meta Reports', 'Teams', 'Card Reveals'];
-    displayedGames = ['All Games', 'Hearthstone'/*, 'Gwent'*/];
+    displayedGames = ['All Games', 'Hearthstone', 'Gwent'];
     displayGames = 'All Games';
     displayArticles = 'All Articles';
     articlesOpen = false;
@@ -30,42 +30,45 @@ export class ArticlesComponent implements OnInit {
     }
 
     ngOnInit() {
-        let articles = this.displayArticles;
-        if (articles === 'All Articles') {
-            articles = '';
-        }
-        this.loadArticles(this.sum, 30, articles.replace(/ /g, '_').toUpperCase());
-        this.sum += 30;
+        this.loadNewArticles(30);
     }
 
     onScrollDown() {
-        let articles = this.displayArticles;
-        if (articles === 'All Articles') {
-            articles = '';
-        }
-        this.loadArticles(this.sum, 20, articles.replace(/ /g, '_').toUpperCase());
-        this.sum += 20;
+        this.loadNewArticles(20);
     }
 
-    changeArticles(articlesType) {
+    onDisplayParamChange() {
+        this.resetLoadData();
+        this.loadNewArticles(30);
+    }
+
+    private resetLoadData() {
         this.sum = 0;
         this.articles = [];
         this.loading = false;
         this.allArticlesLoaded = false;
-        if (articlesType === 'All Articles') {
-            articlesType = '';
-        }
-        this.loadArticles(this.sum, 30, articlesType.replace(/ /g, '_').toUpperCase());
-        this.sum += 30;
     }
 
-    loadArticles(offset: number, amount: number, type: string) { // TODO move in service, handle errors in case they take place...
+    loadNewArticles(amount) {
+        this.loadArticles(this.sum, amount);
+        this.sum += amount;
+    }
+
+    loadArticles(offset: number, amount: number) { // TODO move in service, handle errors in case they take place...
+        let gameString = '';
+        let articleString = '';
+
         if (this.loading || this.allArticlesLoaded) {
             return;
         }
-		if (type == "META_REPORTS") type = "METAREPORTS";
+        if (this.displayArticles !== 'All Articles') {
+            articleString = '&type=' + (this.displayArticles === 'Meta Reports' ? 'METAREPORTS' : this.displayArticles).replace(/ /g, '_').toUpperCase();
+        }
+        if (this.displayGames !== 'All Games') {
+            gameString = '&game=' + this.displayGames.toUpperCase();
+        }
         this.loading = true;
-        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}${articleString}${gameString}`).subscribe(res => {
             const articles = res.json();
             this.articles = this.articles.concat(articles);
             if (articles.length < amount) {
