@@ -54,9 +54,10 @@ export class NavigationComponent implements OnInit {
     resetOpenItems(currentNavItem?: NavItem) {
         this.open = false;
         this.navItems.forEach(navItem => {
-            if (currentNavItem && currentNavItem.name !== navItem.name) {
-                navItem.open = false;
+            if (currentNavItem && currentNavItem.name === navItem.name) {
+                return;
             }
+            navItem.open = false;
         });
     }
 

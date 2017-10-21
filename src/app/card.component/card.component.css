@@ -1,32 +1,5 @@
-$white: #FFFFFF;
-$sky-blue: #4A90E2;
-$gray: #333333;
-
-$legendary: #F7B220;
-$rare: #49A1BB;
-$epic: #8365C7;
-$common: #E7E7E7;
-
-$monsters: #EF3418;
-$northern-realm: #4A90E2;
-$scotia-tael: #315B01;
-$skellige: #57009B;
-$nilfgaard: #4F4F4F;
-
-// Constants across view widths
-$tiny-pad: 1px;
-$card-name-width: 170px;
-$card-name-pad: 10px;
-$rarity-width: 4px;
-$image-width: 104px;
-
-// Default to smallest view
-// TODO: uncomment when below is fixed
-// $central-card-width: 100vw;
-// $square-width: 30px;
-
 .hs-card {
-    margin-bottom: $tiny-pad;
+    margin-bottom: 1px;
 }
 
 .hs-card .square {
@@ -63,30 +36,30 @@ $image-width: 104px;
 
 .hs-card .central {
     float: left;
-    margin: 0 $tiny-pad 0 $tiny-pad;
+    margin: 0 1px 0 1px;
     box-sizing: border-box;
 }
 
 .hs-card .central .image-wrap {
     box-sizing: border-box;
-    width: $image-width;
+    width: 104px;
     float: right;
 }
 
 .hs-card .central .image-wrap img {
-    width: 100%
+    width: 100%;
 }
 
 .hs-card .central .card-name {
     float: left;
-    width: $card-name-width + $card-name-pad;
+    width: 180px;
 }
 
 .hs-card .central .card-name p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding-left: $card-name-pad;
+    padding-left: 10px;
 }
 
 /* Color */
@@ -95,7 +68,7 @@ $image-width: 104px;
 }
 
 .sky-blue-bg {
-    background-color: $sky-blue;
+    background-color: #4A90E2;
 }
 
 .gray-bg {
@@ -109,68 +82,67 @@ $image-width: 104px;
 
 /* Rarity */
 .legendary {
-    border-left: 4px solid $legendary;
+    border-left: 4px solid #F7B220;
 }
 
 .rare {
-    border-left: 4px solid $rare;
+    border-left: 4px solid #49A1BB;
 }
 
 .epic {
-    border-left: 4px solid $epic;
+    border-left: 4px solid #8365C7;
 }
 
 div.common {
-    border-left: 4px solid $common;
+    border-left: 4px solid #E7E7E7;
 }
 
 /* GW Factions */
-
 .monsters {
-    background-color: $monsters;
+    background-color: #EF3418;
 }
 
 .northern-realm {
-    background-color: $northern-realm;
+    background-color: #4A90E2;
 }
 
 .scotia-tael {
-    background-color: $scotia-tael;
+    background-color: #315B01;
 }
 
 .skellige {
-    background-color: $skellige;
+    background-color: #57009B;
 }
 
 .nilfgaard {
-    background-color: $nilfgaard;
+    background-color: #4F4F4F;
 }
 
 span.common {
-    background-color: $legendary;
+    background-color: #F7B220;
 }
 
 @media (max-width: 767px) {
-    $central-card-width: calc(100vw - 102px);
-    $square-width: 30px;
     .hs-card {
-        height: $square-width;
+        height: 30px;
         max-width: 378px;
     }
 
     .hs-card .square {
-        width: $square-width;
-        height: $square-width;
+        width: 30px;
+        height: 30px;
     }
 
     .hs-card .central {
-        width: calc(#{$central-card-width} - #{($tiny-pad * 2) - $rarity-width});
         max-width: 378px;
-        height: $square-width;
+        height: 30px;
+        position: relative;
+        width: Calc(100% - 62px);
     }
 
     .hs-card .central .card-name {
-        height: $square-width;
+        height: 30px;
+        width: auto;
     }
 
     .hs-card .central .card-name p {
@@ -182,61 +154,54 @@ span.common {
     }
 
     .hs-card .central .image-wrap {
-        height: $square-width;
+        height: 30px;
+        position: absolute;
+        right: 0;
     }
 }
-
 @media (min-width: 768px) {
-    //$central-card-width: 302px;
-    $central-card-width: 274px;
-    $image-width: 76px;
-    $square-width: 40px;
     h1, h2, h3, h4, h5 {
         text-shadow: 1px;
     }
 
     .hs-card {
-        width: $central-card-width + ($tiny-pad * 2) + ($square-width * 2);
-        height: $square-width;
+        width: 356px;
+        height: 40px;
     }
 
     .hs-card .square {
-        width: $square-width;
-        height: $square-width;
+        width: 40px;
+        height: 40px;
     }
 
     .hs-card .central {
-        width: $central-card-width - ($tiny-pad * 2) - $rarity-width;
-        height: $square-width;
+        width: 268px;
+        height: 40px;
     }
 
     .hs-card .central .image-wrap {
-        height: $square-width;
-        width: $image-width;
+        height: 40px;
+        width: 76px;
     }
 }
-
 @media (min-width: 1220px) {
-    $central-card-width: 298px;
-    $square-width: 40px;
-
     .hs-card {
-        width: $central-card-width + ($tiny-pad * 2) + ($square-width * 2);
-        height: $square-width;
+        width: 380px;
+        height: 40px;
     }
 
     .hs-card .square {
-        width: $square-width;
-        height: $square-width;
+        width: 40px;
+        height: 40px;
     }
 
     .hs-card .central {
-        width: $central-card-width - ($tiny-pad * 2) - $rarity-width;
-        height: $square-width;
+        width: 292px;
+        height: 40px;
     }
 
     .hs-card .central .card-name {
-        height: $square-width;
+        height: 40px;
     }
 
     .hs-card .central .card-name p {
@@ -248,6 +213,6 @@ span.common {
     }
 
     .hs-card .central .image-wrap {
-        height: $square-width;
+        height: 40px;
     }
 }

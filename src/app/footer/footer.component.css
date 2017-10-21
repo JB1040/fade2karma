@@ -13,6 +13,11 @@ h5 {
     display: inline-block;
 }
 
+.footer-tree > img {
+    height: 45px;
+    opacity: 0.25;
+}
+
 .footer-links {
     height: 30px;
     text-align: center;
@@ -114,7 +119,6 @@ h5 {
     .footer-tree {
         float: left;
         margin-right: 30px;
-        width: 45px;
     }
 }
 
