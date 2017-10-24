@@ -65,7 +65,7 @@ export class ArticlesComponent implements OnInit {
             articleString = '&type=' + (this.displayArticles === 'Meta Reports' ? 'METAREPORTS' : this.displayArticles).replace(/ /g, '_').toUpperCase();
         }
         if (this.displayGames !== 'All Games') {
-            gameString = '&game=' + this.displayGames.toUpperCase();
+            gameString = '&game=' + (this.displayGames === 'Hearthstone' ? 'HS' : this.displayGames).toUpperCase();
         }
         this.loading = true;
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}${articleString}${gameString}`).subscribe(res => {
