@@ -184,14 +184,18 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     }
 
     copyDeckCode(): void {
-        const textArea = this.docEl.createElement('textarea');
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
-        this.docEl.body.appendChild(textArea);
-        textArea.value = this.deck.code;
-        textArea.select();
-        this.docEl.execCommand('copy');
-        textArea.remove();
+        if (document.execCommand('copy')) {
+            const textArea = this.docEl.createElement('textarea');
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            this.docEl.body.appendChild(textArea);
+            textArea.value = this.deck.code;
+            textArea.select();
+            this.docEl.execCommand('copy');
+            textArea.remove();
+        } else {
+            prompt('Deck code could not be automatically copied\nto your clipboard, but you can manually copy it.', this.deck.code);
+        }
     }
 
     ngOnDestroy() {
