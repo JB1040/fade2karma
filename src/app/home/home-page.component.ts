@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
-            const articles = res.json();
+            const articles = res.json().map((model: any) => model.cards ? new Deck(model) : new Article(model));
             if (articles.length > 1) {
                 this.featuredArticles = articles;
                 this.firstTilesColumn.unshift(this.featuredArticles[1]);

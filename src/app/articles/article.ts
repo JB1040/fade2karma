@@ -1,16 +1,20 @@
 import { Author } from './article/author/author';
+import { Extend } from '../core/globals';
 
 export class Article {
-    constructor(public id: number,
-                public author: Author,
-                public title: string,
-                public imageURL: string,
-                public content: string,
-                public game: string, // TODO enum
-                public articleType: string, // TODO enum
-                public published: boolean,
-                public rating: number,
-                public date: number,
-                public changeDate: number) {
+    id: number;
+    author: Author;
+    title: string;
+    imageURL: string;
+    content: string;
+    game: string; // TODO enum
+    articleType: string; // TODO enum
+    published: boolean;
+    rating: number;
+    date: number;
+    changeDate: number;
+
+    constructor(jsonData: any) {
+        Extend(this, jsonData);
     }
 }

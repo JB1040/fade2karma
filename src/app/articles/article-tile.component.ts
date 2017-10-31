@@ -12,13 +12,15 @@ import { Deck } from '../decks/deck';
     styleUrls: [ './article-tile.component.css' ]
 })
 export class ArticlesTileComponent implements OnInit {
-    @Input() article: Article|Deck;
+    @Input() article: Article | Deck;
     @Input() showDescription = false;
     description: any;
     date: string;
     image: any;
     t: any;
     done: boolean;
+    heroClass: string;
+    articleType: string;
 
     onClick() {
         this.router.navigate([ `/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}` ]);
@@ -40,6 +42,11 @@ export class ArticlesTileComponent implements OnInit {
 	}
 	
     ngOnInit() {
+        if (this.article instanceof Deck) {
+            this.heroClass = this.article.heroClass;
+        } else {
+            this.articleType = this.article.articleType;
+        }
         this.date = TimeTransfer.getTime(this.article.changeDate || this.article.date);
         if (this.article.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
