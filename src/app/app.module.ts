@@ -27,7 +27,6 @@ import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
 import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
-import { HearthstoneManaGraphComponent } from './hsmanagraph/hsmanagraph.component';
 import { HearthstoneManaComponent } from './hsmana/hsmana.component';
 import { DeckListRowComponent } from './decklistrow/decklistrow.component';
 import { HearthstoneFilterComponent } from './hsfilter/hsfilter.component';
@@ -56,6 +55,7 @@ import { HearthstoneDecksHubComponent } from './decks/decks-hub/hearthstone-deck
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CanvasManaGraphComponent } from './canvas-mana-graph/canvas-mana-graph.component';
 
 const config = {
     breakPoints: {
@@ -110,7 +110,6 @@ const myAppRoutes: Routes = [
         TierListComponent,
         SafeStyle,
         CardComponent,
-        HearthstoneManaGraphComponent,
         HearthstoneManaComponent,
         ManatableComponent,
         DeckListRowComponent,
@@ -130,7 +129,8 @@ const myAppRoutes: Routes = [
         HearthstoneDecksHubComponent,
         PrivacyPolicyComponent,
         TermsOfServiceComponent,
-        AboutUsComponent
+        AboutUsComponent,
+        CanvasManaGraphComponent
     ],
     exports: [
         CapitalizePipe,

@@ -33,16 +33,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     showComments = false;
     commentUrl: string;
 
-    distribution: Array<Array<any>> = [ // TODO type
-        ['0', 0],
-        ['1', 0],
-        ['2', 0],
-        ['3', 0],
-        ['4', 0],
-        ['5', 0],
-        ['6', 0],
-        ['7', 0]
-    ];
+    distribution: {[key: string]: number};
 
     static sortByManaCostAndName(a: Card, b: Card) {
         const sortValue = a.cost - b.cost;
@@ -105,9 +96,14 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             }
         }
 
-        this.deck.cards.forEach((card: Card) => {
-            this.distribution[(card.cost > 7 ? 7 : card.cost)][1] += 1;
+        if (this.deck.game === 'HS') {
+            this.distribution = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '+7': 0};
+        }
 
+        this.deck.cards.forEach((card: Card) => {
+            if (this.distribution) {
+                this.distribution[(card.cost >= 7 ? '+7' : `${card.cost}`)] += 1;
+            }
             if (card.heroClass === 'NEUTRAL') {
                 if (addedCardIDs.indexOf(card.dbId) >= 0) {
                     this.neutralCards.forEach(neutralCard => {
