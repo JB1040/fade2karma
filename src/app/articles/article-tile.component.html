@@ -23,10 +23,10 @@
     <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="article-image" #img (load)="onImageLoaded(img)" [src]='getURL()'>
     <img *ngIf="article.imageURL && article.imageURL.indexOf('youtube') === -1 && article.imageURL.indexOf('twitch') === -1" class="article-image" src="{{ article.imageURL && article.imageURL.indexOf('http') !== -1 ? article.imageURL : 'assets/images/' + article.imageURL}}">
     <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="f2k-play-image" src="assets/images/icons/PlayBtn.svg">
-    <img *ngIf="!article.imageURL && article.heroClass" src="assets/images/hearthstoneDeckImageFallback/{{article.heroClass.toLowerCase()}}.jpg" class="article-image"/>
+    <img *ngIf="!article.imageURL && !!heroClass" src="assets/images/hearthstoneDeckImageFallback/{{heroClass.toLowerCase()}}.jpg" class="article-image"/>
 </div>
 <div (click)="onClick()" class="article-text-container">
-    <h6 *ngIf="article.articleType">{{article.articleType}}</h6>
+    <h6 *ngIf="articleType">{{articleType}}</h6>
     <h4>{{article.title}}</h4>
     <p class="b2 author">{{article.author.username}} &bull; {{date}}</p>
     <p *ngIf="showDescription && description" class="b2">{{description}}</p>
