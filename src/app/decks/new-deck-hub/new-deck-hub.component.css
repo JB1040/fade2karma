@@ -140,7 +140,7 @@ f2k-rating-box {
     width: 780px;
 }
 .deck-guide-section iframe{
-    width: 780px;	
+    width: 780px;
 	height: 450px;
 	border:0;
 }
@@ -301,12 +301,12 @@ f2k-rating-box {
     .deck-content img {
         width: 728px;
     }
-	
+
 	.deck-guide-section img{
 		width: 728px;
 	}
 	.deck-guide-section iframe{
-		width: 728px;	
+		width: 728px;
 		height: 420px;
 	}
 
@@ -353,7 +353,7 @@ f2k-rating-box {
     }
     .graph-container {
       float: none;
-      margin: 20px auto;
+      margin: 20px 10px;
       max-width: 440px;
      }
     .btn-copy-deck-code {
@@ -422,7 +422,7 @@ f2k-rating-box {
         width: 100%;
         max-width: 460px;
     }
-	
+
 	.deck-guide-section img {
         width: 100%;
         max-width: 460px;
