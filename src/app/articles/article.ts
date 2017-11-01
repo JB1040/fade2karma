@@ -12,7 +12,7 @@ export class Article {
     published: boolean;
     rating: number;
     date: number;
-    changeDate: number;
+    editDate: number;
 
     constructor(jsonData: any) {
         Extend(this, jsonData);

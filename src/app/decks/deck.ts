@@ -18,7 +18,7 @@ export class Deck {
     imageURL: string;
     heroClass: HeroClasses;
     date: number;
-    changeDate: number;
+    editDate: number;
     tier: number;
     code: any;
     dust?: number;
