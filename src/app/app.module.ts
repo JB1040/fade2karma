@@ -56,6 +56,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CanvasManaGraphComponent } from './canvas-mana-graph/canvas-mana-graph.component';
+import { SponsorTileComponent } from './sponsor/sponsor-tile/sponsor-tile.component';
+import { SponsorHubComponent } from './sponsor/sponsor-hub/sponsor-hub.component';
 
 const config = {
     breakPoints: {
@@ -130,7 +132,9 @@ const myAppRoutes: Routes = [
         PrivacyPolicyComponent,
         TermsOfServiceComponent,
         AboutUsComponent,
-        CanvasManaGraphComponent
+        CanvasManaGraphComponent,
+        SponsorTileComponent,
+        SponsorHubComponent
     ],
     exports: [
         CapitalizePipe,
