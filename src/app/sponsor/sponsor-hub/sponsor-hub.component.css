@@ -1,0 +1,49 @@
+:host {
+    display: block;
+    position: relative;
+}
+
+f2kSponsorTile {
+    float: left;
+}
+
+h1 {
+    padding-top: 20px;
+}
+
+@media (max-width: 767px) {
+    h1 {
+        margin: 15px 0 25px 0;
+    }
+
+    f2kSponsorTile {
+        margin-bottom: 10px;
+        max-width: 480px;
+    }
+}
+
+@media (min-width: 768px) {
+    h1 {
+        margin: 32px 0 33px 0;
+    }
+
+    f2kSponsorTile {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    f2kSponsorTile:not(:nth-child(2n+2)) {
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 1220px) {
+    h1 {
+        margin: 33px 0 32px 0;
+    }
+
+    f2kSponsorTile:not(:nth-child(3n+3)) {
+        margin-right: 20px;
+    }
+}

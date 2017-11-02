@@ -1,0 +1,9 @@
+<a [href]="sponsor.link" target="_blank" class="sponsor-image-container tint">
+    <img [src]="sponsor.imageURL" class="sponsor-image">
+</a>
+<div class="sponsor-link-container">
+    <a *ngFor="let link of sponsor.links; let last=last" [href]="link.url" target="_blank" class="sponsor-link"
+       [ngStyle]="{'width': 'Calc(' + 100 / sponsor.links.length + '% - ' + (last ? 0 : 1) + 'px)'}">
+        <img [src]="link.icon">
+    </a>
+</div>
