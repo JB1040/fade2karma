@@ -15,6 +15,7 @@ export class NavigationComponent implements OnInit {
     lastScrollTop: number;
     top: number;
     giveawayExists = false;
+    externals = ['EU Shop', 'NA Shop'];
     navItems: NavItem[] = [
         // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
         new NavItem('Tier List', []),
@@ -22,7 +23,7 @@ export class NavigationComponent implements OnInit {
         new NavItem('Giveaways', []),
         new NavItem('Team', []),
         // new NavItem('Sponsors', []),
-        // new NavItem('Shop', [])
+        new NavItem('Shops', this.externals)
     ];
 
     @HostListener('window:scroll', ['$event']) scroll(event) {
@@ -49,6 +50,25 @@ export class NavigationComponent implements OnInit {
 
     toLink(url: string) {
         return url.replace(/ /g, '_').toLowerCase();
+    }
+
+    getOuterLink(url: string): string {
+        if (url === 'EU Shop') {
+            return 'https://teespring.com/stores/f2k-eu';
+        } else if (url === 'NA Shop') {
+            return 'https://teespring.com/stores/f2k-us';
+        } else {
+            return '';
+        }
+    }
+
+    openInNewTab(url) {
+        const win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    absoluteUrl(url: string): boolean {
+        return this.externals.indexOf(url) !== -1;
     }
 
     resetOpenItems(currentNavItem?: NavItem) {
