@@ -13,9 +13,11 @@ import { HearthstoneDecksHubComponent } from '../decks/decks-hub/hearthstone-dec
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from '../about-us/about-us.component';
+import { SponsorHubComponent } from '../sponsor/sponsor-hub/sponsor-hub.component';
 
 const contentRoutes: Routes = [
     { path: 'team', component: TeamsComponent },
+    { path: 'partners', component: SponsorHubComponent },
     { path: '', component: HomePageComponent },
     { path: 'articles', component: ArticlesComponent },
     { path: 'articles/:article', component: ArticleComponent },

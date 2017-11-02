@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit {
         new NavItem('Articles', []),
         new NavItem('Giveaways', []),
         new NavItem('Team', []),
-        // new NavItem('Sponsors', []),
+        new NavItem('Partners', []),
         new NavItem('Shops', this.externals)
     ];
 
