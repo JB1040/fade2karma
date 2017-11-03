@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
         new NavItem('Giveaways', []),
         new NavItem('Team', []),
         new NavItem('Partners', []),
-        new NavItem('Shops', this.externals)
+        new NavItem('Shop', this.externals)
     ];
 
     @HostListener('window:scroll', ['$event']) scroll(event) {

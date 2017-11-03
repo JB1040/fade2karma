@@ -26,7 +26,7 @@
     margin: auto;
 }
 
-:host:hover .tint:before {
+.tint:hover:before {
     background: #ef3418;
 }
 
@@ -42,6 +42,7 @@
 }
 
 .sponsor-link {
+    position: relative;
     display: inline-block;
     padding: 15px 0;
     height: 20px;
