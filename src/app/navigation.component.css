@@ -131,6 +131,12 @@ h5:hover,
         border: 1px solid #e7e7e7;
         background: white;
         padding: 0 20px;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        overflow: auto;
+        max-height: Calc(100vh - 40px);
     }
 
     .nav-column {
