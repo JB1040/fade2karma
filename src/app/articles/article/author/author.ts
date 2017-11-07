@@ -57,9 +57,9 @@ export class Channel {
                 public updated_at: string,
                 public delay: number,
                 public logo: string,
-                public banner: string, // TODO if this is right type
+                public banner: string,
                 public video_banner: string,
-                public background: string, // TODO if this is right type
+                public background: string,
                 public profile_banner: string,
                 public profile_banner_background_color: string,
                 public url: string,

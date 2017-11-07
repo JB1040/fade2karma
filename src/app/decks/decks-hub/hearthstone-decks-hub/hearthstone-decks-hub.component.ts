@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TierListHubService } from '../../../tier-list-hub/tier-list-hub.service';
-import { Deck, HeroClasses } from '../../deck';
+import { Deck, Games, HeroClasses } from '../../deck';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,8 +15,9 @@ export class HearthstoneDecksHubComponent implements OnInit {
     page = 0;
     mode: string;
     isStandard: boolean;
-    active = 'STANDARD';
-    heroClasses: Array<HeroClasses>;
+    game: Games = 'HS';
+    active = 'STANDARD'; // If this is expanded then in the chace tracking and filtering needs to be updated
+    heroClasses: Array<HeroClasses> = [];
     routeSubscription: any;
     sortBy: 'tier' | 'dust' | 'date' | 'none' = 'none';
     sortUp = false;
@@ -44,7 +45,7 @@ export class HearthstoneDecksHubComponent implements OnInit {
 
     getDecks() {
         this.tierListHubService
-            .getDecks(this.amount, 0, this.mode, this.isStandard, this.heroClasses, this.page * this.amount)
+            .getDecks(this.amount, 0, this.mode, this.isStandard, this.game, this.heroClasses, this.page * this.amount)
             .then((decks: Array<Deck>) => {
                 this.decks = decks;
                 if (this.sortBy !== 'none') {

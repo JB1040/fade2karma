@@ -7,7 +7,7 @@ export class Article {
     title: string;
     imageURL: string;
     content: string;
-    game: string; // TODO enum
+    game: 'HS' | 'GWENT';
     articleType: string; // TODO enum
     published: boolean;
     rating: number;

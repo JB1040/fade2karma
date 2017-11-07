@@ -31,15 +31,19 @@
                 <div class="deck-content">
                     <div class="cards-containers clearfix">
                         <div class="cards-container">
-                            <p class="b2">{{deck.heroClass | capitalize}} Cards</p>
-                            <f2kCardComponent *ngFor="let card of classCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true; "
-                                (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                            <div *ngFor="let cell of leftColumn">
+                                <p class="b2">{{cell.title}}</p>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true; "
+                                                  (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                            </div>
                         </div>
 
                         <div class="cards-container">
-                            <p class="b2">Neutral Cards</p>
-                            <f2kCardComponent *ngFor="let card of neutralCards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true"
-                                (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                            <div *ngFor="let cell of rightColumn">
+                                <p class="b2">{{cell.title}}</p>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true"
+                                                  (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                            </div>
                         </div>
                     </div>
                     <!-- (mouseenter)="hovering($event, 'enter')" (mouseleave)="hovering($event, 'leave')" -->
