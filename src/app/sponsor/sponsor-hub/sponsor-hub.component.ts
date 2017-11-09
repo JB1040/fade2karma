@@ -36,20 +36,5 @@ export class SponsorHubComponent implements OnInit {
                 icon: 'assets/icons/twitter.svg'
             }]
         }));
-
-        this.sponsors.push(new Sponsor({
-            imageURL: 'assets/sponsor-images/twitch.png',
-            link: 'https://go.twitch.tv/',
-            links: [{
-                url: 'https://www.facebook.com/Twitch/',
-                icon: 'assets/icons/facebook.svg'
-            }, {
-                url: 'https://twitter.com/Twitch',
-                icon: 'assets/icons/twitter.svg'
-            }, {
-                url: 'https://www.youtube.com/user/Twitch',
-                icon: 'assets/icons/youtube.svg'
-            }]
-        }));
     }
 }
