@@ -136,3 +136,12 @@ h1 {
     border: 1px solid #ef3418;
     color: #ef3418;
 }
+
+.gwent {
+    margin-left: -2px;
+}
+
+.gwent:not(.active) {
+    border-left: 0;
+}
+

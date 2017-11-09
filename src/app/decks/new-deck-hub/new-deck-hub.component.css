@@ -42,7 +42,7 @@
     float: left;
 }
 
-.cards-container .b2 {
+.cards-container > div:first-child > p {
     margin-top: 0;
 }
 

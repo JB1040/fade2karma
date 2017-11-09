@@ -1,12 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { Deck } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
-import { DOCUMENT } from '@angular/platform-browser';
-import { DomSanitizer} from '@angular/platform-browser';
+import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'f2kNewDeckHub',
@@ -19,8 +18,8 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     deck: Deck;
     decks: Deck[] = [];
     chartData: any;
-    classCards: Card[] = [];
-    neutralCards: Card[] = [];
+    leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
+    rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
     displayCard = false;
     displayedCard: Card;
     displayedCardUp: boolean;
@@ -33,7 +32,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     showComments = false;
     commentUrl: string;
 
-    distribution: {[key: string]: number};
+    distribution: { [key: string]: number };
 
     static sortByManaCostAndName(a: Card, b: Card) {
         const sortValue = a.cost - b.cost;
@@ -51,13 +50,13 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute,private sanitizer: DomSanitizer) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.decks = [];
             this.chartData = null;
-            this.classCards = [];
-            this.neutralCards = [];
+            this.leftColumn = [];
+            this.rightColumn = [];
             this.displayCard = false;
             this.displayedCard = null;
             this.displayedCardUp = false;
@@ -69,24 +68,33 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
             this.getDecks();
         });
-
-        // const card: Card = new Card('Gabe from Penny Arcade', 6, 'NEUTRAL', true, 5, 559, 'At least he has Angry Chicken.', 2, 'EX1_116', 'Leeroy Jenkins', 'expert1', 'LEGENDARY', 'MINION', false);
-        // const card2: Card = new Card('Chippy', null, 'PALADIN', true, 1, 1373, 'Apparently with wisdom comes the knowledge that you should probably be attacking every turn.', 2, 'EX1_363', 'Blessing of Wisdom', 'expert1', 'COMMON', 'SPELL', false);
-        // const cards: Card[] = [card, card2, card2];
-        // const author: Author = new Author(2, 'Bob', 'test@gmail.com', 'Hearthstone', null, 1501927168668);
-        // this.deck = new Deck(1, author, 'This is a Tilte', 'Cipher.jpg', '<p>this is the content</p>', 'HEARTHSTONE', cards, true, 10, 'PALADIN', true, 'STANDARD', 1501927168668);
-        // for (let i = 0; i < 6; i++) {
-        //     this.decks.push(this.deck);
-        // }
     }
 
-    // ngOnInit() {
-    //     this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-    //     this.getDecks();
-    // }
+    getSpecificCards(param: string, value: any, equils = true) {
+        const cards: Array<Card> = [];
+        this.deck.cards.forEach(card => {
+            if ((equils ? card[param] === value : card[param] !== value)) {
+                const c = cards.reduce((acc, val) => {
+                    if (val.dbId === card.dbId) {
+                        return card;
+                    }
+                }, null);
+                if (c) {
+                    ++c.amount;
+                } else {
+                    card.amount = 1;
+                    cards.push(card);
+                }
+            }
+        });
+        return cards.sort(NewDeckHubComponent.sortByManaCostAndName);
+    }
+
+    getCardAmount(cards: Array<Card>) {
+        return cards.reduce((acc, card) => { return acc += card.amount; }, 0);
+    }
 
     buildData() {
-        const addedCardIDs: number[] = [];
         let deckMode: string;
         if (this.deck.mode === 'CON') {
             if (this.deck.isStandard) {
@@ -97,57 +105,43 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         }
 
         if (this.deck.game === 'HS') {
-            this.distribution = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '+7': 0};
-        }
-
-        this.deck.cards.forEach((card: Card) => {
-            if (this.distribution) {
+            this.distribution = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '+7': 0 };
+            this.deck.cards.forEach((card: Card) => {
                 this.distribution[(card.cost >= 7 ? '+7' : `${card.cost}`)] += 1;
-            }
-            if (card.heroClass === 'NEUTRAL') {
-                if (addedCardIDs.indexOf(card.dbId) >= 0) {
-                    this.neutralCards.forEach(neutralCard => {
-                        if (neutralCard.dbId === card.dbId) {
-                            neutralCard.amount += 1;
-                        }
-                    });
-                } else {
-                    card.amount = 1;
-                    this.neutralCards.push(card);
-                }
-            } else {
-                if (addedCardIDs.indexOf(card.dbId) >= 0) {
-                    this.classCards.forEach(classCard => {
-                        if (classCard.dbId === card.dbId) {
-                            classCard.amount += 1;
-                        }
-                    });
-                } else {
-                    card.amount = 1;
-                    this.classCards.push(card);
-                }
-            }
-            addedCardIDs.push(card.dbId);
-        });
+            });
+            this.leftColumn.push({
+                title: `${this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} Cards`,
+                cards: this.getSpecificCards('heroClass', 'NEUTRAL', false)
+            });
+            this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
+        } else {
+            this.leftColumn.push({ title: 'Leader', cards: this.getSpecificCards('group', 'Leader') });
 
-        this.neutralCards.sort(NewDeckHubComponent.sortByManaCostAndName);
-        this.classCards.sort(NewDeckHubComponent.sortByManaCostAndName);
+            const goldCards = this.getSpecificCards('group', 'Gold');
+            this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
+
+            const silverCards = this.getSpecificCards('group', 'Silver');
+            this.leftColumn.push({ title: 'Silver x ' + this.getCardAmount(silverCards), cards: silverCards });
+
+            const bronzeCards = this.getSpecificCards('group', 'Bronze');
+            this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
+        }
 
         this.chartData = {
             metadata: [
                 {
-                    label: 'Class',
-                    value: this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`
+                    label: this.deck.game === 'HS' ? 'Class' : 'Faction',
+                    value: this.deck.game === 'HS' ? this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.faction.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
+                    image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
                 },
                 {
-                    label: 'Game mode',
-                    value: deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: `assets/icons/${deckMode.toLowerCase()}icon.svg`
+                    label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
+                    value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
+                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
                 },
                 {
-                    label: 'Dust Cost',
-                    value: DustCalculationService.getDustCost(this.deck.cards)
+                    label: this.deck.game === 'HS' ? 'Dust Cost' : 'Scrap',
+                    value: DustCalculationService.getCardCost(this.deck.cards, this.deck.game)
                 }
             ],
             distribution: this.distribution
@@ -167,7 +161,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
             this.deck = res.json();
-            this.CONTENT =  this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
+            this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
             this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
             this.buildData();
         });
