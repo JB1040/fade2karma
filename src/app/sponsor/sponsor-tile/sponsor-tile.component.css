@@ -41,7 +41,7 @@
     border-right: 1px solid #E7E7E7;
 }
 
-.sponsor-link {
+.spnsr-url-image-container {
     position: relative;
     display: inline-block;
     padding: 15px 0;
@@ -55,7 +55,7 @@
     color: black;
 }
 
-.sponsor-link > img {
+.spnsr-url-image-container > img {
     display: inline-block;
     height: 20px;
 }
