@@ -20,8 +20,6 @@ export class CanvasManaGraphComponent implements OnInit {
     maxDataHeightProportion = 0.8;
     valueHeightRep: number;
     hexagon: HTMLImageElement;
-    chartPattern: HTMLImageElement;
-    promises: Array<Promise<{}>> = [];
 
     @HostListener('window:resize', [ '$event' ])
     onWindowResize() {
@@ -29,7 +27,7 @@ export class CanvasManaGraphComponent implements OnInit {
     }
 
     constructor(private elRef: ElementRef) {
-        this.promises.push(new Promise(resolve => {
+        new Promise(resolve => {
             this.hexagon = document.createElement('img');
             const path = 'assets/graph-images/bg-hexagon.png';
 
@@ -37,17 +35,7 @@ export class CanvasManaGraphComponent implements OnInit {
             this.hexagon.onerror = () => resolve({path, status: 'error'});
 
             this.hexagon.src = path;
-        }));
-        this.promises.push(new Promise(resolve => {
-            this.chartPattern = document.createElement('img');
-            const path = 'assets/graph-images/cart-fill-pattern.png';
-
-            this.chartPattern.onload = () => resolve({path, status: 'ok'});
-            this.chartPattern.onerror = () => resolve({path, status: 'error'});
-
-            this.chartPattern.src = path;
-        }));
-        Promise.all(this.promises).then(() => {
+        }).then(() => {
             this.build(true);
         });
     }
@@ -89,12 +77,12 @@ export class CanvasManaGraphComponent implements OnInit {
     }
 
     drawHeader(key: string, index: number) { // Header height is 25px
-        this.drawCenteredText(`${this.data[key]}`, ((this.colWidth * index) + (this.colWidth / 2)), (this.header - 5), 'bold 22px serif', 'black');
+        this.drawCenteredText(`${this.data[key]}`, ((this.colWidth * index) + (this.colWidth / 2)), (this.header - 5), 'bold 16px Roboto', '#333');
     }
 
     drawFooter(key: string, index: number) { // Footer height is 30px
         this.ctx.drawImage(this.hexagon, this.colWidth * index + Math.floor((this.colWidth - 26) / 2), this.height - this.header); // 26 image width
-        this.drawCenteredText(key, ((this.colWidth * index) + (this.colWidth / 2)), this.height - 8, 'bold 16px serif', 'white');
+        this.drawCenteredText(key, ((this.colWidth * index) + (this.colWidth / 2)), this.height - 8, 'bold 16px Roboto', 'white');
     }
 
     drawColumns() {
@@ -109,10 +97,9 @@ export class CanvasManaGraphComponent implements OnInit {
     }
 
     drawData(key: string, index: number) {
-        const pat = this.ctx.createPattern(this.chartPattern, 'repeat');
         const height = this.data[key] * this.valueHeightRep;
         this.ctx.rect(((this.colWidth * index) + 1), (this.height - this.footer - height), this.colWidth - 1, height);
-        this.ctx.fillStyle = pat;
+        this.ctx.fillStyle = '#67c8ff';
         this.ctx.fill();
     }
 }
