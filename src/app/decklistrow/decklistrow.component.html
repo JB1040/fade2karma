@@ -24,7 +24,7 @@
         <div class="b2">{{deck.tier}}</div>
     </div>
     <div class="cell data-cell-4">
-        <div class="b2">{{dustCost}}</div>
+        <div class="b2 resource" [ngClass]="{'hs-resource': deck.game === 'HS', 'gwent-resource': deck.game === 'GWENT'}">{{dustCost}}</div>
     </div>
     <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.editDate || deck.date)}}</div></div>-->
     <div class="cell date-cell">
@@ -57,7 +57,7 @@
         <div class="b2">Tier: {{deck.tier}}</div>
     </div>
     <div class="cell data-cell-4">
-        <div class="b2">Dust: {{dustCost}}</div>
+        <div class="b2 resource" [ngClass]="{'hs-resource': deck.game === 'HS', 'gwent-resource': deck.game === 'GWENT'}">{{dustCost}}</div>
     </div>
     <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.editDate || deck.date)}}</div></div>-->
     <div class="cell date-cell">

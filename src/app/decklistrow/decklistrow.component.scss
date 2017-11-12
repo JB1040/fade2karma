@@ -9,6 +9,29 @@ $bw: 1px; // border width
     cursor: pointer;
 }
 
+.resource {
+    position: relative;
+}
+
+.resource::before {
+    content: '';
+    display: block;
+    height: 16px;
+    position: absolute;
+}
+
+.gwent-resource::before {
+    background: url(../../assets/icons/icon-scrap.png);
+    width: 16px;
+    left: -20px;
+}
+
+.hs-resource::before {
+    background: url(../../assets/icons/icon-dust.png);
+    width: 11px;
+    left: -15px;
+}
+
 .decklistrow {
     display: flex;
     flex-wrap: wrap;
@@ -62,7 +85,7 @@ $bw: 1px; // border width
     }
 
     .cell {
-        padding-left: 10px;
+        padding-left: 30px;
         padding-right: 10px;
         height: 30px;
         background: #F7F7F7;
@@ -104,7 +127,7 @@ $bw: 1px; // border width
     }
 
     .cell {
-        padding-left: 10px;
+        padding-left: 30px;
         padding-right: 10px;
         height: 40px;
         background: #F7F7F7;
