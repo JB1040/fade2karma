@@ -30,7 +30,7 @@ export type GwentLeaders =
     | 'emhyr-var-emreis'
     | 'john-calveit'
     | 'morvran-voorhis';
-export type GwentFactions = 'Monsters' | 'Northern Realms' | 'Scotia\' Tael' | 'Skellige' | 'Nilfgaard';
+export type GwentFactions = 'Monsters' | 'Northern Realms' | 'Scoia\'tael' | 'Skellige' | 'Nilfgaard';
 
 export class Deck {
     id: number;
