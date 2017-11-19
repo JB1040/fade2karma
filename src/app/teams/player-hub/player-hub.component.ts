@@ -41,7 +41,6 @@ export class PlayerHubComponent implements OnDestroy {
     getDecksByPlayer(id: number): void {
         this.http.get(`${BASE_URL}/api/articles/byAuthor/${id}`).subscribe(res => {
             this.playerArticles = res.json().slice(0, 2);
-            console.log(this.playerArticles);
         });
     }
 
