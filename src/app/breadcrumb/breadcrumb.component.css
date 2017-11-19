@@ -9,6 +9,11 @@ ul.breadcrumb li.breadcrumb-link {
     display: inline;
 }
 
+ul.breadcrumb li.breadcrumb-link a {
+    text-decoration: none;
+    color: #9B9B9B;
+}
+
 .disabled {
     pointer-events: none;
     text-decoration: none;

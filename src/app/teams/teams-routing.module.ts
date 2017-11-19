@@ -14,6 +14,7 @@ import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.compone
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { SponsorHubComponent } from '../sponsor/sponsor-hub/sponsor-hub.component';
+import { PlayerHubComponent } from './player-hub/player-hub.component';
 
 const contentRoutes: Routes = [
     { path: 'team', component: TeamsComponent },
@@ -22,6 +23,7 @@ const contentRoutes: Routes = [
     { path: 'articles', component: ArticlesComponent },
     { path: 'articles/:article', component: ArticleComponent },
     { path: 'tier_list/:deck', component: NewDeckHubComponent },
+    { path: 'team/:author', component: PlayerHubComponent },
     { path: 'tier_list', component: TierListHubComponent },
     {
         path: 'decklists/hearthstone',
