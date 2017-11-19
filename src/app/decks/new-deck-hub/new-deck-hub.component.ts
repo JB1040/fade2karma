@@ -74,11 +74,15 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         const cards: Array<Card> = [];
         this.deck.cards.forEach(card => {
             if ((equils ? card[param] === value : card[param] !== value)) {
-                const c = cards.reduce((acc, val) => {
-                    if (val.dbId === card.dbId) {
-                        return card;
+                let c;
+
+                for (let i = 0; i < cards.length; i++) {
+                    if (cards[i].dbId === card.dbId) {
+                        c = cards[i];
+                        break;
                     }
-                }, null);
+                }
+
                 if (c) {
                     ++c.amount;
                 } else {
