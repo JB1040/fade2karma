@@ -50,7 +50,7 @@ import { PlayerInstanceComponent } from './teams/player-tile/player-tile.compone
 import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
-import {DmcaComponent} from 'app/dmca/dmca.component';
+import { DmcaComponent } from 'app/dmca/dmca.component';
 import { HearthstoneDecksHubComponent } from './decks/decks-hub/hearthstone-decks-hub/hearthstone-decks-hub.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
@@ -58,6 +58,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { CanvasManaGraphComponent } from './canvas-mana-graph/canvas-mana-graph.component';
 import { SponsorTileComponent } from './sponsor/sponsor-tile/sponsor-tile.component';
 import { SponsorHubComponent } from './sponsor/sponsor-hub/sponsor-hub.component';
+import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 
 const config = {
     breakPoints: {
@@ -134,7 +135,8 @@ const myAppRoutes: Routes = [
         AboutUsComponent,
         CanvasManaGraphComponent,
         SponsorTileComponent,
-        SponsorHubComponent
+        SponsorHubComponent,
+        PlayerHubComponent
     ],
     exports: [
         CapitalizePipe,

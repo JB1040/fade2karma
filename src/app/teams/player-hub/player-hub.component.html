@@ -1,0 +1,70 @@
+<div *ngIf="iframe" class="stream-container">
+    <div class="stream-upper-display-box"></div>
+    <div class="videoWrapperBounder">
+        <div class="videoWrapper">
+            <iframe [src]="iframe" scrolling="no" allowfullscreen="true" width="1280" height="720" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="player" class="F2K-column clearfix">
+    <f2k-breadcrumb [title]="player.username"></f2k-breadcrumb>
+
+    <div class="user-core-details clearfix">
+        <div class="player-image-container">
+            <img src="assets/images/users/{{player.username.toLowerCase()}}.jpg"  onError="this.src='./assets/images/logo-f2k.png';">
+        </div>
+
+        <div class="user-details">
+            <h1>{{player.username}}</h1>
+            <div class="user-detail-container">
+                <h5><span class="detail-title">Name: </span>{{player.fullName}}</h5>
+                <h5><span class="detail-title">Age: </span>{{age}}</h5>
+                <h5><span class="detail-title">Country: </span>{{player.residence}}</h5>
+            </div>
+        </div>
+
+        <div *ngIf="player.facebook || player.twitter || player.twitch || player.youtube" class="user-social-media">
+            <a *ngIf="player.facebook" href="https://www.facebook.com/{{player.facebook}}/" target="_blank">
+                <img src="assets/icons/facebook.svg">
+            </a>
+
+            <a *ngIf="player.twitter" href="https://twitter.com/{{player.twitter}}" target="_blank">
+                <img src="assets/icons/twitter.svg">
+            </a>
+
+            <a *ngIf="player.twitch" href="http://www.twitch.tv/{{player.twitch}}" target="_blank">
+                <img src="assets/icons/twitch.svg">
+            </a>
+
+            <a *ngIf="player.youtube" href="https://www.youtube.com/{{player.youtube}}" target="_blank">
+                <img src="assets/icons/youtube.svg">
+            </a>
+        </div>
+
+        <div *ngIf="playerArticles && playerArticles.length" class="latest-decks-container-lg">
+            <span class="b2 latest-decks-title">LATEST FROM {{player.username.toUpperCase()}}</span>
+            <ng-template ngFor let-deck [ngForOf]="playerArticles">
+                <f2kRecommendedTile *ngIf="deck" class="recommended-tiles" [ngClass]="'article'" [type]="'article'" [teasedItem]="deck"></f2kRecommendedTile>
+            </ng-template>
+        </div>
+    </div>
+
+    <div class="user-details-lg">
+        <h1>{{player.username}}</h1>
+        <div class="user-detail-container">
+            <h5><span class="detail-title">Name: </span>{{player.fullName}}</h5>
+            <h5><span class="detail-title">Age: </span>{{age}}</h5>
+            <h5><span class="detail-title">Country: </span>{{player.residence}}</h5>
+        </div>
+    </div>
+
+    <span class="b2 description-container" [innerHTML]="player.description"></span>
+
+    <div *ngIf="playerArticles && playerArticles.length" class="latest-decks-container">
+        <span class="b2 latest-decks-title">LATEST FROM {{player.username.toUpperCase()}}</span>
+        <ng-template ngFor let-deck [ngForOf]="playerArticles">
+            <f2kRecommendedTile *ngIf="deck" class="recommended-tiles" [ngClass]="'article'" [type]="'article'" [teasedItem]="deck"></f2kRecommendedTile>
+        </ng-template>
+    </div>
+</div>

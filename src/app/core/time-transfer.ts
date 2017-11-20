@@ -1,5 +1,5 @@
 export class TimeTransfer {
-    public static getTime(time) {
+    public static getTime(time: number): string {
         let date;
         if ((date = (Date.now() - time) / 1000) < 60) {
             return Math.floor(date) + (Math.floor(date) > 1 ? ' seconds' : ' second') + ' ago';
@@ -16,5 +16,13 @@ export class TimeTransfer {
         } else {
             return Math.floor(date / 12) + (Math.floor(date / 12) > 1 ? ' years' : ' year') + ' ago';
         }
+    }
+
+    public static getAge(time: number): number {
+        /**
+         *  https://en.wikipedia.org/wiki/Year
+         *  length of an year (year as 365.2425 days) in ms 31556952000
+         */
+        return Math.floor((Date.now() - time) / 31556952000);
     }
 }

@@ -1,0 +1,227 @@
+/* TODO optimize */
+
+:host {
+    display: block;
+    margin-bottom: 33px;
+}
+
+.F2K-column {
+    padding-top: 33px;
+}
+
+
+.latest-decks-container f2kRecommendedTile:last-child,
+.latest-decks-container-lg f2kRecommendedTile:last-child {
+    border-bottom: none;
+}
+
+.stream-container {
+    padding: 20px 0;
+    background: black;
+    position: relative;
+    text-align: center;
+}
+
+.stream-container .stream {
+    /*position: absolute;*/
+    display: inline-block;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.user-details-lg,
+.latest-decks-container-lg {
+    display: none;
+}
+
+.user-details,
+.latest-decks-container {
+    display: block;
+}
+
+.user-social-media {
+    padding: 12px 0;
+}
+
+.user-social-media > a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-decoration: none;
+    margin: 4px;
+}
+
+.stream-container .stream-upper-display-box {
+    height: 90px;
+    width: 728px;
+    margin: 30px auto;
+    display: none;
+    background: lightgray;
+}
+
+f2k-breadcrumb {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.user-detail-container {
+    padding: 10px 0;
+}
+
+.user-detail-container .detail-title,
+.latest-decks-title {
+    color: #9c9c9c;
+}
+
+.player-image-container {
+    position: relative;
+}
+
+.player-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+f2kRecommendedTile {
+    margin-top: 12px;
+}
+
+.user-detail-container > h5 {
+    display: inline-block;
+}
+
+.user-detail-container > h5:not(:last-child) {
+    margin-right: 30px;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.videoWrapperBounder {
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .player-image-container {
+        width: Calc(100% - 20px);
+        padding-top: Calc(100% - 20px);
+        margin: 20px 10px;
+    }
+
+    .videoWrapperBounder {
+        width: Calc(100% - 20px);
+    }
+
+    .description-container {
+        margin: 20px;
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .videoWrapperBounder {
+        width: 748px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1219px) {
+    .player-image-container {
+        width: 170px;
+        height: 170px;
+        margin: 10px;
+        float: left;
+    }
+
+    .user-details,
+    .user-social-media {
+        width: 520px;
+        float: right;
+    }
+
+    h1 {
+        margin-top: 10px;
+    }
+
+    .description-container {
+        margin: 20px;
+        display: block;
+    }
+}
+
+@media (max-width: 1220px) {
+    .user-core-details {
+        border-bottom: 1px solid #E7E7E7;
+    }
+}
+
+@media (min-width: 1220px) {
+    .stream-container .stream-upper-display-box {
+        /*display: block;*//*when we use adds this is an add container*/
+    }
+
+    .user-details-lg,
+    .description-container {
+        float: right;
+        width: 760px;
+    }
+
+    .user-core-details {
+        width: 360px;
+        float: left;
+        padding: 10px;
+    }
+
+    .player-image-container {
+        width: 360px;
+        height: 360px;
+    }
+
+    .videoWrapperBounder {
+        width: 1200px;
+    }
+
+    .latest-decks-container {
+        float: left;
+        padding: 10px;
+    }
+
+    .user-details-lg,
+    .latest-decks-container-lg {
+        display: block;
+    }
+
+    .user-details,
+    .latest-decks-container {
+        display: none;
+    }
+
+    .user-detail-container {
+        border-bottom: 1px solid #E7E7E7;
+    }
+
+    .user-social-media {
+        text-align: center;
+        border-bottom: 1px solid #E7E7E7;
+        margin-bottom: 20px;
+    }
+}
+
