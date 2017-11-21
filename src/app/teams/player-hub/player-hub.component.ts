@@ -31,7 +31,9 @@ export class PlayerHubComponent implements OnDestroy {
     getPlayer(id: number): void {
         this.http.get(`${BASE_URL}/api/users/${id}`).subscribe(res => {
             this.player = res.json();
-            this.age = TimeTransfer.getAge(parseInt(this.player.birthday, 10));
+            if (this.player.birthday) {
+                this.age = TimeTransfer.getAge(parseInt(this.player.birthday, 10));
+            }
             if (this.player.twitchData) {
                 this.iframe = this.sanitizer.bypassSecurityTrustResourceUrl(`https://player.twitch.tv/?channel=${this.player.twitch}`);
             }

@@ -19,12 +19,12 @@
             <h1>{{player.username}}</h1>
             <div class="user-detail-container">
                 <h5><span class="detail-title">Name: </span>{{player.fullName}}</h5>
-                <h5><span class="detail-title">Age: </span>{{age}}</h5>
+                <h5 *ngIf="age"><span class="detail-title">Age: </span>{{age}}</h5>
                 <h5><span class="detail-title">Country: </span>{{player.residence}}</h5>
             </div>
         </div>
 
-        <div *ngIf="player.facebook || player.twitter || player.twitch || player.youtube" class="user-social-media">
+        <div *ngIf="player.facebook || player.twitter || player.twitch || player.youtube" class="user-social-media" [ngStyle]="{'border-width.px': playerArticles && playerArticles.length ? 1 : 0}">
             <a *ngIf="player.facebook" href="https://www.facebook.com/{{player.facebook}}/" target="_blank">
                 <img src="assets/icons/facebook.svg">
             </a>
@@ -54,7 +54,7 @@
         <h1>{{player.username}}</h1>
         <div class="user-detail-container">
             <h5><span class="detail-title">Name: </span>{{player.fullName}}</h5>
-            <h5><span class="detail-title">Age: </span>{{age}}</h5>
+            <h5 *ngIf="age"><span class="detail-title">Age: </span>{{age}}</h5>
             <h5><span class="detail-title">Country: </span>{{player.residence}}</h5>
         </div>
     </div>
