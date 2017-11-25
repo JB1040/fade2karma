@@ -149,13 +149,13 @@ f2k-rating-box {
 /* TODO: Button specs for all layouts */
 
 .btn-expand-comments {
-    float: left;
     border: none;
     height: 40px;
     padding: 0 20px;
     background-color: #EF3418;
     color: white;
     font-weight: bold;
+    margin-bottom: 12px;
 }
 
 .btn-copy-deck-code {

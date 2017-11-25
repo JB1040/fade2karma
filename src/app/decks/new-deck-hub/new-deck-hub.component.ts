@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { Deck } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
+import { FacebookSkdService } from '../../facebook-skd.service';
 
 @Component({
     selector: 'f2kNewDeckHub',
@@ -31,8 +32,11 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     facebookComments = false;
     showComments = false;
     commentUrl: string;
+    previousSize: number;
 
     distribution: { [key: string]: number };
+
+    @ViewChild('commentContainer') commentContainer: ElementRef;
 
     static sortByManaCostAndName(a: Card, b: Card) {
         const sortValue = a.cost - b.cost;
@@ -50,7 +54,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.decks = [];
@@ -68,6 +72,24 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
             this.getDecks();
         });
+    }
+
+    @HostListener('window:resize', ['$event.target'])
+    onResize() {
+        if (this.previousSize && this.commentContainer.nativeElement.clientWidth !== this.previousSize) {
+            this.parseHTML(true);
+        }
+    }
+
+    parseHTML(forceResize?: boolean): void {
+        if (this.facebookService.fb) {
+            if (!this.facebookComments || forceResize) {
+                this.facebookComments = true;
+                this.previousSize = this.commentContainer.nativeElement.clientWidth;
+                this.commentContainer.nativeElement.innerHTML = `<div class="fb-comments" data-href="${BASE_URL}/decks/${this.deck.id}" data-width="${this.previousSize}" data-numposts="5"></div>`;
+                this.facebookService.fb.XFBML.parse(this.commentContainer.nativeElement);
+            }
+        }
     }
 
     getSpecificCards(param: string, value: any, equils = true) {

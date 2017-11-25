@@ -30,17 +30,14 @@
 		 <div class="article-content" [innerHtml]="CONTENT"></div>
 
         <div class="article-footer">
-            <div class="article-comments">
-                <button class="btn-expand-comments" (click)="facebookComments = true; showComments = !showComments">COMMENTS
-                    <i class="fa" [ngClass]="{'fa-angle-down': facebookComments, 'fa-angle-up': facebookComments}"></i>
-                </button>
+            <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
+                <i class="fa" [ngClass]="{'fa-angle-down': !showComments, 'fa-angle-up': showComments}"></i>
+            </button>
 
-                    <div [ngStyle]="{display: showComments ? 'block' : 'none'}"class="fb-comments" data-href="http://www.f2k.gg/#/articles/f2k_signs_streamer_aggedon_22" data-numposts="5"></div>
-            </div>	
-                
-            <div class="footer-ad">AD</div>
-				<div class="fb-comments" data-href="http://www.f2k.gg/#/articles/f2k_signs_streamer_aggedon_22" data-numposts="5"></div>
-			</div>
+            <div #commentContainer class="article-comments" [ngStyle]="{opacity: showComments ? '1' : '0', height: showComments ? '' : '0'}"></div>
+
+            <!--<div class="footer-ad">AD</div>-->
+        </div>
     </div>
 
     <div #recommendedTeaser class="recommended">
