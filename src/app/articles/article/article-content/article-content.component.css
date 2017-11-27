@@ -91,13 +91,13 @@ f2k-rating-box {
 /* TODO: Button specs for all layouts */
 
 .btn-expand-comments {
-    float: left;
     border: none;
     height: 40px;
     padding: 0 20px;
     background-color: #EF3418;
     color: white;
     font-weight: bold;
+    margin-bottom: 12px;
 }
 
 
@@ -205,7 +205,7 @@ f2k-rating-box {
     .article-content img {
         width: 728px;
     }
-	
+
 	.article-content iframe{
 		width: 728px;
 		height:420px;
@@ -314,7 +314,7 @@ f2k-rating-box {
 		height:53.7vw;
 		max-height:260px;
 	}
-	
+
     .btn-expand-comments {
         float: none;
         width: 100%;

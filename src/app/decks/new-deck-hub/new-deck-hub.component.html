@@ -33,16 +33,20 @@
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
                                 <p class="b2">{{cell.title}}</p>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true; "
-                                                  (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card"
+                                                  (mouseenter)="displayedCard = card; displayCard = true; "
+                                                  (mousemove)="positionDisplayedCard($event)"
+                                                  (mouseleave)="displayCard = false"></f2kCardComponent>
                             </div>
                         </div>
 
                         <div class="cards-container">
                             <div *ngFor="let cell of rightColumn">
                                 <p class="b2">{{cell.title}}</p>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" (mouseenter)="displayedCard = card; displayCard = true"
-                                                  (mousemove)="positionDisplayedCard($event)" (mouseleave)="displayCard = false"></f2kCardComponent>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card"
+                                                  (mouseenter)="displayedCard = card; displayCard = true"
+                                                  (mousemove)="positionDisplayedCard($event)"
+                                                  (mouseleave)="displayCard = false"></f2kCardComponent>
                             </div>
                         </div>
                     </div>
@@ -69,8 +73,9 @@
 
                     <div class="deck-comments phone">
                         <button class="btn-expand-comments">COMMENTS
-        <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}" ></i> <!-- TODO: comments open...comments closed -->
-      </button>
+                            <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>
+                            <!-- TODO: comments open...comments closed -->
+                        </button>
                         <!-- TODO: Facebook Comments API -->
                     </div>
 
@@ -80,16 +85,13 @@
 
                 </div>
                 <div class="deck-footer">
-                    <div class="deck-comments desktop">
-                        <button class="btn-expand-comments" (click)="facebookComments = true; showComments = !showComments">COMMENTS
-                            <i class="fa" [ngClass]="{'fa-angle-down': facebookComments, 'fa-angle-up': facebookComments}"></i>
-                        </button>
+                    <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
+                        <i class="fa" [ngClass]="{'fa-angle-down': !showComments, 'fa-angle-up': showComments}"></i>
+                    </button>
 
-                        <div *ngIf="facebookComments" [ngStyle]="{display: showComments ? 'block' : 'none'}">
-                            <div class="fb-comments fb-comment-embed" attr.data-href="{{commentUrl}}" data-numposts="5"></div>
-                        </div>
-                    </div>
-                    <div class="footer-ad">AD</div>
+                    <div #commentContainer class="article-comments" [ngStyle]="{opacity: showComments ? '1' : '0', height: showComments ? '' : '0'}"></div>
+
+                    <!--<div class="footer-ad">AD</div>-->
                 </div>
             </div>
 
@@ -107,7 +109,7 @@
 </div>
 
 <div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
-    [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
+     [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
     <!-- TODO make a component -->
     <img src="assets/images/static/hearthstone/{{displayedCard.cardId}}.png">
 </div>

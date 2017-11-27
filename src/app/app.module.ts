@@ -59,6 +59,7 @@ import { CanvasManaGraphComponent } from './canvas-mana-graph/canvas-mana-graph.
 import { SponsorTileComponent } from './sponsor/sponsor-tile/sponsor-tile.component';
 import { SponsorHubComponent } from './sponsor/sponsor-hub/sponsor-hub.component';
 import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
+import { FacebookSkdService } from './facebook-skd.service';
 
 const config = {
     breakPoints: {
@@ -156,7 +157,8 @@ const myAppRoutes: Routes = [
         DustCalculationService,
         TierListHubService,
         F2kUrlPipe,
-        GoogleAnalyticsEventsService
+        GoogleAnalyticsEventsService,
+        FacebookSkdService
     ]
 })
 export class AppModule {
