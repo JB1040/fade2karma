@@ -36,5 +36,20 @@ export class SponsorHubComponent implements OnInit {
                 icon: 'assets/icons/twitter.svg'
             }]
         }));
+
+        this.sponsors.push(new Sponsor({
+            imageURL: 'assets/sponsor-images/aftershockz.png',
+            link: 'https://aftershokz.com',
+            links: [{
+                url: 'https://www.facebook.com/AfterShokz',
+                icon: 'assets/icons/facebook.svg'
+            }, {
+                url: 'https://twitter.com/aftershokz',
+                icon: 'assets/icons/twitter.svg'
+            }, {
+                url: 'https://www.youtube.com/channel/UCyNdHJA6ZlAtDNQJUoqJKdA',
+                icon: 'assets/icons/twitch.svg'
+            }]
+        }));
     }
 }
