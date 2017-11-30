@@ -131,9 +131,9 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         }
 
         if (this.deck.game === 'HS') {
-            this.distribution = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '+7': 0 };
+            this.distribution = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7+': 0 };
             this.deck.cards.forEach((card: Card) => {
-                this.distribution[(card.cost >= 7 ? '+7' : `${card.cost}`)] += 1;
+                this.distribution[(card.cost >= 7 ? '7+' : `${card.cost}`)] += 1;
             });
             this.leftColumn.push({
                 title: `${this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} Cards`,

@@ -3,11 +3,15 @@ import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/cor
 @Component({
     selector: 'f2kCanvasManaGraph',
     template: '',
-    styles: [`:host { display: block; width: 100%; height: 100%; }`]
+    styles: [`:host {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }`]
 })
 export class CanvasManaGraphComponent implements OnInit {
 
-    @Input() data: {[key: string]: number} = {'0': 2, '1': 4, '2': 7, '3': 4, '4': 2, '5': 0, '6': 1, '+7': 4}; // as fallback
+    @Input() data: { [key: string]: number } = { '0': 2, '1': 4, '2': 7, '3': 4, '4': 2, '5': 0, '6': 1, '7+': 4 }; // as fallback
 
     canvas = document.createElement('canvas');
     ctx = this.canvas.getContext('2d');
@@ -15,13 +19,13 @@ export class CanvasManaGraphComponent implements OnInit {
     width: number;
     height: number;
     header = 25;
-    footer = 30;
+    footer = 35;
     keys: Array<string>;
     maxDataHeightProportion = 0.8;
     valueHeightRep: number;
     hexagon: HTMLImageElement;
 
-    @HostListener('window:resize', [ '$event' ])
+    @HostListener('window:resize', ['$event'])
     onWindowResize() {
         this.build();
     }
@@ -29,10 +33,10 @@ export class CanvasManaGraphComponent implements OnInit {
     constructor(private elRef: ElementRef) {
         new Promise(resolve => {
             this.hexagon = document.createElement('img');
-            const path = 'assets/graph-images/bg-hexagon.png';
+            const path = 'assets/graph-images/mana.png';
 
-            this.hexagon.onload = () => resolve({path, status: 'ok'});
-            this.hexagon.onerror = () => resolve({path, status: 'error'});
+            this.hexagon.onload = () => resolve({ path, status: 'ok' });
+            this.hexagon.onerror = () => resolve({ path, status: 'error' });
 
             this.hexagon.src = path;
         }).then(() => {
@@ -80,9 +84,12 @@ export class CanvasManaGraphComponent implements OnInit {
         this.drawCenteredText(`${this.data[key]}`, ((this.colWidth * index) + (this.colWidth / 2)), (this.header - 5), 'bold 16px Roboto', '#333');
     }
 
-    drawFooter(key: string, index: number) { // Footer height is 30px
-        this.ctx.drawImage(this.hexagon, this.colWidth * index + Math.floor((this.colWidth - 26) / 2), this.height - this.header); // 26 image width
-        this.drawCenteredText(key, ((this.colWidth * index) + (this.colWidth / 2)), this.height - 8, 'bold 16px Roboto', 'white');
+    drawFooter(key: string, index: number) { // Footer height is 35px
+        this.ctx.drawImage(this.hexagon, this.colWidth * index + Math.floor((this.colWidth - 31) / 2), this.height - this.footer + 4, 31, 31); // 31 image width
+        this.ctx.shadowColor = 'black';
+        this.ctx.shadowBlur = 4;
+        this.drawCenteredText(key, ((this.colWidth * index) + (this.colWidth / 2)), this.height - 9, 'bold 16px Roboto', 'white');
+        this.ctx.shadowBlur = 0;
     }
 
     drawColumns() {

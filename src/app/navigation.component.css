@@ -136,7 +136,7 @@ h5:hover,
         left: 0;
         right: 0;
         overflow: auto;
-        max-height: Calc(100vh - 40px);
+        max-height: Calc(75vh - 40px);
     }
 
     .nav-column {
