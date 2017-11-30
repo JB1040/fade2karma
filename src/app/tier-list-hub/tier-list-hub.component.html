@@ -25,14 +25,14 @@
     <div class="row">
         <div class="col-md-12">
             <!--<h1>Hearthstone July Tier List</h1>-->
-            <h1>Hearthstone Tier List</h1>
+            <h1>Tier Lists</h1>
             <!--<p class="b2 date">Last Updated: July 15th, 2017</p>-->
 
             <div class="tier-list-button-group">
                 <div class="tier-list-button standard" (click)="changeActive('STANDARD')"
                      [ngClass]="{'active': active === 'STANDARD'}">
                     <img src="../../assets/icons/standardicon.svg">
-                    Standard
+                    Hearthstone
                 </div>
              <!--   <div class="tier-list-button wild" (click)="changeActive('WILD')"
                      [ngClass]="{'active': active === 'WILD'}">
@@ -46,11 +46,11 @@
                 </div>-->
 
                 <!--TODO comment in when Gwent is live-->
-                <!--<div class="tier-list-button gwent" (click)="changeActive('GWENT')"-->
-                     <!--[ngClass]="{'active': active === 'GWENT'}">-->
-                    <!--<img src="../../assets/icons/gwent.svg">-->
-                    <!--Gwent-->
-                <!--</div>-->
+                <div class="tier-list-button gwent" (click)="changeActive('GWENT')"
+                     [ngClass]="{'active': active === 'GWENT'}">
+                    <img src="../../assets/icons/gwent.svg">
+                    Gwent
+                </div>
             </div>
         </div>
         <!--<div class="col-md-4">-->
