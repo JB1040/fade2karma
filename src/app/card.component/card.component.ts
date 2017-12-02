@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import Card from '../card';
+import { Games } from '../decks/deck';
 
 @Component({
     selector: 'f2kCardComponent',
@@ -9,4 +10,5 @@ import Card from '../card';
 
 export class CardComponent {
     @Input() card: Card;
+    @Input() game: Games;
 }

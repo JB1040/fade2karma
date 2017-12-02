@@ -33,7 +33,7 @@
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
                                 <p class="b2">{{cell.title}}</p>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card"
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
                                                   (mouseenter)="displayedCard = card; displayCard = true; "
                                                   (mousemove)="positionDisplayedCard($event)"
                                                   (mouseleave)="displayCard = false"></f2kCardComponent>
@@ -43,7 +43,7 @@
                         <div class="cards-container">
                             <div *ngFor="let cell of rightColumn">
                                 <p class="b2">{{cell.title}}</p>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card"
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
                                                   (mouseenter)="displayedCard = card; displayCard = true"
                                                   (mousemove)="positionDisplayedCard($event)"
                                                   (mouseleave)="displayCard = false"></f2kCardComponent>
@@ -111,5 +111,5 @@
 <div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
      [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
     <!-- TODO make a component -->
-    <img src="assets/images/static/hearthstone/{{displayedCard.cardId}}.png">
+    <img src="assets/images/static/{{deck.game === 'HS' ? 'hearthstone' : 'gwent'}}/{{displayedCard.cardId}}.png">
 </div>
