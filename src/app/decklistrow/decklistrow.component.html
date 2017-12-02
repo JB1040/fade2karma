@@ -4,14 +4,14 @@
 
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img *ngIf="deck.game === 'HS'" src="assets/images/Hearthstone_Square/{{deck.heroClass.toLowerCase()}}.jpg" class="icon"/>
-            <img *ngIf="deck.game === 'GWENT'" src="assets/icons/{{deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}}.jpg" class="icon"/>
+            <img *ngIf="deck.game === 'HS'" src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>
+            <img *ngIf="deck.game === 'GWENT'" src="assets/icons/{{deck.faction.replace('\'', '-').replace(' ', '') | lowercase}}.jpg" class="icon"/>
         </div>
     </div>
     <div class="cell img-cell">
         <div class="icon-wrap">
             <img *ngIf="deck.game === 'HS'" src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>
-            <img *ngIf="deck.game === 'GWENT'" src="assets/GwentLeaders_Square/{{deck.leader.replace('\'', '-').replace(' ', '').toLowerCase()}}.jpg" class="icon"/>
+            <img *ngIf="deck.game === 'GWENT'" src="assets/GwentLeaders_Square/{{deck.leader.name.replace('\'', '-').replace(' ', '') | lowercase}}.jpg" class="icon"/>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
     </div>
     <div class="cell img-cell">
         <div class="icon-wrap">
-            <img src="assets/images/Hearthstone_Square/{{deck.heroClass.toLowerCase()}}.jpg" class="icon"/>
+            <img src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>
         </div>
     </div>
     <div class="cell img-cell">

@@ -141,7 +141,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             });
             this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
         } else {
-            this.leftColumn.push({ title: 'Leader', cards: this.getSpecificCards('group', 'LEADER') });
+            this.leftColumn.push({ title: 'Leader', cards: [(this.deck.leader as any)] });
 
             const goldCards = this.getSpecificCards('group', 'GOLD');
             this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
@@ -162,8 +162,8 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
-                    value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
+                    value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
+                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.name.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Dust Cost' : 'Scrap',
