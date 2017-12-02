@@ -141,15 +141,15 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             });
             this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
         } else {
-            this.leftColumn.push({ title: 'Leader', cards: this.getSpecificCards('group', 'Leader') });
+            this.leftColumn.push({ title: 'Leader', cards: this.getSpecificCards('group', 'LEADER') });
 
-            const goldCards = this.getSpecificCards('group', 'Gold');
+            const goldCards = this.getSpecificCards('group', 'GOLD');
             this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
 
-            const silverCards = this.getSpecificCards('group', 'Silver');
+            const silverCards = this.getSpecificCards('group', 'SILVER');
             this.leftColumn.push({ title: 'Silver x ' + this.getCardAmount(silverCards), cards: silverCards });
 
-            const bronzeCards = this.getSpecificCards('group', 'Bronze');
+            const bronzeCards = this.getSpecificCards('group', 'BRONZE');
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
