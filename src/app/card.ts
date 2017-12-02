@@ -22,7 +22,7 @@ export default class Card {
     public group: string;
     public info: string;
     public positions: Array<string>;
-    public strength: 3;
+    public strength: number;
     // public variations: Array<{ availability: string, rarity: string }>;
     constructor(jsonData: any) {
         Extend(this, jsonData);

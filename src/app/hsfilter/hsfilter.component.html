@@ -2,7 +2,7 @@
     <div class="icons">
         <img *ngFor="let className of classNames" (click)="toggleActiveClass(className)"
              [ngClass]="{grey: activeClasses.length > 0 && !activeClasses.includes(className)}"
-             src="assets/Hearthstone_Square/{{className.toLowerCase()}}.jpg">
+             src="assets/Hearthstone_Square/{{className | lowercase}}.jpg">
     </div>
 
     <div class="type-filters">

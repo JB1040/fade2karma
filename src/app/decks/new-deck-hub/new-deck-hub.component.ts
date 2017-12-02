@@ -141,15 +141,18 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             });
             this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
         } else {
-            this.leftColumn.push({ title: 'Leader', cards: this.getSpecificCards('group', 'Leader') });
+            const leaderCard = new Card(this.deck.leader);
+            leaderCard.rarity = 'LEGENDARY';
+            leaderCard.positions = ['EVENT'];
+            this.leftColumn.push({ title: 'Leader', cards: [leaderCard] });
 
-            const goldCards = this.getSpecificCards('group', 'Gold');
+            const goldCards = this.getSpecificCards('group', 'GOLD');
             this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
 
-            const silverCards = this.getSpecificCards('group', 'Silver');
+            const silverCards = this.getSpecificCards('group', 'SILVER');
             this.leftColumn.push({ title: 'Silver x ' + this.getCardAmount(silverCards), cards: silverCards });
 
-            const bronzeCards = this.getSpecificCards('group', 'Bronze');
+            const bronzeCards = this.getSpecificCards('group', 'BRONZE');
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
@@ -162,8 +165,8 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
-                    value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
+                    value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
+                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.name.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Dust Cost' : 'Scrap',

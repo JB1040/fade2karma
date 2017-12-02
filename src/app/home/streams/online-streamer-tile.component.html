@@ -1,6 +1,6 @@
 <a [routerLink]="['/team/' + streamer.username + '_' + streamer.id]"></a> <!-- TODO FIX -->
 <div class="tint">
-    <img class="img-circle image" src="assets/images/users/{{streamer.username.toLowerCase()}}.jpg">
+    <img class="img-circle image" src="assets/images/users/{{streamer.username | lowercase}}.jpg">
 </div>
 <div class="online-streamer-info" style="float: left">
     <h5>{{streamer.username}}</h5>

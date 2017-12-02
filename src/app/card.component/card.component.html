@@ -1,10 +1,10 @@
 <div class="hs-card">
     <div class="square">
         <div class="square-content">
-            <div><span [ngClass]="card.heroClass" class="b2 white sky-blue-bg">{{card.cost}}</span></div>
+            <div><span class="b2 white sky-blue-bg">{{card.cost != null ? card.cost : (card.strength || '-')}}</span></div>
         </div>
     </div>
-    <div class="central gray-bg" [ngClass]="card.rarity">
+    <div class="central gray-bg" [ngClass]="card.rarity | lowercase">
         <div class="b2 white card-name">
             <p class="">{{card.name}}</p>
         </div>

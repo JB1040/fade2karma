@@ -48,7 +48,7 @@ export class SponsorHubComponent implements OnInit {
                 icon: 'assets/icons/twitter.svg'
             }, {
                 url: 'https://www.youtube.com/channel/UCyNdHJA6ZlAtDNQJUoqJKdA',
-                icon: 'assets/icons/twitch.svg'
+                icon: 'assets/icons/youtube.svg'
             }]
         }));
     }

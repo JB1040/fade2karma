@@ -14,7 +14,7 @@ export type HeroClasses =
     | 'ROGUE';
 export type Modes = 'CON' | 'ARENA' | 'BRAWL';
 export type Games = 'HS' | 'GWENT' | 'UNDEFINED';
-export type GwentLeaders =
+export type GwentLeaderName =
     'unseen-elder'
     | 'eredin'
     | 'dagon'
@@ -31,6 +31,14 @@ export type GwentLeaders =
     | 'john-calveit'
     | 'morvran-voorhis';
 export type GwentFactions = 'Monsters' | 'Northern Realms' | 'Scoia\'tael' | 'Skellige' | 'Nilfgaard';
+
+export class GwentLeader {
+    name: GwentLeaderName;
+    strength: number;
+    text: string;
+    cardId: string;
+    rarity: string;
+}
 
 export class Deck {
     id: number;
@@ -50,7 +58,7 @@ export class Deck {
     tier: number;
     code: any;
 
-    leader: GwentLeaders;
+    leader: GwentLeader;
     faction: GwentFactions;
     dust?: number;
 
