@@ -36,7 +36,8 @@ export class GwentLeader {
     name: GwentLeaderName;
     strength: number;
     text: string;
-
+    cardId: string;
+    rarity: string;
 }
 
 export class Deck {

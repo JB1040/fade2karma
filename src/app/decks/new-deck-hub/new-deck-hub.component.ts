@@ -141,7 +141,10 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             });
             this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
         } else {
-            this.leftColumn.push({ title: 'Leader', cards: [(this.deck.leader as any)] });
+            const leaderCard = new Card(this.deck.leader);
+            leaderCard.rarity = 'LEGENDARY';
+            leaderCard.positions = ['EVENT'];
+            this.leftColumn.push({ title: 'Leader', cards: [leaderCard] });
 
             const goldCards = this.getSpecificCards('group', 'GOLD');
             this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
