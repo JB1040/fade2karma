@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { Deck } from '../deck';
+import { Deck, Games } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
@@ -7,6 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { FacebookSkdService } from '../../facebook-skd.service';
+
+export function GetImageSrc(card: Card, gameMode: string, thumbnail: boolean): string {
+    return `assets/images/static/${ gameMode === 'HS' ? 'hearthstone/' + card.cardId : 'gwent/' + card.name.replace(/-/g, ' ')}${ thumbnail ? '_thumb' : ''}.png`;
+}
 
 @Component({
     selector: 'f2kNewDeckHub',

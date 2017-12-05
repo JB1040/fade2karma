@@ -111,5 +111,5 @@
 <div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
      [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
     <!-- TODO make a component -->
-    <img src="assets/images/static/{{deck.game === 'HS' ? 'hearthstone' : 'gwent'}}/{{displayedCard.cardId}}.png">
+    <img [src]="getImageSrc(displayedCard, deck.game, false)">
 </div>
