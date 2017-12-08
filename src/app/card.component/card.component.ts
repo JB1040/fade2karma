@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import Card from '../card';
 import { Games } from '../decks/deck';
-import { GetImageSrc } from '../decks/new-deck-hub/new-deck-hub.component';
+import { GetImageSrc } from '../core/globals';
 
 @Component({
     selector: 'f2kCardComponent',

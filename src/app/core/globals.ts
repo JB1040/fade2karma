@@ -1,3 +1,6 @@
+import Card from '../card';
+import { Games } from '../decks/deck';
+
 export const BASE_URL = 'https://api.f2k.gg';
 
 export function Extend(a, b) {
@@ -7,4 +10,8 @@ export function Extend(a, b) {
         }
     }
     return a;
+}
+
+export function GetImageSrc(card: Card, gameMode: Games, thumbnail: boolean): string {
+    return `assets/images/static/${ gameMode === 'HS' ? 'hearthstone/' + card.cardId : 'gwent/' + card.name.replace(/-/g, ' ')}${ thumbnail ? '_thumb' : ''}.png`;
 }
