@@ -32,7 +32,7 @@
                     <div class="cards-containers clearfix">
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
-                                <p class="b2">{{cell.title}}</p>
+                                <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
                                                   (mouseenter)="displayedCard = card; displayCard = true; "
                                                   (mousemove)="positionDisplayedCard($event)"
@@ -42,7 +42,7 @@
 
                         <div class="cards-container">
                             <div *ngFor="let cell of rightColumn">
-                                <p class="b2">{{cell.title}}</p>
+                                <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
                                                   (mouseenter)="displayedCard = card; displayCard = true"
                                                   (mousemove)="positionDisplayedCard($event)"
@@ -71,13 +71,11 @@
                     <f2kRecommendedContainer *ngIf="decks.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
 
-                    <div class="deck-comments phone">
-                        <button class="btn-expand-comments">COMMENTS
-                            <i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>
-                            <!-- TODO: comments open...comments closed -->
-                        </button>
-                        <!-- TODO: Facebook Comments API -->
-                    </div>
+                    <!--<div class="deck-comments phone">-->
+                        <!--<button class="btn-expand-comments">COMMENTS-->
+                            <!--<i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>-->
+                        <!--</button>-->
+                    <!--</div>-->
 
                     <f2kRecommendedContainer *ngIf="decks.length > 0" class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>

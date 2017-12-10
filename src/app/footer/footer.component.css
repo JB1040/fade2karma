@@ -49,7 +49,7 @@ h5 {
 
 @media (max-width: 767px) {
     :host {
-        width: Calc(100vw - 20px);
+        width: Calc(100vw - 30px);
         max-width: 460px;
         text-align: center;
     }

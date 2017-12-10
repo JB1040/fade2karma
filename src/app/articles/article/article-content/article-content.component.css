@@ -172,6 +172,7 @@ f2k-rating-box {
     }
     .article-body {
         float: none;
+        word-break: break-all;
     }
     .article-footer {
         padding-bottom: 30px;
@@ -305,7 +306,9 @@ f2k-rating-box {
     }
     .article-content img {
         width: 100%;
-        max-width: 460px;
+        height: auto!important;
+        max-width: 100%;
+        margin: auto!important;
     }
 	.article-content iframe{
 		position: relative;
