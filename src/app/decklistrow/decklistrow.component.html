@@ -5,7 +5,7 @@
     <div class="cell img-cell">
         <div class="icon-wrap">
             <img *ngIf="deck.game === 'HS'" src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>
-            <img *ngIf="deck.game === 'GWENT'" src="assets/icons/{{deck.faction.replace('\'', '-').replace(' ', '') | lowercase}}.jpg" class="icon"/>
+            <img *ngIf="deck.game === 'GWENT'" src="assets/icons/{{deck.faction.replace('\'', '-').replace(' ', '') | lowercase}}.svg" class="icon"/>
         </div>
     </div>
     <div class="cell img-cell">
