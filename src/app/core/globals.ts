@@ -13,5 +13,5 @@ export function Extend(a, b) {
 }
 
 export function GetImageSrc(card: Card, gameMode: Games, thumbnail: boolean): string {
-    return `assets/images/static/${ gameMode === 'HS' ? 'hearthstone/' + card.cardId : 'gwent/' + card.name.replace(/-/g, ' ')}${ thumbnail ? '_thumb' : ''}.png`;
+    return encodeURI(`assets/images/static/${ gameMode === 'HS' ? 'hearthstone/' + card.cardId : 'gwent/' + card.name.replace(/-/g, ' ')}${ thumbnail ? '_thumb' : ''}.png`);
 }

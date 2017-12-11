@@ -48,7 +48,7 @@
 
 .deck-guide-section {
     margin: 40px auto 34px auto;
-    width: 740px;
+    /*width: 740px;*/
 }
 
 .deck-hub-container {
@@ -219,6 +219,11 @@ f2k-rating-box {
     /*display: none; !* TODO add adds*!*/
 }
 
+.cards-container > div > span {
+    margin: 8px 0 12px 0;
+    display: inline-block;
+}
+
 
 /******************/
 
@@ -355,6 +360,7 @@ f2k-rating-box {
       float: none;
       margin: 20px 10px;
       max-width: 440px;
+      width: auto;
      }
     .btn-copy-deck-code {
       width: Calc(100% - 40px);

@@ -162,7 +162,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
                 {
                     label: this.deck.game === 'HS' ? 'Class' : 'Faction',
                     value: this.deck.game === 'HS' ? this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.faction.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
+                    image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.svg`
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
