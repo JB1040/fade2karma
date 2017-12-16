@@ -157,21 +157,26 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
+        console.log(`assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`, );
         this.chartData = {
             metadata: [
                 {
                     label: this.deck.game === 'HS' ? 'Class' : 'Faction',
                     value: this.deck.game === 'HS' ? this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.faction.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.svg`
+                    image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.svg`,
+                    imageStyle: {'padding-bottom': '4px'}
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
                     value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-                    image: this.deck.game === 'HS' ? `` : `assets/GwentLeaders_Square/${this.deck.leader.name.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`
+                    image: this.deck.game === 'HS' ? `assets/icons/${deckMode.toLowerCase()}icon.svg` : `assets/GwentLeaders_Square/${this.deck.leader.name.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`,
+                    imageStyle: {'padding-bottom': '5px'}
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Dust Cost' : 'Scrap',
-                    value: DustCalculationService.getCardCost(this.deck.cards, this.deck.game)
+                    value: DustCalculationService.getCardCost(this.deck.cards, this.deck.game),
+                    image: this.deck.game !== 'HS' ? 'assets/icons/icon-dust.png' : 'assets/icons/icon-scrap.png',
+                    imageStyle: {'padding-bottom': '5px'}
                 }
             ],
             distribution: this.distribution
