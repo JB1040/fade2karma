@@ -3,7 +3,7 @@
         <span class="label"><h5>{{row.label}}:</h5></span>
         <span class="value b2">{{row.value}}</span>
         <div class="icon-wrap">
-            <img src="{{row.image}}" class="icon"/>
+            <img src="{{row.image}}" [ngStyle]="row.imageStyle" class="icon"/>
         </div>
     </div>
 </div>
