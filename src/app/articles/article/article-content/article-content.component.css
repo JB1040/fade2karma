@@ -172,7 +172,7 @@ f2k-rating-box {
     }
     .article-body {
         float: none;
-        word-break: break-all;
+        word-break: break-word;
     }
     .article-footer {
         padding-bottom: 30px;
