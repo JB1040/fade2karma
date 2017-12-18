@@ -90,6 +90,8 @@
         font-size: 24px;
         line-height: 30px;
     }
+	
+
 
     .article-text-container {
         padding: 10px;
@@ -106,7 +108,9 @@
     }
 
     :host(.featured) .article-text-container {
-        width: 314px;
+        width: 314px;	
+        opacity:0.74;
+    
     }
 
     :host(.featured) h4 { /*h4 as h1*/
