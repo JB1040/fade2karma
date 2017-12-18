@@ -108,9 +108,8 @@
     }
 
     :host(.featured) .article-text-container {
-        width: 314px;	
-        opacity:0.74;
-    
+        opacity: 0.75;
+        width: 314px;
     }
 
     :host(.featured) h4 { /*h4 as h1*/
