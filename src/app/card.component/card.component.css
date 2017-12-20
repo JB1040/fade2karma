@@ -154,8 +154,11 @@ span.common {
 
     .hs-card .central .image-wrap {
         height: 30px;
+        width: 50%;
+        max-width: 140px;
     }
 }
+
 @media (min-width: 768px) {
     h1, h2, h3, h4, h5 {
         text-shadow: 1px;
@@ -180,6 +183,7 @@ span.common {
         height: 40px;
     }
 }
+
 @media (min-width: 1220px) {
     .hs-card {
         width: 380px;
