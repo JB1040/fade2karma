@@ -38,12 +38,14 @@
     float: left;
     margin: 0 1px 0 1px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .hs-card .central .image-wrap {
     box-sizing: border-box;
-    width: 104px;
-    float: right;
+    position: absolute;
+    width: 120px;
+    right: 0;
 }
 
 .hs-card .central .image-wrap img {
@@ -52,7 +54,6 @@
 
 .hs-card .central .card-name {
     float: left;
-    width: 180px;
 }
 
 .hs-card .central .card-name p {
@@ -82,19 +83,19 @@
 
 /* Rarity */
 .legendary {
-    border-left: 4px solid #F7B220;
+    border-left: 8px solid #F7B220;
 }
 
 .rare {
-    border-left: 4px solid #49A1BB;
+    border-left: 8px solid #49A1BB;
 }
 
 .epic {
-    border-left: 4px solid #8365C7;
+    border-left: 8px solid #8365C7;
 }
 
 div.common {
-    border-left: 4px solid #E7E7E7;
+    border-left: 8px solid #E7E7E7;
 }
 
 /* GW Factions */
@@ -136,13 +137,11 @@ span.common {
     .hs-card .central {
         max-width: 378px;
         height: 30px;
-        position: relative;
         width: Calc(100% - 62px);
     }
 
     .hs-card .central .card-name {
         height: 30px;
-        width: auto;
     }
 
     .hs-card .central .card-name p {
@@ -155,8 +154,6 @@ span.common {
 
     .hs-card .central .image-wrap {
         height: 30px;
-        position: absolute;
-        right: 0;
     }
 }
 @media (min-width: 768px) {
@@ -181,7 +178,6 @@ span.common {
 
     .hs-card .central .image-wrap {
         height: 40px;
-        width: 76px;
     }
 }
 @media (min-width: 1220px) {
