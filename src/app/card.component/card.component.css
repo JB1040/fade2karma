@@ -154,8 +154,7 @@ span.common {
 
     .hs-card .central .image-wrap {
         height: 30px;
-        width: 50%;
-        max-width: 140px;
+        max-width: 50%;
     }
 }
 
