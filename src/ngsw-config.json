@@ -1,0 +1,74 @@
+{
+    "index": "/index.html",
+    "assetGroups": [
+        {
+            "name": "app",
+            "installMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/index.html"
+                ],
+                "versionedFiles": [
+                    "/*.bundle.css",
+                    "/*.bundle.js",
+                    "/*.chunk.js"
+                ],
+                "urls": [
+                    "https://fonts.googleapis.com/css?family=Roboto:400,400i,700,900"
+                ]
+            }
+        },
+        {
+            "name": "assets",
+            "installMode": "lazy",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/assets/**/*.{js,html,css,png,jpg,gif}"
+                ]
+            }
+        }
+    ],
+    "dataGroups": [
+        {
+            "name": "api-freshness",
+            "urls": [
+                "/api/articles/list",
+                "/api/articles/featured",
+                "/api/decks/list"
+            ],
+            "cacheConfig": {
+                "maxSize": 1000,
+                "maxAge": "1h",
+                "timeout": "10s",
+                "strategy": "freshness"
+            }
+        },
+        {
+            "name": "api-performance",
+            "urls": [
+                "/api/articles",
+                "/api/decks",
+                "/api/users/list",
+                "/api/articles/byAuthor",
+                "/team"
+            ],
+            "cacheConfig": {
+                "maxSize": 1000,
+                "maxAge": "4h",
+                "strategy": "performance"
+            }
+        },
+        {
+            "name": "api-performance",
+            "urls": [
+                "api/users"
+            ],
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "1d",
+                "strategy": "performance"
+            }
+        }
+    ]
+}

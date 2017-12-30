@@ -1,0 +1,19 @@
+{
+    "short_name": "F2K",
+    "name": "Fade_To_Karma",
+    "start_url": "/",
+
+    "theme_color": "#cccccc",
+    "background_color": "#ffffff",
+
+    "display": "standalone",
+    "orientation": "portrait",
+
+    "icons": [
+        {
+            "src": "/assets/images/f2kBBI.png",
+            "sizes": "512x512",
+            "type": "image/svg"
+        }
+    ]
+}

@@ -12,16 +12,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "4.2.3",
-    "@angular/compiler": "4.2.3",
-    "@angular/core": "4.2.3",
-    "@angular/forms": "4.2.3",
-    "@angular/http": "4.2.3",
-    "@angular/platform-browser": "4.2.3",
-    "@angular/platform-browser-dynamic": "4.2.3",
-    "@angular/platform-server": "4.2.3",
-    "@angular/router": "4.2.3",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.29",
+    "@angular/animations": "^5.1.2",
+    "@angular/common": "^5.1.2",
+    "@angular/compiler": "^5.1.2",
+    "@angular/compiler-cli": "^5.1.2",
+    "@angular/core": "^5.1.2",
+    "@angular/forms": "^5.1.2",
+    "@angular/http": "^5.1.2",
+    "@angular/platform-browser": "^5.1.2",
+    "@angular/platform-browser-dynamic": "^5.1.2",
+    "@angular/platform-server": "^5.1.2",
+    "@angular/router": "^5.1.2",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.8",
     "core-js": "^2.4.1",
     "d3": "^4.10.0",
     "ng2-responsive": "^0.8.4",
@@ -29,7 +31,7 @@
     "rxjs": "^5.0.1",
     "streamer": "^0.2.1",
     "ts-helpers": "^1.1.1",
-    "typescript": "2.3.4",
+    "typescript": "2.6.2",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
@@ -52,7 +54,7 @@
     "systemjs": "^0.20.17",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3",
+    "typescript": "^2.6.2",
     "webpack": "^3.4.1"
   }
 }
