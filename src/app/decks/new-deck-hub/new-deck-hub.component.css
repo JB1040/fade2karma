@@ -186,17 +186,8 @@ f2k-rating-box {
 }
 
 .footer-ad {
-    width: 728px;
-    height: 90px;
-    margin: 40px auto;
-    /* TODO: REMOVE THOSE PLACEHOLDER SPECIFIC PROPERTIES */
-    text-align: center;
-    background-color: #e7e7e7;
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-    line-height: 90px;
-    display: none; /* TODO add adds*/
+    width: 780px;
+    margin-top: 40px;
 }
 
 .recommended {
@@ -207,16 +198,7 @@ f2k-rating-box {
 
 .side-ad {
     width: 300px;
-    height: 250px;
     margin: 40px auto;
-    /* TODO: REMOVE THOSE PLACEHOLDER SPECIFIC PROPERTIES */
-    text-align: center;
-    background-color: #e7e7e7;
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-    line-height: 250px;
-    /*display: none; !* TODO add adds*!*/
 }
 
 .cards-container > div > span {

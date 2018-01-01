@@ -1,5 +1,5 @@
 f2kArticlesTile {
-    float: left;    
+    float: left;
 }
 
 h1 {
@@ -47,11 +47,11 @@ h1 {
     margin: -41px -20px 0 -20px;
 }
 
-.dropdown-children h5{
+.dropdown-children h5 {
     padding: 4px 0;
 }
 
-.dropdown-children h5:hover{
+.dropdown-children h5:hover {
     opacity: 0.75;
 }
 
@@ -63,10 +63,18 @@ h1 {
     margin-top: 5px;
 }
 
+f2k-ad {
+    display: none;
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
 @media (max-width: 767px) {
     h1 {
         margin-top: 15px;
     }
+
     .articles-select {
         margin: 17px 0 25px 0;
     }
@@ -81,20 +89,23 @@ h1 {
     h1 {
         margin-top: 32px;
     }
+
     .articles-select {
         margin: 29px 0 33px 0;
     }
 
+    f2k-ad {
+        display: block;
+    }
+
+    f2k-ad,
     f2kArticlesTile {
         margin-bottom: 20px;
     }
-	
-
-
 }
 
 @media (min-width: 768px) and (max-width: 1219px) {
-    f2kArticlesTile:not(:nth-child(2n+2)) {
+    f2kArticlesTile:not(:nth-of-type(2n+2)) {
         margin-right: 20px;
     }
 }
@@ -103,11 +114,12 @@ h1 {
     h1 {
         margin-top: 33px;
     }
+
     .articles-select {
         margin: 26px 0 32px 0;
     }
 
-    f2kArticlesTile:not(:nth-child(3n+3)) {
+    f2kArticlesTile:not(:nth-of-type(3n+3)) {
         margin-right: 20px;
     }
 }
