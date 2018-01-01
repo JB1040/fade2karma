@@ -38,6 +38,7 @@ const contentRoutes: Routes = [
             }
         ]
     },
+    { path: 'giveaway', component: GiveawaysHubComponent },
     { path: 'giveaways', component: GiveawaysHubComponent },
     { path: 'dmca', component: DmcaComponent },
     { path: 'privacy_and_cookie_policy', component: PrivacyPolicyComponent },

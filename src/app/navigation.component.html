@@ -14,7 +14,7 @@
     <div class="navbar-collapse" [ngClass]="open ? 'open': ''">
         <div *ngFor="let navItem of navItems; let index = index"
             [ngClass]="{dropdown : (navItem.children.length > 0), open : navItem.children.length > 0 && navItem.open}"
-            (click)="navItem.open = !navItem.open"  class="navItem" [ngStyle]="{display: navItem.name === 'Giveaway' && !giveawayExists ? 'none' : ''}">
+            (click)="navItem.open = !navItem.open"  class="navItem">
             <h5 [ngClass]="{active: isActive(navItem.name)}">
                 <span class="navItemText">{{navItem.name}}</span>
                 <span class="caret" *ngIf="navItem.children.length > 0" [ngClass]="{up: navItem.open, down: !navItem.open}"></span> <!--TODO caret => &#65087 && &#65088-->
