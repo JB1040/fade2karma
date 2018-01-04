@@ -6,6 +6,11 @@ f2kTierListComponent {
     float: right;
 }
 
+.article-container-one,
+.article-container-two {
+    display: inline-block;
+}
+
 .article-container-one f2kArticlesTile,
 .article-container-two f2kArticlesTile {
     float: left;
@@ -18,6 +23,10 @@ f2kTierListComponent {
 }
 
 .article-container-two f2kArticlesTile:first-child {
+    display: none;
+}
+
+f2k-ad {
     display: none;
 }
 
@@ -133,6 +142,18 @@ f2kTierListComponent {
     .article-container-one,
     .article-container-two {
         width: Calc(100% - 400px);
+    }
+
+    f2k-ad {
+        float: right;
+        display: inline-block;
+        width: 300px;
+        margin: 40px;
+    }
+
+    .side-container {
+        float: right;
+        width: 380px;
     }
 }
 

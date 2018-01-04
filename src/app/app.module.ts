@@ -60,14 +60,15 @@ import { SponsorTileComponent } from './sponsor/sponsor-tile/sponsor-tile.compon
 import { SponsorHubComponent } from './sponsor/sponsor-hub/sponsor-hub.component';
 import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 import { FacebookSkdService } from './facebook-skd.service';
+import { AdComponent } from './ad/ad.component';
 
 const config = {
     breakPoints: {
-        xs: {min: 0, max: 0},
-        sm: {min: 1, max: 767},
-        md: {min: 768, max: 1219},
-        lg: {min: 1220, max: Infinity},
-        xl: {min: Infinity}
+        xs: { min: 0, max: 0 },
+        sm: { min: 1, max: 767 },
+        md: { min: 768, max: 1219 },
+        lg: { min: 1220, max: Infinity },
+        xl: { min: Infinity }
     },
     debounceTime: 100
 };
@@ -77,8 +78,8 @@ export function ResponsiveDefinition() {
 };
 
 const myAppRoutes: Routes = [
-    {path: '', component: PageNotFoundComponent},
-    {path: '**', component: PageNotFoundComponent}
+    { path: '', component: PageNotFoundComponent },
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 
@@ -95,6 +96,7 @@ const myAppRoutes: Routes = [
     ],
     declarations: [
         AppComponent,
+        AdComponent,
         PageNotFoundComponent,
         HomePageComponent,
         NavigationComponent,

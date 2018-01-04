@@ -14,7 +14,6 @@ export class NavigationComponent implements OnInit {
     open: boolean;
     lastScrollTop: number;
     top: number;
-    giveawayExists = false;
     externals = ['EU Shop', 'NA Shop'];
     navItems: NavItem[] = [
         // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
@@ -95,13 +94,20 @@ export class NavigationComponent implements OnInit {
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
-        const amount = 100;
+        const amount = 2;
         const offset = 0;
         const type = 'GIVEAWAYS';
         this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
-            const giveaways = res.json();
-            if (giveaways && giveaways.length > 0) {
-                this.giveawayExists = true;
+            for (let i = 0, ii = this.navItems.length; i < ii; i++) {
+                if (this.navItems[i].name === 'Giveaways') {
+                    switch (res.json().length) {
+                        case 0:
+                            this.navItems.splice(i, 1);
+                            break;
+                        case 1:
+                            this.navItems[i].name = 'Giveaway';
+                    }
+                }
             }
         });
     }
