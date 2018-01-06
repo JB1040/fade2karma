@@ -40,11 +40,19 @@ export class GwentLeader {
     rarity: string;
 }
 
+export class DeckObj {
+    name: string;
+    code: string;
+    cards: Array<Card>;
+
+    dust?: number;
+}
+
 export class Deck {
     id: number;
+    authorID: number;
     author: Author;
     title: string;
-    cards: Card[];
     content: string;
     game: Games;
     published: boolean;
@@ -57,10 +65,10 @@ export class Deck {
     editDate: number;
     tier: number;
     code: any;
+    decks: Array<DeckObj>;
 
     leader: GwentLeader;
     faction: GwentFactions;
-    dust?: number;
 
     constructor(jsonData: any) {
         Extend(this, jsonData);

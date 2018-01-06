@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { Deck } from '../deck';
+import { Deck, DeckObj } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { Http } from '@angular/http';
@@ -13,7 +13,7 @@ import { FacebookSkdService } from '../../facebook-skd.service';
     templateUrl: './new-deck-hub.component.html',
     styleUrls: ['./new-deck-hub.component.css']
 })
-export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
+export class NewDeckHubComponent implements OnDestroy {
 
     public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
     deck: Deck;
@@ -34,6 +34,7 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     commentUrl: string;
     previousSize: number;
     getImageSrc = GetImageSrc;
+    activeDeck: DeckObj;
 
     distribution: { [key: string]: number };
 
@@ -93,9 +94,9 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
         }
     }
 
-    getSpecificCards(param: string, value: any, equils = true) {
+    getSpecificCards(deck: DeckObj, param: string, value: any, equils = true) {
         const cards: Array<Card> = [];
-        this.deck.cards.forEach(card => {
+        deck.cards.forEach(card => {
             if ((equils ? card[param] === value : card[param] !== value)) {
                 let c;
 
@@ -122,6 +123,9 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     }
 
     buildData() {
+        this.leftColumn = [];
+        this.rightColumn = [];
+
         let deckMode: string;
         if (this.deck.mode === 'CON') {
             if (this.deck.isStandard) {
@@ -133,57 +137,58 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
 
         if (this.deck.game === 'HS') {
             this.distribution = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7+': 0 };
-            this.deck.cards.forEach((card: Card) => {
+            this.activeDeck.cards.forEach((card: Card) => {
                 this.distribution[(card.cost >= 7 ? '7+' : `${card.cost}`)] += 1;
             });
             this.leftColumn.push({
                 title: `${this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} Cards`,
-                cards: this.getSpecificCards('heroClass', 'NEUTRAL', false)
+                cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL', false)
             });
-            this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards('heroClass', 'NEUTRAL') });
+            this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL') });
         } else {
+            this.distribution = null;
             const leaderCard = new Card(this.deck.leader);
             leaderCard.rarity = 'LEGENDARY';
             leaderCard.positions = ['EVENT'];
             this.leftColumn.push({ title: 'Leader', cards: [leaderCard] });
 
-            const goldCards = this.getSpecificCards('group', 'GOLD');
+            const goldCards = this.getSpecificCards(this.activeDeck, 'group', 'GOLD');
             this.leftColumn.push({ title: 'Gold x ' + this.getCardAmount(goldCards), cards: goldCards });
 
-            const silverCards = this.getSpecificCards('group', 'SILVER');
+            const silverCards = this.getSpecificCards(this.activeDeck, 'group', 'SILVER');
             this.leftColumn.push({ title: 'Silver x ' + this.getCardAmount(silverCards), cards: silverCards });
 
-            const bronzeCards = this.getSpecificCards('group', 'BRONZE');
+            const bronzeCards = this.getSpecificCards(this.activeDeck, 'group', 'BRONZE');
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
-        console.log(`assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`, );
+        console.log(`assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`);
         this.chartData = {
             metadata: [
                 {
                     label: this.deck.game === 'HS' ? 'Class' : 'Faction',
                     value: this.deck.game === 'HS' ? this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.faction.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
                     image: this.deck.game === 'HS' ? `assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg` : `assets/icons/${this.deck.faction.replace('\'', '-').replace(' ', '').toLowerCase()}.svg`,
-                    imageStyle: {'padding-bottom': '4px'}
+                    imageStyle: { 'padding-bottom': '4px' }
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Game mode' : 'Leader',
                     value: this.deck.game === 'HS' ? deckMode.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : this.deck.leader.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
                     image: this.deck.game === 'HS' ? `assets/icons/${deckMode.toLowerCase()}icon.svg` : `assets/GwentLeaders_Square/${this.deck.leader.name.replace('\'', '-').replace(' ', '').toLowerCase()}.jpg`,
-                    imageStyle: {'padding-bottom': '5px'}
+                    imageStyle: { 'padding-bottom': '5px' }
                 },
                 {
                     label: this.deck.game === 'HS' ? 'Dust Cost' : 'Scrap',
-                    value: DustCalculationService.getCardCost(this.deck.cards, this.deck.game),
+                    value: DustCalculationService.getCardCost(this.activeDeck.cards, this.deck.game),
                     image: this.deck.game === 'HS' ? 'assets/icons/icon-dust.png' : 'assets/icons/icon-scrap.png',
-                    imageStyle: {'padding-bottom': '5px'}
+                    imageStyle: { 'padding-bottom': '5px' }
                 }
             ],
             distribution: this.distribution
         };
     }
 
-    positionDisplayedCard(event: any) {
+    positionDisplayedCard(event: MouseEvent) {
         const xPos = event.clientX;
         const yPos = event.clientY;
 
@@ -194,10 +199,14 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
     }
 
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => { // TODO get id...
+        this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => {
+
             this.deck = res.json();
+            this.activeDeck = this.deck.decks[0];
+
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
             this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
+
             this.buildData();
         });
     }
@@ -214,12 +223,12 @@ export class NewDeckHubComponent implements /*OnInit, */OnDestroy {
             textArea.style.position = 'fixed';
             textArea.style.opacity = '0';
             this.docEl.body.appendChild(textArea);
-            textArea.value = this.deck.code;
+            textArea.value = this.activeDeck.code;
             textArea.select();
             this.docEl.execCommand('copy');
             textArea.remove();
         } else {
-            prompt('Deck code could not be automatically copied\nto your clipboard, but you can manually copy it.', this.deck.code);
+            prompt('Deck code could not be automatically copied\nto your clipboard, but you can manually copy it.', this.activeDeck.code);
         }
     }
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
     selector: 'f2kCanvasManaGraph',
@@ -9,7 +9,7 @@ import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/cor
         height: 100%;
     }`]
 })
-export class CanvasManaGraphComponent implements OnInit {
+export class CanvasManaGraphComponent implements OnInit, OnChanges {
 
     @Input() data: { [key: string]: number } = { '0': 2, '1': 4, '2': 7, '3': 4, '4': 2, '5': 0, '6': 1, '7+': 4 }; // as fallback
 
@@ -44,11 +44,15 @@ export class CanvasManaGraphComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    ngOnChanges(): void {
+        this.build(true);
+    }
+
+    ngOnInit(): void {
         this.elRef.nativeElement.appendChild(this.canvas);
     }
 
-    build(forceBuild?: boolean) {
+    build(forceBuild?: boolean): void {
         console.log(this.elRef);
         const width = this.elRef.nativeElement.clientWidth - 1; // -1 for the up most right side border
         const height = this.elRef.nativeElement.clientHeight;

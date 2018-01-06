@@ -95,6 +95,57 @@ h1.deck-title {
     padding: 31px 0 20px 0;
 }
 
+ /* deck cycling  */
+
+
+
+.f2k-nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.f2k-nav-tabs {
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.f2k-nav-item {
+    display: inline-block;
+    margin-bottom: -1px;
+}
+
+.f2k-nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    color: #666;
+    text-decoration: none;
+    background-color: transparent;
+    text-align: center;
+}
+
+.f2k-nav-tabs > li > a {
+    transition: background-color 200ms ease;
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.f2k-nav-tabs > li:hover > a {
+    background-color: rgba(239, 52, 24, .1);
+}
+
+.f2k-nav-tabs > li.active > a {
+    color: #333;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
 
 /* Article Info Clearfix */
 
