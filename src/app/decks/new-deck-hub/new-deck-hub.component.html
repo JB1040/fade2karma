@@ -28,7 +28,14 @@
                         <f2k-social-share [text]="deck.title"></f2k-social-share>
                     </div>
                 </div>
+
                 <div class="deck-content">
+                    <ul *ngIf="deck.decks?.length > 1" class="f2k-nav f2k-nav-tabs">
+                        <li *ngFor="let deck of deck.decks" class="f2k-nav-item"
+                            [ngClass]="{active: activeDeck.name === deck.name}"
+                            (click)="activeDeck = deck; buildData()"><a>{{deck.name}}</a></li>
+                    </ul>
+
                     <div class="cards-containers clearfix">
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
@@ -55,20 +62,20 @@
                     <div class="deck-and-ad tablet clearfix">
                         <div class="graph-container">
                             <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                            <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                            <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                         </div>
                         <f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>
                     </div>
 
                     <div class="phone graph-container">
                         <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                        <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                        <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                     </div>
                     <f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>
 
                     <div class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
-                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks?.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
 
                     <!--<div class="deck-comments phone">-->
@@ -77,7 +84,7 @@
                         <!--</button>-->
                     <!--</div>-->
 
-                    <f2kRecommendedContainer *ngIf="decks.length > 0" class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
+                    <f2kRecommendedContainer *ngIf="decks?.length > 0" class="phone recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
                     <!-- TODO: itemType -->
 
@@ -95,9 +102,9 @@
 
             <div class="recommended desktop">
                 <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                <button *ngIf="deck.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
                 <f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>
-                <f2kRecommendedContainer *ngIf="decks.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
+                <f2kRecommendedContainer *ngIf="decks?.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->
             </div>
             <div class="clearfix"></div>

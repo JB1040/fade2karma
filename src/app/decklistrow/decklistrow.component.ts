@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DeckListRowComponent implements OnInit {
 
-    @Input() protected deck: Deck; // TODO deck type
+    @Input() protected deck: Deck;
     @Input() protected odd: Boolean;
     @Input() protected even: Boolean;
     @Input() protected index: Number;
@@ -31,6 +31,6 @@ export class DeckListRowComponent implements OnInit {
         if ((Date.now() - (this.deck.editDate || this.deck.date)) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
             this.displayDate = TimeTransfer.getTime(this.deck.editDate || this.deck.date);
         }
-        this.dustCost = this.deck.dust;
+        this.dustCost = this.deck.decks[0].dust;
     }
 }

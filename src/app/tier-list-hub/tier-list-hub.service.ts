@@ -16,8 +16,8 @@ export class TierListHubService {
             .toPromise()
             .then(response => {
                 const res: Array<Deck> = response.json();
-                for (let i = 0; i < res.length; i++) {
-                    res[i].dust = DustCalculationService.getCardCost(res[i].cards, res[i].game);
+                for (let i = 0, ii = res.length; i < ii; i++) {
+                    res[i].decks.forEach(deck => deck.dust = DustCalculationService.getCardCost(deck.cards, res[i].game));
                 }
                 return res;
             })
