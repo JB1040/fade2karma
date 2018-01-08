@@ -35,6 +35,7 @@
             "urls": [
                 "/api/articles/list",
                 "/api/articles/featured",
+                "/api/users/list",
                 "/api/decks/list"
             ],
             "cacheConfig": {
@@ -49,7 +50,6 @@
             "urls": [
                 "/api/articles",
                 "/api/decks",
-                "/api/users/list",
                 "/api/articles/byAuthor",
                 "/team"
             ],

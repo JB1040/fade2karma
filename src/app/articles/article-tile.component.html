@@ -1,4 +1,6 @@
-<div (click)="onClick()" class="article-image-container tint">
+<a [routerLink]="[url]" class="overlay"></a>
+
+<div class="article-image-container tint">
 	<!--
 	INSTEAD OF IFRAME....
 	IF ITS YOUTUBE DO:
@@ -25,7 +27,7 @@
     <img *ngIf="article.imageURL && (article.imageURL.indexOf('youtube') !== -1 || article.imageURL.indexOf('twitch') !== -1)" class="f2k-play-image" src="assets/images/icons/PlayBtn.svg">
     <img *ngIf="!article.imageURL && !!heroClass" src="assets/images/hearthstoneDeckImageFallback/{{heroClass | lowercase}}.jpg" class="article-image"/>
 </div>
-<div (click)="onClick()" class="article-text-container">
+<div class="article-text-container">
     <h6 *ngIf="articleType">{{articleType}}</h6>
     <h4>{{article.title}}</h4>
     <p class="b2 author">{{article.author.username}} &bull; {{date}}</p>

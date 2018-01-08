@@ -22,6 +22,9 @@ export class SponsorHubComponent implements OnInit {
             }, {
                 url: 'https://twitter.com/Rush49',
                 icon: 'assets/icons/twitter.svg'
+            }, {
+                url: 'https://www.youtube.com/user/Rush49deals',
+                icon: 'assets/icons/youtube.svg'
             }]
         }));
 
@@ -34,6 +37,9 @@ export class SponsorHubComponent implements OnInit {
             }, {
                 url: 'https://twitter.com/amplemeal',
                 icon: 'assets/icons/twitter.svg'
+            }, {
+                url: 'https://www.youtube.com/channel/UCARyuqkXBF6aOoxyHcsD-mA',
+                icon: 'assets/icons/youtube.svg'
             }]
         }));
 
