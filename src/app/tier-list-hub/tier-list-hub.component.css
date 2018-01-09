@@ -6,6 +6,10 @@ h1 {
     padding-top: 20px;
 }
 
+.tier-list-info {
+    font-size: 16px;
+}
+
 .b2.date {
     color: #9b9b9b;
 }
@@ -145,3 +149,20 @@ h1 {
     border-left: 0;
 }
 
+
+@media (min-width: 768px) {
+    .tier-list-info {
+        width: 520px;
+        position: absolute;
+        right: 20px;
+        top: 32px;
+    }
+}
+
+@media (min-width: 1220px) {
+    .tier-list-info {
+        width: 730px;
+        right: 180px;
+        top: 56px;
+    }
+}
