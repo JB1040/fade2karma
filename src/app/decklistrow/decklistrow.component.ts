@@ -1,7 +1,6 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { TimeTransfer } from '../core/time-transfer';
 import { Deck } from '../decks/deck';
-import { DustCalculationService } from '../core/dust-calculation.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +20,8 @@ export class DeckListRowComponent implements OnInit {
     url: string;
 
     displayDate: string;
+
+    @HostBinding('class') class = 'clearfix';
 
     constructor(private router: Router) {}
 
