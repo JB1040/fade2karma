@@ -39,7 +39,7 @@ export class ArticlesTileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.url = `/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}`;
+        this.url = `/articles/${this.article.id}`;
 
         if (this.article instanceof Deck) {
             this.heroClass = this.article.heroClass;

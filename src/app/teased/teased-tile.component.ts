@@ -28,7 +28,7 @@ export class RecommendedTileComponent implements OnInit {
         if (this.type === 'deck') {
             this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
         } else {
-            this.url = `/articles/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+            this.url = `/articles/${this.teasedItem.id}`;
         }
 
         this.width.emit(this.el.nativeElement.clientWidth);
