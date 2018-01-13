@@ -205,8 +205,7 @@ export class NewDeckHubComponent implements OnDestroy {
             this.activeDeck = this.deck.decks[0];
 
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
-            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
-
+            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
             this.buildData();
         });
     }

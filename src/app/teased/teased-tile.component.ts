@@ -26,7 +26,7 @@ export class RecommendedTileComponent implements OnInit {
 
     ngOnInit() {
         if (this.type === 'deck') {
-            this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+            this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
         } else {
             this.url = `/articles/${this.teasedItem.id}`;
         }
