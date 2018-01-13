@@ -107,6 +107,8 @@ export class NavigationComponent implements OnInit {
                         case 1:
                             this.navItems[i].name = 'Giveaway';
                     }
+
+                    break;
                 }
             }
         });
