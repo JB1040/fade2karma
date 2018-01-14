@@ -61,6 +61,7 @@ import { SponsorHubComponent } from './sponsor/sponsor-hub/sponsor-hub.component
 import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 import { FacebookSkdService } from './facebook-skd.service';
 import { AdComponent } from './ad/ad.component';
+import { HtmlHovererComponent } from './html-hoverer/html-hoverer.component';
 
 const config = {
     breakPoints: {
@@ -139,7 +140,8 @@ const myAppRoutes: Routes = [
         CanvasManaGraphComponent,
         SponsorTileComponent,
         SponsorHubComponent,
-        PlayerHubComponent
+        PlayerHubComponent,
+        HtmlHovererComponent
     ],
     exports: [
         CapitalizePipe,
@@ -148,7 +150,7 @@ const myAppRoutes: Routes = [
     bootstrap: [
         AppComponent
     ],
-    providers: [{
+    providers: [ {
         provide: ResponsiveConfig,
         useFactory: ResponsiveDefinition
     },

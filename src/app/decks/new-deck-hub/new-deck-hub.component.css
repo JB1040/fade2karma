@@ -10,23 +10,6 @@
   display: none;
 }
 
-.deck-display {
-    position: fixed;
-    z-index: 9999;
-}
-
-.deck-display.left {
-    transform: translateX(-100%);
-}
-
-.deck-display.top {
-    transform: translateY(-100%);
-}
-
-.deck-display.top.left {
-    transform: translate(-100%, -100%);
-}
-
 .cards-containers {
     border-bottom: #e7e7e7 1px solid;
     padding-bottom: 40px;
