@@ -36,7 +36,9 @@
                 "/api/articles/list",
                 "/api/articles/featured",
                 "/api/users/list",
-                "/api/decks/list"
+                "/api/decks/list",
+                "/api/articles",
+                "/api/decks"
             ],
             "cacheConfig": {
                 "maxSize": 1000,
@@ -48,14 +50,12 @@
         {
             "name": "api-performance",
             "urls": [
-                "/api/articles",
-                "/api/decks",
                 "/api/articles/byAuthor",
                 "/team"
             ],
             "cacheConfig": {
                 "maxSize": 1000,
-                "maxAge": "4h",
+                "maxAge": "2h",
                 "strategy": "performance"
             }
         },
@@ -66,7 +66,7 @@
             ],
             "cacheConfig": {
                 "maxSize": 100,
-                "maxAge": "1d",
+                "maxAge": "8h",
                 "strategy": "performance"
             }
         }
