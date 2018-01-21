@@ -25,16 +25,17 @@ export class NavigationComponent implements OnInit {
         new NavItem('Shop', this.externals)
     ];
 
-    @HostListener('window:scroll', ['$event']) scroll(event) {
-        const st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > this.lastScrollTop) {
-            this.resetOpenItems();
-            this.element.nativeElement.style.top = -this.getHeight() + 'px';
-        } else {
-            this.element.nativeElement.style.top = 0;
-        }
-        this.lastScrollTop = st;
-    }
+    // TODO for preview, remove cleanly
+    // @HostListener('window:scroll', ['$event']) scroll(event) {
+    //     const st = window.pageYOffset || document.documentElement.scrollTop;
+    //     if (st > this.lastScrollTop) {
+    //         this.resetOpenItems();
+    //         this.element.nativeElement.style.top = -this.getHeight() + 'px';
+    //     } else {
+    //         this.element.nativeElement.style.top = 0;
+    //     }
+    //     this.lastScrollTop = st;
+    // }
 
     constructor(private service: NavigationService,
                 private route: ActivatedRoute,
