@@ -155,7 +155,7 @@ h1 {
         width: 520px;
         position: absolute;
         right: 20px;
-        top: 32px;
+        top: 7px;
     }
 }
 
@@ -163,6 +163,6 @@ h1 {
     .tier-list-info {
         width: 730px;
         right: 180px;
-        top: 56px;
+        top: 17px;
     }
 }
