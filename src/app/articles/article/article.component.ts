@@ -26,7 +26,6 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
             this.loadingArticles = false;
             this.allArticlesLoaded = false;
             this.recommendedArticles = [];
-            console.log(this.router.url);
             this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('/') + 1), 10));
             this.loadRecommendedArticles(3, 0);
         });

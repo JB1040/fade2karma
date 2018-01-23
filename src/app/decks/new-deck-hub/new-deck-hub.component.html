@@ -75,7 +75,7 @@
                     </div>
                     <!--<f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
 
-                    <div class="deck-guide-section" [innerHTML]="CONTENT"></div>
+                    <div #contentContainer class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
                     <f2kRecommendedContainer *ngIf="decks?.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>

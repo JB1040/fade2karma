@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { Deck, DeckObj } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
@@ -33,8 +33,11 @@ export class NewDeckHubComponent implements OnDestroy {
     getImageSrc = GetImageSrc;
     activeDeck: DeckObj;
 
+    clickOnHoverableElement: null | MouseEvent = null;
+
     distribution: { [key: string]: number };
 
+    @ViewChild('contentContainer') contentContainer: ElementRef;
     @ViewChild('commentContainer') commentContainer: ElementRef;
     @ViewChild('cardsContainers') cardsContainers: ElementRef;
     @ViewChild('htmlHover') htmlHover: HtmlHovererComponent;
@@ -55,7 +58,7 @@ export class NewDeckHubComponent implements OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.decks = [];
@@ -78,9 +81,44 @@ export class NewDeckHubComponent implements OnDestroy {
     }
 
     @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
-        if (this.openedWithClick && $event.button !== 2 && !this.cardsContainers.nativeElement.contains($event.target)) {
-            this.openedWithClick = false;
-            this.htmlHover.close();
+        if (this.openedWithClick && $event.button !== 2) {
+            if (this.clickOnHoverableElement !== $event) {
+                this.openedWithClick = false;
+                this.htmlHover.close();
+            } else if (!this.cardsContainers.nativeElement.contains($event.target)) {
+                this.openedWithClick = false;
+                this.htmlHover.close();
+            }
+        }
+    }
+
+    initTextCardHover(): void {
+        if (this.deck && this.deck.game === 'HS') {
+            const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
+            for (let i = 0; i < hoverableElements.length; i++) {
+                const hoverableElement = hoverableElements[i];
+                const cardId = hoverableElement.getAttribute('data-id');
+                if (cardId) {
+                    hoverableElement.addEventListener('click', $event => {
+                        this.clickOnHoverableElement = $event;
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event, true);
+                    });
+
+                    hoverableElement.addEventListener('mouseenter', $event => {
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event);
+                    });
+
+                    hoverableElement.addEventListener('mousemove', $event => {
+                        this.htmlHover.positionRelativeToMouse($event);
+                    });
+
+                    hoverableElement.addEventListener('mouseleave', $event => {
+                        this.closeHover();
+                    });
+                }
+            }
         }
     }
 
@@ -163,7 +201,6 @@ export class NewDeckHubComponent implements OnDestroy {
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
-        console.log(`assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`);
         this.chartData = {
             metadata: [
                 {
@@ -218,6 +255,8 @@ export class NewDeckHubComponent implements OnDestroy {
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
             this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
             this.buildData();
+            this.cdRef.detectChanges();
+            this.initTextCardHover();
         });
     }
 
