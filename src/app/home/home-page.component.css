@@ -53,7 +53,6 @@ f2k-ad {
         margin-bottom: 20px;
     }
 
-    .article-container-one,
     .article-container-two {
         margin-bottom: 10px;
     }
@@ -92,7 +91,6 @@ f2k-ad {
         margin-bottom: 40px;
     }
 
-    .article-container-one,
     .article-container-two {
         margin-bottom: 20px;
     }
@@ -129,10 +127,6 @@ f2k-ad {
     .article-container-one f2kArticlesTile:nth-child(2n+1),
     .article-container-two f2kArticlesTile:nth-child(2n+2) {
         margin-left: 20px;
-    }
-
-    .article-container-one {
-        margin-bottom: 20px;
     }
 
     f2kTopDecks {

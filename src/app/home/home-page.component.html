@@ -15,8 +15,6 @@
         <f2kArticlesTile *ngFor="let article of firstTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
     </div>
 
-    <f2kTopDecks *ngIf="decksArr.length > 0" [itemArr]="decksArr" [title]="'TOP DECKS'" class="clearfix"></f2kTopDecks>
-
     <div class="clearfix article-container-two" *ngIf="secondTilesColumn.length > 0">
         <f2kArticlesTile *ngFor="let article of secondTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
     </div>
