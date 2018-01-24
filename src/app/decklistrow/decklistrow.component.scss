@@ -7,6 +7,17 @@ $bw: 1px; // border width
 
 :host {
     cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
 }
 
 .resource {

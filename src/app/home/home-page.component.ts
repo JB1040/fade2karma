@@ -13,7 +13,6 @@ export class HomePageComponent implements OnInit {
     featuredArticles: Array<Article|Deck> = [];
     tierOne: Deck[] = [];
     tierTwo: Deck[] = [];
-    decksArr: Deck[][] = [];
     firstTilesColumn: Array<Article|Deck> = [];
     secondTilesColumn: Array<Article|Deck> = [];
     onlineStreamers: Author[] = [];
@@ -25,7 +24,6 @@ export class HomePageComponent implements OnInit {
     ngOnInit() {
         this.setFeatured();
         this.setArticles();
-        this.setDecks();
         this.setTierListDecks();
         this.setOnlineStreamers();
     }
@@ -70,14 +68,6 @@ export class HomePageComponent implements OnInit {
                 };
                 setTimeout(todo, 100);
             }
-        });
-    }
-
-    setDecks(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/decks/list?amount=12&offset=0`).subscribe(res => {
-            const decks = res.json();
-            this.decksArr.push(decks.slice(0, 6));
-            this.decksArr.push(decks.slice(6));
         });
     }
 

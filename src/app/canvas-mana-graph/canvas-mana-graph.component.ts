@@ -53,7 +53,6 @@ export class CanvasManaGraphComponent implements OnInit, OnChanges {
     }
 
     build(forceBuild?: boolean): void {
-        console.log(this.elRef);
         const width = this.elRef.nativeElement.clientWidth - 1; // -1 for the up most right side border
         const height = this.elRef.nativeElement.clientHeight;
         if (forceBuild || this.width !== width || this.height !== height) {

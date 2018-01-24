@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, ElementRef, AfterContentInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Article } from './article';
 import { TimeTransfer } from '../core/time-transfer';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Deck } from '../decks/deck';
 @Component({
     selector: 'f2kArticlesTile',
     templateUrl: './article-tile.component.html',
-    styleUrls: [ './article-tile.component.css' ]
+    styleUrls: ['./article-tile.component.css']
 })
 export class ArticlesTileComponent implements OnInit {
     @Input() article: Article | Deck;
@@ -21,27 +21,26 @@ export class ArticlesTileComponent implements OnInit {
     done: boolean;
     heroClass: string;
     articleType: string;
-
-    onClick() {
-        this.router.navigate([ `/articles/${this.article.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.article.id}` ]);
-    }
+    url: string;
 
     constructor(private router: Router, private sanitizer: DomSanitizer, private e: ElementRef, private http: Http) {}
 
     updateUrl() {
-		if (this.article.imageURL.indexOf('youtube') !== -1) {
-			this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
-		}
-	}
-	
-	onImageLoaded(img) {
-		if (img.naturalWidth < 1000 && !this.done) {
-			this.done = true;
-			this.updateUrl();
-		}
-	}
-	
+        if (this.article.imageURL.indexOf('youtube') !== -1) {
+            this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+        }
+    }
+
+    onImageLoaded(img) {
+        if (img.naturalWidth < 1000 && !this.done) {
+            this.done = true;
+            this.updateUrl();
+        }
+    }
+
     ngOnInit() {
+        this.url = `/articles/${this.article.id}`;
+
         if (this.article instanceof Deck) {
             this.heroClass = this.article.heroClass;
         } else {
@@ -50,11 +49,11 @@ export class ArticlesTileComponent implements OnInit {
         this.date = TimeTransfer.getTime(this.article.editDate || this.article.date);
         if (this.article.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
-			//this.http.get('http://i1.ytimg.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg').subscribe(data => { }, err => {
-			//	console.log("Error generated in finding youtoob image. " + this.article.imageURL);
-			//	this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
-			//});
-		} else if (this.article.imageURL.indexOf('twitch') !== -1) {
+            //this.http.get('http://i1.ytimg.com/vi/' + this.article.imageURL.split('embed/')[1] + '/maxresdefault.jpg').subscribe(data => { }, err => {
+            //	console.log("Error generated in finding youtoob image. " + this.article.imageURL);
+            //	this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.article.imageURL.split('embed/')[1] + '/mqdefault.jpg');
+            //});
+        } else if (this.article.imageURL.indexOf('twitch') !== -1) {
             this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.article.imageURL.split('&clip=')[1]).subscribe(res => {
                 const result = res.json();
                 this.image = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.medium);
@@ -70,11 +69,11 @@ export class ArticlesTileComponent implements OnInit {
                     this.description = this.description.slice(0, 120) + '...';
                 }
             }
-			
+
         }
     }
-	
-	getURL() {
-		return this.image;
-	}
+
+    getURL() {
+        return this.image;
+    }
 }

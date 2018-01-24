@@ -36,6 +36,23 @@
     right: 0;
 }
 
+.f2kHoverCard {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.f2kHoverCard.legendary {
+    color: #F7B220;
+}
+
+.f2kHoverCard.rare {
+    color: #49A1BB;
+}
+
+.f2kHoverCard.epic {
+    color: #8365C7;
+}
+
 router-outlet {
     display: block;
 }

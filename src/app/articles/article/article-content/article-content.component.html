@@ -27,7 +27,7 @@
             </div>
             <f2k-rating-box class="rating-box-phone" [rating]="article.rating" [itemId]="article.id" [itemType]="'article'"></f2k-rating-box>
         </div>
-		 <div class="article-content" [innerHtml]="CONTENT"></div>
+		 <div #contentContainer class="article-content" [innerHtml]="CONTENT"></div>
 
         <div class="article-footer">
             <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
@@ -46,3 +46,5 @@
     </div>
     <div class="clearfix"></div>
 </div>
+
+<f2kHtmlHoverer #htmlHover [htmlString]="displayedCard" [height]="400" [width]="300"></f2kHtmlHoverer>

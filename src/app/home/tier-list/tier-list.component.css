@@ -11,18 +11,22 @@ h5 {
     color: #ef3418;
 }
 
-a {
+.title-link {
+    text-decoration: none;
+}
+
+.tier-list-link-container > a {
     text-decoration: none;
     background: #ef3418;
     display: inline-block;
     transition: opacity 300ms;
 }
 
-a:hover{
+.tier-list-link-container > a:hover{
     opacity:0.75;
 }
 
-a .b2 {
+.tier-list-link-container > a .b2 {
     color: #ffffff;
 }
 
@@ -108,7 +112,7 @@ and (max-width : 1219px) {
         display: none;
     }
 
-    a {
+    .tier-list-link-container > a {
         padding: 10px 20px;
     }
 
@@ -127,7 +131,7 @@ and (max-width : 1219px) {
         width: 768px;
     }
 
-    a {
+    .tier-list-link-container > a {
         padding: 11px 20px;
     }
 
@@ -157,7 +161,7 @@ and (max-width : 1219px) {
         float: none;
     }
 
-    a {
+    .tier-list-link-container > a {
         padding: 9px 20px;
     }
 

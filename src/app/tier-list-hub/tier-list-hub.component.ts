@@ -34,7 +34,7 @@ export class TierListHubComponent implements OnInit {
         this.getDecks(1, 'Tier 1 - Best of the Best');
         this.getDecks(2, 'Tier 2 - Competitive Decks');
         this.getDecks(3, 'Tier 3 - Playable Decks');
-        this.getDecks(4, 'Tier 4 - The Best of the Rest');
+        // this.getDecks(4, 'Tier 4 - The Best of the Rest');
     }
 
     getDecks(tier: number, title: string) {

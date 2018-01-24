@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -12,6 +13,7 @@ import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { Article } from '../../article';
 import { BASE_URL } from '../../../core/globals';
 import { FacebookSkdService } from '../../../facebook-skd.service';
+import { HtmlHovererComponent } from '../../../html-hoverer/html-hoverer.component';
 
 @Component({
     selector: 'f2kArticleContent',
@@ -29,10 +31,16 @@ export class ArticleContentComponent implements OnInit {
     showComments = false;
     previousSize: number;
 
+    displayedCard: string;
+    clickOnHoverableElement: null | MouseEvent = null;
+    openedWithClick = false;
+
+    @ViewChild('contentContainer') contentContainer: ElementRef;
     @ViewChild('articleBody') articleBody: ElementRef;
     @ViewChild('recommendedTeaser') recommendedTeaser: ElementRef;
     @ViewChild('socialShare') socialShare: ElementRef;
     @ViewChild('commentContainer') commentContainer: ElementRef;
+    @ViewChild('htmlHover') htmlHover: HtmlHovererComponent;
 
     @HostListener('window:scroll', ['$event'])
     // TODO: while scrolling up, start scrolling when hits viewport bottom
@@ -70,7 +78,7 @@ export class ArticleContentComponent implements OnInit {
         this.socialShare.nativeElement.style.transform = 'translateY(' + distance + 'px)';
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private sanitizer: DomSanitizer, private el: ElementRef, private facebookService: FacebookSkdService) {}
+    constructor(@Inject(DOCUMENT) private docEl: Document, private sanitizer: DomSanitizer, private el: ElementRef, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) {}
 
     @HostListener('window:resize', ['$event.target'])
     onResize() {
@@ -78,6 +86,61 @@ export class ArticleContentComponent implements OnInit {
 
         if (this.previousSize && this.commentContainer.nativeElement.clientWidth !== this.previousSize) {
             this.parseHTML(true);
+        }
+    }
+
+    @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
+        if (this.openedWithClick && $event.button !== 2) {
+            if (this.clickOnHoverableElement !== $event) {
+                this.openedWithClick = false;
+                this.htmlHover.close();
+            }
+        }
+    }
+
+    initTextCardHover(): void {
+        if (this.article && this.article.game === 'HS') {
+            const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
+            for (let i = 0; i < hoverableElements.length; i++) {
+                const hoverableElement = hoverableElements[i];
+                const cardId = hoverableElement.getAttribute('data-id');
+                if (cardId) {
+                    hoverableElement.addEventListener('click', $event => {
+                        this.clickOnHoverableElement = $event;
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event, true);
+                    });
+
+                    hoverableElement.addEventListener('mouseenter', $event => {
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event);
+                    });
+
+                    hoverableElement.addEventListener('mousemove', $event => {
+                        this.htmlHover.positionRelativeToMouse($event);
+                    });
+
+                    hoverableElement.addEventListener('mouseleave', $event => {
+                        this.closeHover();
+                    });
+                }
+            }
+        }
+    }
+
+    // on mobile if only click based events to show cards if screen size is to small for hover to work properly
+    openHover($event: MouseEvent, clickOpen?: boolean): void {
+        if (clickOpen) {
+            this.openedWithClick = true;
+            this.htmlHover.open($event);
+        } else if (window.innerWidth > 600 || window.innerHeight > 800) {
+            this.htmlHover.open($event);
+        }
+    }
+
+    closeHover(): void {
+        if (!this.openedWithClick && (window.innerWidth > 600 || window.innerHeight > 800)) {
+            this.htmlHover.close();
         }
     }
 
@@ -104,5 +167,8 @@ export class ArticleContentComponent implements OnInit {
         } else {
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
         }
+
+        this.cdRef.detectChanges();
+        this.initTextCardHover();
     }
 }

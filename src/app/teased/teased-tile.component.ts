@@ -17,21 +17,20 @@ export class RecommendedTileComponent implements OnInit {
     @Input() type: string;
     date: string;
     image: any;
+    url: string;
 
     @Output() width = new EventEmitter<number>();
-
-    @HostListener('click') onClick() {
-        if (this.type === 'deck') {
-            this.router.navigate([`/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`]);
-        } else {
-            this.router.navigate([`/articles/${this.teasedItem.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`]);
-        }
-    }
 
     constructor(private el: ElementRef, private router: Router, private sanitizer: DomSanitizer, private http: Http) {
     }
 
     ngOnInit() {
+        if (this.type === 'deck') {
+            this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+        } else {
+            this.url = `/articles/${this.teasedItem.id}`;
+        }
+
         this.width.emit(this.el.nativeElement.clientWidth);
         this.date = TimeTransfer.getTime(this.teasedItem.editDate || this.teasedItem.date);
         if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('youtube') !== -1) {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { Deck, DeckObj } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL, GetImageSrc } from '../../core/globals';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { FacebookSkdService } from '../../facebook-skd.service';
+import { HtmlHovererComponent } from '../../html-hoverer/html-hoverer.component';
 
 @Component({
     selector: 'f2kNewDeckHub',
@@ -21,12 +22,8 @@ export class NewDeckHubComponent implements OnDestroy {
     chartData: any;
     leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
     rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
-    displayCard = false;
-    displayedCard: Card;
-    displayedCardUp: boolean;
-    displayedCardLeft: boolean;
-    displayCardTopPx: number;
-    displayCardleftPx: number;
+    displayedCard: string;
+    openedWithClick = false;
     CONTENT: any;
     routeSubscription: any;
     facebookComments = false;
@@ -36,9 +33,14 @@ export class NewDeckHubComponent implements OnDestroy {
     getImageSrc = GetImageSrc;
     activeDeck: DeckObj;
 
+    clickOnHoverableElement: null | MouseEvent = null;
+
     distribution: { [key: string]: number };
 
+    @ViewChild('contentContainer') contentContainer: ElementRef;
     @ViewChild('commentContainer') commentContainer: ElementRef;
+    @ViewChild('cardsContainers') cardsContainers: ElementRef;
+    @ViewChild('htmlHover') htmlHover: HtmlHovererComponent;
 
     static sortByManaCostAndName(a: Card, b: Card) {
         const sortValue = a.cost - b.cost;
@@ -56,19 +58,14 @@ export class NewDeckHubComponent implements OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.decks = [];
             this.chartData = null;
             this.leftColumn = [];
             this.rightColumn = [];
-            this.displayCard = false;
             this.displayedCard = null;
-            this.displayedCardUp = false;
-            this.displayedCardLeft = false;
-            this.displayCardTopPx = null;
-            this.displayCardleftPx = null;
             this.CONTENT = '';
 
             this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
@@ -80,6 +77,48 @@ export class NewDeckHubComponent implements OnDestroy {
     onResize() {
         if (this.previousSize && this.commentContainer.nativeElement.clientWidth !== this.previousSize) {
             this.parseHTML(true);
+        }
+    }
+
+    @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
+        if (this.openedWithClick && $event.button !== 2) {
+            if (this.clickOnHoverableElement !== $event) {
+                this.openedWithClick = false;
+                this.htmlHover.close();
+            } else if (!this.cardsContainers.nativeElement.contains($event.target)) {
+                this.openedWithClick = false;
+                this.htmlHover.close();
+            }
+        }
+    }
+
+    initTextCardHover(): void {
+        if (this.deck && this.deck.game === 'HS') {
+            const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
+            for (let i = 0; i < hoverableElements.length; i++) {
+                const hoverableElement = hoverableElements[i];
+                const cardId = hoverableElement.getAttribute('data-id');
+                if (cardId) {
+                    hoverableElement.addEventListener('click', $event => {
+                        this.clickOnHoverableElement = $event;
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event, true);
+                    });
+
+                    hoverableElement.addEventListener('mouseenter', $event => {
+                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                        this.openHover($event);
+                    });
+
+                    hoverableElement.addEventListener('mousemove', $event => {
+                        this.htmlHover.positionRelativeToMouse($event);
+                    });
+
+                    hoverableElement.addEventListener('mouseleave', $event => {
+                        this.closeHover();
+                    });
+                }
+            }
         }
     }
 
@@ -162,7 +201,6 @@ export class NewDeckHubComponent implements OnDestroy {
             this.rightColumn.push({ title: 'Bronze x ' + this.getCardAmount(bronzeCards), cards: bronzeCards });
         }
 
-        console.log(`assets/Hearthstone_Square/${this.deck.heroClass.toLowerCase()}.jpg`);
         this.chartData = {
             metadata: [
                 {
@@ -188,14 +226,24 @@ export class NewDeckHubComponent implements OnDestroy {
         };
     }
 
-    positionDisplayedCard(event: MouseEvent) {
-        const xPos = event.clientX;
-        const yPos = event.clientY;
+    // on mobile if only click based events to show cards if screen size is to small for hover to work properly
+    openHover($event: MouseEvent, clickOpen?: boolean): void {
+        if (clickOpen) {
+            this.openedWithClick = true;
+            this.htmlHover.open($event);
+        } else if (window.innerWidth > 600 || window.innerHeight > 800) {
+            this.htmlHover.open($event);
+        }
+    }
 
-        this.displayedCardLeft = xPos * 2 > window.innerWidth;
-        this.displayedCardUp = yPos * 2 > window.innerHeight;
-        this.displayCardTopPx = yPos + (this.displayedCardUp ? -20 : 20);
-        this.displayCardleftPx = xPos + (this.displayedCardLeft ? -20 : 20);
+    closeHover(): void {
+        if (!this.openedWithClick && (window.innerWidth > 600 || window.innerHeight > 800)) {
+            this.htmlHover.close();
+        }
+    }
+
+    setDisplayedCard(card: Card): void {
+        this.displayedCard = `<img src="${GetImageSrc(card, this.deck.game, false)}">`;
     }
 
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
@@ -205,9 +253,10 @@ export class NewDeckHubComponent implements OnDestroy {
             this.activeDeck = this.deck.decks[0];
 
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
-            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[^a-zA-Z0-9;,+*()\'$!-._~?/]/g, '').toLowerCase()}`;
-
+            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
             this.buildData();
+            this.cdRef.detectChanges();
+            this.initTextCardHover();
         });
     }
 

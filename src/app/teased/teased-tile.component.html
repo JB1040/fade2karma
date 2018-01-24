@@ -20,6 +20,8 @@ on play button click do {
 
 
 -->
+<a [routerLink]="[url]" class="overlay"></a>
+
 <img *ngIf="teasedItem.imageURL && (teasedItem.imageURL.indexOf('youtube') !== -1 || teasedItem.imageURL.indexOf('twitch') !== -1)" (error)="updateUrl($event)" [src]='image'>
 <img *ngIf="!teasedItem.imageURL && type === 'deck' && teasedItem.game === 'HS'" src="assets/Hearthstone_Square/{{teasedItem.heroClass | lowercase}}.jpg">
 <img *ngIf="!teasedItem.imageURL && type === 'deck' && teasedItem.game === 'GWENT'" src="assets/GwentLeaders_Square/{{teasedItem.leader.name.replace('\'', '-').replace(' ', '') | lowercase}}.jpg">

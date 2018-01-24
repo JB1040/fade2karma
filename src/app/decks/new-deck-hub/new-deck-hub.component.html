@@ -36,14 +36,15 @@
                             (click)="activeDeck = deck; buildData()"><a>{{deck.name}}</a></li>
                     </ul>
 
-                    <div class="cards-containers clearfix">
+                    <div #cardsContainers class="cards-containers clearfix">
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
                                 <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (mouseenter)="displayedCard = card; displayCard = true; "
-                                                  (mousemove)="positionDisplayedCard($event)"
-                                                  (mouseleave)="displayCard = false"></f2kCardComponent>
+                                                  (click)="setDisplayedCard(card); openHover($event, true)"
+                                                  (mouseenter)="setDisplayedCard(card); openHover($event)"
+                                                  (mousemove)="htmlHover.positionRelativeToMouse($event)"
+                                                  (mouseleave)="closeHover()"></f2kCardComponent>
                             </div>
                         </div>
 
@@ -51,9 +52,10 @@
                             <div *ngFor="let cell of rightColumn">
                                 <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (mouseenter)="displayedCard = card; displayCard = true"
-                                                  (mousemove)="positionDisplayedCard($event)"
-                                                  (mouseleave)="displayCard = false"></f2kCardComponent>
+                                                  (click)="setDisplayedCard(card); openHover($event, true)"
+                                                  (mouseenter)="setDisplayedCard(card); openHover($event)"
+                                                  (mousemove)="htmlHover.positionRelativeToMouse($event)"
+                                                  (mouseleave)="closeHover()"></f2kCardComponent>
                             </div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
                     </div>
                     <!--<f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
 
-                    <div class="deck-guide-section" [innerHTML]="CONTENT"></div>
+                    <div #contentContainer class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
                     <f2kRecommendedContainer *ngIf="decks?.length > 0" class="tablet recommended-teaser" [title]="'SIMILAR DECKS'"
                         [items]="decks" [itemType]="'deck'"></f2kRecommendedContainer>
@@ -113,8 +115,4 @@
     </div>
 </div>
 
-<div class="deck-display" *ngIf="displayCard" [ngClass]="{ 'left' : displayedCardLeft, 'top' : displayedCardUp }"
-     [ngStyle]="{'top.px': displayCardTopPx, 'left.px': displayCardleftPx}">
-    <!-- TODO make a component -->
-    <img [src]="getImageSrc(displayedCard, deck.game, false)">
-</div>
+<f2kHtmlHoverer #htmlHover [htmlString]="displayedCard" [height]="400" [width]="300"></f2kHtmlHoverer>
