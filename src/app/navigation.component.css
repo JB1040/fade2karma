@@ -78,28 +78,6 @@ h5:hover,
     margin-top: 2px;
 }
 
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    -webkit-transition: -webkit-transform 300ms; /* Safari */
-    transition: transform 300ms;
-}
-
-.caret.up {
-    border-top: 4px dashed;
-    -webkit-transform: rotate(-180deg); /* Safari */
-    transform: rotate(-180deg);
-}
-
-.caret.down {
-    border-top: 4px dashed;
-}
-
 .navbar-collapse {
     border-bottom: 1px solid #e7e7e7;
     background: white;

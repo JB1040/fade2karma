@@ -53,6 +53,40 @@
     color: #8365C7;
 }
 
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    -webkit-transition: -webkit-transform 300ms; /* Safari */
+    transition: transform 300ms;
+}
+
+.caret.up,
+.caret.down {
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 4px dashed;
+}
+
+.caret.left,
+.caret.right {
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 4px dashed;
+}
+
+.caret.up {
+    -webkit-transform: rotate(-180deg); /* Safari */
+    transform: rotate(-180deg);
+}
+
+.caret.right {
+    -webkit-transform: rotate(-180deg); /* Safari */
+    transform: rotate(-180deg);
+}
+
 router-outlet {
     display: block;
 }
