@@ -1,8 +1,13 @@
-<div *ngIf="iframe" class="stream-container">
+<div *ngIf="twitchStreamUrl" class="stream-container">
     <div class="stream-upper-display-box"></div>
     <div class="videoWrapperBounder">
-        <div class="videoWrapper">
-            <iframe [src]="iframe" scrolling="no" allowfullscreen="true" width="1280" height="720" frameborder="0"></iframe>
+        <div class="videoWrapper" [ngClass]="{'showChat': showChat}">
+            <iframe class="video" [src]="twitchStreamUrl" scrolling="no" allowfullscreen="true"></iframe>
+            <iframe class="chat" [src]="twitchChatUrl" allowfullscreen="true"></iframe>
+
+            <button (click)="showChat = !showChat" class="chat-toggle-btn">
+                <span class="caret" [ngClass]="{left: !showChat, right: showChat}"></span>
+            </button>
         </div>
     </div>
 </div>

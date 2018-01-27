@@ -33,6 +33,8 @@ export class NewDeckHubComponent implements OnDestroy {
     getImageSrc = GetImageSrc;
     activeDeck: DeckObj;
 
+    copyDeckCodeName = 'COPY DECK CODE';
+
     clickOnHoverableElement: null | MouseEvent = null;
 
     distribution: { [key: string]: number };
@@ -276,6 +278,8 @@ export class NewDeckHubComponent implements OnDestroy {
             textArea.select();
             this.docEl.execCommand('copy');
             textArea.remove();
+            this.copyDeckCodeName = '✔ DECK CODE COPIED';
+            window.setTimeout(() => { this.copyDeckCodeName = 'COPY DECK CODE'; }, 5000);
         } else {
             prompt('Deck code could not be automatically copied\nto your clipboard, but you can manually copy it.', this.activeDeck.code);
         }

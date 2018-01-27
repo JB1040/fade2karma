@@ -64,14 +64,14 @@
                     <div class="deck-and-ad tablet clearfix">
                         <div class="graph-container">
                             <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                            <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                            <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
                         </div>
                         <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
                     </div>
 
                     <div class="phone graph-container">
                         <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                        <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                        <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
                     </div>
                     <!--<f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
 
@@ -104,7 +104,7 @@
 
             <div class="recommended desktop">
                 <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">COPY DECK CODE</button>
+                <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
                 <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
                 <f2kRecommendedContainer *ngIf="decks?.length > 0" class="recommended-teaser" [itemType]="'deck'" [title]="'SIMILAR DECKS'" [items]="decks"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->

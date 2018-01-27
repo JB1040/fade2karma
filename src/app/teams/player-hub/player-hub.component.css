@@ -9,7 +9,6 @@
     padding-top: 33px;
 }
 
-
 .latest-decks-container f2kRecommendedTile:last-child,
 .latest-decks-container-lg f2kRecommendedTile:last-child {
     border-bottom: none;
@@ -105,22 +104,80 @@ f2kRecommendedTile {
 
 .videoWrapper {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
     height: 0;
 }
-.videoWrapper iframe {
+
+.videoWrapper {
+    padding-bottom: calc(100vh - 140px);
+}
+
+.videoWrapper iframe.video,
+.videoWrapper iframe.chat {
     position: absolute;
+    height: 100%;
+    border: none;
+}
+
+.videoWrapper iframe.video {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+}
+
+.videoWrapper iframe.chat {
+    bottom: 0;
+    right: 0;
+    width: 0;
 }
 
 .videoWrapperBounder {
     display: inline-block;
 }
 
+.chat-toggle-btn {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 1px;
+    background-color: #444;
+    padding: 2px 11px;
+    opacity: 0.7;
+}
+
+.chat-toggle-btn:hover {
+    cursor: pointer;
+}
+
+.chat-toggle-btn:hover .caret {
+    border-right-color: #666;
+    cursor: pointer;
+}
+
+.caret {
+    border-right-color: #222;
+}
+
 @media (max-width: 767px) {
+    .videoWrapper {
+        padding-bottom: calc(70vh + 56.25%);
+    }
+
+    .videoWrapper iframe.video,
+    .videoWrapper iframe.chat {
+        width: 100%;
+    }
+
+    .videoWrapper iframe.video {
+        height: calc(100% - 70vh);
+    }
+
+    .videoWrapper iframe.chat {
+        height: 70vh;
+    }
+
     .player-image-container {
         width: Calc(100% - 20px);
         padding-top: Calc(100% - 20px);
@@ -135,11 +192,30 @@ f2kRecommendedTile {
         margin: 20px;
         display: block;
     }
+
+    .chat-toggle-btn {
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
+    .videoWrapper iframe.video,
+    .videoWrapper iframe.chat {
+        transition: width 0.3s ease-in-out;
+    }
+
+    .videoWrapper.showChat iframe.video {
+        width: calc(100% - 340px);
+
+    }
+
+    .videoWrapper.showChat iframe.chat {
+        width: 339px;
+        border-left: 1px solid black;
+    }
+
     .videoWrapperBounder {
-        width: 748px;
+        width: Calc(100% - 32px);
     }
 }
 
@@ -196,7 +272,7 @@ f2kRecommendedTile {
     }
 
     .videoWrapperBounder {
-        width: 1200px;
+        width: Calc(100% - 40px);
     }
 
     .latest-decks-container {

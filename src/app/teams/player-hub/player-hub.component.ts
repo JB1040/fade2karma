@@ -19,7 +19,9 @@ export class PlayerHubComponent implements OnDestroy {
     player: Author;
     playerArticles: Array<Article>;
     age: number;
-    iframe: any;
+    twitchStreamUrl: any;
+    twitchChatUrl: any;
+    showChat = true;
 
     constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
@@ -35,7 +37,8 @@ export class PlayerHubComponent implements OnDestroy {
                 this.age = TimeTransfer.getAge(parseInt(this.player.birthday, 10));
             }
             if (this.player.twitchData) {
-                this.iframe = this.sanitizer.bypassSecurityTrustResourceUrl(`https://player.twitch.tv/?channel=${this.player.twitch}`);
+                this.twitchStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://player.twitch.tv/?channel=${this.player.twitch}`);
+                this.twitchChatUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.twitch.tv/${this.player.twitch}/chat`);
             }
         });
     }
