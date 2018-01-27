@@ -2,6 +2,10 @@
     display: none;
 }
 
+.twitter-container {
+    display: none;
+}
+
 f2kTierListComponent {
     float: right;
 }
@@ -138,11 +142,19 @@ f2k-ad {
         width: Calc(100% - 400px);
     }
 
+    .twitter-container {
+        display: block;
+        float: right;
+        margin: 40px 0;
+        width: calc(100% - 2px);
+        border: 1px solid #e7e7e7;
+    }
+
     f2k-ad {
         float: right;
         display: inline-block;
         width: 300px;
-        margin: 40px;
+        margin: 0 40px;
     }
 
     .side-container {
