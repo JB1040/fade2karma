@@ -180,7 +180,7 @@ h5:hover,
 
 @media (min-width: 768px) {
     :host {
-        height: 60px;
+        height: 50px;
     }
 
     .navItem {
@@ -192,7 +192,7 @@ h5:hover,
         margin-left: -21px;
         position: absolute;
         pointer-events: none;
-        top: 60px;
+        top: 50px;
         transform: translateY(-100%);
         transition: transform 300ms ease;
         background: white;
@@ -231,16 +231,20 @@ h5:hover,
 
     .navbar a {
         margin-right: 15px;
-        margin-left:-15px;
+        margin-left: -15px;
     }
 
     .navbar img {
         width: 132px;
     }
 
-    .navItem,
+    .navItem {
+        padding: 16px 15px;
+    }
+
     .navbar a {
-        padding: 21px 15px;
+        height: 16px;
+        padding: 18px 15px;
     }
 
     .navItem.open .dropdown-menu {
@@ -250,17 +254,13 @@ h5:hover,
 }
 
 @media (min-width: 1220px) {
-    :host {
-        height: 80px;
-    }
-
     .navbar {
         margin-top: 2px;
     }
 
     .navbar a {
         margin-right: 40px;
-        margin-left:-20px;
+        margin-left: -20px;
     }
 
     .navbar img {
@@ -275,12 +275,11 @@ h5:hover,
         padding: 24px 0;
     }
 
-    .dropdown-menu {
-        top: 80px;
+    .navItem {
+        padding: 14px 20px;
     }
 
-    .navItem,
     .navbar a {
-        padding: 29px 20px;
+        padding: 16px 20px;
     }
 }

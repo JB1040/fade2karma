@@ -55,17 +55,13 @@ router-outlet {
         width: 728px;
     }
     router-outlet {
-        margin-top: 60px;
+        margin-top: 50px;
     }
 }
 
 @media (min-width: 1220px) {
     .F2K-column {
         width: 1180px;
-    }
-
-    router-outlet {
-        margin-top: 80px;
     }
 }
 
