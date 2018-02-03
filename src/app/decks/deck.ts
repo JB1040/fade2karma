@@ -66,6 +66,7 @@ export class Deck {
     tier: number;
     code: any;
     decks: Array<DeckObj>;
+    difficulty: Difficulty;
 
     leader: GwentLeader;
     faction: GwentFactions;
@@ -73,4 +74,10 @@ export class Deck {
     constructor(jsonData: any) {
         Extend(this, jsonData);
     }
+}
+
+enum Difficulty {
+    easy = 'EASY',
+    medium = 'MEDIUM',
+    hard = 'HARD'
 }
