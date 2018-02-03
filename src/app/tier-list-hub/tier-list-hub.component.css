@@ -165,4 +165,10 @@ h1 {
         right: 180px;
         top: 17px;
     }
+
+    .row > .deck-list-row {
+        padding: 0;
+        padding-left: 15px;
+        margin-right: -3px;
+    }
 }

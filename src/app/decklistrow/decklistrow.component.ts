@@ -10,14 +10,15 @@ import { Router } from '@angular/router';
 })
 export class DeckListRowComponent implements OnInit {
 
-    @Input() protected deck: Deck;
-    @Input() protected odd: Boolean;
-    @Input() protected even: Boolean;
-    @Input() protected index: Number;
-    @Input() protected mode: string; // 'STANDARD' / 'WILD' / 'ARENA' when there is 3 images for each more use to set image
+    @Input() deck: Deck;
+    @Input() odd: Boolean;
+    @Input() even: Boolean;
+    @Input() index: Number;
+    @Input() mode: string; // 'STANDARD' / 'WILD' / 'ARENA' when there is 3 images for each more use to set image
     @Input() showTier = true;
     dustCost: number;
     url: string;
+    color = '';
 
     displayDate: string;
 
