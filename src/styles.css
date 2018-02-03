@@ -41,15 +41,15 @@
     text-decoration: underline;
 }
 
-.f2kHoverCard.legendary {
+.f2kHoverCard.LEGENDARY {
     color: #F7B220;
 }
 
-.f2kHoverCard.rare {
+.f2kHoverCard.RARE {
     color: #49A1BB;
 }
 
-.f2kHoverCard.epic {
+.f2kHoverCard.EPIC {
     color: #8365C7;
 }
 
