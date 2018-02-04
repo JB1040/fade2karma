@@ -3,18 +3,25 @@
 <div class="decklistrow" (mouseover)="color='red'" (mouseout)="color=''"
      [ngClass]="{odd: odd, even: even, first: index === 0}">
     <div class="cell title-cell">
-        <h5 [ngClass]="color">{{deck.title}}</h5>
+        <img src="assets/images/class/DLRCellTitleBg/{{deck.heroClass | lowercase}}.png">
+        <h4 [ngClass]="color">{{deck.title}}</h4>
         <div style="width:100%"></div>
         <!--<p class="b2 grey">by {{deck.author.username}}</p>-->
     </div>
-    <div class="cell img-cell">
+    <!--<div class="cell img-cell">-->
+        <!--<div class="icon-wrap">-->
+            <!--<img src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="cell img-cell">-->
+        <!--<div class="icon-wrap">-->
+            <!--<img src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="cell difficulty-cell">
         <div class="icon-wrap">
-            <img src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>
-        </div>
-    </div>
-    <div class="cell img-cell">
-        <div class="icon-wrap">
-            <img src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>
+            <img src="assets/icons/dificulty_{{deck.difficulty | lowercase}}.png" class="icon"/>
         </div>
     </div>
 
@@ -26,7 +33,6 @@
     </div>
     <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.editDate || deck.date)}}</div></div>-->
     <div class="cell date-cell">
-        <span class="b2 edit-note">Last edited</span>
-        <div class="b2">{{displayDate || ((deck.editDate || deck.date) | date:'MMM d, y')}}</div>
+        <div class="b2 date"><small>Last edited:</small> {{displayDate || ((deck.editDate || deck.date) | date:'MMM d, y')}}</div>
     </div>
 </div>

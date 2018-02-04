@@ -75,7 +75,8 @@ h1.deck-title {
 }
 
 .deck-info {
-    padding: 31px 0 20px 0;
+    display: inline-block;
+    margin-bottom: -14px;
 }
 
  /* deck cycling  */
@@ -116,6 +117,8 @@ h1.deck-title {
     line-height: 1.42857143;
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 
 .f2k-nav-tabs > li:hover > a {
@@ -296,9 +299,6 @@ f2k-rating-box {
     h1.deck-title {
         margin-top: 8px;
     }
-    .deck-info {
-        padding: 21px 0 17px 0;
-    }
     f2kAuthorTile {
         margin-right: 20px;
     }
@@ -423,9 +423,6 @@ f2k-rating-box {
         margin-top: 7px;
         width: 100%;
         max-width: 440px;
-    }
-    .deck-info {
-        padding: 15px 0 17px 0;
     }
     /* TODO: f2k-rating-box positioning for phone screen */
     /* TODO: social-share positioning for phone screen */

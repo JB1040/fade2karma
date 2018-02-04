@@ -16,9 +16,8 @@ export class AdComponent implements AfterViewInit {
     @Input() adLayoutKey = '';
     @Input() adSlot: string;
 
-    adClient: 'ca-pub-5126766313804047';
-
     ngAfterViewInit() {
+        console.log(window.adsbygoogle);
         (window.adsbygoogle || []).push({});
     }
 }

@@ -149,26 +149,53 @@ h1 {
     border-left: 0;
 }
 
+.difficulty-container {
+    white-space: pre-line;
+    font-weight: bold;
+}
+.difficulty-container > img {
+    width: 60px;
+}
+
+@media (max-width: 767px) {
+    .difficulty-container {
+        margin-bottom: 30px;
+    }
+}
 
 @media (min-width: 768px) {
     .tier-list-info {
-        width: 520px;
+        width: 370px;
         position: absolute;
         right: 20px;
-        top: 7px;
+        top: 33px;
+    }
+
+    .difficulty-container {
+        position: absolute;
+        top: 9px;
+        left: 180px;
+    }
+
+    .header-container {
+        padding: 15px 0;
     }
 }
 
 @media (min-width: 1220px) {
     .tier-list-info {
         width: 730px;
-        right: 180px;
-        top: 17px;
+        right: 110px;
+        top: 52px;
     }
 
     .row > .deck-list-row {
         padding: 0;
         padding-left: 15px;
         margin-right: -3px;
+    }
+
+    .difficulty-container {
+        top: 11px;
     }
 }

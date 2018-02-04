@@ -154,7 +154,7 @@ f2k-ad {
         float: right;
         display: inline-block;
         width: 300px;
-        margin: 0 40px;
+        margin: 0 40px 40px 40px;
     }
 
     .side-container {

@@ -2,16 +2,17 @@
     <div class="deck-hub-container">
         <div class="deck-page">
 
-            <div class="deck-header">
-                <f2k-breadcrumb [title]="deck.title"></f2k-breadcrumb>
-                <h1 class="deck-title">{{deck.title}}</h1>
+            <div class="deck-header clearfix" style="margin-bottom: 32px">
+                <div style="display: inline-block">
+                    <f2k-breadcrumb [title]="deck.title"></f2k-breadcrumb>
+                    <h1 class="deck-title">{{deck.title}}</h1>
+                </div>
                 <div class="deck-info">
-                    <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
                     <div class="deck-date">
                         <h5>Date Posted:</h5>
                         <span class="b2 date-string">{{(deck.editDate || deck.date) | date:'MMM d, y'}}</span>
                     </div>
-                    <f2k-rating-box class="desktop" [rating]="deck.rating" [itemId]="deck.id" [itemType]="'deck'"></f2k-rating-box>
+                    <f2k-rating-box class="desktop" [rating]="deck.rating" [itemId]="deck.id" [itemType]="'deck'" style="float: left; margin: 0"></f2k-rating-box>
                     <div class="social-share-tablet">
                         <f2k-social-share [text]="deck.title"></f2k-social-share>
                     </div>
@@ -29,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="deck-content">
+                <div class="deck-content clearfix">
                     <ul *ngIf="deck.decks?.length > 1" class="f2k-nav f2k-nav-tabs">
                         <li *ngFor="let deck of deck.decks" class="f2k-nav-item"
                             [ngClass]="{active: activeDeck.name === deck.name}"
@@ -91,7 +92,11 @@
                     <!-- TODO: itemType -->
 
                 </div>
-                <div class="deck-footer">
+                <div class="deck-footer" style="display: block">
+                    <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
+
+                    <!--<p>Created by: <bold>{{deck.author.username}}</bold></p>-->
+
                     <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
                         <i class="fa" [ngClass]="{'fa-angle-down': !showComments, 'fa-angle-up': showComments}"></i>
                     </button>
