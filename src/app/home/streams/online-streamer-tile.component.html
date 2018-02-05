@@ -7,6 +7,6 @@
     <div>
         <p class="b2 indicator">Live</p>
         <div class="point"></div>
-        <p class="b2 game">{{streamer.twitchData.game}}</p>
+        <p *ngIf="streamer.twitchData" class="b2 game">{{streamer.twitchData.game}}</p>
     </div>
 </div>
