@@ -86,7 +86,7 @@ export class NewDeckHubComponent implements OnDestroy {
     }
 
     @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
-        if (this.openedWithClick && $event.button !== 2) {
+        if (this.openedWithClick && $event.button !== 2 && $event !== this.clickOnHoverableElement) {
             if (this.clickOnHoverableElement !== $event) {
                 this.openedWithClick = false;
                 this.htmlHover.close();

@@ -42,7 +42,7 @@
                             <div *ngFor="let cell of leftColumn">
                                 <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (click)="setDisplayedCard(card); openHover($event, true)"
+                                                  (click)="clickOnHoverableElement = $event; setDisplayedCard(card); openHover($event, true)"
                                                   (mouseenter)="setDisplayedCard(card); openHover($event)"
                                                   (mousemove)="htmlHover.positionRelativeToMouse($event)"
                                                   (mouseleave)="closeHover()"></f2kCardComponent>
@@ -53,7 +53,7 @@
                             <div *ngFor="let cell of rightColumn">
                                 <span class="b2">{{cell.title}}</span>
                                 <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (click)="setDisplayedCard(card); openHover($event, true)"
+                                                  (click)="clickOnHoverableElement = $event; setDisplayedCard(card); openHover($event, true)"
                                                   (mouseenter)="setDisplayedCard(card); openHover($event)"
                                                   (mousemove)="htmlHover.positionRelativeToMouse($event)"
                                                   (mouseleave)="closeHover()"></f2kCardComponent>
