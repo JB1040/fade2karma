@@ -23,10 +23,16 @@
 <div class="F2K-column">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 header-container">
             <!--<h1>Hearthstone July Tier List</h1>-->
             <h1>Tier List</h1>
             <!--<p class="b2 date">Last Updated: July 15th, 2017</p>-->
+
+            <div class="difficulty-container">
+                <img src="assets/icons/dificulty_easy.png"> : Easy
+                <img src="assets/icons/dificulty_medium.png"> : Medium
+                <img src="assets/icons/dificulty_hard.png"> : Hard
+            </div>
 
             <p class="b2 tier-list-info">We try to compile both Ladder data and top Legend players’ opinions, to create
                 the most powerful and up-to-date Hearthstone tier list. If you have any suggestions, please email
@@ -91,7 +97,7 @@
                 {{decks.title}}
             </p>
             <div class="row">
-                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 deck-list-row"
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 deck-list-row"
                      *ngFor="let deck of decks.list; let index=index; let odd=odd; let even=even;">
                     <f2kDeckListRow [deck]="deck" [odd]="odd" [even]="even" [index]="index" [mode]="active" [showTier]="false"></f2kDeckListRow>
                 </div>

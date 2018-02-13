@@ -36,21 +36,21 @@
     right: 0;
 }
 
-.f2kHoverCard {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.f2kHoverCard.legendary {
+.f2kHoverCard.LEGENDARY {
     color: #F7B220;
 }
 
-.f2kHoverCard.rare {
+.f2kHoverCard.RARE {
     color: #49A1BB;
 }
 
-.f2kHoverCard.epic {
+.f2kHoverCard.EPIC {
     color: #8365C7;
+}
+
+.f2kHoverCard.COMMON,
+.f2kHoverCard.BASIC {
+    color: darkgreen;
 }
 
 .caret {
@@ -106,17 +106,13 @@ router-outlet {
         width: 728px;
     }
     router-outlet {
-        margin-top: 60px;
+        margin-top: 50px;
     }
 }
 
 @media (min-width: 1220px) {
     .F2K-column {
         width: 1180px;
-    }
-
-    router-outlet {
-        margin-top: 80px;
     }
 }
 

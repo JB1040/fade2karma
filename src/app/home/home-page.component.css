@@ -71,7 +71,7 @@ f2k-ad {
 
 @media (min-width: 768px) {
     .F2K-column > .featured {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .article-container-one f2kArticlesTile,
@@ -82,7 +82,7 @@ f2k-ad {
 
 @media (min-width: 768px) and (max-width: 1219px) {
     f2kOnlineSteamerScroll {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .article-container-one f2kArticlesTile:nth-child(2n+2),
@@ -92,7 +92,7 @@ f2k-ad {
 
     f2kTopDecks {
         margin-left: -20px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .article-container-two {
@@ -101,7 +101,7 @@ f2k-ad {
 
     f2kTierListComponent {
         margin-right: -20px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 }
 
@@ -134,7 +134,7 @@ f2k-ad {
     }
 
     f2kTopDecks {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .article-container-one,
@@ -145,7 +145,7 @@ f2k-ad {
     .twitter-container {
         display: block;
         float: right;
-        margin: 40px 0;
+        margin: 20px 0;
         width: calc(100% - 2px);
         border: 1px solid #e7e7e7;
     }
@@ -154,12 +154,16 @@ f2k-ad {
         float: right;
         display: inline-block;
         width: 300px;
-        margin: 0 40px;
+        margin: 0 40px 20px 40px;
     }
 
     .side-container {
         float: right;
         width: 380px;
+    }
+
+    f2kTierListComponent {
+        margin-top: -110px;
     }
 }
 

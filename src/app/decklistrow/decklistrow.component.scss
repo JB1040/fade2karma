@@ -69,10 +69,23 @@ $bw: 1px; // border width
 
 .cell.title-cell {
     flex-flow: row wrap;
-    h5 {
+    background: none;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    h4 {
+        color: white;
         margin-bottom: -25px;
         -webkit-transition: -webkit-all 300ms; /* Safari */
         transition: all 300ms;
+    }
+    img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        z-index: -1;
+        min-width: 100%;
     }
 }
 
@@ -88,6 +101,33 @@ $bw: 1px; // border width
     color: #ef3418;
 }
 
+.cell.date-cell {
+    position: relative;
+    padding: 0;
+    .date {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.cell.difficulty-cell {
+    padding: 0;
+
+    .icon-wrap {
+        height: 30px;
+        width: 60px;
+        .icon {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.decklistrow .cell:nth-of-type(3) {
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
 @media (max-width: 767px) {
     .decklistrow {
         width: calc(100vw - 40px);
@@ -96,22 +136,25 @@ $bw: 1px; // border width
     }
 
     .cell {
-        padding-left: 30px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         height: 30px;
         background: #F7F7F7;
         border-top: solid $bw #E7E7E7;
     }
 
     .cell.title-cell {
-        width: calc(100vw - 40px);
         max-width: 440px;
         height: 48px;
-        background: #FFFFFF;
     }
 
     .cell.date-cell {
         flex: 1;
+    }
+
+    .cell.difficulty-cell .icon-wrap {
+        height: 20px;
+        width: 40px;
     }
 
     .img-cell:nth-child(2) {
@@ -127,7 +170,7 @@ $bw: 1px; // border width
     }
 }
 
-@media (min-width: 768px) and (max-width: 1219px) {
+@media (min-width: 768px) {
     .decklistrow {
         width: 359px;
         height: 90px;
@@ -138,17 +181,16 @@ $bw: 1px; // border width
     }
 
     .cell {
-        padding-left: 30px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         height: 40px;
         background: #F7F7F7;
         border-top: solid $bw #E7E7E7;
     }
 
     .cell.title-cell {
-        width: 359px;
+        //width: 359px;
         height: 48px;
-        background: #FFFFFF;
     }
 
     .cell.date-cell {
@@ -169,44 +211,43 @@ $bw: 1px; // border width
 }
 
 @media (min-width: 1220px) {
+    :host {
+        width: 390px;
+        float: left;
+    }
+
+    //:host:not(:nth-child(3n+3)) {
+    //    margin-right: 20px;
+    //}
+
     .decklistrow {
-        width: 1180px;
-        height: 60px;
+        width: 390px;
+        height: 120px;
     }
 
     .cell {
-        padding-left: 40px;
-        padding-right: 40px;
+        height: 50px;
+    }
+
+    .cell.difficulty-cell .icon-wrap {
+        height: 40px;
+        width: 80px;
     }
 
     .cell.title-cell {
-        flex: 1;
-    }
-
-    .cell.date-cell {
-        width: 182px;
-    }
-
-    .cell.data-cell-4 {
-        width: 114px;
-    }
-
-    .cell.data-cell-1 {
-        width: 89px;
-    }
-
-    .icon-wrap {
-        width: 30px;
-        height: 30px;
-        .icon {
-            width: 30px;
+        height: 68px;
+        h4 {
+            margin-bottom: -35px;
         }
     }
 
-    .even {
-        background: #FFFFFF
-    }
-    .odd {
-        background: #F7F7F7
+    .decklistrow .cell.img-cell {
+        .icon-wrap {
+            width: 40px;
+            height: 40px;
+            .icon {
+                width: 40px;
+            }
+        }
     }
 }

@@ -22,11 +22,13 @@ export class PlayerHubComponent implements OnDestroy {
     twitchStreamUrl: any;
     twitchChatUrl: any;
     showChat = true;
+    onlineStreamers: Author[] = [];
 
     constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.getPlayer(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
             this.getDecksByPlayer(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
+            this.setOnlineStreamers();
         });
     }
 
@@ -51,5 +53,11 @@ export class PlayerHubComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
+    }
+
+    setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
+        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
+            this.onlineStreamers = res.json();
+        });
     }
 }

@@ -9,6 +9,9 @@ import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { FacebookSkdService } from '../../facebook-skd.service';
 import { HtmlHovererComponent } from '../../html-hoverer/html-hoverer.component';
 
+const COLLAPSED_CLASS = 'collapsed';
+const EXPANDED_CLASS = 'expanded';
+
 @Component({
     selector: 'f2kNewDeckHub',
     templateUrl: './new-deck-hub.component.html',
@@ -18,7 +21,6 @@ export class NewDeckHubComponent implements OnDestroy {
 
     public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
     deck: Deck;
-    decks: Deck[] = [];
     chartData: any;
     leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
     rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
@@ -63,7 +65,6 @@ export class NewDeckHubComponent implements OnDestroy {
     constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
-            this.decks = [];
             this.chartData = null;
             this.leftColumn = [];
             this.rightColumn = [];
@@ -71,7 +72,6 @@ export class NewDeckHubComponent implements OnDestroy {
             this.CONTENT = '';
 
             this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-            this.getDecks();
         });
     }
 
@@ -83,7 +83,7 @@ export class NewDeckHubComponent implements OnDestroy {
     }
 
     @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
-        if (this.openedWithClick && $event.button !== 2) {
+        if (this.openedWithClick && $event.button !== 2 && $event !== this.clickOnHoverableElement) {
             if (this.clickOnHoverableElement !== $event) {
                 this.openedWithClick = false;
                 this.htmlHover.close();
@@ -97,31 +97,69 @@ export class NewDeckHubComponent implements OnDestroy {
     initTextCardHover(): void {
         if (this.deck && this.deck.game === 'HS') {
             const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
-            for (let i = 0; i < hoverableElements.length; i++) {
-                const hoverableElement = hoverableElements[i];
-                const cardId = hoverableElement.getAttribute('data-id');
-                if (cardId) {
-                    hoverableElement.addEventListener('click', $event => {
-                        this.clickOnHoverableElement = $event;
-                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
-                        this.openHover($event, true);
-                    });
+            this.makeElementsHoverable(hoverableElements);
+        }
+    }
 
-                    hoverableElement.addEventListener('mouseenter', $event => {
-                        this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
-                        this.openHover($event);
-                    });
+    makeElementsHoverable(hoverableElements: NodeListOf<HTMLElement>): void {
+        for (let i = 0; i < hoverableElements.length; i++) {
+            const hoverableElement = hoverableElements[i];
+            const cardId = hoverableElement.getAttribute('data-id');
+            if (cardId) {
+                hoverableElement.addEventListener('click', $event => {
+                    this.clickOnHoverableElement = $event;
+                    this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                    this.openHover($event, true);
+                });
 
-                    hoverableElement.addEventListener('mousemove', $event => {
-                        this.htmlHover.positionRelativeToMouse($event);
-                    });
+                hoverableElement.addEventListener('mouseenter', $event => {
+                    this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
+                    this.openHover($event);
+                });
 
-                    hoverableElement.addEventListener('mouseleave', $event => {
-                        this.closeHover();
-                    });
-                }
+                hoverableElement.addEventListener('mousemove', $event => {
+                    this.htmlHover.positionRelativeToMouse($event);
+                });
+
+                hoverableElement.addEventListener('mouseleave', $event => {
+                    this.closeHover();
+                });
             }
         }
+    }
+
+    initSpoilers(): void {
+         if (this.deck) {
+            const spoilerElements  = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kSpoiler');
+            for (let i = 0; i < spoilerElements.length; i++) {
+                const clickEl = document.createElement('span');
+
+                const spoilerElement = spoilerElements[i];
+                const content = spoilerElement.innerHTML;
+                this.toggleSpoiler(spoilerElement, clickEl, content);
+
+                clickEl.addEventListener('click', () => {
+                    this.toggleSpoiler(spoilerElement, clickEl, content);
+                });
+            }
+        }
+    }
+
+    toggleSpoiler(el: HTMLSpanElement, clickEl: HTMLSpanElement, initialContent: string): void {
+        if (el.classList.contains(COLLAPSED_CLASS)) {
+            el.classList.add(EXPANDED_CLASS);
+            el.classList.remove(COLLAPSED_CLASS);
+            el.innerHTML = initialContent;
+            clickEl.innerHTML = '[-]';
+            const hoverableElements = el.querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
+            this.makeElementsHoverable(hoverableElements);
+        } else {
+            el.classList.add(COLLAPSED_CLASS);
+            el.classList.remove(EXPANDED_CLASS);
+            el.innerHTML = '';
+            clickEl.innerHTML = '[+]';
+        }
+        el.insertBefore(clickEl, el.childNodes[0]);
     }
 
     parseHTML(forceResize?: boolean): void {
@@ -259,12 +297,7 @@ export class NewDeckHubComponent implements OnDestroy {
             this.buildData();
             this.cdRef.detectChanges();
             this.initTextCardHover();
-        });
-    }
-
-    getDecks() { // TODO make something cool with similar decks...
-        this.http.get(`${BASE_URL}/api/decks/list?amount=6&offset=0`).subscribe(res => {
-            this.decks = res.json();
+            this.initSpoilers();
         });
     }
 

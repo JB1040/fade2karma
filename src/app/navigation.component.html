@@ -19,7 +19,8 @@
                 <span class="navItemText">{{navItem.name}}</span>
                 <span class="caret" *ngIf="navItem.children.length > 0" [ngClass]="{up: navItem.open, down: !navItem.open}"></span> <!--TODO caret => &#65087 && &#65088-->
 
-                <a (click)="open = false; resetOpenItems()" *ngIf="!navItem.children || navItem.children.length === 0" routerLink="{{'/' + toLink(navItem.name)}}"></a>
+                <a (click)="open = false; resetOpenItems()" *ngIf="!absoluteUrl(navItem.name) && (!navItem.children || navItem.children.length === 0)" routerLink="{{'/' + toLink(navItem.name)}}"></a>
+                <a (click)="open = false; resetOpenItems()" *ngIf="absoluteUrl(navItem.name) && (!navItem.children || navItem.children.length === 0)" [href]="getOuterLink(navItem.name)" target="_blank"></a>
             </h5>
             <div class="dropdown-menu" *ngIf="navItem.children && navItem.children.length > 0">
                 <div style="display: block" *ngFor="let child of navItem.children" class="navItemChild">

@@ -2,17 +2,17 @@
 <div class="F2K-column clearfix">
     <div class="clearfix featured" *ngIf="featuredArticles.length > 1">
         <f2kArticlesTile *ngIf="featuredArticles[0]" class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
-        <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg next-to-featured" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
+        <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
     </div>
 
     <span class="side-container clearfix">
+        <!--<f2k-ad [adStyle]="{'display': 'inline-block', 'width.px': '300', 'height.px': '250'}" [adLayout]="'in-article'" [adFormat]="'fluid'" [adSlot]="'2783969262'"></f2k-ad>-->
+
         <f2kTierListComponent [type]="'deck'" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne" [tierTwo]="tierTwo"></f2kTierListComponent>
 
         <div class="twitter-container">
             <a class="twitter-timeline" data-chrome="nofooter noborders" data-tweet-limit="3" data-dnt="true" href="https://twitter.com/Fade2Karma?ref_src=twsrc%5Etfw">Tweets by Fade2Karma</a>
         </div>
-
-        <f2k-ad [adStyle]="{'display': 'block', 'text-align': 'center'}" [adLayout]="'in-article'" [adFormat]="'fluid'" [adSlot]="'1192776336'"></f2k-ad>
 	</span>
 
     <div class="clearfix article-container-one" *ngIf="firstTilesColumn.length > 0">

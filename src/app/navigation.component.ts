@@ -14,7 +14,7 @@ export class NavigationComponent implements OnInit {
     open: boolean;
     lastScrollTop: number;
     top: number;
-    externals = ['EU Shop', 'NA Shop'];
+    externals = ['Shop'];
     navItems: NavItem[] = [
         // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
         new NavItem('Tier List', []),
@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit {
         new NavItem('Giveaways', []),
         new NavItem('Team', []),
         new NavItem('Partners', []),
-        new NavItem('Shop', this.externals)
+        new NavItem('Shop', [])
     ];
 
     // TODO for preview, remove cleanly
@@ -53,9 +53,7 @@ export class NavigationComponent implements OnInit {
     }
 
     getOuterLink(url: string): string {
-        if (url === 'EU Shop') {
-            return 'https://teespring.com/stores/f2k-eu';
-        } else if (url === 'NA Shop') {
+        if (url === 'Shop') {
             return 'https://teespring.com/stores/f2k-us';
         } else {
             return '';

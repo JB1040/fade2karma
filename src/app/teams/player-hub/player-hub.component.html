@@ -11,6 +11,7 @@
         </div>
     </div>
 </div>
+<f2kOnlineSteamerScroll *ngIf="onlineStreamers.length > 0" [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 
 <div *ngIf="player" class="F2K-column clearfix">
     <f2k-breadcrumb [title]="player.username"></f2k-breadcrumb>

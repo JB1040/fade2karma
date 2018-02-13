@@ -250,6 +250,10 @@ f2kRecommendedTile {
 }
 
 @media (min-width: 1220px) {
+    .videoWrapper {
+        padding-bottom: calc(100vh - 110px);
+    }
+
     .stream-container .stream-upper-display-box {
         /*display: block;*//*when we use adds this is an add container*/
     }
