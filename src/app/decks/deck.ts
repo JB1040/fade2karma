@@ -67,6 +67,7 @@ export class Deck {
     code: any;
     decks: Array<DeckObj>;
     difficulty: Difficulty;
+    recommended: Array<Deck>;
 
     leader: GwentLeader;
     faction: GwentFactions;

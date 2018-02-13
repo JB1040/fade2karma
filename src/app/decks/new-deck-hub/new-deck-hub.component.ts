@@ -21,7 +21,6 @@ export class NewDeckHubComponent implements OnDestroy {
 
     public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
     deck: Deck;
-    decks: Deck[] = [];
     chartData: any;
     leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
     rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
@@ -66,7 +65,6 @@ export class NewDeckHubComponent implements OnDestroy {
     constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
-            this.decks = [];
             this.chartData = null;
             this.leftColumn = [];
             this.rightColumn = [];
@@ -74,7 +72,6 @@ export class NewDeckHubComponent implements OnDestroy {
             this.CONTENT = '';
 
             this.getDeck(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
-            this.getDecks();
         });
     }
 
@@ -301,12 +298,6 @@ export class NewDeckHubComponent implements OnDestroy {
             this.cdRef.detectChanges();
             this.initTextCardHover();
             this.initSpoilers();
-        });
-    }
-
-    getDecks() { // TODO make something cool with similar decks...
-        this.http.get(`${BASE_URL}/api/decks/list?amount=6&offset=0`).subscribe(res => {
-            this.decks = res.json();
         });
     }
 
