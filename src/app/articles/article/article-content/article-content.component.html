@@ -40,8 +40,8 @@
     </div>
 
     <div #recommendedTeaser class="recommended">
-        <f2kRecommendedContainer *ngIf="articles && articles.length > 0" class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
-                                 [items]="articles"></f2kRecommendedContainer>
+        <f2kRecommendedContainer *ngIf="article?.recommended?.length" class="recommended-teaser" [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
+                                 [items]="article.recommended"></f2kRecommendedContainer>
         <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7199016179'"></f2k-ad>-->
     </div>
     <div class="clearfix"></div>

@@ -12,7 +12,6 @@ import { BASE_URL } from '../../core/globals';
     styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements /*OnInit, */OnDestroy {
-    recommendedArticles: Article[] = [];
     articles = [];
     scrolled = 0;
     loadingArticles = false;
@@ -25,9 +24,7 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
             this.scrolled = 0;
             this.loadingArticles = false;
             this.allArticlesLoaded = false;
-            this.recommendedArticles = [];
             this.loadArticle(parseInt(this.router.url.slice(this.router.url.lastIndexOf('/') + 1), 10));
-            this.loadRecommendedArticles(3, 0);
         });
     }
 
@@ -60,12 +57,6 @@ export class ArticleComponent implements /*OnInit, */OnDestroy {
                 this.allArticlesLoaded = true;
             }
             this.loadingArticles = false;
-        });
-    }
-
-    loadRecommendedArticles(amount: number, offset: number) {
-        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(res => {
-            this.recommendedArticles = res.json();
         });
     }
 

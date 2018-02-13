@@ -13,6 +13,7 @@ export class Article {
     rating: number;
     date: number;
     editDate: number;
+    recommended: Array<Article>;
 
     constructor(jsonData: any) {
         Extend(this, jsonData);

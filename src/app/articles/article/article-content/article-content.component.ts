@@ -24,7 +24,6 @@ import { HtmlHovererComponent } from '../../../html-hoverer/html-hoverer.compone
 export class ArticleContentComponent implements OnInit {
 
     @Input() article: Article;
-    @Input() articles: Article[];
     CONTENT: any;
     height: any;
     facebookComments = false;
