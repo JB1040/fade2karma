@@ -17,7 +17,6 @@ export class AdComponent implements AfterViewInit {
     @Input() adSlot: string;
 
     ngAfterViewInit() {
-        console.log(window.adsbygoogle);
         (window.adsbygoogle || []).push({});
     }
 }

@@ -1,14 +1,16 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { CanvasService } from '../../core/canvas.service';
-import { Http } from '@angular/http';
 import { BASE_URL } from '../../core/globals';
+import { InfiniteScrollerDirective } from '../../infinite-scroller.directive';
+import { Subscription } from 'rxjs/Subscription';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.css']
 })
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, OnDestroy {
 
     articles: Article[] = [];
     sum = 0;
@@ -20,8 +22,12 @@ export class ArticlesComponent implements OnInit {
     gamesOpen = false;
     loading = false;
     allArticlesLoaded = false;
+    infiniteScrollSubscription: Subscription;
 
-    constructor(private canvas: CanvasService, private el: ElementRef, private http: Http) {
+    constructor(private canvas: CanvasService, private el: ElementRef, private http: HttpClient, private infiniteScroll: InfiniteScrollerDirective) {
+        this.infiniteScrollSubscription = infiniteScroll.scrollLimitReached.subscribe(() => {
+            this.onScrollDown();
+        });
     }
 
     getWidth(text: string) {
@@ -49,7 +55,11 @@ export class ArticlesComponent implements OnInit {
         this.allArticlesLoaded = false;
     }
 
-    loadNewArticles(amount) {
+    loadNewArticles(amount): void {
+        if (this.loading || this.allArticlesLoaded) {
+            return;
+        }
+
         this.loadArticles(this.sum, amount);
         this.sum += amount;
     }
@@ -58,9 +68,6 @@ export class ArticlesComponent implements OnInit {
         let gameString = '';
         let articleString = '';
 
-        if (this.loading || this.allArticlesLoaded) {
-            return;
-        }
         if (this.displayArticles !== 'All Articles') {
             articleString = '&type=' + (this.displayArticles === 'Meta Reports' ? 'METAREPORTS' : this.displayArticles).replace(/ /g, '_').toUpperCase();
         }
@@ -68,13 +75,16 @@ export class ArticlesComponent implements OnInit {
             gameString = '&game=' + (this.displayGames === 'Hearthstone' ? 'HS' : this.displayGames).toUpperCase();
         }
         this.loading = true;
-        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}${articleString}${gameString}`).subscribe(res => {
-            const articles = res.json();
+        this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}${articleString}${gameString}`).subscribe(articles => {
             this.articles = this.articles.concat(articles);
             if (articles.length < amount) {
                 this.allArticlesLoaded = true;
             }
             this.loading = false;
         });
+    }
+
+    ngOnDestroy(): void {
+        this.infiniteScrollSubscription.unsubscribe();
     }
 }

@@ -1,13 +1,7 @@
 <div class="F2K-column">
-  <div class="articles-container"
-      infinite-scroll
-      [infiniteScrollDistance]="0"
-      [infiniteScrollThrottle]="500"
-      (scrolled)="onScrollDown()">
-
+  <div class="articles-container">
       <div *ngFor="let article of articles" class="article">
           <f2kArticleContent [article]="article"></f2kArticleContent>
       </div>
-
   </div>
 </div>

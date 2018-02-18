@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../../articles/article';
-import { Http } from '@angular/http';
 import { BASE_URL } from '../../core/globals';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     templateUrl: './giveaways-hub.component.html',
     styleUrls: ['./giveaways-hub.component.css']
 })
-export class GiveawaysHubComponent implements OnInit {
+export class GiveawaysHubComponent implements OnInit, OnDestroy {
 
     giveaways: Article[] = [];
     loading = false;
+    subscriptions: Array<Subscription> = [];
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpClient) {}
 
     ngOnInit(): void {
         this.loadGiveaways();
@@ -22,8 +24,12 @@ export class GiveawaysHubComponent implements OnInit {
         const amount = 100;
         const offset = 0;
         const type = 'GIVEAWAYS';
-        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
-            this.giveaways = res.json();
-        });
+        this.subscriptions.push(this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(articles => {
+            this.giveaways = articles;
+        }));
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

@@ -180,7 +180,7 @@ h5:hover,
 
 @media (min-width: 768px) {
     :host {
-        height: 50px;
+        height: 40px;
     }
 
     .navItem {
@@ -239,12 +239,12 @@ h5:hover,
     }
 
     .navItem {
-        padding: 16px 15px;
+        padding: 11px 15px;
     }
 
     .navbar a {
         height: 16px;
-        padding: 18px 15px;
+        padding: 13px 15px;
     }
 
     .navItem.open .dropdown-menu {
@@ -276,10 +276,10 @@ h5:hover,
     }
 
     .navItem {
-        padding: 14px 20px;
+        padding: 9px 20px;
     }
 
     .navbar a {
-        padding: 16px 20px;
+        padding: 11px 20px;
     }
 }

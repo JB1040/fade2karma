@@ -106,7 +106,7 @@ router-outlet {
         width: 728px;
     }
     router-outlet {
-        margin-top: 50px;
+        margin-top: 40px;
     }
 }
 

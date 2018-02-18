@@ -1,19 +1,20 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { BASE_URL } from 'app/core/globals';
 import { Author } from '../../articles/article/author/author';
 import { TimeTransfer } from '../../core/time-transfer';
-import { Deck } from '../../decks/deck';
 import { Article } from '../../articles/article';
+import { HttpClient } from '@angular/common/http';
+import { DOCUMENT } from '@angular/common';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'f2kPlayerHub',
     templateUrl: './player-hub.component.html',
     styleUrls: ['./player-hub.component.css']
 })
-export class PlayerHubComponent implements OnDestroy {
+export class PlayerHubComponent implements OnDestroy, OnDestroy {
 
     routeSubscription: any;
     player: Author;
@@ -23,8 +24,9 @@ export class PlayerHubComponent implements OnDestroy {
     twitchChatUrl: any;
     showChat = true;
     onlineStreamers: Author[] = [];
+    subscriptions: Array<Subscription> = [];
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: HttpClient, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.getPlayer(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
             this.getDecksByPlayer(parseInt(this.router.url.slice(this.router.url.lastIndexOf('_') + 1), 10));
@@ -33,8 +35,8 @@ export class PlayerHubComponent implements OnDestroy {
     }
 
     getPlayer(id: number): void {
-        this.http.get(`${BASE_URL}/api/users/${id}`).subscribe(res => {
-            this.player = res.json();
+        this.subscriptions.push(this.http.get<Author>(`${BASE_URL}/api/users/${id}`).subscribe(player => {
+            this.player = player;
             if (this.player.birthday) {
                 this.age = TimeTransfer.getAge(parseInt(this.player.birthday, 10));
             }
@@ -42,22 +44,23 @@ export class PlayerHubComponent implements OnDestroy {
                 this.twitchStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://player.twitch.tv/?channel=${this.player.twitch}`);
                 this.twitchChatUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.twitch.tv/${this.player.twitch}/chat`);
             }
-        });
+        }));
     }
 
     getDecksByPlayer(id: number): void {
-        this.http.get(`${BASE_URL}/api/articles/byAuthor/${id}`).subscribe(res => {
-            this.playerArticles = res.json().slice(0, 2);
-        });
+        this.subscriptions.push(this.http.get<Array<Article>>(`${BASE_URL}/api/articles/byAuthor/${id}`).subscribe(articles => {
+            this.playerArticles = articles.slice(0, 2);
+        }));
+    }
+
+    setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
+        this.subscriptions.push(this.http.get<Array<Author>>(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(onlineStreamers => {
+            this.onlineStreamers = onlineStreamers;
+        }));
     }
 
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
-    }
-
-    setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
-            this.onlineStreamers = res.json();
-        });
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

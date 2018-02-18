@@ -1,8 +1,10 @@
-﻿import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NavigationService, NavItem } from './navigation.service';
+﻿import { Subscription } from 'rxjs/Subscription';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavItem } from './navigation.service';
 import { BASE_URL } from './core/globals';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Article } from './articles/article';
 
 @Component({
     selector: 'f2kNavigation',
@@ -10,7 +12,7 @@ import { Http } from '@angular/http';
     styleUrls: ['./navigation.component.css']
 })
 
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
     open: boolean;
     lastScrollTop: number;
     top: number;
@@ -24,6 +26,7 @@ export class NavigationComponent implements OnInit {
         new NavItem('Partners', []),
         new NavItem('Shop', [])
     ];
+    subscriptions: Array<Subscription> = [];
 
     // TODO for preview, remove cleanly
     // @HostListener('window:scroll', ['$event']) scroll(event) {
@@ -37,11 +40,10 @@ export class NavigationComponent implements OnInit {
     //     this.lastScrollTop = st;
     // }
 
-    constructor(private service: NavigationService,
-                private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
                 private router: Router,
                 private element: ElementRef,
-                private http: Http) {
+                private http: HttpClient) {
     }
 
     ngOnInit() {
@@ -96,10 +98,10 @@ export class NavigationComponent implements OnInit {
         const amount = 2;
         const offset = 0;
         const type = 'GIVEAWAYS';
-        this.http.get(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(res => {
+        this.subscriptions.push(this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}&type=${type}`).subscribe(articles => {
             for (let i = 0, ii = this.navItems.length; i < ii; i++) {
                 if (this.navItems[i].name === 'Giveaways') {
-                    switch (res.json().length) {
+                    switch (articles.length) {
                         case 0:
                             this.navItems.splice(i, 1);
                             break;
@@ -110,6 +112,10 @@ export class NavigationComponent implements OnInit {
                     break;
                 }
             }
-        });
+        }));
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

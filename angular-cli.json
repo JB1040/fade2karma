@@ -1,7 +1,7 @@
 {
   "project": {
-    "version": "1.0.0-beta.28.3",
-    "name": "angular-quickstart"
+    "version": "0",
+    "name": "Fade2Karma"
   },
   "apps": [
     {
@@ -21,7 +21,6 @@
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/systemjs/dist/system.src.js",
         "../node_modules/core-js/client/shim.min.js",
         "../node_modules/zone.js/dist/zone.js"
       ],

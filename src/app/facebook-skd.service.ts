@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http } from '@angular/http';
 
 declare var window: any;
 declare var FB: any;
@@ -10,7 +8,7 @@ export class FacebookSkdService {
 
     fb: any;
 
-    constructor(private router: Router, private http: Http) {
+    constructor() {
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0]; // tslint:disable-line
             if (d.getElementById(id)) return; // tslint:disable-line

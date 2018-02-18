@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+﻿﻿import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -6,12 +6,9 @@ import { TeamsModule } from './teams/teams.module';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { NavigationComponent } from './navigation.component';
-import { NavigationService } from './navigation.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OnlineStreamerTileComponent } from './home/streams/online-streamer-tile.component';
 import { OnlineStreamerScrollComponent } from './home/streams/online-streamer-scroll.component';
 import { ArticlesTileComponent } from './articles/article-tile.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ArticlesComponent } from './articles/articles/articles.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AuthorComponent } from './articles/article/author/author.component';
@@ -25,7 +22,6 @@ import { TopDecksComponent } from './home/topDecks/top-decks.component';
 import { CanvasService } from './core/canvas.service';
 import { HomePageComponent } from './home/home-page.component';
 import { TierListComponent } from './home/tier-list/tier-list.component';
-import { ResponsiveConfig, ResponsiveModule } from 'ng2-responsive';
 
 import { HearthstoneManaComponent } from './hsmana/hsmana.component';
 import { DeckListRowComponent } from './decklistrow/decklistrow.component';
@@ -40,7 +36,7 @@ import { NewsLetterComponent } from './news/news.component';
 import { ArticleFetchingService } from './articles/article/article-fetching.service';
 import { CapitalizePipe } from './core/capitalize pipe';
 import { DustCalculationService } from './core/dust-calculation.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TierListHubComponent } from './tier-list-hub/tier-list-hub.component';
 import { TierListHubService } from './tier-list-hub/tier-list-hub.service';
 import { NewDeckHubComponent } from './decks/new-deck-hub/new-deck-hub.component';
@@ -62,39 +58,21 @@ import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 import { FacebookSkdService } from './facebook-skd.service';
 import { AdComponent } from './ad/ad.component';
 import { HtmlHovererComponent } from './html-hoverer/html-hoverer.component';
-
-const config = {
-    breakPoints: {
-        xs: { min: 0, max: 0 },
-        sm: { min: 1, max: 767 },
-        md: { min: 768, max: 1219 },
-        lg: { min: 1220, max: Infinity },
-        xl: { min: Infinity }
-    },
-    debounceTime: 100
-};
-
-export function ResponsiveDefinition() {
-    return new ResponsiveConfig(config);
-};
+import { InfiniteScrollerDirective } from './infinite-scroller.directive';
 
 const myAppRoutes: Routes = [
     { path: '', component: PageNotFoundComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 
-
 @NgModule({
     imports: [
         BrowserModule,
         TeamsModule,
         RouterModule.forRoot(myAppRoutes, { useHash: false }),
-        NgbModule.forRoot(),
-        InfiniteScrollModule,
         FormsModule,
-        ResponsiveModule,
-        HttpModule
-    ],
+        HttpClientModule
+],
     declarations: [
         AppComponent,
         AdComponent,
@@ -150,11 +128,7 @@ const myAppRoutes: Routes = [
     bootstrap: [
         AppComponent
     ],
-    providers: [ {
-        provide: ResponsiveConfig,
-        useFactory: ResponsiveDefinition
-    },
-        NavigationService,
+    providers: [
         CanvasService,
         DatePipe,
         ArticleFetchingService,
@@ -162,7 +136,8 @@ const myAppRoutes: Routes = [
         TierListHubService,
         F2kUrlPipe,
         GoogleAnalyticsEventsService,
-        FacebookSkdService
+        FacebookSkdService,
+        InfiniteScrollerDirective
     ]
 })
 export class AppModule {

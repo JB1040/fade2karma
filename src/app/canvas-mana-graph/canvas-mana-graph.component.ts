@@ -31,17 +31,10 @@ export class CanvasManaGraphComponent implements OnInit, OnChanges {
     }
 
     constructor(private elRef: ElementRef) {
-        new Promise(resolve => {
-            this.hexagon = document.createElement('img');
-            const path = 'assets/graph-images/mana.png';
-
-            this.hexagon.onload = () => resolve({ path, status: 'ok' });
-            this.hexagon.onerror = () => resolve({ path, status: 'error' });
-
-            this.hexagon.src = path;
-        }).then(() => {
-            this.build(true);
-        });
+        this.hexagon = document.createElement('img');
+        const path = 'assets/graph-images/mana.png';
+        this.hexagon.onload = () => this.build(true);
+        this.hexagon.src = path;
     }
 
     ngOnChanges(): void {
