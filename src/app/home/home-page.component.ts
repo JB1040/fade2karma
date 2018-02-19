@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class HomePageComponent implements OnInit, OnDestroy {
     featuredArticles: Array<Article|Deck> = [];
     tierOne: Deck[] = [];
-    tierTwo: Deck[] = [];
     firstTilesColumn: Array<Article|Deck> = [];
     secondTilesColumn: Array<Article|Deck> = [];
     onlineStreamers: Author[] = [];
@@ -77,12 +76,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
 
     setTierListDecks() { // TODO optimize the component for displaying them and requests...
-        this.subscriptions.push(this.http.get<Array<Deck>>(`${BASE_URL}/api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(decks => {
+        this.subscriptions.push(this.http.get<Array<Deck>>(`${BASE_URL}/api/decks/list?amount=${100}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(decks => {
             this.tierOne = decks;
-        }));
-
-        this.subscriptions.push(this.http.get<Array<Deck>>(`${BASE_URL}/api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(decks => {
-            this.tierTwo = decks;
         }));
     }
 

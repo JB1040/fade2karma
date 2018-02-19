@@ -9,7 +9,6 @@ import { Deck } from '../../decks/deck';
 })
 export class TierListComponent implements OnChanges {
     @Input() tierOne: Article[] | Deck[];
-    @Input() tierTwo: Article[] | Deck[];
     @Input() title: string;
     @Input() type: string;
     tiers: (Article[] | Deck[])[];
@@ -19,7 +18,7 @@ export class TierListComponent implements OnChanges {
 
     ngOnChanges(change: SimpleChanges) {
         if (change.tierOne || change.tierTwo) {
-            this.tiers = [this.tierOne, this.tierTwo];
+            this.tiers = [this.tierOne];
         }
     }
 }
