@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class RecommendedTileComponent implements OnInit, OnDestroy {
 
     @Input() teasedItem: Article | Deck;
-    @Input() type: string;
+    @Input() type: 'article'|'deck';
     date: string;
     image: any;
     url: string;
