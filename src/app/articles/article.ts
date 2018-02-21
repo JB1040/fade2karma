@@ -1,5 +1,6 @@
 import { Author } from './article/author/author';
 import { Extend } from '../core/globals';
+import { Deck } from '../decks/deck';
 
 export class Article {
     id: number;
@@ -14,6 +15,7 @@ export class Article {
     date: number;
     editDate: number;
     recommended: Array<Article>;
+    similar?: Array<Deck>;
 
     constructor(jsonData: any) {
         Extend(this, jsonData);

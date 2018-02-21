@@ -2,12 +2,13 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestr
 import { Deck, DeckObj } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
-import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL, GetImageSrc } from '../../core/globals';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { FacebookSkdService } from '../../facebook-skd.service';
 import { HtmlHovererComponent } from '../../html-hoverer/html-hoverer.component';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs/Subscription';
 
 const COLLAPSED_CLASS = 'collapsed';
 const EXPANDED_CLASS = 'expanded';
@@ -34,6 +35,7 @@ export class NewDeckHubComponent implements OnDestroy {
     previousSize: number;
     getImageSrc = GetImageSrc;
     activeDeck: DeckObj;
+    subscriptions: Array<Subscription> = [];
 
     copyDeckCodeName = 'COPY DECK CODE';
 
@@ -62,7 +64,7 @@ export class NewDeckHubComponent implements OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: Http, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
+    constructor(@Inject(DOCUMENT) private docEl: Document, private http: HttpClient, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.chartData = null;
@@ -287,9 +289,9 @@ export class NewDeckHubComponent implements OnDestroy {
     }
 
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/decks/${id}`).subscribe(res => {
+        this.subscriptions.push(this.http.get<Deck>(`${BASE_URL}/api/decks/${id}`).subscribe(deck => {
 
-            this.deck = res.json();
+            this.deck = deck;
             this.activeDeck = this.deck.decks[0];
 
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
@@ -298,7 +300,7 @@ export class NewDeckHubComponent implements OnDestroy {
             this.cdRef.detectChanges();
             this.initTextCardHover();
             this.initSpoilers();
-        });
+        }));
     }
 
     copyDeckCode(): void {
@@ -320,5 +322,6 @@ export class NewDeckHubComponent implements OnDestroy {
 
     ngOnDestroy() {
         this.routeSubscription.unsubscribe();
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

@@ -30,11 +30,7 @@
         </div>
     </div>
 
-    <div class="articles clearfix"
-         infinite-scroll
-         [infiniteScrollDistance]="2"
-         [infiniteScrollThrottle]="10"
-         (scrolled)="onScrollDown()">
+    <div class="articles clearfix">
         <ng-template ngFor let-article [ngForOf]="articles" let-i="index">
             <f2kArticlesTile [article]="article"></f2kArticlesTile>
             <!--<f2k-ad *ngIf="!((i + 1) % 6)" [adStyle]="{'display': 'inline-block', 'width.px': '728', 'height.px': '90'}" [adSlot]="1503836362"></f2k-ad>-->

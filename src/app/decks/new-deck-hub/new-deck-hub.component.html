@@ -79,7 +79,11 @@
                     <div #contentContainer class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
                     <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="tablet recommended-teaser"
-                                             [title]="'SIMILAR DECKS'" [items]="deck.recommended"
+                                             [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
+                                             [itemType]="'article'"></f2kRecommendedContainer>
+
+                    <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="tablet recommended-teaser"
+                                             [title]="'SIMILAR DECKS'" [items]="deck.similar"
                                              [itemType]="'deck'"></f2kRecommendedContainer>
 
                     <!--<div class="deck-comments phone">-->
@@ -89,7 +93,11 @@
                     <!--</div>-->
 
                     <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="phone recommended-teaser"
-                                             [title]="'SIMILAR DECKS'" [items]="deck.recommended"
+                                             [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
+                                             [itemType]="'article'"></f2kRecommendedContainer>
+
+                    <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="phone recommended-teaser"
+                                             [title]="'SIMILAR DECKS'" [items]="deck.similar"
                                              [itemType]="'deck'"></f2kRecommendedContainer>
                     <!-- TODO: itemType -->
 
@@ -114,8 +122,12 @@
                 <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
                 <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
                 <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="recommended-teaser"
-                                         [itemType]="'deck'" [title]="'SIMILAR DECKS'"
+                                         [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
                                          [items]="deck.recommended"></f2kRecommendedContainer>
+
+                <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="recommended-teaser"
+                                         [itemType]="'deck'" [title]="'SIMILAR DECKS'"
+                                         [items]="deck.similar"></f2kRecommendedContainer>
                 <!-- TODO: itemType -->
             </div>
             <div class="clearfix"></div>

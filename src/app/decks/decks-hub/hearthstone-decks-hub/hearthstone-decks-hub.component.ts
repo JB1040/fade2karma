@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TierListHubService } from '../../../tier-list-hub/tier-list-hub.service';
 import { Deck, Games, HeroClasses } from '../../deck';
 import { ActivatedRoute } from '@angular/router';
+import { DustCalculationService } from '../../../core/dust-calculation.service';
 
 @Component({
     selector: 'f2kHearthstoneDecksHub',
@@ -44,9 +45,11 @@ export class HearthstoneDecksHubComponent implements OnInit {
     }
 
     getDecks() {
-        this.tierListHubService
-            .getDecks(this.amount, 0, this.mode, this.isStandard, this.game, this.heroClasses, this.page * this.amount)
-            .then((decks: Array<Deck>) => {
+        const deckSubscription = this.tierListHubService.getDecks(this.amount, 0, this.mode, this.isStandard,
+            this.game, this.heroClasses, this.page * this.amount).subscribe(decks => {
+                for (let i = 0, ii = decks.length; i < ii; i++) {
+                    decks[i].decks.forEach(deck => deck.dust = DustCalculationService.getCardCost(deck.cards, decks[i].game));
+                }
                 this.decks = decks;
                 if (this.sortBy !== 'none') {
                     this.decks.sort((a: Deck, b: Deck) => {

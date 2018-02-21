@@ -1,6 +1,7 @@
 import { Author } from '../articles/article/author/author';
 import Card from '../card';
 import { Extend } from '../core/globals';
+import { Article } from '../articles/article';
 
 export type HeroClasses =
     'DRUID'
@@ -67,7 +68,8 @@ export class Deck {
     code: any;
     decks: Array<DeckObj>;
     difficulty: Difficulty;
-    recommended: Array<Deck>;
+    recommended: Array<Article>;
+    similar: Array<Deck>;
 
     leader: GwentLeader;
     faction: GwentFactions;

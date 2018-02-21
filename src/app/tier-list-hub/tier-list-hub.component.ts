@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TierListHubService } from './tier-list-hub.service';
 import { Games } from '../decks/deck';
+import { Subscription } from 'rxjs/Subscription';
+import { DustCalculationService } from '../core/dust-calculation.service';
+
 
 type activeTypes = 'STANDARD' /*| 'WILD' | 'ARENA'*/ | 'GWENT';
 
@@ -9,7 +12,7 @@ type activeTypes = 'STANDARD' /*| 'WILD' | 'ARENA'*/ | 'GWENT';
     templateUrl: './tier-list-hub.component.html',
     styleUrls: ['./tier-list-hub.component.css', 'grid.css']
 })
-export class TierListHubComponent implements OnInit {
+export class TierListHubComponent implements OnInit, OnDestroy {
 
     decksList: any = {};
     showFloatingSocialMediaLinks = false;
@@ -18,6 +21,7 @@ export class TierListHubComponent implements OnInit {
     game: Games;
     isStandard: boolean | null;
     active: activeTypes = 'STANDARD';
+    decksSubscriptions: Array<Subscription> = [];
 
     constructor(private tierListHubService: TierListHubService) {}
 
@@ -38,11 +42,18 @@ export class TierListHubComponent implements OnInit {
     }
 
     getDecks(tier: number, title: string) {
-        this.tierListHubService
-            .getDecks(this.amount, tier, this.mode, this.isStandard, this.game)
-            .then(deckList => {
-                this.decksList[this.active][tier - 1] = { title: title, list: deckList };
-            });
+        const deckSubscription = this.tierListHubService.getDecks(this.amount, tier, this.mode, this.isStandard, this.game).subscribe(decks => {
+            for (let i = 0, ii = decks.length; i < ii; i++) {
+                decks[i].decks.forEach(deck => deck.dust = DustCalculationService.getCardCost(deck.cards, decks[i].game));
+            }
+            this.decksList[this.active][tier - 1] = { title: title, list: decks };
+        });
+        this.decksSubscriptions.push(deckSubscription);
+    }
+
+    unsubscribeDeckSubscriptions(): void {
+        this.decksSubscriptions.forEach(deckSubscription => deckSubscription.unsubscribe());
+        this.decksSubscriptions = [];
     }
 
     setParams(): void {
@@ -69,6 +80,7 @@ export class TierListHubComponent implements OnInit {
 
     changeActive(newActive: activeTypes) {
         this.active = newActive;
+        this.unsubscribeDeckSubscriptions();
         this.loadDecks();
     }
 
@@ -83,5 +95,9 @@ export class TierListHubComponent implements OnInit {
 
     isLg() {
         return (window.innerWidth > 1199);
+    }
+
+    ngOnDestroy(): void {
+        this.unsubscribeDeckSubscriptions();
     }
 }

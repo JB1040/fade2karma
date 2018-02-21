@@ -1,27 +1,30 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Article } from '../articles/article';
 import { TimeTransfer } from '../core/time-transfer';
 import { Deck } from '../decks/deck';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'f2kRecommendedTile',
     templateUrl: './teased-tile.component.html',
     styleUrls: ['./teased-tile.component.css']
 })
-export class RecommendedTileComponent implements OnInit {
+export class RecommendedTileComponent implements OnInit, OnDestroy {
 
     @Input() teasedItem: Article | Deck;
-    @Input() type: string;
+    @Input() type: 'article'|'deck';
     date: string;
     image: any;
     url: string;
+    subscriptions: Array<Subscription> = [];
 
     @Output() width = new EventEmitter<number>();
 
-    constructor(private el: ElementRef, private router: Router, private sanitizer: DomSanitizer, private http: Http) {
+    constructor(private el: ElementRef, private router: Router, private sanitizer: DomSanitizer, private http: HttpClient) {
     }
 
     ngOnInit() {
@@ -36,10 +39,14 @@ export class RecommendedTileComponent implements OnInit {
         if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('youtube') !== -1) {
             this.image = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.teasedItem.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
         } else if (this.teasedItem.imageURL && this.teasedItem.imageURL.indexOf('twitch') !== -1) {
-            this.http.get(`https://clips.twitch.tv/api/v2/clips/` + this.teasedItem.imageURL.split('&clip=')[1]).subscribe(res => {
-                const result = res.json();
+            this.subscriptions.push(this.http.get<any>(`https://clips.twitch.tv/api/v2/clips/` + this.teasedItem.imageURL.split('&clip=')[1]).subscribe(res => {
+                const result = res;
                 this.image = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.small);
-            });
+            }));
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

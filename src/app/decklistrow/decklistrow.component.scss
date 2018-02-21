@@ -84,6 +84,7 @@ $bw: 1px; // border width
         left: 50%;
         top: 50%;
         -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
         z-index: -1;
         min-width: 100%;
     }

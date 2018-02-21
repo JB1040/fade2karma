@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../articles/article';
-import { Http } from '@angular/http';
 import { Deck } from '../decks/deck';
 import { Author } from '../articles/article/author/author';
 import { BASE_URL } from '../core/globals';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
     featuredArticles: Array<Article|Deck> = [];
     tierOne: Deck[] = [];
-    tierTwo: Deck[] = [];
     firstTilesColumn: Array<Article|Deck> = [];
     secondTilesColumn: Array<Article|Deck> = [];
     onlineStreamers: Author[] = [];
     completedFeatured: Boolean = false;
+    subscriptions: Array<Subscription> = [];
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     ngOnInit() {
@@ -29,8 +30,8 @@ export class HomePageComponent implements OnInit {
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles/featured`).subscribe(res => {
-            const articles = res.json().map((model: any) => model.cards ? new Deck(model) : new Article(model));
+        const featuredSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/featured`).subscribe(res => {
+            const articles = res.map((model: any) => model.cards ? new Deck(model) : new Article(model));
             if (articles.length > 1) {
                 this.featuredArticles = articles;
                 this.firstTilesColumn.unshift(this.featuredArticles[1]);
@@ -43,11 +44,12 @@ export class HomePageComponent implements OnInit {
             }
             this.completedFeatured = true;
         });
+        this.subscriptions.push(featuredSubscription);
     }
 
     setArticles(): void { // TODO move in service, handle errors in case they take place...
-        this.http.get(`${BASE_URL}/api/articles/list?amount=13&offset=0`).subscribe(res => {
-            let articles = res.json();
+        const articlesSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=13&offset=0`).subscribe(resArticles => {
+            let articles = resArticles;
             if (this.firstTilesColumn.length > 1) {
                 this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
                 this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(5, 11));
@@ -59,7 +61,7 @@ export class HomePageComponent implements OnInit {
                         return;
                     }
                     articles = articles.filter(art =>
-                        parent.featuredArticles.length == 0 ||
+                        parent.featuredArticles.length === 0 ||
                         art.id !== parent.featuredArticles[0].id
                     );
                     parent.featuredArticles = parent.featuredArticles.concat(articles.slice(0, 1));
@@ -69,20 +71,23 @@ export class HomePageComponent implements OnInit {
                 setTimeout(todo, 100);
             }
         });
+
+        this.subscriptions.push(articlesSubscription);
     }
 
     setTierListDecks() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
-            this.tierOne = res.json();
-        });
-        this.http.get(`${BASE_URL}/api/decks/list?amount=${4}&tier=${2}&mode=${'CON'}&isStandard=${true}`).subscribe(res => {
-            this.tierTwo = res.json();
-        });
+        this.subscriptions.push(this.http.get<Array<Deck>>(`${BASE_URL}/api/decks/list?amount=${100}&tier=${1}&mode=${'CON'}&isStandard=${true}`).subscribe(decks => {
+            this.tierOne = decks;
+        }));
     }
 
     setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
-        this.http.get(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(res => {
-            this.onlineStreamers = res.json();
-        });
+        this.subscriptions.push(this.http.get<Array<Author>>(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(authors => {
+            this.onlineStreamers = authors;
+        }));
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

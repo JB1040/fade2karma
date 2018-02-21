@@ -100,6 +100,7 @@ export class ArticleContentComponent implements OnInit {
     initTextCardHover(): void {
         if (this.article && this.article.game === 'HS') {
             const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
+            console.log(hoverableElements);
             for (let i = 0; i < hoverableElements.length; i++) {
                 const hoverableElement = hoverableElements[i];
                 const cardId = hoverableElement.getAttribute('data-id');

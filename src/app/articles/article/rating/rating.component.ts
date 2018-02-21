@@ -1,20 +1,24 @@
-import { Component, OnInit, Renderer2, Input, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BASE_URL } from '../../../core/globals';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'f2k-rating-box',
     templateUrl: './rating.component.html',
     styleUrls: ['./rating.component.css']
 })
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnInit, OnDestroy {
+
     @Input() rating: number;
     @Input() liked: boolean;
     @Input() itemId: number;
     @Input() itemType: string; // article / deck
     @ViewChild('upAngle') ratingAngle;
 
-    constructor(private renderer: Renderer2, private http: Http) {
+    subscriptions: Array<Subscription> = [];
+
+    constructor(private renderer: Renderer2, private http: HttpClient) {
     }
 
     ngOnInit() {
@@ -45,13 +49,17 @@ export class RatingComponent implements OnInit {
         this.liked = true;
 
         if (this.itemType === 'article') {
-            this.http.get(`${BASE_URL}/api/articles/upvote/${this.itemId}`).subscribe(() => {
-            });
+            this.subscriptions.push(this.http.get(`${BASE_URL}/api/articles/upvote/${this.itemId}`).subscribe(() => {
+            }));
         }
         if (this.itemType === 'deck') {
-            this.http.get(`${BASE_URL}/api/decks/upvote/${this.itemId}`).subscribe(() => {
-            });
+            this.subscriptions.push(this.http.get(`${BASE_URL}/api/decks/upvote/${this.itemId}`).subscribe(() => {
+            }));
         }
 
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 }

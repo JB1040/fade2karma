@@ -316,3 +316,10 @@ f2k-rating-box {
         margin: 0 auto 20px auto;
     }
 }
+
+@media(min-width: 1220px) {
+    .recommended {
+        top: 50px;
+        position: sticky;
+    }
+}

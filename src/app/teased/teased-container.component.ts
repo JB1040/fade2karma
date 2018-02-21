@@ -11,7 +11,7 @@ import { CanvasService } from '../core/canvas.service';
 export class RecommendedContainerComponent {
     @Input() items: Article[] | Deck[];
     @Input() title: string;
-    @Input() itemType: string;
+    @Input() itemType: 'article'|'deck';
     width: number;
 
     @HostListener('window:resize') resized() {
