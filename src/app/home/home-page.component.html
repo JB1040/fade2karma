@@ -1,4 +1,3 @@
-<f2kOnlineSteamerScroll *ngIf="onlineStreamers.length > 0" [onlineStreamers]="onlineStreamers"></f2kOnlineSteamerScroll>
 <div class="F2K-column clearfix">
     <div class="clearfix featured" *ngIf="featuredArticles.length > 1">
         <f2kArticlesTile *ngIf="featuredArticles[0]" class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
@@ -11,15 +10,11 @@
         <f2kTierListComponent [type]="'deck'" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne"></f2kTierListComponent>
 
         <div class="twitter-container">
-            <a class="twitter-timeline" data-chrome="nofooter noborders" data-tweet-limit="3" data-dnt="true" href="https://twitter.com/Fade2Karma?ref_src=twsrc%5Etfw">Tweets by Fade2Karma</a>
+            <a class="twitter-timeline" data-chrome="nofooter noborders" data-height="400" data-tweet-limit="2" data-dnt="true" href="https://twitter.com/Fade2Karma?ref_src=twsrc%5Etfw">Tweets by Fade2Karma</a>
         </div>
 	</span>
 
-    <div class="clearfix article-container-one" *ngIf="firstTilesColumn.length > 0">
-        <f2kArticlesTile *ngFor="let article of firstTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
-    </div>
-
-    <div class="clearfix article-container-two" *ngIf="secondTilesColumn.length > 0">
-        <f2kArticlesTile *ngFor="let article of secondTilesColumn.slice(0, 6)" [article]="article"></f2kArticlesTile>
+    <div class="clearfix article-container" *ngIf="articles.length > 0">
+        <f2kArticlesTile *ngFor="let article of articles" [article]="article"></f2kArticlesTile>
     </div>
 </div>
