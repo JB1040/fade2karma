@@ -25,6 +25,7 @@
 
 .article-body {
     float: left;
+    word-wrap: break-word;
     border-top: #e7e7e7 1px solid;
 }
 
@@ -154,7 +155,6 @@ f2k-rating-box {
     }
     .article-body {
         float: none;
-        word-break: break-word;
     }
     .article-footer {
         padding-bottom: 30px;
