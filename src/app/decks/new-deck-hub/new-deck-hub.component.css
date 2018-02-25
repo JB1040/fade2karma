@@ -471,8 +471,20 @@ f2k-rating-box {
     }
 }
 
-@media(min-width: 1200px) {
+@media(min-width: 1220px) {
     f2kRecommendedContainer {
         margin-top: 40px;
+    }
+
+    .recommended.desktop {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        float: unset;
+    }
+
+    .recommended-container {
+        top: 50px;
+        position: sticky;
     }
 }
