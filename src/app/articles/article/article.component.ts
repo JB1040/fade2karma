@@ -58,9 +58,8 @@ export class ArticleComponent implements OnDestroy {
         this.loadingArticles = true;
         const loadArticlesSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(articles => {
             if (articles[0] && articles[0].id === this.articles[0].id) { // TODO better solution (maybe I can in list request gibe notId=:ID or something to speed this up)
-                this.scrolled += 1;
-                this.loadingArticles = false;
                 this.loadArticles(1, this.scrolled);
+                this.scrolled += 1;
                 return;
             }
             articles.forEach(article => {
