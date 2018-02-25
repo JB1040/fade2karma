@@ -28,10 +28,7 @@ export class DeckListRowComponent implements OnInit {
 
     ngOnInit() {
         this.url = `${this.router.url}/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.deck.id}`;
-
-        if ((Date.now() - (this.deck.editDate || this.deck.date)) < 1000 * 60 * 60 * 24 * 7) { // if less then 1 week
-            this.displayDate = TimeTransfer.getTime(this.deck.editDate || this.deck.date);
-        }
+        this.displayDate = TimeTransfer.getTime(this.deck.editDate || this.deck.date);
         this.dustCost = this.deck.decks[0].dust;
     }
 }
