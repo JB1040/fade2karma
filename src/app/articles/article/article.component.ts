@@ -46,8 +46,10 @@ export class ArticleComponent implements OnDestroy {
 
     loadArticle(id: number) {
         this.loadingArticles = true;
-        this.loadArticleSubscription = this.http.get<Article>(`${BASE_URL}/api/articles/${id}`).subscribe(res => {
-            this.articles.unshift(res);
+        this.loadArticleSubscription = this.http.get<Article>(`${BASE_URL}/api/articles/${id}`).subscribe(article => {
+            article.content = article.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
+
+            this.articles.unshift(article);
             this.loadingArticles = false;
         });
     }
@@ -61,6 +63,9 @@ export class ArticleComponent implements OnDestroy {
                 this.loadArticles(1, this.scrolled);
                 return;
             }
+            articles.forEach(article => {
+                article.content = article.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
+            });
             this.articles = this.articles.concat(articles);
             if (articles.length < amount) {
                 this.allArticlesLoaded = true;

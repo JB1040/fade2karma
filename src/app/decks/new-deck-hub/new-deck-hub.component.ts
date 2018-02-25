@@ -292,6 +292,7 @@ export class NewDeckHubComponent implements OnDestroy {
         this.subscriptions.push(this.http.get<Deck>(`${BASE_URL}/api/decks/${id}`).subscribe(deck => {
 
             this.deck = deck;
+            this.deck.content = this.deck.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
             this.activeDeck = this.deck.decks[0];
 
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
