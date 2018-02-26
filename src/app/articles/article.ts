@@ -9,7 +9,7 @@ export class Article {
     imageURL: string;
     content: string;
     game: 'HS' | 'GWENT';
-    articleType: string; // TODO enum
+    type: 'METAREPORTS' | 'ANNOUNCMENTS' | 'PODCASTS' | 'HIGHLIGHTS' | 'VIEWPOINTS' | 'TEAMS' | 'CARD_REVEALS';
     published: boolean;
     rating: number;
     date: number;
