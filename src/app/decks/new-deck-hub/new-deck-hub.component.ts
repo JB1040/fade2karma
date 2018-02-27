@@ -222,7 +222,7 @@ export class NewDeckHubComponent implements OnDestroy {
                 this.distribution[(card.cost >= 7 ? '7+' : `${card.cost}`)] += 1;
             });
             this.leftColumn.push({
-                title: `${this.deck.heroClass.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} Cards`,
+                title: 'Class Cards',
                 cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL', false)
             });
             this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL') });
