@@ -1,10 +1,9 @@
 <div class="F2K-column clearfix">
-    <div class="clearfix featured" *ngIf="featuredArticles.length > 1">
-        <f2kArticlesTile *ngIf="featuredArticles[0]" class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
-        <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
-    </div>
+    <f2kArticlesTile *ngIf="featuredArticles[0]" class="featured" style="float: left" [showDescription]="true" [article]="featuredArticles[0]"></f2kArticlesTile>
 
     <span class="side-container clearfix">
+        <f2kArticlesTile *ngIf="featuredArticles[1]" class="f2k-visible-lg" style="float: right" [showDescription]="true" [article]="featuredArticles[1]"></f2kArticlesTile>
+
         <!--<f2k-ad [adStyle]="{'display': 'inline-block', 'width.px': '300', 'height.px': '250'}" [adLayout]="'in-article'" [adFormat]="'fluid'" [adSlot]="'2783969262'"></f2k-ad>-->
 
         <f2kTierListComponent [type]="'deck'" [title]="'F2K HEARTHSTONE TIER LIST'" [tierOne]="tierOne"></f2kTierListComponent>
