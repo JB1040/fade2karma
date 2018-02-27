@@ -5,30 +5,29 @@
     border-bottom: 1px solid #e7e7e7;
     padding-bottom: 4px;
     cursor: pointer;
-    position: relative;
 }
 
 :host(.article) .text-container h4 {
-    margin-bottom: 2px;
-    height: 50px;
+    height: 42px; /*line-height(21px) * 2*/
     overflow: hidden;
+}
+
+.text-container h4 {
+    margin-bottom: 2px;
 }
 
 :host:hover {
     cursor: pointer;
 }
 
+.text-container h6 {
+    font-size: 12px;
+    line-height: 12px;
+    color: #4E78A0;
+}
+
 :host:hover h4 {
     color: #ef3418;
-}
-
-:host(.deck) .text-container {
-    display: inline-block;
-    margin-left: 44px;
-}
-
-:host(.article) .text-container {
-    width: 250px;
 }
 
 :host(.article) h4 {
@@ -53,21 +52,13 @@ h4 {
 
 .text-container p {
     color: #9b9b9b;
-}
-
-
-:host(.deck) img {
-    height: 30px;
-    width: 30px;
-}
-
-:host(.article) img {
-    right: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 img {
+    height: calc(100% - 10px);
     position: absolute;
-    top: 4px;
 }
 
 @media (max-width: 768px) {
@@ -84,16 +75,6 @@ img {
         width: Calc(100vw - 30px);
         max-width: 460px;
     }
-
-    :host(.article) img {
-        width: 65px;
-        height: 37px;
-    }
-
-    :host(.article) .text-container {
-        width: Calc(100vw - 95px);
-        max-width: 385px;
-    }
 }
 
 @media (min-width: 768px) {
@@ -103,15 +84,6 @@ img {
     }
     :host(.deck) {
         width: 334px;
-    }
-
-    :host(.article) img {
-        width: 65px;
-        height: 37px;
-    }
-
-    :host(.article) .text-container {
-        width: 270px;
     }
 }
 
@@ -128,8 +100,7 @@ img {
         width: 360px;
     }
 
-    :host(.article) img {
-        width: 90px;
-        height: 51px;
+    :host(.article) .text-container h4 {
+        height: 50px; /*line-height(25px) * 2*/
     }
 }
