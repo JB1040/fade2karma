@@ -20,7 +20,7 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
 
     @Input() teasedItem: Article | Deck;
     @Input() type: 'article'|'deck';
-    @Input() showTier = true;
+    @Input() showInfo = true;
     date: string;
     imageSrc: any;
     url: string;
@@ -60,7 +60,9 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
 
         this.width.emit(this.el.nativeElement.clientWidth);
         this.date = TimeTransfer.getTime(this.teasedItem.editDate || this.teasedItem.date);
-        this.info = (this.teasedItem as Article).type || 'TIER: ' + (this.teasedItem as Deck).tier;
+        if (this.showInfo) {
+            this.info = (this.teasedItem as Article).type || 'TIER: ' + (this.teasedItem as Deck).tier;
+        }
         this.setImageUrl();
         this.onResize();
     }
