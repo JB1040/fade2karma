@@ -68,7 +68,7 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
     }
 
     setImageUrl(): void {
-        if (this.teasedItem.imageURL) {
+        if (this.teasedItem.imageURL && this.type === 'article') {
             if (this.teasedItem.imageURL.indexOf('youtube') !== -1) {
                 this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.teasedItem.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
             } else if (this.teasedItem.imageURL.indexOf('twitch') !== -1) {
