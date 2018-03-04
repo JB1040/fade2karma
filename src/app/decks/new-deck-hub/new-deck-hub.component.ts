@@ -15,7 +15,7 @@ import { CopyDeckCodeService } from '../../core/copy-deck-code.service';
 @Component({
     selector: 'f2kNewDeckHub',
     templateUrl: './new-deck-hub.component.html',
-    styleUrls: ['./new-deck-hub.component.css', 'src/app/core/f2k-deckcode-button.css']
+    styleUrls: ['./new-deck-hub.component.css']
 })
 export class NewDeckHubComponent implements OnDestroy {
 

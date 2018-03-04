@@ -19,7 +19,7 @@ import { CopyDeckCodeService } from '../../../core/copy-deck-code.service';
 @Component({
     selector: 'f2kArticleContent',
     templateUrl: './article-content.component.html',
-    styleUrls: ['./article-content.component.css', 'src/app/core/f2k-deckcode-button.css'],
+    styleUrls: ['./article-content.component.css'],
     encapsulation: ViewEncapsulation.None
 })
 export class ArticleContentComponent implements OnInit {
