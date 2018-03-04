@@ -1,7 +1,6 @@
 import { Component, Input, Inject} from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
-import { BASE_URL } from '../../../core/globals';
 
 @Component({
     selector: 'f2k-social-share',

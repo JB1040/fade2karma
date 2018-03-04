@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { CanvasService } from '../../core/canvas.service';
 import { BASE_URL } from '../../core/globals';
-import { InfiniteScrollerDirective } from '../../infinite-scroller.directive';
+import { InfiniteScrollService } from '../../infinite-scroller.directive';
 import { Subscription } from 'rxjs/Subscription';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,7 +24,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     allArticlesLoaded = false;
     infiniteScrollSubscription: Subscription;
 
-    constructor(private canvas: CanvasService, private el: ElementRef, private http: HttpClient, private infiniteScroll: InfiniteScrollerDirective) {
+    constructor(private canvas: CanvasService, private el: ElementRef, private http: HttpClient, private infiniteScroll: InfiniteScrollService) {
         this.infiniteScrollSubscription = infiniteScroll.scrollLimitReached.subscribe(() => {
             this.onScrollDown();
         });

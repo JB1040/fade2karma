@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ArticleFetchingService } from './article-fetching.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
-import { InfiniteScrollerDirective } from '../../infinite-scroller.directive';
+import { InfiniteScrollService } from '../../infinite-scroller.directive';
 import { Subscription } from 'rxjs/Subscription';
 import { HttpClient } from '@angular/common/http';
 import { Article } from '../article';
@@ -22,7 +22,7 @@ export class ArticleComponent implements OnDestroy {
     loadArticleSubscription: Subscription;
     loadArticlesSubscriptions: Array<Subscription> = [];
 
-    constructor(private articleService: ArticleFetchingService, private router: Router, private http: HttpClient, private route: ActivatedRoute, infiniteScroll: InfiniteScrollerDirective) {
+    constructor(private articleService: ArticleFetchingService, private router: Router, private http: HttpClient, private route: ActivatedRoute, infiniteScroll: InfiniteScrollService) {
         this.routeSubscription = this.route.params.subscribe(() => {
             this.articles = [];
             this.scrolled = 0;

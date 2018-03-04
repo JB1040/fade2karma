@@ -1,4 +1,4 @@
-﻿﻿import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -58,7 +58,10 @@ import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 import { FacebookSkdService } from './facebook-skd.service';
 import { AdComponent } from './ad/ad.component';
 import { HtmlHovererComponent } from './html-hoverer/html-hoverer.component';
-import { InfiniteScrollerDirective } from './infinite-scroller.directive';
+import { InfiniteScrollService } from './infinite-scroller.directive';
+import { HoverService } from './core/hover.service';
+import { SpoilerService } from './core/spoilers';
+import { CopyDeckCodeService } from './core/copy-deck-code.service';
 
 const myAppRoutes: Routes = [
     { path: '', component: PageNotFoundComponent },
@@ -137,7 +140,10 @@ const myAppRoutes: Routes = [
         F2kUrlPipe,
         GoogleAnalyticsEventsService,
         FacebookSkdService,
-        InfiniteScrollerDirective
+        HoverService,
+        SpoilerService,
+        CopyDeckCodeService,
+        InfiniteScrollService
     ]
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import Card from '../card';
 import { Games } from '../decks/deck';
 import { GetImageSrc } from '../core/globals';
@@ -11,7 +11,10 @@ import { GetImageSrc } from '../core/globals';
 
 export class CardComponent {
     @Input() card: Card;
+    @Input() cardId: string;
     @Input() game: Games;
+
+    @HostBinding('class') class = 'f2kHoverCard';
 
     getImageSrc = GetImageSrc;
 }

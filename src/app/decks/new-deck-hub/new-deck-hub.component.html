@@ -32,31 +32,23 @@
 
                 <div class="deck-content clearfix">
                     <ul *ngIf="deck.decks?.length > 1" class="f2k-nav f2k-nav-tabs">
-                        <li *ngFor="let deck of deck.decks" class="f2k-nav-item"
-                            [ngClass]="{active: activeDeck.name === deck.name}"
-                            (click)="activeDeck = deck; buildData()"><a>{{deck.name}}</a></li>
+                        <li *ngFor="let singleDeck of deck.decks" class="f2k-nav-item"
+                            [ngClass]="{active: activeDeck.name === singleDeck.name}"
+                            (click)="onDeckChange(singleDeck)"><a>{{singleDeck.name}}</a></li>
                     </ul>
 
                     <div #cardsContainers class="cards-containers clearfix">
                         <div class="cards-container">
                             <div *ngFor="let cell of leftColumn">
                                 <span class="b2">{{cell.title}}</span>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (click)="clickOnHoverableElement = $event; setDisplayedCard(card); openHover($event, true)"
-                                                  (mouseenter)="setDisplayedCard(card); openHover($event)"
-                                                  (mousemove)="htmlHover.positionRelativeToMouse($event)"
-                                                  (mouseleave)="closeHover()"></f2kCardComponent>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
                             </div>
                         </div>
 
                         <div class="cards-container">
                             <div *ngFor="let cell of rightColumn">
                                 <span class="b2">{{cell.title}}</span>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game"
-                                                  (click)="clickOnHoverableElement = $event; setDisplayedCard(card); openHover($event, true)"
-                                                  (mouseenter)="setDisplayedCard(card); openHover($event)"
-                                                  (mousemove)="htmlHover.positionRelativeToMouse($event)"
-                                                  (mouseleave)="closeHover()"></f2kCardComponent>
+                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
                             </div>
                         </div>
                     </div>
@@ -134,5 +126,3 @@
         </div>
     </div>
 </div>
-
-<f2kHtmlHoverer #htmlHover [htmlString]="displayedCard" [height]="400" [width]="300"></f2kHtmlHoverer>

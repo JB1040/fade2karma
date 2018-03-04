@@ -1,52 +1,45 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { Deck, DeckObj } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BASE_URL, GetImageSrc } from '../../core/globals';
-import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
+import { BASE_URL} from '../../core/globals';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FacebookSkdService } from '../../facebook-skd.service';
-import { HtmlHovererComponent } from '../../html-hoverer/html-hoverer.component';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-
-const COLLAPSED_CLASS = 'collapsed';
-const EXPANDED_CLASS = 'expanded';
+import { HoverService } from '../../core/hover.service';
+import { SpoilerService } from '../../core/spoilers';
+import { CopyDeckCodeService } from '../../core/copy-deck-code.service';
 
 @Component({
     selector: 'f2kNewDeckHub',
     templateUrl: './new-deck-hub.component.html',
-    styleUrls: ['./new-deck-hub.component.css']
+    styleUrls: ['./new-deck-hub.component.css', 'src/app/core/f2k-deckcode-button.css']
 })
 export class NewDeckHubComponent implements OnDestroy {
 
-    public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
     deck: Deck;
     chartData: any;
     leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
     rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
     displayedCard: string;
-    openedWithClick = false;
     CONTENT: any;
     routeSubscription: any;
     facebookComments = false;
     showComments = false;
     commentUrl: string;
     previousSize: number;
-    getImageSrc = GetImageSrc;
     activeDeck: DeckObj;
     subscriptions: Array<Subscription> = [];
 
     copyDeckCodeName = 'COPY DECK CODE';
-
-    clickOnHoverableElement: null | MouseEvent = null;
 
     distribution: { [key: string]: number };
 
     @ViewChild('contentContainer') contentContainer: ElementRef;
     @ViewChild('commentContainer') commentContainer: ElementRef;
     @ViewChild('cardsContainers') cardsContainers: ElementRef;
-    @ViewChild('htmlHover') htmlHover: HtmlHovererComponent;
 
     static sortByManaCostAndName(a: Card, b: Card) {
         const sortValue = a.cost - b.cost;
@@ -64,7 +57,15 @@ export class NewDeckHubComponent implements OnDestroy {
         return sortValue;
     }
 
-    constructor(@Inject(DOCUMENT) private docEl: Document, private http: HttpClient, private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private facebookService: FacebookSkdService, private cdRef: ChangeDetectorRef) { // TODO remove when real data is there
+    constructor(private http: HttpClient,
+                private router: Router,
+                private route: ActivatedRoute,
+                private sanitizer: DomSanitizer,
+                private facebookService: FacebookSkdService,
+                private cdRef: ChangeDetectorRef,
+                private hoverService: HoverService,
+                private spoilerService: SpoilerService,
+                private copyDeckCodeService: CopyDeckCodeService) {
         this.routeSubscription = this.route.params.subscribe(() => {
             this.deck = null;
             this.chartData = null;
@@ -82,86 +83,6 @@ export class NewDeckHubComponent implements OnDestroy {
         if (this.previousSize && this.commentContainer.nativeElement.clientWidth !== this.previousSize) {
             this.parseHTML(true);
         }
-    }
-
-    @HostListener('document:click', ['$event']) onDocClick($event: MouseEvent) {
-        if (this.openedWithClick && $event.button !== 2 && $event !== this.clickOnHoverableElement) {
-            if (this.clickOnHoverableElement !== $event) {
-                this.openedWithClick = false;
-                this.htmlHover.close();
-            } else if (!this.cardsContainers.nativeElement.contains($event.target)) {
-                this.openedWithClick = false;
-                this.htmlHover.close();
-            }
-        }
-    }
-
-    initTextCardHover(): void {
-        if (this.deck && this.deck.game === 'HS') {
-            const hoverableElements = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
-            this.makeElementsHoverable(hoverableElements);
-        }
-    }
-
-    makeElementsHoverable(hoverableElements: NodeListOf<HTMLElement>): void {
-        for (let i = 0; i < hoverableElements.length; i++) {
-            const hoverableElement = hoverableElements[i];
-            const cardId = hoverableElement.getAttribute('data-id');
-            if (cardId) {
-                hoverableElement.addEventListener('click', $event => {
-                    this.clickOnHoverableElement = $event;
-                    this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
-                    this.openHover($event, true);
-                });
-
-                hoverableElement.addEventListener('mouseenter', $event => {
-                    this.displayedCard = `<img src="${encodeURI(`assets/images/static/hearthstone/${cardId}.png`)}">`;
-                    this.openHover($event);
-                });
-
-                hoverableElement.addEventListener('mousemove', $event => {
-                    this.htmlHover.positionRelativeToMouse($event);
-                });
-
-                hoverableElement.addEventListener('mouseleave', $event => {
-                    this.closeHover();
-                });
-            }
-        }
-    }
-
-    initSpoilers(): void {
-         if (this.deck) {
-            const spoilerElements  = (this.contentContainer.nativeElement as HTMLDivElement).querySelectorAll<HTMLSpanElement>('.f2kSpoiler');
-            for (let i = 0; i < spoilerElements.length; i++) {
-                const clickEl = document.createElement('span');
-
-                const spoilerElement = spoilerElements[i];
-                const content = spoilerElement.innerHTML;
-                this.toggleSpoiler(spoilerElement, clickEl, content);
-
-                clickEl.addEventListener('click', () => {
-                    this.toggleSpoiler(spoilerElement, clickEl, content);
-                });
-            }
-        }
-    }
-
-    toggleSpoiler(el: HTMLSpanElement, clickEl: HTMLSpanElement, initialContent: string): void {
-        if (el.classList.contains(COLLAPSED_CLASS)) {
-            el.classList.add(EXPANDED_CLASS);
-            el.classList.remove(COLLAPSED_CLASS);
-            el.innerHTML = initialContent;
-            clickEl.innerHTML = '[-]';
-            const hoverableElements = el.querySelectorAll<HTMLSpanElement>('.f2kHoverCard');
-            this.makeElementsHoverable(hoverableElements);
-        } else {
-            el.classList.add(COLLAPSED_CLASS);
-            el.classList.remove(EXPANDED_CLASS);
-            el.innerHTML = '';
-            clickEl.innerHTML = '[+]';
-        }
-        el.insertBefore(clickEl, el.childNodes[0]);
     }
 
     parseHTML(forceResize?: boolean): void {
@@ -225,7 +146,10 @@ export class NewDeckHubComponent implements OnDestroy {
                 title: 'Class Cards',
                 cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL', false)
             });
-            this.rightColumn.push({ title: 'Neutral Cards', cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL') });
+            this.rightColumn.push({
+                title: 'Neutral Cards',
+                cards: this.getSpecificCards(this.activeDeck, 'heroClass', 'NEUTRAL')
+            });
         } else {
             this.distribution = null;
             const leaderCard = new Card(this.deck.leader);
@@ -268,26 +192,6 @@ export class NewDeckHubComponent implements OnDestroy {
         };
     }
 
-    // on mobile if only click based events to show cards if screen size is to small for hover to work properly
-    openHover($event: MouseEvent, clickOpen?: boolean): void {
-        if (clickOpen) {
-            this.openedWithClick = true;
-            this.htmlHover.open($event);
-        } else if (window.innerWidth > 600 || window.innerHeight > 800) {
-            this.htmlHover.open($event);
-        }
-    }
-
-    closeHover(): void {
-        if (!this.openedWithClick && (window.innerWidth > 600 || window.innerHeight > 800)) {
-            this.htmlHover.close();
-        }
-    }
-
-    setDisplayedCard(card: Card): void {
-        this.displayedCard = `<img src="${GetImageSrc(card, this.deck.game, false)}">`;
-    }
-
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
         this.subscriptions.push(this.http.get<Deck>(`${BASE_URL}/api/decks/${id}`).subscribe(deck => {
 
@@ -299,26 +203,24 @@ export class NewDeckHubComponent implements OnDestroy {
             this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
             this.buildData();
             this.cdRef.detectChanges();
-            this.initTextCardHover();
-            this.initSpoilers();
+            this.hoverService.initTextCardHover(this.cardsContainers.nativeElement);
+            this.hoverService.initTextCardHover(this.contentContainer.nativeElement);
+            this.spoilerService.initSpoilers(this.contentContainer.nativeElement);
+            this.copyDeckCodeService.initDeckCodeCopy(this.contentContainer.nativeElement);
         }));
     }
 
-    copyDeckCode(): void {
-        if (document.execCommand('copy')) {
-            const textArea = this.docEl.createElement('textarea');
-            textArea.style.position = 'fixed';
-            textArea.style.opacity = '0';
-            this.docEl.body.appendChild(textArea);
-            textArea.value = this.activeDeck.code;
-            textArea.select();
-            this.docEl.execCommand('copy');
-            textArea.remove();
-            this.copyDeckCodeName = '✔ DECK CODE COPIED';
-            window.setTimeout(() => { this.copyDeckCodeName = 'COPY DECK CODE'; }, 5000);
-        } else {
-            prompt('Deck code could not be automatically copied\nto your clipboard, but you can manually copy it.', this.activeDeck.code);
-        }
+    copyDeckCode(deckCode?: string): void {
+        this.copyDeckCodeService.copyDeckCode(deckCode || this.activeDeck.code);
+        this.copyDeckCodeName = '✔ DECK CODE COPIED';
+        setTimeout(() => { this.copyDeckCodeName = 'COPY DECK CODE'; }, 5000);
+    }
+
+    onDeckChange(newDeck: DeckObj): void {
+        this.activeDeck = newDeck;
+        this.buildData();
+        this.cdRef.detectChanges();
+        this.hoverService.initTextCardHover(this.cardsContainers.nativeElement);
     }
 
     ngOnDestroy() {
