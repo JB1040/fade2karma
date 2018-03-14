@@ -26,7 +26,7 @@
                 <div style="display: block" *ngFor="let child of navItem.children" class="navItemChild">
                     <h5 [ngClass]="{active: isActive(child)}">
                         <span class="navItemText">{{child}}</span>
-                        <img *ngIf='!absoluteUrl(child)' src="assets/images/{{child}}.svg">
+                        <img *ngIf='!absoluteUrl(child)' [src]="getChildIcon(child)">
 
                         <a *ngIf='!absoluteUrl(child)' (click)="open = false; resetOpenItems(navItem)" routerLink="{{'/' + [toLink(navItem.name), toLink(child)].join('/')}}"></a>
                         <a *ngIf='absoluteUrl(child)' (click)="open = false; resetOpenItems(navItem); openInNewTab(getOuterLink(child))" [href]="getOuterLink(child)" target="_blank"></a>

@@ -47,7 +47,7 @@ import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { DmcaComponent } from 'app/dmca/dmca.component';
-import { HearthstoneDecksHubComponent } from './decks/decks-hub/hearthstone-decks-hub/hearthstone-decks-hub.component';
+import { TopSpotlightComponent } from './decks/decks-hub/hearthstone-decks-hub/top-spotlight.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -62,6 +62,7 @@ import { InfiniteScrollService } from './infinite-scroller.directive';
 import { HoverService } from './core/hover.service';
 import { SpoilerService } from './core/spoilers';
 import { CopyDeckCodeService } from './core/copy-deck-code.service';
+import { PaginationComponent } from './decks/decks-hub/hearthstone-decks-hub/spotlight-list-row/pagination.component';
 
 const myAppRoutes: Routes = [
     { path: '', component: PageNotFoundComponent },
@@ -114,7 +115,7 @@ const myAppRoutes: Routes = [
         GiveawaysHubComponent,
         GiveawayTileComponent,
         DmcaComponent,
-        HearthstoneDecksHubComponent,
+        TopSpotlightComponent,
         PrivacyPolicyComponent,
         TermsOfServiceComponent,
         AboutUsComponent,
@@ -122,7 +123,8 @@ const myAppRoutes: Routes = [
         SponsorTileComponent,
         SponsorHubComponent,
         PlayerHubComponent,
-        HtmlHovererComponent
+        HtmlHovererComponent,
+        PaginationComponent
     ],
     exports: [
         CapitalizePipe,

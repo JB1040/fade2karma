@@ -1,0 +1,67 @@
+:host {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    color: #333;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+
+button:not(:first-child) {
+    margin-left: -1px;
+}
+
+button:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+button.active {
+    background-color: #aaa;
+}
+
+.btn-container > button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.btn-container > button:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+button:active {
+    z-index: 2;
+}
+
+button.disabled {
+    pointer-events: none;
+    cursor: auto;
+}

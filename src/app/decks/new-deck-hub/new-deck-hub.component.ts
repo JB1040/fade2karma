@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
-import { Deck, DeckObj } from '../deck';
+import { Deck, DeckObj, TopLegendDeck } from '../deck';
 import Card from '../../card';
 import { DustCalculationService } from '../../core/dust-calculation.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { CopyDeckCodeService } from '../../core/copy-deck-code.service';
 })
 export class NewDeckHubComponent implements OnDestroy {
 
-    deck: Deck;
+    deck: Deck | TopLegendDeck;
     chartData: any;
     leftColumn: Array<{ title: string, cards: Array<Card> }> = [];
     rightColumn: Array<{ title: string, cards: Array<Card> }> = [];
@@ -193,14 +193,15 @@ export class NewDeckHubComponent implements OnDestroy {
     }
 
     getDeck(id: number) { // TODO move in service, handle errors in case they take place...
-        this.subscriptions.push(this.http.get<Deck>(`${BASE_URL}/api/decks/${id}`).subscribe(deck => {
+        const topSpotlightDeck = this.router.url.indexOf('top_25_spotlight') > -1;
+        this.subscriptions.push(this.http.get<Deck | TopLegendDeck>(`${BASE_URL}/api/${topSpotlightDeck ? 'topdecks' : 'decks'}/${id}`).subscribe(deck => {
 
             this.deck = deck;
-            this.deck.content = this.deck.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
-            this.activeDeck = this.deck.decks[0];
+            this.deck.content = this.deck.content ? this.deck.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>') : '';
+            this.activeDeck = topSpotlightDeck ? (<any>this.deck).deck : this.deck.decks[0];
 
             this.CONTENT = this.sanitizer.bypassSecurityTrustHtml(`${this.deck.content}`);
-            this.commentUrl = `${BASE_URL}/tier_list/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
+            this.commentUrl = `${BASE_URL}/${topSpotlightDeck ? 'top_25_spotlight' : 'tier_list'}/${this.deck.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}`;
             this.buildData();
             this.cdRef.detectChanges();
             this.hoverService.initTextCardHover(this.cardsContainers.nativeElement);

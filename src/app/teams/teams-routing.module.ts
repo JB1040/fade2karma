@@ -9,7 +9,7 @@ import { TierListHubComponent } from '../tier-list-hub/tier-list-hub.component';
 import { NewDeckHubComponent } from '../decks/new-deck-hub/new-deck-hub.component';
 import { GiveawaysHubComponent } from '../giveaways/hub/giveaways-hub.component';
 import { DmcaComponent } from '../dmca/dmca.component';
-import { HearthstoneDecksHubComponent } from '../decks/decks-hub/hearthstone-decks-hub/hearthstone-decks-hub.component';
+import { TopSpotlightComponent } from '../decks/decks-hub/hearthstone-decks-hub/top-spotlight.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from '../about-us/about-us.component';
@@ -26,11 +26,11 @@ const contentRoutes: Routes = [
     { path: 'team/:author', component: PlayerHubComponent },
     { path: 'tier_list', component: TierListHubComponent },
     {
-        path: 'decklists/hearthstone',
+        path: 'decklists/top_25_spotlight',
         children: [
             {
                 path: '',
-                component: HearthstoneDecksHubComponent
+                component: TopSpotlightComponent
             },
             {
                 path: ':deck',

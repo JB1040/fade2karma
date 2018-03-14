@@ -20,7 +20,19 @@ export const uncraftableHS = ['CORE', 'HOF'];
 
 export class DustCalculationService {
     public static getCardCost(cards: Card[], game: Games): number {
-        const costs = (game === 'HS' ? dustCosts : scrapCosts);
+        let costs = (game === 'HS' ? dustCosts : scrapCosts);
+        switch (game) {
+            case 'HS':
+                costs = dustCosts;
+                break;
+            case 'GWENT':
+                costs = scrapCosts;
+                break;
+            default:
+                costs = dustCosts;
+                console.error('no Game passed in to dust-calculation');
+        }
+
         return cards.reduce((dustCost, card) => {
             if (game === 'HS' && uncraftableHS.indexOf(card.set) !== -1) {
                 return dustCost;

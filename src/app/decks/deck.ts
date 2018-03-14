@@ -3,6 +3,18 @@ import Card from '../card';
 import { Extend } from '../core/globals';
 import { Article } from '../articles/article';
 
+export const HeroClassesArr: Array<HeroClasses> = [
+    'DRUID',
+    'HUNTER',
+    'MAGE',
+    'PALADIN',
+    'PRIEST',
+    'ROGUE',
+    'SHAMAN',
+    'WARLOCK',
+    'WARRIOR'
+];
+
 export type HeroClasses =
     'DRUID'
     | 'MAGE'
@@ -42,9 +54,13 @@ export class GwentLeader {
 }
 
 export class DeckObj {
+    id: number;
     name: string;
     code: string;
     cards: Array<Card>;
+    mode: Modes;
+    isStandard: boolean;
+    heroClass: HeroClasses;
 
     dust?: number;
 }
@@ -77,6 +93,19 @@ export class Deck {
     constructor(jsonData: any) {
         Extend(this, jsonData);
     }
+}
+
+export class TopLegendDeck extends Deck {
+    server: Servers;
+    rank: number;
+    player: string;
+    deck: DeckObj
+}
+
+enum Servers {
+    NorthAmerica = 'NA',
+    Europe = 'EU',
+    Asia = 'ASIA'
 }
 
 enum Difficulty {

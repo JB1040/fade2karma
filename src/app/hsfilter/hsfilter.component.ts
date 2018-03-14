@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { HeroClasses, HeroClassesArr } from '../decks/deck';
 
 @Component({
     selector: 'f2kHearthstoneFilter',
@@ -7,27 +8,13 @@ import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 })
 export class HearthstoneFilterComponent {
 
-    classNames: Array<any>;
-    // private activeClasses: Array<any>;
-    activeClasses: any = [];
-    activeMode = 'STANDARD';
+    classNames = HeroClassesArr;
+
+    @Input() activeClasses: any = [];
 
     @Output() activeClassesChange = new EventEmitter<Array<any>>();
-    @Output() activeModeChange = new EventEmitter<string>();
 
-    constructor(private el: ElementRef) {
-        this.classNames = [
-            'DRUID',
-            'HUNTER',
-            'MAGE',
-            'PALADIN',
-            'PRIEST',
-            'ROGUE',
-            'SHAMAN',
-            'WARLOCK',
-            'WARRIOR'
-        ];
-    }
+    constructor(private el: ElementRef) {}
 
     toggleActiveClass(classType) {
         const index = this.activeClasses.indexOf(classType);
@@ -40,9 +27,8 @@ export class HearthstoneFilterComponent {
         this.activeClassesChange.emit(this.activeClasses);
     }
 
-    toggleActiveMode(modeType) {
-        this.activeMode = modeType;
-        this.activeModeChange.emit(this.activeMode);
+    isInactive(className: HeroClasses): boolean {
+        return this.activeClasses.length > 0 && !this.activeClasses.includes(className);
     }
 
     // hoverOver(name) {
