@@ -1,6 +1,13 @@
 import {
     ChangeDetectorRef,
-    Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output,
+    Component,
+    ElementRef,
+    EventEmitter, HostBinding,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
     ViewChild
 } from '@angular/core';
 import { Article } from '../articles/article';
@@ -19,7 +26,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class RecommendedTileComponent implements OnInit, OnDestroy {
 
     @Input() teasedItem: Article | Deck;
-    @Input() type: 'article'|'deck';
+    @Input() type: 'article' | 'deck';
     @Input() showInfo = true;
     date: string;
     imageSrc: any;
@@ -31,6 +38,8 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
 
     @ViewChild('imageNode') image: ElementRef;
     @ViewChild('textContainerNode') textContainer: ElementRef;
+
+    @HostBinding('class.hidden') hidden = false; // only set to true if the teasedItem is a number
 
     @HostListener('window:resize')
     onResize() {
@@ -52,8 +61,17 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        if (typeof this.teasedItem === 'number') {
+            this.hidden = true;
+            console.error('(f2kRecommendedTile) teasedItem is a number and not an object');
+            return;
+        }
         if (this.type === 'deck') {
-            this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+            if ((<any>this.teasedItem).rank) {
+                this.url = `/decklists/top_25_spotlight/${this.teasedItem.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+            } else {
+                this.url = `/tier_list/${this.teasedItem.title.replace(/ /g, '_').replace(/[:<>;,+*()'$!-.~?/]/g, '').toLowerCase()}_${this.teasedItem.id}`;
+            }
         } else {
             this.url = `/articles/${this.teasedItem.id}`;
         }
@@ -61,7 +79,7 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
         this.width.emit(this.el.nativeElement.clientWidth);
         this.date = TimeTransfer.getTime(this.teasedItem.editDate || this.teasedItem.date);
         if (this.showInfo) {
-            this.info = (this.teasedItem as Article).type || 'TIER: ' + (this.teasedItem as Deck).tier;
+            this.info = (this.teasedItem as Article).type || ((this.teasedItem as Deck).tier ? 'TIER: ' + (this.teasedItem as Deck).tier : '');
         }
         this.setImageUrl();
         this.onResize();
@@ -73,8 +91,7 @@ export class RecommendedTileComponent implements OnInit, OnDestroy {
                 this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://img.youtube.com/vi/' + this.teasedItem.imageURL.split('embed/')[1] + '/maxresdefault.jpg');
             } else if (this.teasedItem.imageURL.indexOf('twitch') !== -1) {
                 this.subscriptions.push(this.http.get<any>(`https://clips.twitch.tv/api/v2/clips/` + this.teasedItem.imageURL.split('&clip=')[1]).subscribe(res => {
-                    const result = res;
-                    this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(result.thumbnails.small);
+                    this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(res.thumbnails.small);
                 }));
             } else {
                 this.imageSrc = this.teasedItem.imageURL.indexOf('http') !== -1 ? this.teasedItem.imageURL : 'assets/images/' + this.teasedItem.imageURL;

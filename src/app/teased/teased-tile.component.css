@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+:host.hidden { /*This is only then set if the data which in input in the component is braking it (teasedItem is a number)*/
+    display: none !important;
+}
+
 :host(.article) .text-container h4 {
     height: 42px; /*line-height(21px) * 2*/
     overflow: hidden;

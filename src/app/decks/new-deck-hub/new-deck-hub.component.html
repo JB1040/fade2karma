@@ -23,104 +23,106 @@
                 <f2k-social-share [text]="deck.title"></f2k-social-share>
             </div>
 
-            <div class="deck-body">
-                <div class="share-rate-phone">
-                    <div class="social-share-phone">
-                        <f2k-social-share [text]="deck.title"></f2k-social-share>
-                    </div>
-                </div>
-
-                <div class="deck-content clearfix">
-                    <ul *ngIf="deck.decks?.length > 1" class="f2k-nav f2k-nav-tabs">
-                        <li *ngFor="let singleDeck of deck.decks" class="f2k-nav-item"
-                            [ngClass]="{active: activeDeck.name === singleDeck.name}"
-                            (click)="onDeckChange(singleDeck)"><a>{{singleDeck.name}}</a></li>
-                    </ul>
-
-                    <div #cardsContainers class="cards-containers clearfix">
-                        <div class="cards-container">
-                            <div *ngFor="let cell of leftColumn">
-                                <span class="b2">{{cell.title}}</span>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
-                            </div>
-                        </div>
-
-                        <div class="cards-container">
-                            <div *ngFor="let cell of rightColumn">
-                                <span class="b2">{{cell.title}}</span>
-                                <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
-                            </div>
+            <div class="content-container">
+                <div class="deck-body">
+                    <div class="share-rate-phone">
+                        <div class="social-share-phone">
+                            <f2k-social-share [text]="deck.title"></f2k-social-share>
                         </div>
                     </div>
-                    <!-- (mouseenter)="hovering($event, 'enter')" (mouseleave)="hovering($event, 'leave')" -->
 
-                    <div class="deck-and-ad tablet clearfix">
-                        <div class="graph-container">
+                    <div class="deck-content clearfix">
+                        <ul *ngIf="deck.decks?.length > 1" class="f2k-nav f2k-nav-tabs">
+                            <li *ngFor="let singleDeck of deck.decks" class="f2k-nav-item"
+                                [ngClass]="{active: activeDeck.name === singleDeck.name}"
+                                (click)="onDeckChange(singleDeck)"><a>{{singleDeck.name}}</a></li>
+                        </ul>
+
+                        <div #cardsContainers class="cards-containers clearfix">
+                            <div class="cards-container">
+                                <div *ngFor="let cell of leftColumn">
+                                    <span class="b2">{{cell.title}}</span>
+                                    <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
+                                </div>
+                            </div>
+
+                            <div class="cards-container">
+                                <div *ngFor="let cell of rightColumn">
+                                    <span class="b2">{{cell.title}}</span>
+                                    <f2kCardComponent *ngFor="let card of cell.cards" [card]="card" [game]="deck.game" [cardId]="card.cardId"></f2kCardComponent>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- (mouseenter)="hovering($event, 'enter')" (mouseleave)="hovering($event, 'leave')" -->
+
+                        <div class="deck-and-ad tablet clearfix">
+                            <div class="graph-container">
+                                <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+                                <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
+                            </div>
+                            <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
+                        </div>
+
+                        <div class="phone graph-container">
                             <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
                             <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
                         </div>
-                        <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
-                    </div>
+                        <!--<f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
 
-                    <div class="phone graph-container">
-                        <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                        <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
-                    </div>
-                    <!--<f2k-ad class="phone side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
+                        <div #contentContainer class="deck-guide-section" [innerHTML]="CONTENT"></div>
 
-                    <div #contentContainer class="deck-guide-section" [innerHTML]="CONTENT"></div>
+                        <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="tablet recommended-teaser"
+                                                 [title]="'SIMILAR DECKS'" [items]="deck.similar"
+                                                 [itemType]="'deck'"></f2kRecommendedContainer>
 
-                    <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="tablet recommended-teaser"
-                                             [title]="'SIMILAR DECKS'" [items]="deck.similar"
-                                             [itemType]="'deck'"></f2kRecommendedContainer>
+                        <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="tablet recommended-teaser"
+                                                 [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
+                                                 [itemType]="'article'"></f2kRecommendedContainer>
 
-                    <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="tablet recommended-teaser"
-                                             [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
-                                             [itemType]="'article'"></f2kRecommendedContainer>
-
-                    <!--<div class="deck-comments phone">-->
+                        <!--<div class="deck-comments phone">-->
                         <!--<button class="btn-expand-comments">COMMENTS-->
-                            <!--<i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>-->
+                        <!--<i class="fa" [ngClass]="{'fa-angle-down': true, 'fa-angle-up': false}"></i>-->
                         <!--</button>-->
-                    <!--</div>-->
-                    <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="phone recommended-teaser"
-                                             [title]="'SIMILAR DECKS'" [items]="deck.similar"
-                                             [itemType]="'deck'"></f2kRecommendedContainer>
+                        <!--</div>-->
+                        <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="phone recommended-teaser"
+                                                 [title]="'SIMILAR DECKS'" [items]="deck.similar"
+                                                 [itemType]="'deck'"></f2kRecommendedContainer>
 
-                    <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="phone recommended-teaser"
-                                             [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
-                                             [itemType]="'article'"></f2kRecommendedContainer>
-                    <!-- TODO: itemType -->
+                        <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="phone recommended-teaser"
+                                                 [title]="'YOU MAY ALSO LIKE'" [items]="deck.recommended"
+                                                 [itemType]="'article'"></f2kRecommendedContainer>
+                        <!-- TODO: itemType -->
 
+                    </div>
+                    <div class="deck-footer" style="display: block">
+                        <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
+
+                        <!--<p>Created by: <bold>{{deck.author.username}}</bold></p>-->
+
+                        <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
+                            <i class="fa" [ngClass]="{'fa-angle-down': !showComments, 'fa-angle-up': showComments}"></i>
+                        </button>
+
+                        <div #commentContainer class="article-comments" [ngStyle]="{opacity: showComments ? '1' : '0', height: showComments ? '' : '0'}"></div>
+
+                        <!--<f2k-ad class="footer-ad" [adStyle]="{'display': 'inline-block', 'width.px': '728', 'height.px': '90'}"></f2k-ad>-->
+                    </div>
                 </div>
-                <div class="deck-footer" style="display: block">
-                    <f2kAuthorTile style="display: inline-block" [author]="deck.author"></f2kAuthorTile>
 
-                    <!--<p>Created by: <bold>{{deck.author.username}}</bold></p>-->
+                <div class="recommended desktop">
+                    <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
+                    <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
+                    <div class="recommended-container">
+                        <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="recommended-teaser"
+                                                 [itemType]="'deck'" [title]="'SIMILAR DECKS'"
+                                                 [items]="deck.similar"></f2kRecommendedContainer>
 
-                    <button class="btn-expand-comments" (click)="showComments = !showComments; parseHTML()">COMMENTS
-                        <i class="fa" [ngClass]="{'fa-angle-down': !showComments, 'fa-angle-up': showComments}"></i>
-                    </button>
-
-                    <div #commentContainer class="article-comments" [ngStyle]="{opacity: showComments ? '1' : '0', height: showComments ? '' : '0'}"></div>
-
-                    <!--<f2k-ad class="footer-ad" [adStyle]="{'display': 'inline-block', 'width.px': '728', 'height.px': '90'}"></f2k-ad>-->
+                        <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="recommended-teaser"
+                                                 [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
+                                                 [items]="deck.recommended"></f2kRecommendedContainer>
+                    </div>
+                    <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
                 </div>
-            </div>
-
-            <div class="recommended desktop">
-                <f2kHearthstoneMana *ngIf="chartData" [chartData]="chartData"></f2kHearthstoneMana>
-                <button *ngIf="deck?.mode === 'CON'" class="btn-copy-deck-code" (click)="copyDeckCode()">{{copyDeckCodeName}}</button>
-                <div class="recommended-container">
-                    <f2kRecommendedContainer *ngIf="deck?.similar?.length > 0" class="recommended-teaser"
-                                             [itemType]="'deck'" [title]="'SIMILAR DECKS'"
-                                             [items]="deck.similar"></f2kRecommendedContainer>
-
-                    <f2kRecommendedContainer *ngIf="deck?.recommended?.length > 0" class="recommended-teaser"
-                                             [itemType]="'article'" [title]="'YOU MAY ALSO LIKE'"
-                                             [items]="deck.recommended"></f2kRecommendedContainer>
-                </div>
-                <!--<f2k-ad class="side-ad" [adStyle]="{'display': 'block'}" [adFormat]="'fluid'" [adLayoutKey]="'-7b-1m-75+i4+5r'" [adSlot]="'7360843877'"></f2k-ad>-->
             </div>
             <div class="clearfix"></div>
         </div>
