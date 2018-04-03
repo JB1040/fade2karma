@@ -1,0 +1,15 @@
+<a class="top-link" [routerLink]="['/decklists/top_25_spotlight']">TOP 25 LEGEND SPOTLIGHT</a>
+<a class="cell-container clearfix" *ngFor="let deck of decks" [routerLink]="[getDeckUrl(deck)]">
+    <div class="cell rank-cell">
+        <img src="assets/icons/rank.png" class="icon"/>
+        <h3>{{deck.rank}}</h3>
+    </div>
+
+    <img class="cell image-cell" src="assets/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg">
+
+    <div class="cell text-container-cell">
+        <h4 class="title">{{deck.title}}</h4>
+        <p class="info, b2">{{deck.player}} • {{getDate(deck)}}</p>
+    </div>
+</a>
+<a class="top-link" [routerLink]="['/decklists/top_25_spotlight']">VIEW FULL SPOTLIGHT 	&rarr;</a>

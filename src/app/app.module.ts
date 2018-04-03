@@ -63,6 +63,7 @@ import { HoverService } from './core/hover.service';
 import { SpoilerService } from './core/spoilers';
 import { CopyDeckCodeService } from './core/copy-deck-code.service';
 import { PaginationComponent } from './decks/decks-hub/hearthstone-decks-hub/spotlight-list-row/pagination.component';
+import { TopSpotlightTeaserComponent } from './decks/decks-hub/hearthstone-decks-hub/top-spotligt-teaser/top-spotlight-teaser.component';
 
 const myAppRoutes: Routes = [
     { path: '', component: PageNotFoundComponent },
@@ -76,7 +77,7 @@ const myAppRoutes: Routes = [
         RouterModule.forRoot(myAppRoutes, { useHash: false }),
         FormsModule,
         HttpClientModule
-],
+    ],
     declarations: [
         AppComponent,
         AdComponent,
@@ -124,7 +125,8 @@ const myAppRoutes: Routes = [
         SponsorHubComponent,
         PlayerHubComponent,
         HtmlHovererComponent,
-        PaginationComponent
+        PaginationComponent,
+        TopSpotlightTeaserComponent
     ],
     exports: [
         CapitalizePipe,

@@ -8,6 +8,8 @@
 
         <f2kTierListComponent [type]="'deck'" [title]="'F2K TIER LIST'" [tierOne]="tierOne"></f2kTierListComponent>
 
+        <f2kTopSpotlightTeaser *ngIf="spotlightDecks.length" [decks]="spotlightDecks"></f2kTopSpotlightTeaser>
+
         <div class="twitter-container">
             <a class="twitter-timeline" data-chrome="nofooter noborders" data-height="400" data-tweet-limit="2" data-dnt="true" href="https://twitter.com/Fade2Karma?ref_src=twsrc%5Etfw">Tweets by Fade2Karma</a>
         </div>

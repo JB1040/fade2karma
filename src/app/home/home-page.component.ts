@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../articles/article';
-import { Deck } from '../decks/deck';
+import { Deck, TopLegendDeck } from '../decks/deck';
 import { BASE_URL } from '../core/globals';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
+import { TierListHubService } from '../tier-list-hub/tier-list-hub.service';
 
 @Component({
     templateUrl: './home-page.component.html',
@@ -17,15 +18,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
     featuredArticlesLoaded: Boolean = false;
     articlesLoaded: Boolean = false;
     subscriptions: Array<Subscription> = [];
+    spotlightDecks: TopLegendDeck[] = [];
 
-    constructor(private http: HttpClient) {
+    SPOTLIGHT_DECK_AMOUNT = 4;
+
+    constructor(private http: HttpClient, private tierListHubService: TierListHubService) {
     }
 
     ngOnInit() {
         this.setArticles();
         this.setFeatured();
         this.setTierListDecks();
+        this.loadSpotlightDecks(this.SPOTLIGHT_DECK_AMOUNT);
         // this.setOnlineStreamers();
+    }
+
+    loadSpotlightDecks(amount: number): void {
+        const topDeckSubscription = this.tierListHubService.getTopDecks(amount, 0, '', null, 'HS').subscribe(topLegendDecks => this.spotlightDecks = topLegendDecks[0]);
+        this.subscriptions.push(topDeckSubscription);
     }
 
     setFeatured(): void {

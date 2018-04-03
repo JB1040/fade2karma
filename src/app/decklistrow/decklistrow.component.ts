@@ -5,7 +5,7 @@ import { Deck, TopLegendDeck } from '../decks/deck';
 @Component({
     selector: 'f2kDeckListRow',
     templateUrl: './decklistrow.component.html',
-    styleUrls: ['../app.component.css', './decklistrow.component.scss']
+    styleUrls: ['../app.component.css', './rank-cell.scss', './decklistrow.component.scss']
 })
 export class DeckListRowComponent implements OnInit {
 

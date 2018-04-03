@@ -1,0 +1,84 @@
+:host,
+.top-link,
+.cell,
+.cell-container {
+    width: 100%;
+    box-sizing: border-box;
+    border: solid #000 0;
+    display: block;
+    text-decoration: none;
+}
+
+:host {
+    float: right;
+    margin-bottom: 12px;
+}
+
+.cell {
+    float: left;
+    height: 50px;
+    text-wrap: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.top-link {
+    line-height: 50px;
+    background-color: #000;
+    text-align: center;
+    text-underline: none;
+    font-weight: bold;
+}
+
+.top-link,
+.cell-container {
+    transition: background-color 200ms ease;
+}
+
+.top-link,
+.text-container-cell > h4 {
+    color: #ccc;
+}
+
+.text-container-cell > p {
+    color: #999;
+}
+
+.top-link:hover {
+    background-color: #111;
+}
+
+.rank-cell,
+.image-cell {
+    border-right-width: 1px;
+}
+
+.cell-container:nth-child(2n + 1) {
+    background-color: #222;
+}
+
+.cell-container:nth-child(2n + 1):hover {
+    background-color: #333;
+}
+
+.cell-container:nth-child(2n + 2) {
+    background-color: #444;
+}
+
+.cell-container:nth-child(2n + 2):hover {
+    background-color: #555;
+}
+
+.image-cell {
+    padding: 8px;
+}
+
+.image-cell,
+.cell.rank-cell {
+    width: 50px;
+}
+
+.text-container-cell {
+    padding: 2px 0 0 8px;
+    width: calc(100% - 100px);
+}
