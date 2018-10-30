@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { DOCUMENT } from '@angular/common';
 
 @Injectable()
-export class InfiniteScrollerDirective {
+export class InfiniteScrollService {
 
     private scrollLimitSource = new Subject<void>();
     scrollLimitReached = this.scrollLimitSource.asObservable();

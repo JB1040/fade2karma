@@ -7,7 +7,7 @@
             <h1>{{index + 1}}</h1>
         </div>
         <div class="tier-list-recommended-tiles">
-            <f2kRecommendedTile [ngClass]="type" [type]="type" *ngFor="let item of tier" [teasedItem]="item"></f2kRecommendedTile>
+            <f2kRecommendedTile [ngClass]="type" [showInfo]="false" [type]="type" *ngFor="let item of tier" [teasedItem]="item"></f2kRecommendedTile>
         </div>
     </div>
 </div>

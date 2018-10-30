@@ -98,8 +98,8 @@
             </p>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 deck-list-row"
-                     *ngFor="let deck of decks.list; let index=index; let odd=odd; let even=even;">
-                    <f2kDeckListRow [deck]="deck" [odd]="odd" [even]="even" [index]="index" [mode]="active" [showTier]="false"></f2kDeckListRow>
+                     *ngFor="let deck of decks.list">
+                    <f2kDeckListRow [deck]="deck" [displayedProperties]="['resource', 'date', 'title', 'difficulty']"></f2kDeckListRow>
                 </div>
             </div>
         </div>

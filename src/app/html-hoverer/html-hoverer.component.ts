@@ -7,7 +7,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@ang
 })
 export class HtmlHovererComponent {
 
-    @Input() htmlString: string;
+    @Input() htmlString: string | void;
     @Input() height?: number;
     @Input() width?: number;
 

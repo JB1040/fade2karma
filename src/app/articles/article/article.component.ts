@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ArticleFetchingService } from './article-fetching.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_URL } from '../../core/globals';
-import { InfiniteScrollerDirective } from '../../infinite-scroller.directive';
+import { InfiniteScrollService } from '../../infinite-scroller.directive';
 import { Subscription } from 'rxjs/Subscription';
 import { HttpClient } from '@angular/common/http';
 import { Article } from '../article';
@@ -22,7 +22,7 @@ export class ArticleComponent implements OnDestroy {
     loadArticleSubscription: Subscription;
     loadArticlesSubscriptions: Array<Subscription> = [];
 
-    constructor(private articleService: ArticleFetchingService, private router: Router, private http: HttpClient, private route: ActivatedRoute, infiniteScroll: InfiniteScrollerDirective) {
+    constructor(private articleService: ArticleFetchingService, private router: Router, private http: HttpClient, private route: ActivatedRoute, infiniteScroll: InfiniteScrollService) {
         this.routeSubscription = this.route.params.subscribe(() => {
             this.articles = [];
             this.scrolled = 0;
@@ -46,8 +46,10 @@ export class ArticleComponent implements OnDestroy {
 
     loadArticle(id: number) {
         this.loadingArticles = true;
-        this.loadArticleSubscription = this.http.get<Article>(`${BASE_URL}/api/articles/${id}`).subscribe(res => {
-            this.articles.unshift(res);
+        this.loadArticleSubscription = this.http.get<Article>(`${BASE_URL}/api/articles/${id}`).subscribe(article => {
+            article.content = article.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
+
+            this.articles.unshift(article);
             this.loadingArticles = false;
         });
     }
@@ -56,11 +58,13 @@ export class ArticleComponent implements OnDestroy {
         this.loadingArticles = true;
         const loadArticlesSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=${amount}&offset=${offset}`).subscribe(articles => {
             if (articles[0] && articles[0].id === this.articles[0].id) { // TODO better solution (maybe I can in list request gibe notId=:ID or something to speed this up)
-                this.scrolled += 1;
-                this.loadingArticles = false;
                 this.loadArticles(1, this.scrolled);
+                this.scrolled += 1;
                 return;
             }
+            articles.forEach(article => {
+                article.content = article.content.replace(/<span class="f2kHoverCard(.*?)>(.*?)<\/span>([a-zA-Z']+)/gi, '<span class="f2kHoverCard$1>$2$3</span>');
+            });
             this.articles = this.articles.concat(articles);
             if (articles.length < amount) {
                 this.allArticlesLoaded = true;

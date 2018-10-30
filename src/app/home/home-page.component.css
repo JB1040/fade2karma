@@ -1,3 +1,7 @@
+.F2K-column {
+    padding-top: 12px;
+}
+
 .f2k-visible-lg {
     display: none;
 }
@@ -10,13 +14,11 @@ f2kTierListComponent {
     float: right;
 }
 
-.article-container-one,
-.article-container-two {
+.article-container {
     display: inline-block;
 }
 
-.article-container-one f2kArticlesTile,
-.article-container-two f2kArticlesTile {
+.article-container f2kArticlesTile {
     float: left;
 }
 
@@ -24,10 +26,6 @@ f2kTierListComponent {
     font-family: 'Roboto', sans-serif;
     line-height: 26px; /* TODO */
     font-size: 28px; /* TODO */
-}
-
-.article-container-two f2kArticlesTile:first-child {
-    display: none;
 }
 
 f2k-ad {
@@ -39,113 +37,75 @@ f2k-ad {
         max-width: 480px;
     }
 
+    f2kTierListComponent,
+    f2kTopDecks,
+    .F2K-column > .featured,
+    .article-container f2kArticlesTile,
     f2kOnlineSteamerScroll {
         margin-bottom: 10px;
     }
 
-    .F2K-column > .featured {
-        margin-bottom: 20px;
-    }
-
-    .article-container-one f2kArticlesTile,
-    .article-container-two f2kArticlesTile {
-        margin-bottom: 10px;
-    }
-
+    f2kTierListComponent,
     f2kTopDecks {
         margin-left: -10px;
-        margin-bottom: 20px;
-    }
-
-    .article-container-two {
-        margin-bottom: 10px;
     }
 
     f2kTierListComponent {
-        margin-left: -10px;
-        margin-bottom: 20px;
         max-width: 500px;
         float: left;
     }
 }
 
 @media (min-width: 768px) {
-    .F2K-column > .featured {
-        margin-bottom: 20px;
-    }
-
-    .article-container-one f2kArticlesTile,
-    .article-container-two f2kArticlesTile {
-        margin-bottom: 20px;
+    f2k-ad,
+    f2kTierListComponent,
+    f2kTopDecks,
+    f2kOnlineSteamerScroll,
+    .twitter-container,
+    .F2K-column > .featured,
+    .article-container f2kArticlesTile {
+        margin-bottom: 12px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1219px) {
-    f2kOnlineSteamerScroll {
-        margin-bottom: 20px;
+    .article-container f2kArticlesTile:nth-child(2n+2) {
+        margin-left: 20px;
     }
 
-    .article-container-one f2kArticlesTile:nth-child(2n+2),
-    .article-container-two f2kArticlesTile:nth-child(2n+1) {
-        margin-left: 20px;
+    .article-container f2kArticlesTile:last-child {
+        display: none;
     }
 
     f2kTopDecks {
         margin-left: -20px;
-        margin-bottom: 20px;
-    }
-
-    .article-container-two {
-        margin-bottom: 20px;
     }
 
     f2kTierListComponent {
         margin-right: -20px;
-        margin-bottom: 20px;
     }
 }
 
 @media (min-width: 1220px) {
-    f2kOnlineSteamerScroll {
-        margin-bottom: 20px;
-    }
-
     .f2k-visible-lg {
         display: block
     }
 
-    .F2K-column {
-        margin-bottom: 60px;
+    .article-container {
+        width: Calc(100% - 400px);
     }
 
-    .article-container-two f2kArticlesTile:first-child {
-        display: block;
-    }
-
-    .article-container-one f2kArticlesTile:first-child,
-    .article-container-one f2kArticlesTile:last-child,
-    .article-container-two f2kArticlesTile:last-child {
+    .article-container f2kArticlesTile:first-child {
         display: none;
     }
 
-    .article-container-one f2kArticlesTile:nth-child(2n+1),
-    .article-container-two f2kArticlesTile:nth-child(2n+2) {
+    .article-container f2kArticlesTile:nth-child(2n+1) {
         margin-left: 20px;
-    }
-
-    f2kTopDecks {
-        margin-bottom: 20px;
-    }
-
-    .article-container-one,
-    .article-container-two {
-        width: Calc(100% - 400px);
     }
 
     .twitter-container {
         display: block;
         float: right;
-        margin: 20px 0;
         width: calc(100% - 2px);
         border: 1px solid #e7e7e7;
     }
@@ -154,16 +114,13 @@ f2k-ad {
         float: right;
         display: inline-block;
         width: 300px;
-        margin: 0 40px 20px 40px;
+        margin-right: 40px;
+        margin-left: 40px;
     }
 
     .side-container {
         float: right;
         width: 380px;
-    }
-
-    f2kTierListComponent {
-        margin-top: -110px;
     }
 }
 

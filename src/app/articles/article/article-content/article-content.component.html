@@ -1,7 +1,7 @@
 <div *ngIf="article" class="article-page">
     <div class="article-header">
 
-        <f2k-breadcrumb *ngIf="deck" [title]="article.title"></f2k-breadcrumb>
+        <f2k-breadcrumb *ngIf="article" [title]="article.title"></f2k-breadcrumb>
         <h1 class="article-title">{{article.title}}</h1>
         <div class="article-info">
             <f2kAuthorTile style="display: inline-block" [author]="article.author"></f2kAuthorTile>
@@ -46,5 +46,3 @@
     </div>
     <div class="clearfix"></div>
 </div>
-
-<f2kHtmlHoverer #htmlHover [htmlString]="displayedCard" [height]="400" [width]="300"></f2kHtmlHoverer>

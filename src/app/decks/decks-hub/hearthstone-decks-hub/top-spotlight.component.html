@@ -1,0 +1,33 @@
+<div class="F2K-column clearfix">
+    <h1>Latest Spotlight Decks</h1>
+
+    <f2kHearthstoneFilter [activeClasses]="heroClasses" (activeClassesChange)="onActiveClassesChange($event)"></f2kHearthstoneFilter>
+
+    <div *ngIf="decks">
+        <div class="tier-list-title clearfix"> <!-- TODO extract in separate component-->
+            <div class="titles">
+                <span class="b2" (click)="sort('rank', $event)" [ngClass]="{'selected': this.sortBy === 'rank'}">Legend {{sortBy === 'rank' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+
+                <span class="b2">Class</span>
+
+                <span class="b2">Deck Name</span>
+            </div>
+
+            <div class="filters">
+                <span class="b2 server" (click)="sort('server', $event)" [ngClass]="{'selected': this.sortBy === 'server'}">Server {{sortBy === 'server' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+
+                <span class="b2 dust" (click)="sort('dust', $event)" [ngClass]="{'selected': this.sortBy === 'dust'}">Dust {{sortBy === 'dust' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+
+                <span class="b2 date" (click)="sort('date', $event)" [ngClass]="{'selected': this.sortBy === 'date'}">Last Edited {{sortBy === 'date' && sortUp ? '&#65087;' : '&#65088;'}}</span>
+            </div>
+        </div>
+
+        <div class="grid-list-container clearfix">
+            <f2kDeckListRow *ngFor="let deck of decks; let odd=odd; let even=even;" [odd]="odd" [even]="even"
+                            [deck]="deck" [lgCollapsed]="false" [displayedProperties]="['rank', 'title', 'date', 'heroClass', 'server', 'resource']">
+            </f2kDeckListRow>
+        </div>
+    </div>
+
+    <f2kPagination *ngIf="totalPages && totalPages > 1" [totalPages]="totalPages" [activePage]="page" (activePageChange)="onActivePageChange($event)"></f2kPagination>
+</div>

@@ -1,78 +1,78 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from '../articles/article';
-import { Deck } from '../decks/deck';
-import { Author } from '../articles/article/author/author';
+import { Deck, TopLegendDeck } from '../decks/deck';
 import { BASE_URL } from '../core/globals';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
+import { TierListHubService } from '../tier-list-hub/tier-list-hub.service';
 
 @Component({
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-    featuredArticles: Array<Article|Deck> = [];
+    featuredArticles: Array<Article | Deck> = [];
     tierOne: Deck[] = [];
-    firstTilesColumn: Array<Article|Deck> = [];
-    secondTilesColumn: Array<Article|Deck> = [];
-    onlineStreamers: Author[] = [];
-    completedFeatured: Boolean = false;
+    articles: Array<Article | Deck> = [];
+    // onlineStreamers: Author[] = [];
+    featuredArticlesLoaded: Boolean = false;
+    articlesLoaded: Boolean = false;
     subscriptions: Array<Subscription> = [];
+    spotlightDecks: TopLegendDeck[] = [];
 
-    constructor(private http: HttpClient) {
+    SPOTLIGHT_DECK_AMOUNT = 4;
+
+    constructor(private http: HttpClient, private tierListHubService: TierListHubService) {
     }
 
     ngOnInit() {
-        this.setFeatured();
         this.setArticles();
+        this.setFeatured();
         this.setTierListDecks();
-        this.setOnlineStreamers();
+        this.loadSpotlightDecks(this.SPOTLIGHT_DECK_AMOUNT);
+        // this.setOnlineStreamers();
     }
 
-    setFeatured(): void { // TODO move in service, handle errors in case they take place...
-        const featuredSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/featured`).subscribe(res => {
-            const articles = res.map((model: any) => model.cards ? new Deck(model) : new Article(model));
-            if (articles.length > 1) {
-                this.featuredArticles = articles;
-                this.firstTilesColumn.unshift(this.featuredArticles[1]);
-                if (this.firstTilesColumn.length > 6) {
-                    this.secondTilesColumn.unshift(this.firstTilesColumn.pop());
-                    this.secondTilesColumn.pop();
-                }
-            } else {
-                this.featuredArticles = articles.concat(this.featuredArticles);
-            }
-            this.completedFeatured = true;
+    loadSpotlightDecks(amount: number): void {
+        const topDeckSubscription = this.tierListHubService.getTopDecks(amount, 0, '', null, 'HS').subscribe(topLegendDecks => this.spotlightDecks = topLegendDecks[0]);
+        this.subscriptions.push(topDeckSubscription);
+    }
+
+    setFeatured(): void {
+        const featuredSubscription = this.http.get<Array<Article | Deck>>(`${BASE_URL}/api/articles/featured`).subscribe(articles => {
+            this.featuredArticles = articles.map((model: any) => model.cards ? new Deck(model) : new Article(model));
+            this.featuredArticlesLoaded = true;
+            this.setFeaturedAndArticles();
         });
         this.subscriptions.push(featuredSubscription);
     }
 
     setArticles(): void { // TODO move in service, handle errors in case they take place...
-        const articlesSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=13&offset=0`).subscribe(resArticles => {
-            let articles = resArticles;
-            if (this.firstTilesColumn.length > 1) {
-                this.firstTilesColumn = this.firstTilesColumn.concat(articles.slice(0, 5));
-                this.secondTilesColumn = this.secondTilesColumn.concat(articles.slice(5, 11));
-            } else {
-                const parent = this;
-                const todo = function () {
-                    if (!parent.completedFeatured) {
-                        setTimeout(todo, 200);
-                        return;
-                    }
-                    articles = articles.filter(art =>
-                        parent.featuredArticles.length === 0 ||
-                        art.id !== parent.featuredArticles[0].id
-                    );
-                    parent.featuredArticles = parent.featuredArticles.concat(articles.slice(0, 1));
-                    parent.firstTilesColumn = parent.firstTilesColumn.concat(articles.slice(0, 6));
-                    parent.secondTilesColumn = parent.secondTilesColumn.concat(articles.slice(6, 12));
-                };
-                setTimeout(todo, 100);
-            }
+        const articlesSubscription = this.http.get<Array<Article>>(`${BASE_URL}/api/articles/list?amount=14&offset=0`).subscribe(articles => {
+            this.articles = articles;
+            this.articlesLoaded = true;
+            this.setFeaturedAndArticles();
         });
 
         this.subscriptions.push(articlesSubscription);
+    }
+
+    setFeaturedAndArticles(): void {
+        if (!this.articlesLoaded || !this.featuredArticlesLoaded) {
+            return;
+        }
+        if (this.featuredArticles.length) {
+            this.articles = this.articles.filter(article => !this.featuredArticles.some(featuredArticle => featuredArticle.id === article.id));
+            if (this.featuredArticles.length > 1) {
+                this.articles.unshift(this.featuredArticles[1]);
+            } else {
+                this.featuredArticles.push(this.articles[0]);
+            }
+            this.articles = this.articles.slice(0, 13);
+        } else {
+            this.featuredArticles = this.articles.slice(0, 2);
+            this.articles.shift();
+        }
     }
 
     setTierListDecks() { // TODO optimize the component for displaying them and requests...
@@ -81,11 +81,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
         }));
     }
 
-    setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
-        this.subscriptions.push(this.http.get<Array<Author>>(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(authors => {
-            this.onlineStreamers = authors;
-        }));
-    }
+    // setOnlineStreamers() { // TODO optimize the component for displaying them and requests...
+    //     this.subscriptions.push(this.http.get<Array<Author>>(`${BASE_URL}/api/users/list?amount=100&offset=0&online=true`).subscribe(authors => {
+    //         this.onlineStreamers = authors;
+    //     }));
+    // }
 
     ngOnDestroy(): void {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());

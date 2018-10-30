@@ -18,9 +18,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     top: number;
     externals = ['Shop'];
     navItems: NavItem[] = [
-        // new NavItem('Decklists', ['Hearthstone'/*, 'Gwent'*/]),
         new NavItem('Tier List', []),
+        new NavItem('Top 25', []),
         new NavItem('Articles', []),
+        // new NavItem('Decklists', ['Top 25 Spotlight'/*, 'Hearthstone', 'Gwent'*/]),
         new NavItem('Giveaways', []),
         new NavItem('Team', []),
         new NavItem('Partners', []),
@@ -51,6 +52,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     toLink(url: string) {
+        if (url === 'Top 25') {
+            return 'decklists/top_25_spotlight';
+        }
         return url.replace(/ /g, '_').toLowerCase();
     }
 
@@ -81,17 +85,24 @@ export class NavigationComponent implements OnInit, OnDestroy {
         });
     }
 
-    getHeight() {
-        if (this.element.nativeElement.querySelector('.nav-column').offsetWidth < 728) {
-            return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
-        }
-        return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
-    }
+    // getHeight() {
+    //     if (this.element.nativeElement.querySelector('.nav-column').offsetWidth < 728) {
+    //         return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
+    //     }
+    //     return this.element.nativeElement.querySelector('.nav-column').offsetHeight;
+    // }
 
     isActive(name: string) {
         let currentRoute: string | string[] = this.router.url;
         currentRoute = currentRoute.split('/');
         return currentRoute[currentRoute.length - 1] === this.toLink(name);
+    }
+
+    getChildIcon(child: string): string {
+        // if (child === 'Top 25 Spotlight') {
+        //     return `assets/icons/rank.png`;
+        // }
+        return `assets/images/${child}.svg`;
     }
 
     setFeatured(): void { // TODO move in service, handle errors in case they take place...

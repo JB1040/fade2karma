@@ -1,38 +1,49 @@
-<a [routerLink]="[url]" class="overlay"></a>
+<div class="decklistrow" [ngClass]="{'lg-collapsed': lgCollapsed}">
+    <a [routerLink]="[url]" class="overlay"></a>
 
-<div class="decklistrow" (mouseover)="color='red'" (mouseout)="color=''"
-     [ngClass]="{odd: odd, even: even, first: index === 0}">
-    <div class="cell title-cell">
+    <div *ngIf="isDisplayed('title')" class="cell title-cell">
         <img src="assets/images/class/DLRCellTitleBg/{{deck.heroClass | lowercase}}.png">
-        <h4 [ngClass]="color">{{deck.title}}</h4>
+        <h4>{{deck.title}}</h4>
         <div style="width:100%"></div>
-        <!--<p class="b2 grey">by {{deck.author.username}}</p>-->
     </div>
-    <!--<div class="cell img-cell">-->
-        <!--<div class="icon-wrap">-->
-            <!--<img src="assets/images/Hearthstone_Square/{{deck.heroClass | lowercase}}.jpg" class="icon"/>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="cell img-cell">-->
-        <!--<div class="icon-wrap">-->
-            <!--<img src="{{deck.isStandard ? 'assets/images/icons/standardicon.svg' : 'assets/images/icons/wildicon.svg'}}" class="icon"/>-->
-        <!--</div>-->
-    <!--</div>-->
 
-    <div class="cell difficulty-cell">
+    <div *ngIf="isDisplayed('rank')" class="cell rank-cell">
+        <img src="assets/icons/rank.png" class="icon"/>
+        <h3>{{deck.rank}}</h3>
+    </div>
+
+    <div *ngIf="isDisplayed('heroClass')" class="cell hero-class-cell">
+        <div class="icon-wrap">
+            <img src="assets/images/Hearthstone_Square/{{deck.heroClass.toLowerCase()}}.jpg" class="icon"/>
+        </div>
+    </div>
+
+    <div *ngIf="isDisplayed('title')" class="cell player-cell">
+        <h5>{{deck.title}}</h5>
+        <p class="b2 grey">by {{deck.player}}</p>
+    </div>
+
+    <div *ngIf="isDisplayed('difficulty')" class="cell difficulty-cell">
         <div class="icon-wrap">
             <img src="assets/icons/dificulty_{{deck.difficulty | lowercase}}.png" class="icon"/>
         </div>
     </div>
 
-    <div *ngIf="showTier" class="cell data-cell-1">
+    <div *ngIf="isDisplayed('tier')" class="cell tier-cell">
         <div class="b2">Tier: {{deck.tier}}</div>
     </div>
-    <div class="cell data-cell-4">
-        <div class="b2 resource" [ngClass]="{'hs-resource': deck.game === 'HS', 'gwent-resource': deck.game === 'GWENT'}">{{dustCost}}</div>
+
+    <div *ngIf="isDisplayed('server')" class="cell server-cell">
+        <span>{{deck.server}}</span>
     </div>
-    <!--<div class="cell date-cell"><div class="b2">{{formatDate(deck.editDate || deck.date)}}</div></div>-->
-    <div class="cell date-cell">
-        <div class="b2 date"><small>Last edited:</small> {{displayDate || ((deck.editDate || deck.date) | date:'MMM d, y')}}</div>
+
+    <div *ngIf="isDisplayed('resource')" class="cell resource-cell">
+        <div class="b2 resource"
+             [ngClass]="{'hs-resource': deck.game === 'HS', 'gwent-resource': deck.game === 'GWENT'}">{{dustCost}}
+        </div>
+    </div>
+
+    <div *ngIf="isDisplayed('date')" class="cell date-cell">
+        <div class="b2 date"><small>Last edited: </small>{{displayDate}}</div>
     </div>
 </div>

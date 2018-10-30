@@ -6,7 +6,6 @@ $bw: 1px; // border width
 ================================== */
 
 :host {
-    cursor: pointer;
     display: block;
     position: relative;
 }
@@ -52,10 +51,7 @@ $bw: 1px; // border width
     border-bottom: solid $bw #E7E7E7;
     box-sizing: border-box;
     cursor: pointer;
-}
-
-.decklistrow.first {
-    border-top: solid $bw #E7E7E7;
+    position: relative;
 }
 
 .cell {
@@ -74,8 +70,12 @@ $bw: 1px; // border width
     overflow: hidden;
     width: 100%;
     h4 {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        height: calc(1em + 6px);
         color: white;
-        margin-bottom: -25px;
         -webkit-transition: -webkit-all 300ms; /* Safari */
         transition: all 300ms;
     }
@@ -92,6 +92,11 @@ $bw: 1px; // border width
 
 .cell:first-of-type {
     border: none;
+}
+
+.player-cell,
+.hero-class-cell {
+    display: none;
 }
 
 .b2.grey {
@@ -124,7 +129,7 @@ $bw: 1px; // border width
     }
 }
 
-.decklistrow .cell:nth-of-type(3) {
+.decklistrow .resource-cell {
     padding-left: 30px;
     padding-right: 10px;
 }
@@ -153,13 +158,16 @@ $bw: 1px; // border width
         flex: 1;
     }
 
+    .cell.rank-cell {
+        h3 {
+            font-size: 16px;
+            line-height: 22px;
+        }
+    }
+
     .cell.difficulty-cell .icon-wrap {
         height: 20px;
         width: 40px;
-    }
-
-    .img-cell:nth-child(2) {
-        border-left: none;
     }
 
     .icon-wrap {
@@ -176,9 +184,12 @@ $bw: 1px; // border width
         width: 359px;
         height: 90px;
         float: left;
-        margin-right: 10px;
         margin-bottom: 10px;
         border-top: solid $bw #E7E7E7;
+    }
+
+    .cell.rank-cell {
+        width: 40px;
     }
 
     .cell {
@@ -198,10 +209,6 @@ $bw: 1px; // border width
         flex: 1;
     }
 
-    .img-cell:nth-child(2) {
-        border-left: none;
-    }
-
     .icon-wrap {
         width: 30px;
         height: 30px;
@@ -213,17 +220,39 @@ $bw: 1px; // border width
 
 @media (min-width: 1220px) {
     :host {
+        width: 100%;
+    }
+
+    :host(.lg-collapsed) {
         width: 390px;
         float: left;
     }
 
-    //:host:not(:nth-child(3n+3)) {
-    //    margin-right: 20px;
-    //}
+    :host(.lg-collapsed) .title-cell,
+    .player-cell,
+    .hero-class-cell {
+        display: block;
+    }
+
+    .title-cell,
+    :host(.lg-collapsed) .player-cell,
+    :host(.lg-collapsed) .hero-class-cell {
+        display: none;
+    }
 
     .decklistrow {
+        height: auto;
+        width: 100%;
+    }
+
+    :host(.lg-collapsed) .decklistrow {
         width: 390px;
         height: 120px;
+    }
+
+    .cell.rank-cell {
+        width: 100px;
+        padding: 0 25px;
     }
 
     .cell {
@@ -237,9 +266,67 @@ $bw: 1px; // border width
 
     .cell.title-cell {
         height: 68px;
-        h4 {
-            margin-bottom: -35px;
+    }
+
+    :host(.even) {
+        .cell {
+            background: #FFFFFF;
         }
+    }
+    :host(.odd) {
+        .cell {
+            background: #F7F7F7;
+        }
+    }
+    :host:not(.lg-collapsed) {
+        .cell.player-cell {
+            flex: 1;
+            padding-top: 4px;
+
+            .b2 {
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+
+        .cell.date-cell {
+            flex: none;
+            width: 130px;
+        }
+
+        .cell.hero-class-cell {
+            padding: 10px 22px;
+
+        }
+
+        .cell.resource-cell {
+            width: 90px;
+        }
+
+        .cell.server-cell {
+            width: 100px;
+            span {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .cell {
+            border-top: none;
+            border-bottom: none;
+        }
+
+        .decklistrow {
+            margin-bottom: 0;
+        }
+
+        :host .decklistrow:not(:first-of-type) {
+            border-top: none;
+        }
+    }
+
+    :host:not(.lg-collapsed) .cell.date-cell small {
+        display: none;
     }
 
     .decklistrow .cell.img-cell {

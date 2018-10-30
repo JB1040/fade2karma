@@ -1,0 +1,13 @@
+<div class="btn-container">
+    <button (click)="changeCurrentPage('first')" [ngClass]="{'disabled': activePage === 1}"><i
+        class="fa fa-angle-double-left"></i></button>
+    <button (click)="changeCurrentPage('previous')" [ngClass]="{'disabled': activePage === 1}"><i
+        class="fa fa-angle-left"></i></button>
+    <button (click)="changeCurrentPage(page)" *ngFor="let page of pages" [ngClass]="{'active': activePage === page}">
+        {{page}}
+    </button>
+    <button (click)="changeCurrentPage('next')" [ngClass]="{'disabled': activePage === totalPages}"><i
+        class="fa fa-angle-right"></i></button>
+    <button (click)="changeCurrentPage('last')" [ngClass]="{'disabled': activePage === totalPages}"><i
+        class="fa fa-angle-double-right"></i></button>
+</div>

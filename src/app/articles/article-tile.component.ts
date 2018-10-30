@@ -46,7 +46,7 @@ export class ArticlesTileComponent implements OnInit, OnDestroy {
         if (this.article instanceof Deck) {
             this.heroClass = this.article.heroClass;
         } else {
-            this.articleType = this.article.articleType;
+            this.articleType = this.article.type;
         }
         this.date = TimeTransfer.getTime(this.article.editDate || this.article.date);
         if (this.article.imageURL.indexOf('youtube') !== -1) {

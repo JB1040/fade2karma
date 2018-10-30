@@ -1,4 +1,4 @@
-﻿﻿import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -47,7 +47,7 @@ import { GiveawaysHubComponent } from './giveaways/hub/giveaways-hub.component';
 import { GiveawayTileComponent } from './giveaways/tile/giveaway-tile.component';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { DmcaComponent } from 'app/dmca/dmca.component';
-import { HearthstoneDecksHubComponent } from './decks/decks-hub/hearthstone-decks-hub/hearthstone-decks-hub.component';
+import { TopSpotlightComponent } from './decks/decks-hub/hearthstone-decks-hub/top-spotlight.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -58,7 +58,12 @@ import { PlayerHubComponent } from './teams/player-hub/player-hub.component';
 import { FacebookSkdService } from './facebook-skd.service';
 import { AdComponent } from './ad/ad.component';
 import { HtmlHovererComponent } from './html-hoverer/html-hoverer.component';
-import { InfiniteScrollerDirective } from './infinite-scroller.directive';
+import { InfiniteScrollService } from './infinite-scroller.directive';
+import { HoverService } from './core/hover.service';
+import { SpoilerService } from './core/spoilers';
+import { CopyDeckCodeService } from './core/copy-deck-code.service';
+import { PaginationComponent } from './decks/decks-hub/hearthstone-decks-hub/spotlight-list-row/pagination.component';
+import { TopSpotlightTeaserComponent } from './decks/decks-hub/hearthstone-decks-hub/top-spotligt-teaser/top-spotlight-teaser.component';
 
 const myAppRoutes: Routes = [
     { path: '', component: PageNotFoundComponent },
@@ -72,7 +77,7 @@ const myAppRoutes: Routes = [
         RouterModule.forRoot(myAppRoutes, { useHash: false }),
         FormsModule,
         HttpClientModule
-],
+    ],
     declarations: [
         AppComponent,
         AdComponent,
@@ -111,7 +116,7 @@ const myAppRoutes: Routes = [
         GiveawaysHubComponent,
         GiveawayTileComponent,
         DmcaComponent,
-        HearthstoneDecksHubComponent,
+        TopSpotlightComponent,
         PrivacyPolicyComponent,
         TermsOfServiceComponent,
         AboutUsComponent,
@@ -119,7 +124,9 @@ const myAppRoutes: Routes = [
         SponsorTileComponent,
         SponsorHubComponent,
         PlayerHubComponent,
-        HtmlHovererComponent
+        HtmlHovererComponent,
+        PaginationComponent,
+        TopSpotlightTeaserComponent
     ],
     exports: [
         CapitalizePipe,
@@ -137,7 +144,10 @@ const myAppRoutes: Routes = [
         F2kUrlPipe,
         GoogleAnalyticsEventsService,
         FacebookSkdService,
-        InfiniteScrollerDirective
+        HoverService,
+        SpoilerService,
+        CopyDeckCodeService,
+        InfiniteScrollService
     ]
 })
 export class AppModule {
