@@ -1,4 +1,4 @@
-<a [routerLink]="user.username + '_' + user.id"></a>
+<a [routerLink]="'/team/' + user.username + '_' + user.id"></a>
 
 <div class="player-image-container tint">
     <img class="player-image" src="assets/images/users/{{user.username | lowercase}}.jpg" onError="this.src='./assets/images/logo-f2k.png'">

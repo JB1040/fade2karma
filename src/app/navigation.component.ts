@@ -18,12 +18,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
     top: number;
     externals = ['Shop'];
     navItems: NavItem[] = [
-        new NavItem('Tier List', []),
-        new NavItem('Top 25', []),
-        new NavItem('Articles', []),
+        //new NavItem('Tier List', []),
+        //new NavItem('Top 25', []),
+        //new NavItem('Articles', []),
         // new NavItem('Decklists', ['Top 25 Spotlight'/*, 'Hearthstone', 'Gwent'*/]),
-        new NavItem('Giveaways', []),
         new NavItem('Team', []),
+        new NavItem('Giveaways', []),
         new NavItem('Partners', []),
         new NavItem('Shop', [])
     ];

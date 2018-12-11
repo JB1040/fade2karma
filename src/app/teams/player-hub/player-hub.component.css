@@ -77,6 +77,10 @@ f2k-breadcrumb {
     position: relative;
 }
 
+.content-grey-text {
+	color: #9c9c9c;
+}
+
 .player-image-container img {
     position: absolute;
     top: 0;

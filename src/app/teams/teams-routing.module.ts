@@ -19,7 +19,7 @@ import { PlayerHubComponent } from './player-hub/player-hub.component';
 const contentRoutes: Routes = [
     { path: 'team', component: TeamsComponent },
     { path: 'partners', component: SponsorHubComponent },
-    { path: '', component: HomePageComponent },
+    { path: '', component: TeamsComponent },
     { path: 'articles', component: ArticlesComponent },
     { path: 'articles/:article', component: ArticleComponent },
     { path: 'tier_list/:deck', component: NewDeckHubComponent },
